@@ -47,7 +47,7 @@
 <div style="height: 42px;">
 <form action="newsearch.do">
 <input type="button" class="search_box_in_div_text_side" disabled="disabled">
-<input type="text" name="search_text" class="search_box_in_div_text_main">
+<input type="text" value="${search_text }" name="search_text" class="search_box_in_div_text_main">
 <input type="submit" class="search_box_in_div_button" value="">
 </form>
 </div>
@@ -68,11 +68,11 @@ function sub() {
 </script>
 <form name="frm" action="newsearch.do">
 <select name="shopping_select" onchange="sub()">
-    <option>정렬기준</option>
-    <option value="sell_hit">인기상품순</option>
-    <option value="pregdate">최신순</option>
-    <option value="price_high">높은가격순</option>
-    <option value="price_low">낮은가격순</option>
+    <option selected="selected">정렬기준</option>
+    <option value="sell_hit" ${selected1}>인기상품순</option>
+    <option value="pregdate" ${selected2}>최신순</option>
+    <option value="price_high" ${selected3}>높은가격순</option>
+    <option value="price_low" ${selected4}>낮은가격순</option>
 </select>
 <input type="hidden" name="search_text" value="${search_text }">
 </form>

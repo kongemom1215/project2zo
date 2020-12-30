@@ -21,6 +21,21 @@ public class NewSearch implements CommandProcess {
 		SearchDao searchdao = SearchDao.getInstance();
 		
 		String shopping_select = request.getParameter("shopping_select");
+		try {
+		if (shopping_select.equals("sell_hit")) {
+			request.setAttribute("selected1", "selected");
+		} else if (shopping_select.equals("pregdate")) {
+			request.setAttribute("selected2", "selected");
+		} else if (shopping_select.equals("price_high")) {
+			request.setAttribute("selected3", "selected");
+		} else if (shopping_select.equals("price_low")) {
+			request.setAttribute("selected4", "selected");
+		} else {
+		}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		System.out.println("select box : " + shopping_select);
 		
 		List<Search> al = new ArrayList<Search>();

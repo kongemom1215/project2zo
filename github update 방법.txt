@@ -1,0 +1,5 @@
+cd byrus
+cd 경로
+git add .
+git commit -m "commit 이름"
+git push -u origin "ys1230"

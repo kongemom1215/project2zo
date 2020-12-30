@@ -88,6 +88,8 @@
 	height: 41px;
 	position: relative;
 	top: -17px;
+	font-size: 10.7px;
+	font-family: 'Nanum Gothic', sans-serif;
 }
 
 .search_box_in_div_button {
