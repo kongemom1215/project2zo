@@ -18,7 +18,7 @@ import dao.Product;
 import dao.ProductDao;
 import dao.ShoppingUserDao;
 
-public class MainAction implements CommandProcess {
+public class NewMainAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
@@ -194,7 +194,8 @@ public class MainAction implements CommandProcess {
 				result = covid_19_yesterday.substring(target_start,target_end);
 				String confirmed_yesterday = result;
 				System.out.println("하루 확진 : " + (Integer.parseInt(confirmed) - Integer.parseInt(confirmed_yesterday))); 
-
+				int confirmed_oneday = Integer.parseInt(confirmed) - Integer.parseInt(confirmed_yesterday);
+				
 				// --
 
 				start = "<examCnt>"; // 검사 중
@@ -211,7 +212,8 @@ public class MainAction implements CommandProcess {
 				result = covid_19_yesterday.substring(target_start,target_end);
 				String check_yesterday = result;
 				System.out.println("하루 검사 : " + (Integer.parseInt(check) - Integer.parseInt(check_yesterday))); 
-
+				int check_oneday = Integer.parseInt(check) - Integer.parseInt(check_yesterday);
+				
 				//--
 
 				start = "<deathCnt>"; //총 사망자
@@ -228,6 +230,7 @@ public class MainAction implements CommandProcess {
 				result = covid_19_yesterday.substring(target_start,target_end);
 				String check_death = result;
 				System.out.println("하루 사망 : " + (Integer.parseInt(death) - Integer.parseInt(check_death))); 
+				int death_oneday = Integer.parseInt(death) - Integer.parseInt(check_death);
 				
 				//--
 
@@ -280,7 +283,8 @@ public class MainAction implements CommandProcess {
 				result = covid_19_yesterday.substring(target_start,target_end);
 				String check_clear = result;
 				System.out.println("하루 격리해제 : " + (Integer.parseInt(clear) - Integer.parseInt(check_clear))); 
-			
+				int clear_oneday = Integer.parseInt(clear) - Integer.parseInt(check_clear);
+				
 				request.setAttribute("date_first_time_format2", date_first_time_format2);
 				request.setAttribute("calendar_1_7_format2", calendar_1_7_format2);
 				request.setAttribute("calendar_2_7_format2", calendar_2_7_format2);
@@ -309,12 +313,20 @@ public class MainAction implements CommandProcess {
 				request.setAttribute("clear", clear);
 				
 				request.setAttribute("check", check);
+				request.setAttribute("death", death);
+				
+				request.setAttribute("check_oneday", check_oneday);
+				request.setAttribute("death_oneday", death_oneday);
+				request.setAttribute("clear_oneday", clear_oneday);
+				request.setAttribute("confirmed_oneday", confirmed_oneday);
+				
+				request.setAttribute("day", day);
 				
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
 		
-		return "main.jsp";
+		return "newmain.jsp";
 	}
 
 }

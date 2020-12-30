@@ -1,12 +1,5 @@
 @charset "UTF-8";
 
-@media ( min-width : 500px) {
-	body {
-		width: 100%;
-		margin: 0px;
-	}
-}
-
 .top_div {
 	width: 900px;
 	margin-left: 350px;
@@ -122,7 +115,7 @@
 }
 
 .main_img_div {
-	margin-left: 350px;	
+	margin-left: 350px;
 	width: 900px;
 }
 
@@ -134,7 +127,179 @@
 	height: 250px;
 	width: 250px;
 	margin-top: 15px;
-	margin-right: 24px;
-	margin-left: 24px;
+	margin-right: 22px;
+	margin-left: 22px;
 	margin-bottom: 15px;
+}
+
+.covid_div {
+	margin-left: 350px;
+	width: 900px;
+	display: table;
+}
+
+.covid_chart {
+	width: 440px;
+	float: left;
+}
+
+.covid_guidance {
+	width: 440px;
+	float: left;
+	height: 320px;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.covid_table {
+	position: relative;
+	top: 110px;
+	text-align: center;
+}
+
+.foot_button {
+	background-color: #767171;
+	border: 0px;
+	outline: 0;
+}
+
+.foot_1 {
+	margin-left: 350px;
+	width: 900px;
+	height: 100px;
+}
+
+.foot_2 {
+	margin-left: 350px;
+	width: 900px;
+	height: 50px;
+}
+
+.foot_3 {
+	display: table-cell;
+	vertical-align: middle;
+	width: 900px;
+	height: 50px;
+	background-color: #767171;
+}
+
+.search_div {
+	margin-left: 350px;
+	width: 900px;
+	text-align: center;
+}
+
+@media screen and (min-width:0px) and (max-width:700px) {
+	.main_hr {
+		width: 900px;
+	}
+	.top_div {
+		margin-left: 0px;
+		width: 900px;
+		position: relative;
+	}
+	.menu_div_in_div {
+		margin-left: 0px;
+		width: 900px;
+	}
+	.search_box {
+		margin-left: 0px;
+		width: 900px;
+		height: 150px;
+		position: relative;
+		background-color: #0881C3;
+		display: table;
+	}
+	.best_ment {
+		margin-left: 0px;
+	}
+	.coivd_ment {
+		margin-left: 0px;
+	}
+	.main_img_div {
+		margin-left: 0px;
+		width: 900px;
+	}
+	.covid_div {
+		margin-left: 0px;
+		width: 900px;
+		display: table;
+	}
+	.foot_1 {
+		margin-left: 0px;
+		width: 900px;
+		height: 100px;
+	}
+	.foot_2 {
+		margin-left: 0px;
+		width: 900px;
+		height: 50px;
+	}
+	
+	.search_div {
+	margin-left: 0px;
+	width: 900px;
+	text-align: center;
+}
+}
+
+@media screen and (min-width:700px) and (max-width:1200px) {
+	.main_hr {
+		width: 1300px;
+	}
+	.top_div {
+		margin-left: 150px;
+		width: 900px;
+		position: relative;
+	}
+	.menu_div_in_div {
+		margin-left: 150px;
+		width: 900px;
+	}
+	.search_box {
+		margin-left: 150px;
+		width: 900px;
+		height: 150px;
+		position: relative;
+		background-color: #0881C3;
+		display: table;
+	}
+	.best_ment {
+		margin-left: 150px;
+	}
+	.coivd_ment {
+		margin-left: 150px;
+	}
+	.main_img_div {
+		margin-left: 150px;
+		width: 900px;
+	}
+	.covid_div {
+		margin-left: 150px;
+		width: 900px;
+		display: table;
+	}
+	.foot_1 {
+		margin-left: 150px;
+		width: 900px;
+		height: 100px;
+	}
+	.foot_2 {
+		margin-left: 150px;
+		width: 900px;
+		height: 50px;
+	}
+	
+	.search_div {
+	margin-left: 150px;
+	width: 900px;
+	text-align: center;
+}
+}
+
+@media screen and (min-width:1200px) {
+	.main_hr {
+		width: 1650px;
+	}
 }
