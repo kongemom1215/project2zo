@@ -19,7 +19,7 @@
 </head>
 <body class="body">
 <div class="top_div">
-<input type="button" class="top_div_logo" onclick="location.href='newmain.do'">
+<input type="button" class="top_div_logo" onclick="location.href='main.do'">
 <input type="button" value="위시리스트" class="top_div_button"></input>
 <input type="button" value="장바구니" class="top_div_button"></input>
 <input type="button" value="주문/배송" class="top_div_button"></input>
@@ -45,7 +45,7 @@
 <div style="height: 20px;">
 </div>
 <div style="height: 42px;">
-<form action="newsearch.do">
+<form action="search.do">
 <input type="button" class="search_box_in_div_text_side" disabled="disabled">
 <input type="text" value="${search_text }" name="search_text" class="search_box_in_div_text_main">
 <input type="submit" class="search_box_in_div_button" value="">
@@ -66,7 +66,7 @@ function sub() {
 	document.frm.submit();
 }
 </script>
-<form name="frm" action="newsearch.do">
+<form name="frm" action="search.do">
 <select name="shopping_select" onchange="sub()">
     <option selected="selected">정렬기준</option>
     <option value="sell_hit" ${selected1}>인기상품순</option>
@@ -107,7 +107,7 @@ function sub() {
 </table>
 </div>
 <c:forEach var="page" begin="1" end="${page_num }">
-<input type="button" value="${page }" onclick="location.href='newsearch.do?page=${page}&search_text=${search_text }'">
+<input type="button" value="${page }" onclick="location.href='search.do?page=${page}&search_text=${search_text }'">
 </c:forEach>
 </div>
 <div class="foot_1">
