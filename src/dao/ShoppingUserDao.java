@@ -188,4 +188,139 @@ public class ShoppingUserDao {
         return sb.toString();
     }
 	
+	public ShoppingUser select(int sid) throws SQLException {
+		String sql="select * from ShoppingUser where sid=?";
+		ShoppingUser shoppinguser = new ShoppingUser();
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, sid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				shoppinguser.setSemail(rs.getString(3));
+				shoppinguser.setSaddress(rs.getString(8));
+				shoppinguser.setSagree(rs.getString(10));
+				shoppinguser.setScontact(rs.getString(6));
+				shoppinguser.setSname(rs.getString(5));
+				shoppinguser.setSid(rs.getInt(1));
+				shoppinguser.setSpost(rs.getInt(9));
+				shoppinguser.setSpwd(rs.getString(4));
+				shoppinguser.setSregdate(rs.getDate(7));
+				shoppinguser.setStype(rs.getInt(2));
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(rs!=null)
+				rs.close();
+			if(pstmt!=null)
+				pstmt.close();
+			if(conn!=null)
+				conn.close();
+		}
+		
+		return shoppinguser;
+	}
+	public int getTotalUser() throws SQLException {
+		int totalUser=0;
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select count(*) from ShoppingUser";
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next())
+				totalUser=rs.getInt(1)-1;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(rs!=null)
+				rs.close();
+			if(pstmt!=null)
+				pstmt.close();
+			if(conn!=null)
+				conn.close();
+		}
+		return totalUser;
+	}
+
+	public List<ShoppingUser> list(int startRow, int endRow) throws SQLException {
+		String sql="select * from (select s.* from (select * from ShoppingUser order by sid ) s) where sid between ? and ?";
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<ShoppingUser> userlist=new ArrayList<ShoppingUser>();
+		
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow+1);
+			pstmt.setInt(2, endRow+1);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				ShoppingUser shoppinguser=new ShoppingUser();
+				shoppinguser.setSid(rs.getInt(1));
+				shoppinguser.setStype(rs.getInt(2));
+				shoppinguser.setSemail(rs.getString(3));
+				shoppinguser.setSpwd(rs.getString(4));
+				shoppinguser.setSname(rs.getString(5));
+				shoppinguser.setScontact(rs.getString(6));
+				shoppinguser.setSregdate(rs.getDate(7));
+				shoppinguser.setSaddress(rs.getString(8));
+				shoppinguser.setSpost(rs.getInt(9));
+				shoppinguser.setSagree(rs.getString(10));
+				
+				userlist.add(shoppinguser);
+			}
+		} catch (Exception e) {
+			System.out.println("list 메소드 -> "+e.getMessage());
+		} finally {
+			if(rs!=null)
+				rs.close();
+			if(pstmt!=null)
+				pstmt.close();
+			if(conn!=null)
+				conn.close();
+		}
+		
+		return userlist;
+	}
+
+	public int updateUser(ShoppingUser shoppinguser, int sid) throws SQLException {
+		int result=0;
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		//이름,이메일,연락처,우편번호,주소,마켓팅동의여부
+		String sql="update ShoppingUser set sname=?, semail=?, scontact=?, spost=?, saddress=?, sagree=? where sid=?";
+		
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, shoppinguser.getSname());
+			pstmt.setString(2, shoppinguser.getSemail());
+			pstmt.setString(3, shoppinguser.getScontact());
+			pstmt.setInt(4, shoppinguser.getSpost());
+			pstmt.setString(5, shoppinguser.getSaddress());
+			pstmt.setString(6, shoppinguser.getSagree());
+			pstmt.setInt(7, sid);
+			
+			result=pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("updateUser() ->"+e.getMessage());
+		} finally {
+			if(pstmt!=null)
+				pstmt.close();
+			if(conn!=null)
+				conn.close();
+		}
+		
+		return result;
+	}
+	
 }

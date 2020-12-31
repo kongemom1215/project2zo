@@ -5,11 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 네이버 차트  -->
-<script src="https://d3js.org/d3.v5.min.js"></script>
-<script src="js/billboard.js"></script>
-<link rel="stylesheet" href="css/billboard.css">
-<!--  -->
 <meta charset="UTF-8">
 <!-- 반응형 웹 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
@@ -18,6 +13,8 @@
 <link rel="stylesheet" type="text/css" href="css/YoungCSS2.css?ver=1">
 </head>
 <body class="body">
+<div style="height: 15px;">
+</div>
 <div class="top_div">
 <input type="button" class="top_div_logo" onclick="location.href='main.do'">
 <input type="button" value="위시리스트" class="top_div_button"></input>
@@ -26,17 +23,15 @@
 <input type="button" value="마이페이지" class="top_div_button"></input>
 <input type="button" value="로그인" class="top_div_button"></input>
 </div>
-<div>
-<hr class="main_hr">
-</div>
+<hr class="main_hr" style="margin-bottom: 8px; margin-top: 8px;">
 <div class="menu_div">
 <div class="menu_div_in_div">
 <div class="menu_div_in_div_in_div"><input type="button" class="menu_div_in_div_button" value="ABOUT US"></div>
-<div class="menu_div_in_div_in_div"><input type="button" class="menu_div_in_div_button" value="SHOPPING"></div>
-<div class="menu_div_in_div_in_div"><input type="button" class="menu_div_in_div_button" value="BOARD"></div>
+<div class="menu_div_in_div_in_div"><input type="button" class="menu_div_in_div_button" value="SHOPPING" onclick="location.href='shoppingMain.do'"></div>
+<div class="menu_div_in_div_in_div"><input type="button" class="menu_div_in_div_button" value="BOARD" onclick="location.href='board.do'"></div>
 </div>
 </div>
-<hr class="main_hr" style="margin-bottom: 0px; border-bottom: 0px;">
+<hr class="main_hr" style="margin-bottom: 0px; margin-top: 8px; border-bottom: 0px;">
 <div class="search_box">
 <div class="search_box_in_div">
 <div class="search_box_in_div_ment">
@@ -85,23 +80,23 @@ function sub() {
 <div>
 <table>
 	<tr>
-<c:forEach var="al" items="${al }" begin="${select_page + (16*select_page) }" end="${select_page + 3 + (16*select_page) }">
-		<td><input type="button" style="width: 155px; height: 155px; margin-left: 32px; margin-right: 32px;" > <br> ${al.pname } <br> <fmt:formatNumber value="${al.pprice }" pattern="#,###" /> 원 <p> </td>
+<c:forEach var="main_img" items="${main_img }" begin="${select_page + (16*select_page) }" end="${select_page + 3 + (16*select_page) }">
+		<td><input type="button" class="search_button" style="background: url('${main_img.pthumbimg}'); background-size: 155px;" > <br> ${main_img.pname } <br> <fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </td>
 </c:forEach>
 	</tr>
 	<tr>
-<c:forEach var="al" items="${al }" begin="${select_page + 4 + (16*select_page) }" end="${select_page + 7 + (16*select_page) }">
-		<td><input type="button" style="width: 155px; height: 155px; margin-left: 32px; margin-right: 32px;" > <br> ${al.pname } <br> <fmt:formatNumber value="${al.pprice }" pattern="#,###" /> 원 <p> </td>
+<c:forEach var="main_img" items="${main_img }" begin="${select_page + 4 + (16*select_page) }" end="${select_page + 7 + (16*select_page) }">
+		<td><input type="button" class="search_button" style="background: url('${main_img.pthumbimg}'); background-size: 155px;" > <br> ${main_img.pname } <br> <fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </td>
 </c:forEach>
 	</tr>
 	<tr>
-<c:forEach var="al" items="${al }" begin="${select_page + 8 + (16*select_page) }" end="${select_page + 11 + (16*select_page) }">
-		<td><input type="button" style="width: 155px; height: 155px; margin-left: 32px; margin-right: 32px;" > <br> ${al.pname } <br> <fmt:formatNumber value="${al.pprice }" pattern="#,###" /> 원 <p> </td>
+<c:forEach var="main_img" items="${main_img }" begin="${select_page + 8 + (16*select_page) }" end="${select_page + 11 + (16*select_page) }">
+		<td><input type="button" class="search_button" style="background: url('${main_img.pthumbimg}'); background-size: 155px;" > <br> ${main_img.pname } <br> <fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </td>
 </c:forEach>
 	</tr>
 	<tr>
-<c:forEach var="al" items="${al }" begin="${select_page + 12 + (16*select_page) }" end="${select_page + 15 + (16*select_page)  }">
-		<td><input type="button" style="width: 155px; height: 155px; margin-left: 32px; margin-right: 32px;" > <br> ${al.pname } <br> <fmt:formatNumber value="${al.pprice }" pattern="#,###" /> 원 <p> </td>
+<c:forEach var="main_img" items="${main_img }" begin="${select_page + 12 + (16*select_page) }" end="${select_page + 15 + (16*select_page)  }">
+		<td><input type="button" class="search_button" style="background: url('${main_img.pthumbimg}'); background-size: 155px;" > <br> ${main_img.pname } <br> <fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </td>
 </c:forEach>
 	</tr>
 </table>

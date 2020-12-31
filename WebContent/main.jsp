@@ -16,27 +16,62 @@
 <!--  -->
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/YoungCSS2.css?ver=1">
+<style>
+    ul,li{list-style:none;}
+    .slide{height:350px;overflow:hidden;}
+    .slide ul{width:calc(100% * 3);display:flex;animation:slide 12s infinite;} /* slide를 12초동안 진행하며 무한반복 함 */
+    .slide li{width:calc(100% / 3);height:300px;}
+    @keyframes slide {
+      0% {margin-left:0;} /* 0 ~ 10  : 정지 */
+      10% {margin-left:0;} /* 10 ~ 25 : 변이 */
+      25% {margin-left:-100%;} /* 25 ~ 35 : 정지 */
+      35% {margin-left:-100%;} /* 35 ~ 50 : 변이 */
+      50% {margin-left:-200%;}
+      60% {margin-left:-200%;}
+      75% {margin-left:-300%;}
+      85% {margin-left:-300%;}
+      100% {margin-left:0;}
+    }
+  </style>
 </head>
 <body class="body">
+<div style="height: 15px;">
+</div>
 <div class="top_div">
 <input type="button" class="top_div_logo" onclick="location.href='main.do'">
-<input type="button" value="위시리스트" class="top_div_button"></input>
-<input type="button" value="장바구니" class="top_div_button"></input>
-<input type="button" value="주문/배송" class="top_div_button"></input>
-<input type="button" value="마이페이지" class="top_div_button"></input>
-<input type="button" value="로그인" class="top_div_button"></input>
+
+<c:choose>
+	<c:when test="${seesion_login_num eq '3' }">
+		<input type="button" value="위시리스트" class="top_div_button"></input>
+		<input type="button" value="장바구니" class="top_div_button"></input>
+		<input type="button" value="주문/배송" class="top_div_button"></input>
+		<input type="button" value="마이페이지" class="top_div_button"></input>
+		<input type="button" value="로그아웃" class="top_div_button" onclick="location.href='logoutAction.do'"></input>
+			<c:forEach var="shoppingUser"
+				items="${session_shoppingUser_semail }">
+			<input type="button" value="${shoppingUser.sname }" class="top"></input>
+			</c:forEach>
+	</c:when>
+	<c:otherwise>
+		<input type="button" value="관리자페이지" class="top_div_button" onclick="location.href='adminPage.do'"></input>
+		<input type="button" value="위시리스트" class="top_div_button"></input>
+		<input type="button" value="장바구니" class="top_div_button"></input>
+		<input type="button" value="주문/배송" class="top_div_button"></input>
+		<input type="button" value="마이페이지" class="top_div_button"></input>
+		<input type="button" value="로그인/회원가입" class="top_div_button" onclick="location.href='loginForm.do'"></input>
+	</c:otherwise>
+</c:choose>
+
 </div>
-<div>
-<hr class="main_hr">
-</div>
+<hr class="main_hr" style="margin-bottom: 8px; margin-top: 8px;">
 <div class="menu_div">
 <div class="menu_div_in_div">
 <div class="menu_div_in_div_in_div"><input type="button" class="menu_div_in_div_button" value="ABOUT US"></div>
-<div class="menu_div_in_div_in_div"><input type="button" class="menu_div_in_div_button" value="SHOPPING"></div>
-<div class="menu_div_in_div_in_div"><input type="button" class="menu_div_in_div_button" value="BOARD"></div>
+<div class="menu_div_in_div_in_div"><input type="button" class="menu_div_in_div_button" value="SHOPPING" onclick="location.href='shoppingMain.do'"></div>
+<div class="menu_div_in_div_in_div"><input type="button" class="menu_div_in_div_button" value="BOARD" onclick="location.href='board.do'"></div>
 </div>
 </div>
-<hr class="main_hr" style="margin-bottom: 0px; border-bottom: 0px;">
+<hr class="main_hr" style="margin-bottom: 0px; margin-top: 8px; border-bottom: 0px;">
 <div class="search_box">
 <div class="search_box_in_div">
 <div class="search_box_in_div_ment">
@@ -60,9 +95,16 @@ Bye-rus 인기 상품
 <hr class="main_hr">
 <div class="main_img_div">
 <div class="main_img_div_in_div">
-<c:forEach var="main_img" items="${main_img }">
-<input type="button" class="main_img" value="${main_img.pname }">
-</c:forEach>
+<div class="slide">
+    <ul>
+     	<c:forEach var="main_img" items="${main_img }">
+		<li style="text-align: center;">
+		<input type="button" class="main_img" style="background: url('${main_img.pthumbimg}'); background-size: 250px;">
+		${main_img.pname }
+		</li>
+		</c:forEach>
+    </ul>
+  </div>
 </div>
 </div>
 <hr class="main_hr">

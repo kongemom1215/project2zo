@@ -70,7 +70,7 @@ public class ProductDao {
 		Connection conn = null;	
 		PreparedStatement pstmt= null;
 		ResultSet rs = null;
-		String sql = "select * from (select rownum, a.* from (SELECT * from product a order by psell desc) a) where rownum <= 6";
+		String sql = "select * from (select rownum, a.* from (SELECT * from product a order by psell desc) a) where rownum <= 12";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -107,5 +107,77 @@ public class ProductDao {
 		
 		return list;
 	
+	}
+	
+	public List<Product> bestproducts()throws Exception {
+		List<Product> bestproducts = new ArrayList<Product>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select pid, pname, pprice, pdiscount from ( select rownum rn, a.pid, a.pname, a.pprice, a.pdiscount from (select * from product where psell is not null order by psell desc) a ) where rn between 1 and 3";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				do {
+				Product prdt = new Product();
+				prdt.setPid(rs.getInt("pid"));
+				prdt.setPname(rs.getString("pname"));
+				prdt.setPprice(rs.getInt("pprice"));
+				prdt.setPdiscount(rs.getInt("pdiscount"));
+				bestproducts.add(prdt);
+				} while (rs.next());
+			}
+			
+		} catch (Exception e) {
+			
+		} finally {
+			if (rs !=null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (conn !=null) conn.close();
+		}
+		
+		
+		
+		return bestproducts;
+	}
+	
+	public List<Product> defaultdisplay() throws Exception {
+		List<Product> defaultproducts = new ArrayList<Product>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select pid, pname, pprice, pdiscount from ( select rownum rn, a.pid, a.pname, a.pprice, a.pdiscount from (select * from product where psell is not null order by psell desc) a ) where rn between 1 and 3";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				do {
+				Product prdt = new Product();
+				prdt.setPid(rs.getInt("pid"));
+				prdt.setPname(rs.getString("pname"));
+				prdt.setPprice(rs.getInt("pprice"));
+				prdt.setPdiscount(rs.getInt("pdiscount"));
+				defaultproducts.add(prdt);
+				} while (rs.next());
+			}
+			
+		} catch (Exception e) {
+			
+		} finally {
+			if (rs !=null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (conn !=null) conn.close();
+		}
+		
+		
+		
+		return defaultproducts;
 	}
 }

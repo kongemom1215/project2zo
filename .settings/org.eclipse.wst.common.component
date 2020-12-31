@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-        
-    <wb-module deploy-name="Byerus">
-                
+    <wb-module deploy-name="Byerus_All">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
-                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-                
-        <property name="java-output-path" value="/Byerus/build/classes"/>
-        <property name="context-root" value="Byerus"/>
-            
+        <property name="context-root" value="Byerus_All"/>
+        <property name="java-output-path" value="/Byerus_All/build/classes"/>
     </wb-module>
-    
 </project-modules>

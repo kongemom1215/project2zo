@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.Search;
 import dao.SearchDao;
 
-public class NewSearch implements CommandProcess {
+public class SearchAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
@@ -38,11 +38,11 @@ public class NewSearch implements CommandProcess {
 		
 		System.out.println("select box : " + shopping_select);
 		
-		List<Search> al = new ArrayList<Search>();
-		al = searchdao.compare(search_text, shopping_select);
+		List<Search> main_img = new ArrayList<Search>();
+		main_img = searchdao.compare(search_text, shopping_select);
 		
 		request.setAttribute("search_text", search_text);
-		request.setAttribute("al", al);
+		request.setAttribute("main_img", main_img);
 		
 		int select_page = 0;
 		try {
@@ -53,7 +53,7 @@ public class NewSearch implements CommandProcess {
 		}
 		request.setAttribute("select_page", select_page);
 		
-		int page_full_num = al.size();
+		int page_full_num = main_img.size();
 		request.setAttribute("page_full_num", page_full_num);
 		
 		int page_num = page_full_num/12 - 1;
@@ -66,7 +66,7 @@ public class NewSearch implements CommandProcess {
 		
 		request.setAttribute("page_num", page_num);
 		
-		return "newsearch.jsp";
+		return "search.jsp";
 	}
 
 }
