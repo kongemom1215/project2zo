@@ -1,16 +1,17 @@
-package dao;
+package dao.half;
 
 import java.util.Date;
 
-public class Search {
+public class Product {
 
 	private int pid;
 	private String ptype;
 	private String pexplain;
-	private String col;
+	private String col1;
 	private String col2;
 	private String col3;
 	private String col4;
+	private String col5;
 	private int pprice;
 	private int pinventory;
 	private String pname;
@@ -20,7 +21,6 @@ public class Search {
 	private int pdiscount;
 	private int ppublic;
 	private String pthumbimg;
-	private String poption;
 
 	public int getPid() {
 		return pid;
@@ -46,12 +46,12 @@ public class Search {
 		this.pexplain = pexplain;
 	}
 
-	public String getCol() {
-		return col;
+	public String getCol1() {
+		return col1;
 	}
 
-	public void setCol(String col) {
-		this.col = col;
+	public void setCol1(String col1) {
+		this.col1 = col1;
 	}
 
 	public String getCol2() {
@@ -76,6 +76,14 @@ public class Search {
 
 	public void setCol4(String col4) {
 		this.col4 = col4;
+	}
+
+	public String getCol5() {
+		return col5;
+	}
+
+	public void setCol5(String col5) {
+		this.col4 = col5;
 	}
 
 	public int getPprice() {
@@ -157,6 +165,7 @@ public class Search {
 	public void setPoption(String poption) {
 		this.poption = poption;
 	}
-	
-	
+
+	private String poption;
+
 }

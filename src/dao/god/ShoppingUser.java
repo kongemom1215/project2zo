@@ -1,4 +1,4 @@
-package dao;
+package dao.god;
 
 import java.util.Date;
 

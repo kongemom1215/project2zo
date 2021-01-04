@@ -1,4 +1,4 @@
-package dao;
+package dao.red;
 
 public class CartnWish {
 	private int cwid;
