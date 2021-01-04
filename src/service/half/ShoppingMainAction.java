@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import dao.Product;
 import dao.ProductDao;
 
+import service.CommandProcess;
+
 public class ShoppingMainAction implements CommandProcess {
 
 	@Override

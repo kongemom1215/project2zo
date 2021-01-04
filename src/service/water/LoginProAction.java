@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import dao.ShoppingUser;
 import dao.ShoppingUserDao;
 
+import service.CommandProcess;
+
 public class LoginProAction implements CommandProcess {
 
 	@Override

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import dao.ShoppingUser;
 import dao.ShoppingUserDao;
 
+import service.CommandProcess;
+
 public class FindPwdProAction implements CommandProcess {
 
 	@Override

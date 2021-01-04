@@ -9,6 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
   <servlet>
     <servlet-name>Controller</servlet-name>
     <servlet-class>control.Controller</servlet-class>
@@ -21,4 +22,5 @@
     <servlet-name>Controller</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+ 
 </web-app>

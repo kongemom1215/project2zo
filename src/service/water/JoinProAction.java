@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import dao.ShoppingUser;
 import dao.ShoppingUserDao;
 
+import service.CommandProcess;
+
 public class JoinProAction implements CommandProcess {
 
 	@Override

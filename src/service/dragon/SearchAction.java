@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Search;
 import dao.SearchDao;
+import service.CommandProcess;
 
 public class SearchAction implements CommandProcess {
 

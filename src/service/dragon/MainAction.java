@@ -18,8 +18,9 @@ import javax.servlet.http.HttpSession;
 import dao.Product;
 import dao.ProductDao;
 import dao.ShoppingUserDao;
+import service.CommandProcess;
 
-public class MainAction implements CommandProcess {
+public class MainAction implements CommandProcess  {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)

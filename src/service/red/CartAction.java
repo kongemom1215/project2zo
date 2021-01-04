@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 import dao.CartnWish;
 import dao.CartnWishDao;
 
+import service.CommandProcess;
+
 public class CartAction implements CommandProcess {
 
 	@Override

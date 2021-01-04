@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Board;
 import dao.BoardDao;
+import service.CommandProcess;
 
 public class BoardAction implements CommandProcess {
 
