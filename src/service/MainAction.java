@@ -13,6 +13,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.Product;
 import dao.ProductDao;
@@ -23,6 +24,27 @@ public class MainAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		try {
+			
+			HttpSession session = request.getSession(true);
+			
+			if (request.getParameter("logout").equals("logout")) {
+				request.setAttribute("session_stype", 3);
+				session.invalidate();
+			}
+			
+			String session_stype = (String) session.getAttribute("session_stype");
+			String session_sid = (String) session.getAttribute("session_sid");
+			
+			request.setAttribute("session_sid", session_sid);
+			request.setAttribute("session_stype", session_stype);
+			
+
+			
+		} catch (Exception e) {
+			System.out.println("MainAction Exception-> "+ e.getMessage());
+		}
 		
 		ProductDao productdao = ProductDao.getInstance();
 		List<Product> main_img = new ArrayList<Product>();

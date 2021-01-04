@@ -23,13 +23,12 @@ public class MemberAdminPageAction implements CommandProcess {
 			int currentPage = Integer.parseInt(pageNum);
 			int pageSize=10; //한페이지당 보일 게시글 수
 			int blockSize=10; //페이지수
-			int startRow=(currentPage-1)*pageSize+1; //시작 번호
-			int endRow=startRow+pageSize-1; //끝 번호
+			int startRow=(currentPage-1)*pageSize+1; //시작 번호 //2*10+1=21
+			int endRow=startRow+pageSize-1; //끝 번호 //21+10-1=30
 			
 			ShoppingUserDao sd=ShoppingUserDao.getInstance();
 			int totalUser=sd.getTotalUser(); //회원 수
 			List<ShoppingUser> userlist=sd.list(startRow, endRow);
-			System.out.println(userlist.get(1).getSid());
 			int pageCnt=(int)Math.ceil((double)totalUser/pageSize);
 			int startPage=(int)(currentPage-1)/blockSize*blockSize+1;
 			int endPage=startPage+blockSize-1;

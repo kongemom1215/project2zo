@@ -88,6 +88,8 @@ public class Controller extends HttpServlet {
 	//시용자의 요청을 분석해서 해당 작업을 처리
 	private void requestPro(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		
+		
 		String view = null;
 	    CommandProcess com=null;
 	    String command = request.getRequestURI();
@@ -102,7 +104,11 @@ public class Controller extends HttpServlet {
 	          view = com.requestPro(request, response);                // list.jsp
 			  System.out.println("requestPro view=> "+ view);          // /och16/com
 			  
-			  HttpSession session = request.getSession();
+				HttpSession session = request.getSession(true);
+				session.setAttribute("session_sid", session.getAttribute("session_sid"));
+				session.setAttribute("session_sname", session.getAttribute("session_sname"));
+				session.setAttribute("session_stype", session.getAttribute("session_stype"));
+				session.setAttribute("session_semail", session.getAttribute("session_semail"));
 	    } catch(Throwable e) {  
 	    	throw new ServletException(e); 
 	    } 

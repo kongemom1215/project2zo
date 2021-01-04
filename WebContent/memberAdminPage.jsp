@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/memberadmin.css?ver=1">
-<link rel="stylesheet" type="text/css" href="css/YoungCSS2.css?ver=2">
+<link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
+<link rel="stylesheet" type="text/css" href="css/memberadmin.css?ver=2">
 <style type="text/css">
 a{
 	color:black;
@@ -21,60 +21,82 @@ a:link{
 	color:black;
 }
 </style>
+<script type="text/javascript">
+	function chk(){
+		if(frm.option.value=="none" || frm.option.value==""){
+			alert("검색 옵션을 선택해 주십시오");
+			return false;
+		}
+		if(!frm.search_value.value){
+			alert("검색어를 입력해주세요.");
+			return false;
+		}
+	}
+</script>
 </head>
 <body>
-<div style="height: 15px;"></div>
-	<!--로고 및 로그인 메뉴  -->
-	<div class="top_div">
-		<input type="button" class="top_div_logo"
-			onclick="location.href='main.do'"> <input type="button"
-			value="관리자페이지" class="top_div_button"
-			onclick="location.href='adminAction.do'"></input> <input
-			type="button" value="로그아웃" class="top_div_button"></input>
-	</div>
+<!--로고 및 로그인 메뉴  -->
+	<div class="main">
+<div style="margin-top: 15px;">
+<a href="main.do"><img src="./img/Logo.png"></a>
+
+<c:choose>
+<c:when test="${session_stype eq '1'}">
+<a class="top_button">위시리스트</a>
+<a class="top_button">장바구니</a>
+<a class="top_button">주문/배송</a>
+<a class="top_button">마이페이지</a>
+<a href="main.do?logout=logout" class="top_button">로그아웃</a>
+<a class="top_button">${session_sname } 님</a>
+</c:when>
+<c:when test="${session_stype eq '0'}">
+<a href="main.do?logout=logout" class="top_button">로그아웃</a>
+<a class="top_button">${session_sname } 님</a>
+<a href="adminPage.do" class="top_button">관리페이지</a>
+</c:when>
+<c:otherwise>
+<a class="top_button">위시리스트</a>
+<a class="top_button">장바구니</a>
+<a class="top_button">주문/배송</a>
+<a class="top_button">마이페이지</a>
+<a href="login.do" class="top_button">로그인/회원가입</a>
+</c:otherwise>
+</c:choose>
+</div>
+</div>
+<hr>
 	<!--관리자메뉴  -->
-		<!--관리자메뉴  -->
-	<hr class="main_hr" style="margin-bottom: 8px; margin-top: 8px;">
-	<div class="menu_div">
-		<div class="menu_div_in_div">
-			<div class="menu_div_in_div_in_div">
-				<input type="button" class="menu_div_in_div_button" value="">
-			</div>
-			<div class="menu_div_in_div_in_div">
-				<input type="button" class="menu_div_in_div_button"
-					value="ADMINISTRATOR SERVICE"
-					onclick="location.href='adminPage.do'">
-			</div>
-			<div class="menu_div_in_div_in_div">
-				<input type="button" class="menu_div_in_div_button" value="">
-			</div>
-		</div>
+	<div class="main">
+	<div style="height: 17.33px;">
+	<div class="nav_button" style="height: 10px;"><a></a></div>
+	<div class="nav_button"><a href="adminPage.do">ADMINISTRATOR SERVICE</a></div>
+	<div class="nav_button" style="height: 10px;"><a></a></div>
 	</div>
-	<hr class="main_hr"
-		style="margin-bottom: 0px; margin-top: 8px; border-bottom: 0px;">
-		
-	<div id="adminMember">
+	</div>
+	<hr>
+	
+	<div class="main" style="width: 1000px;">
 		<div id="sidebar">
 			<img src="./img/admin_member.JPG" id="img1">
 			<h2 class="memberMenu">회원 관리</h2>
 			<div class="memberMenuButton">
 				<form>
-					<input type="button" value="● 회원 정보 조회" class="button" style="color:#00B9FF; font-weight:bold;"></input><br>
-					<input type="button" value="● 회원 추가" class="button"></input>
+					<input type="button" value="● 회원 정보 조회" class="button" style="color:#00B9FF; font-weight:bold;" onclick="location.href='memberAdminPage.do'" ></input><br>
+					<input type="button" value="● 회원 추가" class="button" onclick="location.href='memberInsert.do'"></input>
 				</form>
 			</div>
 		</div>
 		<div id="content">
 			<div id="search">
 				<div id="select">
-					<form>
+					<form name="frm" action="memberSearch.do" onsubmit="return chk()">
 						<select name="option" class="option">
 							<option value="none">==선택==</option>
 							<option value="sid">회원번호</option>
 							<option value="sname">회원이름</option>
-							<option value="scotnact">이메일</option>
+							<option value="semail">이메일</option>
 						</select>
-						<input type="text" name="search_value" size="50px">
+						<input type="text" name="search_value" size="50px" placeholder="검색어를 입력해주세요.">
 						<input type="submit" value="검색">
 					</form>
 				</div>
@@ -93,7 +115,7 @@ a:link{
 						<c:forEach var="user" items="${userlist }">
 							<tr>
 								<td>${user.sid }</td>
-								<td><a href="memberInfo.do?sid=${user.sid }">${user.sname }</a></td>
+								<td><a href="memberInfo.do?sid=${user.sid }&pageNum=${pageNum}">${user.sname }</a></td>
 								<td>${user.semail }</td>
 								<td>${user.scontact }</td>
 								<td>${user.sregdate }</td>
@@ -110,6 +132,9 @@ a:link{
 						<c:if test="${endPage< pageCnt}">
 							<a href="memberAdminPage.do?pageNum=${startPage+blockPage }">[다음]</a>
 						</c:if>
+					</div>
+					<div>
+						총 회원수 : ${totalUser }
 					</div>
 				</div>
 			</div>

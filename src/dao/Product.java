@@ -7,10 +7,11 @@ public class Product {
 	private int pid;
 	private String ptype;
 	private String pexplain;
-	private String col;
+	private String col1;
 	private String col2;
 	private String col3;
 	private String col4;
+	private String col5;
 	private int pprice;
 	private int pinventory;
 	private String pname;
@@ -45,12 +46,12 @@ public class Product {
 		this.pexplain = pexplain;
 	}
 
-	public String getCol() {
-		return col;
+	public String getCol1() {
+		return col1;
 	}
 
-	public void setCol(String col) {
-		this.col = col;
+	public void setCol1(String col1) {
+		this.col1 = col1;
 	}
 
 	public String getCol2() {
@@ -75,6 +76,14 @@ public class Product {
 
 	public void setCol4(String col4) {
 		this.col4 = col4;
+	}
+
+	public String getCol5() {
+		return col5;
+	}
+
+	public void setCol5(String col5) {
+		this.col4 = col5;
 	}
 
 	public int getPprice() {
