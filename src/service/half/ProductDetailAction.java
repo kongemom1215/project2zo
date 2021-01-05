@@ -1,14 +1,13 @@
 package service.half;
 
-import java.io.IOException;
+import java.io.IOException; 
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Product;
-import dao.ProductDao;
-
+import dao.half.Product;
+import dao.half.ProductDao;
 import service.CommandProcess;
 
 public class ProductDetailAction implements CommandProcess {

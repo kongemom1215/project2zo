@@ -1,15 +1,14 @@
 package service.god;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ShoppingUser;
-import dao.ShoppingUserDao;
-
+import dao.god.ShoppingUser;
+import dao.god.ShoppingUserDao;
 import service.CommandProcess;
 
 public class MemberAdminPageAction implements CommandProcess {

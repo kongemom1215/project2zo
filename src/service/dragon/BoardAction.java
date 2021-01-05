@@ -1,6 +1,6 @@
 package service.dragon;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Board;
-import dao.BoardDao;
+import dao.dragon.Board;
+import dao.dragon.BoardDao;
 import service.CommandProcess;
 
 public class BoardAction implements CommandProcess {

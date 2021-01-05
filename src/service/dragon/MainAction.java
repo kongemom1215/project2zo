@@ -1,6 +1,6 @@
 package service.dragon;
 
-import java.io.IOException;
+import java.io.IOException; 
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.Product;
-import dao.ProductDao;
-import dao.ShoppingUserDao;
+import dao.dragon.Product;
+import dao.dragon.ProductDao;
+import dao.dragon.ShoppingUserDao;
 import service.CommandProcess;
 
 public class MainAction implements CommandProcess  {

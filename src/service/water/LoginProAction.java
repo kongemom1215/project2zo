@@ -1,6 +1,6 @@
 package service.water;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.ShoppingUser;
-import dao.ShoppingUserDao;
+import dao.water.ShoppingUser;
+import dao.water.ShoppingUserDao;
 
 import service.CommandProcess;
 

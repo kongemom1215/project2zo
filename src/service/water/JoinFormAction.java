@@ -1,14 +1,14 @@
 package service.water;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ShoppingUser;
-import dao.ShoppingUserDao;
+import dao.water.ShoppingUser;
+import dao.water.ShoppingUserDao;
 
 import service.CommandProcess;
 

@@ -1,6 +1,6 @@
 package service.dragon;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Search;
-import dao.SearchDao;
+import dao.dragon.Search;
+import dao.dragon.SearchDao;
 import service.CommandProcess;
 
 public class SearchAction implements CommandProcess {
