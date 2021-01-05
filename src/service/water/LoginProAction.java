@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import dao.water.ShoppingUser;
 import dao.water.ShoppingUserDao;
-
 import service.CommandProcess;
 
 public class LoginProAction implements CommandProcess {

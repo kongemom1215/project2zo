@@ -60,7 +60,7 @@
 <body>
 
 <header>
-	<div class="main" style="height: 54.67px;">
+<div class="main">
 <div style="margin-top: 15px;">
 <a href="main.do"><img src="./img/Logo.png"></a>
 
@@ -69,7 +69,7 @@
 <a class="top_button">위시리스트</a>
 <a href="cart.do" class="top_button">장바구니</a>
 <a class="top_button">주문/배송</a>
-<a class="top_button">마이페이지</a>
+<a href="mypage.do" class="top_button">마이페이지</a>
 <a href="main.do?logout=logout" class="top_button">로그아웃</a>
 <a class="top_button">${session_sname } 님</a>
 </c:when>
@@ -91,7 +91,7 @@
 <hr>
 <div class="main">
 <div style="height: 17.33px;">
-<div class="nav_button"><a>ABOUT US</a></div>
+<div class="nav_button"><a href="aboutUs.do">ABOUT US</a></div>
 <div class="nav_button"><a href="shoppingMain.do">SHOPPING</a></div>
 <div class="nav_button"><a href="board.do?type=notice">BOARD</a></div>
 </div>
@@ -157,34 +157,38 @@
 	</div>
 	<div class="cc">
 		<div class="result" >
+<!-- 총 상품 금액 계산 + 배송비 계산  -->
 		<div style="height: 60px;"></div>
 		총<span>${count }</span>개 
-<%-- 		상품 총 금액<b>
+ 		상품 총 금액
+ 		<b>
+ 			<c:set var="sum" value="0"/>
 			<c:forEach var="arr" items="${list }">
-				${arr++};
-			
-			
-			</c:forEach>
-		
-		
+				<c:set var="sum" value="${sum+arr.pprice*arr.cwqty}"></c:set>
+			</c:forEach>	
+			<fmt:formatNumber value="${sum }" pattern="#,###"></fmt:formatNumber>
 		</b>원 
- --%>		배송비<b>
-			<c:if test="${result >=30000 }">
+		+
+		
+		배송비<b>
+			<c:if test="${sum >=30000 }">
 			0
 			</c:if>
-		</b>원 
-		<c:if test="${result < 30000 }">
-		2500
+		
+		<c:if test="${sum < 30000 }">
+		3000
 		</c:if>
-		</b>원 >
-	
+		</b>원
+		=
 		총 결제 금액<b>
-		<c:if test="${result >=30000 }">
-		${result}
+		<c:if test="${sum >=30000 }">
+		<fmt:formatNumber value="${sum}" pattern="#,###"></fmt:formatNumber>
+		
 		</c:if>
-		</b>원 
-		<c:if test="${result < 30000 }">
-		${result+2500}
+		
+		<c:if test="${sum < 30000 }">
+		<fmt:formatNumber value="${sum+3000}" pattern="#,###"></fmt:formatNumber>
+		
 		</c:if>
 		</b>원 
 		
@@ -194,24 +198,30 @@
 		</div>
 	</div>
 	
-	
 	<div class="main">
-		
-		<span><input type="button" value="전체삭제 "onclick="location.href='cartDelete.do'" class="del" id="wholedel"></span>
+	<span><input type="button" value="전체삭제 "onclick="location.href='cartDelete.do'" class="del" id="wholedel"></span>
 		<span><input type="button" value="선택삭제 "onclick="" class="del" id="checkdel"></span>
-		<span><input type="submit" value="전체주문 "onclick="location.href='order.jsp'" class="buy" id="wholebuy"></span>
+		<span><input type="submit" value="전체주문 "onclick="location.href='order.do?sum=${sum}'" class="buy" id="wholebuy"></span>
 		<span><input type="submit" value="선택주문 "onclick="" class="buy" id="checkbuy"></span>
-		
 	</div>
 
 </div>
-<footer>
-	<div class="dd">
-		
-	
-	</div>
 
-</footer>
-
+<div style="height: 340px;">
+</div>
+<div class="main" style="height: 50px; background-color: #767171; display: table;">
+<div style="width: 10px;">
+</div>
+<div style="display: table-cell; vertical-align: middle; margin-left: 5px;">
+대표 : 임주혜 / 사업자등록번호 : 123-45-67899
+</div>
+<div style="display: table-cell; vertical-align: middle; text-align: right;">
+<a>이용약관</a> /
+<a>개인정보처리방침</a> /
+<a>입점문의</a>
+</div>
+<div style="width: 10px;">
+</div>
+</div>
 </body>
 </html>

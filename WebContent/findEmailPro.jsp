@@ -35,5 +35,21 @@ h1{font-weight: 900;}
 	찾으시는 계정은 ${result }입니다.
 	<a href="login.do">로그인하러가기<p></a>
 </div>
+<div style="height: 340px;">
+</div>
+<div class="main" style="height: 50px; background-color: #767171; display: table;">
+<div style="width: 10px;">
+</div>
+<div style="display: table-cell; vertical-align: middle; margin-left: 5px;">
+대표 : 임주혜 / 사업자등록번호 : 123-45-67899
+</div>
+<div style="display: table-cell; vertical-align: middle; text-align: right;">
+<a>이용약관</a> /
+<a>개인정보처리방침</a> /
+<a>입점문의</a>
+</div>
+<div style="width: 10px;">
+</div>
+</div>
 </body>
 </html>

@@ -6,6 +6,8 @@ git inut
 
 [git 업로드]
 
+git remote add origin https://github.com/kongemom1215/project2zo.git
+
 git add .
 git status
 git commit -m "commit 메세지"

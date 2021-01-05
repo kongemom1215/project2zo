@@ -83,4 +83,46 @@ public class ProductDao {
 
 	}
 
+	public int jjim(int sid, int pid) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs_same = null;
+		int same = 0;
+		int rs = 0;
+		String sql_same = "select * from cartnwish where cwtype='wish' and sid=? and pid=?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql_same);
+			pstmt.setInt(1, sid);
+			pstmt.setInt(2, pid);
+			rs_same = pstmt.executeQuery();
+
+			if (rs_same.next()) {
+
+				same += 1;
+
+			} else {
+				String sql = "insert into cartnwish (cwid, sid, pid, cwtype) SELECT max(cwid) + 1, ? ,?, 'wish' from cartnwish";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, sid);
+				pstmt.setInt(2, pid);
+				rs = pstmt.executeUpdate();
+				if (rs >= 1) {
+					same += 2;
+				}
+			}
+
+			return same;
+
+		} catch (Exception e) {
+			if (rs_same != null)
+				rs_same.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
+		}
+			return same;
+	}
+
 }

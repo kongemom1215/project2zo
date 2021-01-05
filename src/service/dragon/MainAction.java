@@ -1,6 +1,6 @@
 package service.dragon;
 
-import java.io.IOException; 
+import java.io.IOException;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -26,9 +26,14 @@ public class MainAction implements CommandProcess  {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		
 		try {
 			
 			HttpSession session = request.getSession(true);
+			session.setAttribute("session_sid", session.getAttribute("session_sid"));
+			session.setAttribute("session_sname", session.getAttribute("session_sname"));
+			session.setAttribute("session_stype", session.getAttribute("session_stype"));
+			session.setAttribute("session_semail", session.getAttribute("session_semail"));
 			
 			if (request.getParameter("logout").equals("logout")) {
 				request.setAttribute("session_stype", 3);

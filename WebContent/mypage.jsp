@@ -10,7 +10,7 @@
 <style type="text/css">
 	.mypagehead{
 		width: 900px;
-		margin-left: 350px;
+		/* margin-left: 350px; */
 		position: relative;
 		float: left;
 		background-color:white;
@@ -42,7 +42,7 @@
 	}
 	.down {
 		width: 900px;
-		margin-left: 350px;
+		/* margin-left: 350px; */
 		position: relative;
 		float: left;
 		background-color:white;
@@ -120,47 +120,47 @@
 <hr>
 <div class="main">
 <div style="height: 17.33px;">
-<div class="nav_button"><a>ABOUT US</a></div>
+<div class="nav_button"><a href="aboutUs.do">ABOUT US</a></div>
 <div class="nav_button"><a href="shoppingMain.do">SHOPPING</a></div>
 <div class="nav_button"><a href="board.do?type=notice">BOARD</a></div>
 </div>
 </div>
 <hr style="margin-bottom: 0px; border-bottom: 0px;">
+<div class="main">
 
-	<div class="main">
-		<input type="button" value="마이페이지" style="margin-top: 30px; font-weight:bold; font-size: 30px; color: #00EBFF; background-color: white; width: 170px; border: 0; outline: 0;" onclick="location.href='mypage.do'">
+	<div class="mypagehead">
+		<input type="button" value="마이페이지" style="margin-top: 30px; font-weight:bold; font-size: 30px; color: #00EBFF; background-color: white; width: 170px; border: 0; outline: 0;" onclick="location.href='mypage.do?sid=${2 }'">
 	<hr>
 	<!-- 회원아이콘 출력-->
 	<div class="mypagepersonicon">
-		<img src="./img/personicon.PNG" width="140px"/>
+		<img src="./img/mypageicon.png" width="140px"/>
 	</div>
 	<!-- 쿠폰/이름 출력-->
 	<div class="mypageinfo">
 		<div class="mypagecoupon">
 		<a href="mypageCoupon.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
 		<span>사용가능 쿠폰 : </span>
-		<span style=" color:blue; font-weight:bold;"></span>
+		<span style=" color:blue; font-weight:bold;">${count }</span>
 		<span >장</span>
 		</a>
 		</div>
 		<div class="mypagename">
-		<span style="color:black; font-weight:bold;">   ${shoppinguser.sname }</span>
-		<span>${session_sname } 님</span> <p>
+		<span style="color:black; font-weight:bold;">${shoppinguser.sname }</span>
+		<span>님</span>
 		</div>
 	</div>
 	</div>
-	
-<div class="main">
+<div class="down">
 
 
 <div class="mypagemainside">
 	<div class="mypageside">
 		<br>
-		<a href="mypageOrder.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+		<a href="mypageOrder.do?sid=${2 }" style="text-decoration: none; color: black;">
 		<span>주문조회</span>
 		<span style="float:right;">></span>
 		</a><p>
-		<a href="mypageCoupon.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+		<a href="mypageCoupon.do?sid=${2 }" style="text-decoration: none; color: black;">
 		<span>쿠폰</span>
 		<span style="float:right;">></span>
 		</a><p>
@@ -182,14 +182,51 @@
 		<h3>주문내역</h3>
 	<div class="myorderviewdetail">
 		<a href="mypageOrder.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
-		<span ></span>	
-		<span style="float:right; color:blue; fon-weight:bold;"></span>
+		<span >${orderjoin.odate }</span>	
+		<span style="float:right; color:blue; font-weight:bold;"> ${orderjoin.oid }</span>
 		<span style="float:right;">주문번호 : </span>
 		</a>
 		<hr>
-		
 		<table>
+		<!-- 주문상품 중 대표 사진 -->
+			<tr><td rowspan="4"><img src="${orderjoin.pthumbimg }" width="100"/></td>
+			<td></td><td></td><td></td>
+			<td colspan="6">${orderjoin.pname }</td><td></td><td></td><td></td><td></td></tr>
+			<tr></tr><tr><td></td><td></td><td></td><td colspan="6">주문총액 : ${orderjoin.oamount } 원 </td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+			<td></td></tr><tr></tr>
 		</table>
+				<span style="font-size:large; color:blue; font-weight:bold;">
+				<c:set var="ostate" value="${orderjoin.ostate }"/>
+				<c:choose>
+				 	<c:when test="${ostate eq '0' }">
+				 		구매취소
+				 	</c:when>
+				 	<c:when test="${ostate eq '1' }">
+				 		결제대기
+				 		<input type="button"  value=" 주문취소 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
+						onclick="location.href='mypageOrderdelete.do?sid=${shoppinguser.sid}&pid=${orderjoin.oid }'" >
+				 	</c:when>
+				 	<c:when test="${ostate eq '2' }">
+				 		결제완료
+				 		<input type="button"  value=" 주문취소 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
+						onclick="location.href='mypageOrderdelete.do?sid=${shoppinguser.sid}&pid=${orderjoin.oid }'" >
+				 	</c:when>
+				 	<c:when test="${ostate eq '3' }">
+				 		배송중
+				 	</c:when>
+				 	<c:when test="${ostate eq '4' }">
+				 		배송완료
+				 		<input type="button"  value=" 구매확정 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
+						onclick="location.href='reviewForm.do?sid=${shoppinguser.sid}&pid=${orderjoin.pid }'" >
+				 	</c:when>
+				 	<c:when test="${ostate eq '5' }">
+				 		구매확정
+				 		<input type="button"  value=" 리뷰쓰기 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
+						onclick="location.href='reviewForm.do?sid=${shoppinguser.sid}&pid=${orderjoin.pid }'" >
+				 	</c:when>
+				 	<c:otherwise></c:otherwise>
+				</c:choose>
+				</span>
 	</div>
 	
 <!-- <c:forEach var="order_tb" items=""> -->	
@@ -199,5 +236,22 @@
 </div>
 <table>
 </table>
+</div>
+<div style="height: 90%;">
+</div>
+<div class="main" style="height: 50px; background-color: #767171; display: table;">
+<div style="width: 10px;">
+</div>
+<div style="display: table-cell; vertical-align: middle; margin-left: 5px;">
+대표 : 임주혜 / 사업자등록번호 : 123-45-67899
+</div>
+<div style="display: table-cell; vertical-align: middle; text-align: right;">
+<a>이용약관</a> /
+<a>개인정보처리방침</a> /
+<a>입점문의</a>
+</div>
+<div style="width: 10px;">
+</div>
+</div>
 </body>
 </html>

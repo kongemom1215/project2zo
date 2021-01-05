@@ -46,7 +46,7 @@ public class CartnWishDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql=
-				"Select p.pid, p.pname,p.pprice, c.cwid, c.cwqty, s.sid\r\n"
+				"Select p.pid, p.pname,p.pprice, c.cwid, c.cwqty, s.sid, c.cwoption\r\n"
 				+ "From product p , cartnwish c , SHOPPINGUSER s\r\n"
 				+ "where p.pid = c.pid\r\n"
 				+ "And c.sid = s.sid\r\n"
@@ -67,6 +67,7 @@ public class CartnWishDao {
 					cart.setCwid(rs.getInt("cwid"));
 					cart.setCwqty(rs.getInt("cwqty"));
 					cart.setSid(rs.getInt("sid"));
+					cart.setCwoption(rs.getString("cwoption"));
 					list.add(cart);
 					
 				}while(rs.next());	
@@ -87,7 +88,7 @@ public class CartnWishDao {
 	}
 	
 //선택된 값 장바구니 테이블에 insert
-	public int insert (int pid,int sid,int number) throws SQLException{
+	public int insert (int pid,int sid,int number,String option) throws SQLException{
 		
 		int result=0;
 		Connection conn =null;
@@ -96,7 +97,7 @@ public class CartnWishDao {
 		
 		String sql1 = "select nvl(max(cwid),0) from cartnwish";
 		String sql2 = "select count(*)from cartnwish where sid=? and pid=?";
-		String sql3 = "Insert into cartnwish values(?,?,?,?,?)";
+		String sql3 = "Insert into cartnwish values(?,?,?,?,?,?)";
 		String sql4 = "update cartnwish set cwqty=cwqty+1	where sid=? and pid=?";
 				
 		
@@ -128,6 +129,7 @@ public class CartnWishDao {
 					 pstmt.setInt(3, pid); //상품번호 가져오기
 					 pstmt.setString(4, "cart");
 					 pstmt.setInt(5,number); //디폴트는 1 장바구니에서 수량변경 가능하게
+					 pstmt.setString(6, option);
 					 rs=pstmt.executeQuery();
 					 result=0;
 					 //result=pstmt.executeUpdate();
@@ -196,7 +198,7 @@ public class CartnWishDao {
 		Connection conn= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql= "select count(*) from cartnwish where sid = ?";
+		String sql= "select sum(cwqty) from cartnwish where sid = ?";
 		
 		try {
 			conn=getConnection();

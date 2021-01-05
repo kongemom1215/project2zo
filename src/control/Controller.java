@@ -104,11 +104,6 @@ public class Controller extends HttpServlet {
 	          view = com.requestPro(request, response);                // list.jsp
 			  System.out.println("requestPro view=> "+ view);          // /och16/com
 			  
-				HttpSession session = request.getSession(true);
-				session.setAttribute("session_sid", session.getAttribute("session_sid"));
-				session.setAttribute("session_sname", session.getAttribute("session_sname"));
-				session.setAttribute("session_stype", session.getAttribute("session_stype"));
-				session.setAttribute("session_semail", session.getAttribute("session_semail"));
 	    } catch(Throwable e) {  
 	    	throw new ServletException(e); 
 	    } 

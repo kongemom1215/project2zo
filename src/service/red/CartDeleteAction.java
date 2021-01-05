@@ -7,12 +7,9 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import dao.red.CartnWish;
 import dao.red.CartnWishDao;
 import oracle.net.aso.s;
-
 import service.CommandProcess;
 
 public class CartDeleteAction implements CommandProcess {
@@ -21,13 +18,12 @@ public class CartDeleteAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("CartDeletAction Start!!");
+		System.out.println("cart.jsp 에서 전체삭제 버튼 누르면 삭제 실행");
 		
 		try {
 			//전체삭제
-			
-			HttpSession session = request.getSession(true);
-			String useremail = (String) session.getAttribute("session_semail");
-			int sid = (int) session.getAttribute("session_sid");
+			String useremail=(String)request.getSession().getAttribute("useremail");
+			int sid=(int)request.getSession().getAttribute("sid");
 			
 			CartnWishDao cartw=CartnWishDao.getInstance();
 			int result=cartw.delete(sid);

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import dao.red.CartnWish;
 import dao.red.CartnWishDao;
-
 import service.CommandProcess;
 
 public class CartAddAction implements CommandProcess {
@@ -24,51 +23,45 @@ public class CartAddAction implements CommandProcess {
 		
 		try {
 			
-			HttpSession session = request.getSession(true);
-			
 			int pid = Integer.parseInt(request.getParameter("pid"));
+			//선택한 옵션값 받기
 			String option = request.getParameter("option");
-			int number = Integer.parseInt(request.getParameter("howmany"));
-			// 반야의 howmany를 홍주의 number로 바꿈 
+			//선택한 수량값 받기==>반야의 howmany를 홍주의 number로 바꿈 
+			//int number = Integer.parseInt(request.getParameter("howmany"));
+			int number=1; 
 			
 			System.out.println("cart pid check ->" + pid );
 			System.out.println("cart howmany(number) check ->" + number );
 			System.out.println("cart option->" + option );
 
+			HttpSession session = request.getSession(true);
+			session.setAttribute("session_sid", session.getAttribute("session_sid"));
+			session.setAttribute("session_sname", session.getAttribute("session_sname"));
+			session.setAttribute("session_stype", session.getAttribute("session_stype"));
+			session.setAttribute("session_semail", session.getAttribute("session_semail"));
+			//세션 로그인 유지
 			
 			//세션으로 로그인한 회원의 이메일과 회원번호
 			String useremail = (String) session.getAttribute("session_semail");
 			int sid = (int) session.getAttribute("session_sid");
-		//	String useremail=(String)request.getSession().getAttribute("useremail");
-		//	int sid=(int)request.getSession().getAttribute("sid");
-			//라디오버튼으로 선택된 상품번호와 수량
-			
-			//상품개수 선택 가져오는건 고민
-			//int number = Integer.parseInt(request.getParameter("number"));
 			
 			CartnWishDao cartw = CartnWishDao.getInstance();
 			CartnWish cart = new CartnWish();
 			//로그인한 회원의 자기 장바구니에 넣기
-			//ArrayList<CartnWish> list= cartw.select(sid);
-			int result=result  = cartw.insert(pid,sid,number);
+			int result=result  = cartw.insert(pid,sid,number,option);
 					
-			
-			
+			System.out.println("--------CartAddAction 파라미터 확인--------------");
+			System.out.println("cart pid check ->" + pid );
+			System.out.println("cart howmany(number) check ->" + number );
+			System.out.println("cart option->" + option );
 			System.out.println("useremail=>"+useremail);
 			System.out.println("sid=>"+sid);
 			System.out.println("pid=>"+pid);
-			
 			System.out.println("cartAddAction의 result=>"+result);
-			
 			System.out.println("pid=>"+pid);
-			
-			
-	
+			//값 보내기
 			request.setAttribute("result", result);
 			request.setAttribute("pid", pid);
-			
-			//request.getSession().setAttribute("list",list );
-			
 			
 			
 		}catch(Exception e) {

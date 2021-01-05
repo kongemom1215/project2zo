@@ -50,7 +50,7 @@
 <hr>
 <div class="main">
 <div style="height: 17.33px;">
-<div class="nav_button"><a>ABOUT US</a></div>
+<div class="nav_button"><a href="aboutUs.do">ABOUT US</a></div>
 <div class="nav_button"><a href="shoppingMain.do">SHOPPING</a></div>
 <div class="nav_button"><a href="board.do?type=notice">BOARD</a></div>
 </div>

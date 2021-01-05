@@ -8,8 +8,15 @@ public class CartnWish {
 	private int cwqty;
 	private String pname;
 	private int pprice;
+	private String cwoption;
 	
 	
+	public String getCwoption() {
+		return cwoption;
+	}
+	public void setCwoption(String cwoption) {
+		this.cwoption = cwoption;
+	}
 	public String getPname() {
 		return pname;
 	}
