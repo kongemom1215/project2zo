@@ -9,7 +9,14 @@ public class Coupon {
 	private Date cenddate;
 	private int cdiscount;
 	private Date cusedate;
+	private String couponimg;
 	
+	public String getCouponimg() {
+		return couponimg;
+	}
+	public void setCouponimg(String couponimg) {
+		this.couponimg = couponimg;
+	}
 	public int getCid() {
 		return cid;
 	}

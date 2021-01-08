@@ -23,6 +23,8 @@ public class ShoppingMainAction implements CommandProcess {
 		session.setAttribute("session_sname", session.getAttribute("session_sname"));
 		session.setAttribute("session_stype", session.getAttribute("session_stype"));
 		session.setAttribute("session_semail", session.getAttribute("session_semail"));
+		session.setAttribute("parray", session.getAttribute("parray"));
+		
 		
 		ProductDao pd = ProductDao.getInstance();
 

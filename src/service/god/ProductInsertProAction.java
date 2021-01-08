@@ -25,8 +25,9 @@ public class ProductInsertProAction implements CommandProcess {
 		try {
 			request.setCharacterEncoding("utf-8");
 			int maxSize=10*1024*1024; // 10MB
-			String fileSave="C:\\jspSrc\\Byerus\\WebContent\\pdimg";
-			MultipartRequest multi=new MultipartRequest(request,fileSave,maxSize,"utf-8", new DefaultFileRenamePolicy());
+			String rootPath=request.getServletContext().getRealPath("/");
+			String savePath=rootPath+"pdimg/";
+			MultipartRequest multi=new MultipartRequest(request,savePath,maxSize,"utf-8", new DefaultFileRenamePolicy());
 			// 파일 업로드 완료
 			Enumeration en=multi.getFileNames();
 			// 업로드된 파일 이름을 반환
@@ -50,29 +51,20 @@ public class ProductInsertProAction implements CommandProcess {
 			
 			product.setPthumbimg("./pdimg/"+filenames.get(0));
 			if(filenames.get(1)==null)
-				product.setCol5(null);
-			else
-				product.setCol5("./pdimg/"+filenames.get(1));
-			
-			if(filenames.get(2)==null)
-				product.setCol4(null);
-			else
-				product.setCol4("./pdimg/"+filenames.get(2));
-			
-			if(filenames.get(3)==null)
 				product.setCol3(null);
 			else
-				product.setCol3("./pdimg/"+filenames.get(3));
+				product.setCol3("./pdimg/"+filenames.get(1));
 			
-			if(filenames.get(4)==null)
+			if(filenames.get(2)==null)
 				product.setCol2(null);
 			else
-				product.setCol2("./pdimg/"+filenames.get(4));
+				product.setCol2("./pdimg/"+filenames.get(2));
 			
-			if(filenames.get(5)==null)
+			if(filenames.get(3)==null)
 				product.setCol1(null);
 			else
-				product.setCol1("./pdimg/"+filenames.get(5));
+				product.setCol1("./pdimg/"+filenames.get(3));
+			
 			
 			ProductDao pd=ProductDao.getInstance();
 			int result=pd.insert(product);

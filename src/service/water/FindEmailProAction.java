@@ -19,18 +19,18 @@ public class FindEmailProAction implements CommandProcess {
 		try {
 			ShoppingUser shoppinguser=new ShoppingUser();
 			String sname=request.getParameter("sname");
+			String squestion= request.getParameter("squestion");
+			String sanswer = request.getParameter("sanswer");
 			System.out.println("FindEmailProAction Start...");
-			
 			
 			if(request.getParameter("sname") != null) {
 			ShoppingUserDao sd=ShoppingUserDao.getInstance();
-			shoppinguser=sd.findem(sname);
+			shoppinguser=sd.findem(sname,squestion,sanswer);
 			
 			
 			
 			}
-
-
+			
 			request.setAttribute("result", shoppinguser.getSemail());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

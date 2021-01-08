@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +46,7 @@ h1{font-weight: 900;}
 </c:choose>
 </div>
 </div>
-<hr>
+<hr style="width: 900px; border-bottom: 0xp;">
 <div class="main">
 <div style="height: 17.33px;">
 <div class="nav_button"><a href="aboutUs.do">ABOUT US</a></div>
@@ -55,8 +54,7 @@ h1{font-weight: 900;}
 <div class="nav_button"><a href="board.do?type=notice">BOARD</a></div>
 </div>
 </div>
-<hr style="margin-bottom: 0px; border-bottom: 0px;">
-
+<hr style="width: 900px; margin-bottom: 0px; border-bottom: 0px;">
 
 <div id="find">
 <h1>비밀번호 찾기</h1>
@@ -64,25 +62,16 @@ h1{font-weight: 900;}
 		<table>
 			<tr><td><input type="email" name="semail" required="required" placeholder="이메일"></td></tr>
 			<tr><td><input type="text" name="sename" required="required" placeholder="이름"></td></tr>
+			<tr><td><select name="squestion">
+				<option>출신 고등학교는?</option>
+				<option>현재 사는 지역은?</option>
+				<option>어떻게 오셨나요?</option>
+				<option>성별은?</option>
+			</select></td></tr>
+			<tr><td><input type="text" name="sanswer" required="required" placeholder="위 질문의 답변"></td></tr>
 			<tr><td><input type="submit" value="비밀번호" class="find"></td></tr>
 		</table>
 	</form>
-</div>
-<div style="height: 340px;">
-</div>
-<div class="main" style="height: 50px; background-color: #767171; display: table;">
-<div style="width: 10px;">
-</div>
-<div style="display: table-cell; vertical-align: middle; margin-left: 5px;">
-대표 : 임주혜 / 사업자등록번호 : 123-45-67899
-</div>
-<div style="display: table-cell; vertical-align: middle; text-align: right;">
-<a>이용약관</a> /
-<a>개인정보처리방침</a> /
-<a>입점문의</a>
-</div>
-<div style="width: 10px;">
-</div>
 </div>
 </body>
 </html>

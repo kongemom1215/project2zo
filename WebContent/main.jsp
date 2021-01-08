@@ -47,7 +47,7 @@
 </c:choose>
 </div>
 </div>
-<hr>
+<hr style="width: 900px; border-bottom: 0xp;">
 <div class="main">
 <div style="height: 17.33px;">
 <div class="nav_button"><a href="aboutUs.do">ABOUT US</a></div>
@@ -55,7 +55,8 @@
 <div class="nav_button"><a href="board.do?type=notice">BOARD</a></div>
 </div>
 </div>
-<hr style="margin-bottom: 0px; border-bottom: 0px;">
+<hr style="width: 900px; margin-bottom: 0px; border-bottom: 0px;">
+
 <div class="main">
 <div class="search_box1">
 <div class="search_box2">
@@ -72,11 +73,11 @@
 </div>
 </div>
 </div>
-<hr style="margin-top: 0px;">
+<hr style="width: 900px; margin-top: 0px;">
 <div class="main">
 Bye-rus 인기 상품
 </div>
-<hr>
+<hr style="width: 900px;">
 <div class="main">
 <div class="slide">
     <ul>
@@ -89,11 +90,11 @@ Bye-rus 인기 상품
     </ul>
 </div>
 </div>
-<hr>
+<hr style="width: 900px;">
 <div class="main">
 코로나 LIVE
 </div>
-<hr>
+<hr style="width: 900px;">
 <div class="main">
 <div style="width: 450px; height: 100px; float: left; margin-top: 100px;">
 <table style="width: 100%; text-align: center;">

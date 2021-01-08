@@ -19,11 +19,17 @@ public class BoardAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		System.out.println("-- service.dragon.BoardAction --");
+		
+		try {
 		HttpSession session = request.getSession(true);
 		session.setAttribute("session_sid", session.getAttribute("session_sid"));
 		session.setAttribute("session_sname", session.getAttribute("session_sname"));
 		session.setAttribute("session_stype", session.getAttribute("session_stype"));
 		session.setAttribute("session_semail", session.getAttribute("session_semail"));
+		} catch (Exception e) {
+			System.out.println("오류 : "+ e.getMessage());
+		}
 		
 		String type = request.getParameter("type");
 		BoardDao boarddao = BoardDao.getInstance();
@@ -41,7 +47,7 @@ public class BoardAction implements CommandProcess {
 			request.setAttribute("nhit", request.getParameter("nhit"));
 		}
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("오류 : "+ e.getMessage());
 		}
 		
 		try {

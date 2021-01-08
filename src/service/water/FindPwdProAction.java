@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.water.ShoppingUser;
 import dao.water.ShoppingUserDao;
+
 import service.CommandProcess;
 
 public class FindPwdProAction implements CommandProcess {
@@ -20,12 +21,14 @@ public class FindPwdProAction implements CommandProcess {
 			ShoppingUser shoppinguser=new ShoppingUser();
 			String semail=request.getParameter("semail");
 			String sname=request.getParameter("sename");
+			String squestion= request.getParameter("squestion");
+			String sanswer = request.getParameter("sanswer");
 			System.out.println("FindPwdProAction Start...");
 			
 			
 			if( request.getParameter("semail") != null) {
 			ShoppingUserDao sd=ShoppingUserDao.getInstance();
-			shoppinguser=sd.findpwd(semail,sname);
+			shoppinguser=sd.findpwd(semail,sname,squestion,sanswer);
 			System.out.println("shoppinguser->"+shoppinguser);
 			
 	

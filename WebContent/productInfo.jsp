@@ -7,8 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/productinfo.css?ver=1">
-<link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=2">
+<link rel="stylesheet" type="text/css" href="css/productinfo.css?ver=10">
 <style type="text/css">
 a{
 	color:black;
@@ -21,6 +20,20 @@ a:visited {
 
 a:link{
 	color:black;
+}
+.download{
+	display:inline-block;
+    width:50px;
+    line-height:30px;
+    text-align:center;
+    background-color:white;
+    border: 1px solid black;
+    color:#fff;
+    font-size: 12px;
+    margin-left:10px;
+}
+.download:hover{
+	cursor: pointer;
 }
 </style>
 <script type="text/javascript">
@@ -48,45 +61,28 @@ a:link{
 </head>
 <body>
 <!--로고 및 로그인 메뉴  -->
-<div class="main">
-<div style="margin-top: 15px;">
-<a href="main.do"><img src="./img/Logo.png"></a>
-
-<c:choose>
-<c:when test="${session_stype eq '1'}">
-<a class="top_button">위시리스트</a>
-<a href="cart.do" class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
-<a href="mypage.do" class="top_button">마이페이지</a>
-<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
-</c:when>
-<c:when test="${session_stype eq '0'}">
-<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
-<a href="adminPage.do" class="top_button">관리페이지</a>
-</c:when>
-<c:otherwise>
-<a class="top_button">위시리스트</a>
-<a class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
-<a class="top_button">마이페이지</a>
-<a href="login.do" class="top_button">로그인/회원가입</a>
-</c:otherwise>
-</c:choose>
-</div>
-</div>
-<hr>
+	<div style="width: 900px; margin-left: 350px; position: relative;">
+		<img src="img/Logo.png"> <input type="button" value="로그아웃"
+			class="top"
+			style="float: right; background-color: white; border: 0px;"></input>
+		<input type="button" value="관리자페이지" class="top"
+			style="float: right; background-color: white; border: 0px;"
+			onclick="location.href='adminPage.do'"></input>
+	</div>
+	<hr>
 	<!--관리자메뉴  -->
-<div class="main">
-<div style="height: 17.33px;">
-<div class="nav_button" style="width: 300psx; height: 10px;"></div>
-<div class="nav_button"><a href="adminPage.do">ADMINISTRATOR SERVICE</a></div>
-<div class="nav_button" style="width: 300psx; height: 10px;"></div>
-</div>
-</div>
-<hr style="margin-bottom: 0px; border-bottom: 0px;">
-<div class="main">
+	<div
+		style="width: 900px; height: 10px; display: table-cell; vertical-align: middle; position: relative;">
+		<div style="width: 900px; margin-left: 350px;">
+			<div id="admin" style="position: relative; float: left;">
+				<input type="button"
+					style="width: 300px; background-color: white; border: 0px;"
+					value="ADMINISTRATOR SERVICE"
+					onclick="location.href='adminPage.do'">
+			</div>
+		</div>
+	</div>
+	<hr>
 	<div id="adminProduct">
 		<div id="sidebar">
 			<img src="./img/admin_product.JPG" id="img1">
@@ -116,7 +112,7 @@ a:link{
 			<div id="search_content">
 				<div id="search_content2">
 					<div id="search_table">
-						<table>
+						<table style="width:600px;">
 							<tr>
 								<td colspan="2" rowspan="3"><img src="${product.pthumbimg }" id="img2"></td>
 								<td>상품번호</td>
@@ -150,10 +146,17 @@ a:link{
 								<c:if test="${product.ppublic eq 1 }">공개</c:if></td>
 							</tr>
 							<tr>
+								<td>썸네일</td>
+								<td><a href="${product.pthumbimg }" class="download" onclick="window.open(this.href, '_blank'); return false;">조회</a><a class="download" href="${product.pthumbimg }" style="width:70px;" download>다운로드</a></td>
+								<td>상세이미지</td>
+								<td><input type="button" value="페이지로확인" onclick="location.href=productDetail.do?pid=${product.pid}" class="download" style="width:90px; color:black;"></td>
+							</tr>
+							<tr>
+								<td>옵션</td>
+								<td>${product.poption}</td>
 								<td>상품등록일</td>
 								<td>${product.pregdate }</td>
-								<td></td>
-								<td></td>
+								
 							</tr>
 						</table>
 						<br>
@@ -166,7 +169,6 @@ a:link{
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

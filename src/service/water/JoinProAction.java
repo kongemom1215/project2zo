@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.water.ShoppingUser;
 import dao.water.ShoppingUserDao;
+
 import service.CommandProcess;
 
 public class JoinProAction implements CommandProcess {
@@ -31,11 +32,15 @@ public class JoinProAction implements CommandProcess {
 				user.setSaddress(request.getParameter("saddress"));
 				user.setSpost(Integer.parseInt(request.getParameter("spost")));
 				user.setSagree(request.getParameter("sagree"));
+				user.setSquestion(request.getParameter("squestion"));
+				user.setSanswer(request.getParameter("sanswer"));
 				
 		        System.out.println("JoinProAction requestPro semail->"+request.getParameter("semail"));
 		        System.out.println("JoinProAction requestPro spwd->"+request.getParameter("spwd"));
 		        System.out.println("JoinProAction requestPro sname->"+request.getParameter("sname"));
 		        System.out.println("JoinProAction requestPro scontact->"+request.getParameter("scontact"));
+		        System.out.println("JoinProAction requestPro squestion->"+request.getParameter("squestion"));
+		        System.out.println("JoinProAction requestPro sanswer->"+request.getParameter("sanswer"));
 				
 				ShoppingUserDao sp = ShoppingUserDao.getInstance();//DB 
 		        int result = sp.insert(user);

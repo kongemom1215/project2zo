@@ -49,7 +49,10 @@
 <hr style="margin-bottom: 0px; border-bottom: 0px;">
 
 <div class="main">
+<div>
 나의 찜
+</div>
+
 
 >찜 목록에 담긴 상품은 바로 장바구니에 담으실 수 있습니다.
 >찜 목록에 담은 시점과 구매시점에서 상품가격 및 이벤트가 변경될 수 있으며 조기품절 될 수 있습니다.

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +41,7 @@ h1{font-weight: 900;}
 </c:choose>
 </div>
 </div>
-<hr>
+<hr style="width: 900px; border-bottom: 0xp;">
 <div class="main">
 <div style="height: 17.33px;">
 <div class="nav_button"><a href="aboutUs.do">ABOUT US</a></div>
@@ -50,31 +49,12 @@ h1{font-weight: 900;}
 <div class="nav_button"><a href="board.do?type=notice">BOARD</a></div>
 </div>
 </div>
-<hr style="margin-bottom: 0px; border-bottom: 0px;">
-
+<hr style="width: 900px; margin-bottom: 0px; border-bottom: 0px;">
 	
 	<div id="find">
 	<h1>계정찾기</h1>
 		찾으시는 계정의 비밀번호는 ${result }입니다.<p>
 		<a href="login.do">로그인하러가기<p></a>
 	</div>
-	<div style="height: 340px;">
-</div>
-<div style="height: 340px;">
-</div>
-<div class="main" style="height: 50px; background-color: #767171; display: table;">
-<div style="width: 10px;">
-</div>
-<div style="display: table-cell; vertical-align: middle; margin-left: 5px;">
-대표 : 임주혜 / 사업자등록번호 : 123-45-67899
-</div>
-<div style="display: table-cell; vertical-align: middle; text-align: right;">
-<a>이용약관</a> /
-<a>개인정보처리방침</a> /
-<a>입점문의</a>
-</div>
-<div style="width: 10px;">
-</div>
-</div>
 </body>
 </html>

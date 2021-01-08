@@ -4,116 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/mypageEditForm.css?ver=1">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
-<style type="text/css">
-	.down {
-		width: 900px;
-		/* margin-left: 350px; */
-		position: relative;
-		float: left;
-		background-color:white;
-	}
-	.mypagehead{
-		width: 900px;
-		/* margin-left: 350px; */
-		position: relative;
-		float: left;
-		background-color:white;
-		
-	}
-	.mypagemainside {
-		float: left;
-		width: 10%;
-		margin-left: 10px;
-		width: 180px;
-		height: 40%;
-		
-		font-size: 18px;
-		font-color: black;
-		margin-left: 10px;
-		background-color: #B9FFFF;
-}
-
-	.mypageside {
-		margin-left: 10px;
-		float: left;
-		height: 30%;
-		width: 160px;
-	
-	}
-	.useredit{
-		width: 600px;
-		margin-left: 10px;
-		position: relative;
-		background-color:white;
-		float : right;
-	}
-	.input[type="password"]{
-		font-size: 18px;
-		margin-top: 10px;
-		border: 0;
-		outline: 0;
-		background-color: #B9FFFF; 
-		margin-right: 0.5px;
-	}
-	.input[type="text"]{
-		font-size: 18px;
-		margin-top: 10px;
-		border: 0;
-		outline: 0;
-		background-color: #B9FFFF; 
-		margin-right: 0.5px;
-		margin-left: 2px;
-	}
-	.input[type="radio"]{
-		font-size: 18px;
-		border: 0;
-		outline: 0;
-		background-color: #B9FFFF; 
-		margin-right: 5%;
-		margin-left: 2px;
-	}
-	.input[type="submit"]{
-		font-size: 18px;
-		border:3;
-		border-color: #14D3FF;
-		outline: 0;
-		background-color: white; 
-		margin-top: 10px;
-		margin-right: 5px;
-		margin-left: 2px;
-	}
-	
-	table{	
-		width:600px;
-	}
-	table.txc-table{
-		width:100%;
-		table-layout:fixed;
-	}
-	table thead tr{
-		width:100%;
-	}
-	.button {
-    width:75px;
-    background-color: #14D3FF;
-    border: none;
-    color:#fff;
-    padding: 8px 0;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    margin: 4px;
-    cursor: pointer;
-	border-radius:10px;
-}
-	.button:hover {
-    background-color: blue;
-}
-</style>
 </head>
 <body>
 <div class="main">
@@ -198,6 +92,8 @@
 		<tr><td style="font-size:15px;">주소	</td><td>></td><td style="background-color:#B9FFFF;"><input type="text" name="saddress" required="required" value="${shoppinguser.saddress }" class="input"></td></tr>
 		<tr><td style="font-size:15px;">전화번호	</td><td>></td><td style="background-color:#B9FFFF;"><input type="text" name="scontact" required="required" pattern="\d{2,3}-\d{3,4}-\d{4}" placeholder="xxx-xxxx-xxxx" title="2,3자리-3,4자리-4자리"
 									value="${shoppinguser.scontact }" class="input"></td></tr>
+		<tr><td style="font-size:15px;">질문	</td><td>></td><td style="background-color:#B9FFFF;"><input type="text" name="squestion" required="required" value="${shoppinguser.squestion }" class="input"></td></tr>
+		<tr><td style="font-size:15px;">답	</td><td>></td><td style="background-color:#B9FFFF;"><input type="text" name="sanswer" required="required" value="${shoppinguser.sanswer }" class="input"></td></tr>
 		<tr><td>마케팅동의</td><td>></td><td style="background-color:#B9FFFF;">y<input type="radio" name="sagree" required="required" value="y" class="input">  
 								  n<input type="radio" name="sagree" required="required" value="n" class="input"></td></tr>
 		<tr><td colspan="3" style="text-align: center;"><input type="submit" value="수정완료" class="button"></td></tr>

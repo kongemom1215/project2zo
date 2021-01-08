@@ -33,13 +33,13 @@ public class Controller extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 	   	//web.xml에서 propertyConfig에 해당하는 init-param 의 값을 읽어옴
 		String props = config.getInitParameter("config");
-		System.out.println("Controller init props->"+props);
+//		System.out.println("Controller init props->"+props);
 		//명령어와 처리클래스의 매핑정보를 저장할 Properties객체 생성
 		Properties pr = new Properties();
 		FileInputStream f = null;
 		try {
 			String configFilePath = config.getServletContext().getRealPath(props);
-			System.out.println("Controller init configFilePath->"+configFilePath);
+//			System.out.println("Controller init configFilePath->"+configFilePath);
 			f = new FileInputStream(configFilePath);
 			// command.properties파일의 정보를  Properties객체에 저장
 			pr.load(f);
@@ -94,15 +94,15 @@ public class Controller extends HttpServlet {
 	    CommandProcess com=null;
 	    String command = request.getRequestURI();
 	    try {	
-				System.out.println("requestPro command 1=>"+ command);  // /och16/list.do
+//				System.out.println("requestPro command 1=>"+ command);  // /och16/list.do
 	              command = command.substring(request.getContextPath().length());
 	           // ListAction      com = new ListAction();      
 	          com = (CommandProcess)commandMap.get(command);  
-			  System.out.println("requestPro  command 2=>"+ command);  // /och16/com
-			  System.out.println("requestPro com=> "+ com);            // /och16/com
+//			  System.out.println("requestPro  command 2=>"+ command);  // /och16/com
+//			  System.out.println("requestPro com=> "+ com);            // /och16/com
 			  // service.ListAction.requestPro(request, response)
 	          view = com.requestPro(request, response);                // list.jsp
-			  System.out.println("requestPro view=> "+ view);          // /och16/com
+//			  System.out.println("requestPro view=> "+ view);          // /och16/com
 			  
 	    } catch(Throwable e) {  
 	    	throw new ServletException(e); 

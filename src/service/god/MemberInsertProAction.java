@@ -26,7 +26,8 @@ public class MemberInsertProAction implements CommandProcess {
 			shoppinguser.setSpost(Integer.parseInt(request.getParameter("spost")));
 			shoppinguser.setSaddress(request.getParameter("saddress"));
 			shoppinguser.setSagree(request.getParameter("sagree"));
-			
+			shoppinguser.setSquestion(request.getParameter("squestion"));
+			shoppinguser.setSanswer(request.getParameter("sanswer"));
 			ShoppingUserDao sd=ShoppingUserDao.getInstance();
 			int result=sd.insertUser(shoppinguser);
 			

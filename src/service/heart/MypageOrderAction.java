@@ -28,8 +28,23 @@ public class MypageOrderAction implements CommandProcess {
 			Order_tbDao oddao = Order_tbDao.getInstance();
 			Order_Join orderjoin = new Order_Join();
 			
+			String orderdate = request.getParameter("orderdate");
+			request.setAttribute("orderdate", orderdate);
+			try {
+				if(orderdate.equals("onemonth")) {
+					request.setAttribute("onemonth", "selected");
+				}else if(orderdate.equals("threemonth")) {
+					request.setAttribute("threemonth", "selected");
+				}else if(orderdate.equals("sixmonth")) {
+					request.setAttribute("sixmonth", "selected");
+				}else {}
+			} catch (Exception e) {
+				System.err.println("MypageOrderAction orderdate Error->"+e.getMessage());
+			}
+			
+			
 			orderjoin = oddao.select(sid);
-			List<Order_Join> list = oddao.list(sid);
+			List<Order_Join> list = oddao.list(sid, orderdate);
 			
 			
 			request.setAttribute("sid", sid);

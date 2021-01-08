@@ -35,9 +35,9 @@ public class Order_tbDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql1 = "select to_number(to_char(sysdate, 'yymmdd')) || LPAD(oid_num.NEXTVAL,4,0) from dual;";
+		String sql1 = "select to_number(to_char(sysdate, 'yymmdd')) || LPAD(oid_num.NEXTVAL,4,0) from dual";
 		String sql2 = "SELECT inv_num.NEXTVAL FROM DUAL ";
-		String sql3 = "Insert INTO order_tb values(?,sysdate,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql3 = "Insert INTO order_tb (oid, ODATE, sid, cid, oname, ocontact, Oaddress, Opost, Opay, Ostate, Oamount, oinvoice, Odeliverey) values(?,sysdate,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			int count=0;
@@ -49,6 +49,7 @@ public class Order_tbDao {
 			}
 			pstmt.close();
 			rs.close();
+			System.out.println("count=>"+count);
 			
 			int invoice=0;
 			pstmt=conn.prepareStatement(sql2);
@@ -56,6 +57,7 @@ public class Order_tbDao {
 			if(rs.next()) {
 				invoice=rs.getInt(1);
 			}
+			System.out.println("invoice=>"+invoice);
 			
 			
 			pstmt.close();
@@ -82,6 +84,7 @@ public class Order_tbDao {
 			System.out.println("result =>"+ result);
 			
 		}catch(Exception e) {
+			System.out.println("Order_tdDao error insert!!"+e.getMessage());
 			System.out.println("Order_tdDao error!!"+e.getMessage());
 		}finally {
 			if(rs != null) rs.close();
@@ -93,17 +96,45 @@ public class Order_tbDao {
 		return result;
 	
 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public Order select(int session_sid) throws SQLException {
+		Order order_select = new Order();
+		Connection conn= null;
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		String sql = "select oid,odate from order_tb where sid=?";
+		
+		try {
+			
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, session_sid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				order_select.setOid(rs.getInt("oid"));
+//				order_select.setSid(rs.getInt("sid"));
+//				order_select.setCid(rs.getInt("cid"));
+//				order_select.setOname(rs.getString("oname"));
+//				order_select.setOpay(rs.getInt("opost"));
+//				order_select.setOaddress(rs.getString("oaddress"));
+//				order_select.setOcontact(rs.getString("ocontact"));
+//				order_select.setOamount(rs.getInt("oamount"));
+//				order_select.setOdeliverey(rs.getInt("odeliverey"));
+//				order_select.setOstate(rs.getInt("ostate"));
+				order_select.setOdate(rs.getDate("odate"));
+//				order_select.setDqty(rs.getInt("dqty"));
+//				order_select.setOinvoice(rs.getInt("oinvoice"));
+			}
+			
+		}catch(Exception e) {
+			System.out.println("Order_tbDao error select!!"+e.getMessage());
+		}finally {
+			if(rs != null) rs.close();
+			if(conn != null) conn.close();
+			if(pstmt != null) pstmt.close();
+		}
+		
+		
+		return order_select;
+	}
 	
 }

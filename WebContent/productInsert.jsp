@@ -7,8 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/productinsert.css?ver=1">
-<link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=2">
+<link rel="stylesheet" type="text/css" href="css/productinsert.css?ver=10">
 <style type="text/css">
 a{
 	color:black;
@@ -80,46 +79,28 @@ a:link{
 </head>
 <body>
 <!--로고 및 로그인 메뉴  -->
-<div class="main">
-<div style="margin-top: 15px;">
-<a href="main.do"><img src="./img/Logo.png"></a>
-
-<c:choose>
-<c:when test="${session_stype eq '1'}">
-<a class="top_button">위시리스트</a>
-<a href="cart.do" class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
-<a href="mypage.do" class="top_button">마이페이지</a>
-<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
-</c:when>
-<c:when test="${session_stype eq '0'}">
-<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
-<a href="adminPage.do" class="top_button">관리페이지</a>
-</c:when>
-<c:otherwise>
-<a class="top_button">위시리스트</a>
-<a class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
-<a class="top_button">마이페이지</a>
-<a href="login.do" class="top_button">로그인/회원가입</a>
-</c:otherwise>
-</c:choose>
-</div>
-</div>
-<hr>
+	<div style="width: 900px; margin-left: 350px; position: relative;">
+		<img src="img/Logo.png"> <input type="button" value="로그아웃"
+			class="top"
+			style="float: right; background-color: white; border: 0px;"></input>
+		<input type="button" value="관리자페이지" class="top"
+			style="float: right; background-color: white; border: 0px;"
+			onclick="location.href='adminPage.do'"></input>
+	</div>
+	<hr>
 	<!--관리자메뉴  -->
-<div class="main">
-<div style="height: 17.33px;">
-<div class="nav_button" style="width: 300psx; height: 10px;"></div>
-<div class="nav_button"><a href="adminPage.do">ADMINISTRATOR SERVICE</a></div>
-<div class="nav_button" style="width: 300psx; height: 10px;"></div>
-</div>
-</div>
-<hr style="margin-bottom: 0px; border-bottom: 0px;">
-
-<div class="main">
+	<div
+		style="width: 900px; height: 10px; display: table-cell; vertical-align: middle; position: relative;">
+		<div style="width: 900px; margin-left: 350px;">
+			<div id="admin" style="position: relative; float: left;">
+				<input type="button"
+					style="width: 300px; background-color: white; border: 0px;"
+					value="ADMINISTRATOR SERVICE"
+					onclick="location.href='adminPage.do'">
+			</div>
+		</div>
+	</div>
+	<hr>
 	<div id="adminProduct">
 		<div id="sidebar">
 			<img src="./img/admin_product.JPG" id="img1">
@@ -188,14 +169,6 @@ a:link{
 							<td><input type="file" name="col3" multiple="multiple"></td>
 						</tr>
 						<tr>
-							<td>상세 이미지4</td>
-							<td><input type="file" name="col4" multiple="multiple"></td>
-						</tr>
-						<tr>
-							<td>상세 이미지5</td>
-							<td><input type="file" name="col5" multiple="multiple"></td>
-						</tr>
-						<tr>
 							<td>할인율</td>
 							<td><input id="spinner2" type="text" name="pdiscount" value="0" pattern="[0-99]" maxlength="2" size="1"/>
     							<ul class="spinner2">
@@ -226,7 +199,6 @@ a:link{
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

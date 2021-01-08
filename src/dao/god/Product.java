@@ -9,8 +9,6 @@ public class Product {
 	private String col1;
 	private String col2;
 	private String col3;
-	private String col4;
-	private String col5;
 	private int pprice;
 	private int pinventory;
 	private String pname;
@@ -61,21 +59,6 @@ public class Product {
 		this.col3 = col3;
 	}
 
-	public String getCol4() {
-		return col4;
-	}
-
-	public void setCol4(String col4) {
-		this.col4 = col4;
-	}
-
-	public String getCol5() {
-		return col5;
-	}
-
-	public void setCol5(String col5) {
-		this.col5 = col5;
-	}
 	public int getPprice() {
 		return pprice;
 	}

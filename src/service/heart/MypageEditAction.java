@@ -36,6 +36,8 @@ public class MypageEditAction implements CommandProcess {
 			shoppinguser.setSaddress(request.getParameter("saddress"));
 			shoppinguser.setSpost(Integer.parseInt(request.getParameter("spost")));
 			shoppinguser.setSagree(request.getParameter("sagree"));
+			shoppinguser.setSquestion(request.getParameter("squestion"));
+			shoppinguser.setSanswer(request.getParameter("sanswer"));
 			System.out.println("UpdateProAction shoppinguser.getSemail() -> "+shoppinguser.getSemail());
 			System.out.println("UpdateProAction shoppinguser.getSpwd() -> "+shoppinguser.getSpwd());
 			System.out.println("UpdateProAction shoppinguser.getSaddress() -> "+shoppinguser.getSaddress());

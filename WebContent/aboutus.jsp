@@ -47,7 +47,7 @@
 </c:choose>
 </div>
 </div>
-<hr>
+<hr style="width: 900px; border-bottom: 0xp;">
 <div class="main">
 <div style="height: 17.33px;">
 <div class="nav_button"><a href="aboutUs.do">ABOUT US</a></div>
@@ -55,7 +55,7 @@
 <div class="nav_button"><a href="board.do?type=notice">BOARD</a></div>
 </div>
 </div>
-<hr>
+<hr style="width: 900px; margin-bottom: 0px; border-bottom: 0px;">
 <div class="main">
 	<div class="downside">
 		<img src="./img/aboutus.png" width="900" height="600"></img>

@@ -57,6 +57,7 @@ public class CouponDao {
 				coupon.setCenddate(rs.getDate("cenddate"));
 				coupon.setCdiscount(rs.getInt("cdiscount"));
 				coupon.setCusedate(rs.getDate("cusedate"));
+				coupon.setCouponimg(rs.getString("couponimg"));
 			}
 		} catch (Exception e) {
 			System.out.println("CouponDao select error=>"+e.getMessage());
@@ -115,6 +116,7 @@ public class CouponDao {
 					coupon.setCenddate(rs.getDate("cenddate"));
 					coupon.setCdiscount(rs.getInt("cdiscount"));
 					coupon.setCusedate(rs.getDate("cusedate"));
+					coupon.setCouponimg(rs.getString("couponimg"));
 					System.out.println("Coupon list cid->"+rs.getInt("cid"));
 					listC.add(coupon);
 				}

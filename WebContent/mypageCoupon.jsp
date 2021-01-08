@@ -4,55 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/mypageCoupon.css?ver=1">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
-<style type="text/css">
-	.down {
-		width: 900px;
-		/* margin-left: 350px; */
-		position: relative;
-		float: left;
-		background-color:white;
-	}
-	.mypagehead{
-		width: 900px;
-		/* margin-left: 350px; */
-		position: relative;
-		float: left;
-		background-color:white;
-		
-	}
-		.mypagemainside {
-		float: left;
-		width: 10%;
-		margin-left: 10px;
-		width: 180px;
-		height: 40%;
-		margin-right: 20px;
-		font-size: 18px;
-		font-color: black;
-		background-color: #B9FFFF;
-}
-
-	.mypageside {
-		margin-left: 10px;
-		float: left;
-		height: 30%;
-		width: 160px;
-	
-	}
-	table{
-		border: 1px solid white; 
-		width:75%;
-	}
-	table.txc-table{
-		width:100%;
-		table-layout:fixed;
-	}
-	td { background-color: #E1F6FA; text-align: center;}
-	th { background-color: #14D3FF; font-weight:bold; padding: 5px;}
-</style>
 </head>
 <body>
 <div class="main">
@@ -125,11 +80,11 @@
 	</div>
 	<table>
 	<caption><h2>쿠폰</h2></caption>
-	<tr><th>번호</th><th>할인율</th><th>유효기간</th></tr>
+	<tr><th style="background-color:white;"></th><th>번호</th><th>할인율</th><th>유효기간</th></tr>
 		<c:forEach var="coupon" items="${listC}">
-			<tr>
+			<tr><td style="background-color:white;"><img src="${coupon.getCouponimg() }" width="150"/></td>
 			<td>${coupon.getCid()}</td><td>${coupon.getCdiscount() } %</td>
-			<td>${coupon.getCstartdate() } ~ ${coupon.getCenddate()}</td></tr>
+			<td>${coupon.getCstartdate() } ~ ${coupon.getCenddate()}</td></tr>			
 		</c:forEach>
 	</table>
 	</div>

@@ -19,11 +19,17 @@ public class SearchAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		System.out.println("-- service.dragon.SearchAction --");
+		
+		try {
 		HttpSession session = request.getSession(true);
 		session.setAttribute("session_sid", session.getAttribute("session_sid"));
 		session.setAttribute("session_sname", session.getAttribute("session_sname"));
 		session.setAttribute("session_stype", session.getAttribute("session_stype"));
 		session.setAttribute("session_semail", session.getAttribute("session_semail"));
+		} catch (Exception e) {
+			System.out.println("오류 : "+ e.getMessage());
+		}
 		
 		String search_text = request.getParameter("search_text");
 		SearchDao searchdao = SearchDao.getInstance();
@@ -42,10 +48,10 @@ public class SearchAction implements CommandProcess {
 		} else {
 		}
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("오류 : "+ e.getMessage());
 		}
 		
-		System.out.println("select box : " + shopping_select);
+//		System.out.println("select box : " + shopping_select);
 		
 		List<Search> main_img = new ArrayList<Search>();
 		main_img = searchdao.compare(search_text, shopping_select);

@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.god.Product;
 import dao.god.ProductDao;
-import dao.god.ShoppingUser;
-import dao.god.ShoppingUserDao;
 import service.CommandProcess;
 
 public class ProductAdminAction implements CommandProcess {
@@ -23,7 +21,7 @@ public class ProductAdminAction implements CommandProcess {
 			if(pageNum==null || pageNum.equals(""))
 				pageNum="1";
 			int currentPage = Integer.parseInt(pageNum);
-			int pageSize=5; //한페이지당 보일 게시글 수
+			int pageSize=4; //한페이지당 보일 게시글 수
 			int blockSize=10; //페이지수
 			int startRow=(currentPage-1)*pageSize+1; //시작 번호 //2*10+1=21
 			int endRow=startRow+pageSize-1; //끝 번호 //21+10-1=30

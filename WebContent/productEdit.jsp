@@ -7,8 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/productinfo.css?ver=1">
-<link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=2">
+<link rel="stylesheet" type="text/css" href="css/productedit.css?ver=13">
 <style type="text/css">
 a{
 	color:black;
@@ -22,6 +21,13 @@ a:visited {
 a:link{
 	color:black;
 }
+table{
+	table-layout:fixed;
+	width:700px;
+}
+td{
+	white-space: nowrap;
+}
 </style>
 <script type="text/javascript">
 	function chk(){
@@ -34,49 +40,77 @@ a:link{
 			return false;
 		}
 	}
+	function removeThumb(){
+		var v=document.getElementById("pthumbimg");
+		
+		v.value="";
+	}
+	function changeThumb(change){
+		var v=document.getElementById("pthumbimg");
+		
+		v.value="./pdimg/"+change.substr(12);
+	}
+	
+	function removeCol1(){
+		var v=document.getElementById("col1");
+		
+		v.value="";
+		
+	}
+	function changeCol1(change){
+		var v=document.getElementById("col1");
+		
+		v.value="./pdimg/"+change.substr(12);
+	}
+	
+	function removeCol2(){
+		var v=document.getElementById("col2");
+		
+		v.value="";
+		
+	}
+	function changeCol2(change){
+		var v=document.getElementById("col2");
+		
+		v.value="./pdimg/"+change.substr(12);
+	}
+	function removeCol3(){
+		var v=document.getElementById("col3");
+		
+		v.value="";
+		
+	}
+	function changeCol3(change){
+		var v=document.getElementById("col3");
+		
+		v.value="./pdimg/"+change.substr(12);
+	}
 </script>
 </head>
 <body>
 <!--로고 및 로그인 메뉴  -->
-<div class="main">
-<div style="margin-top: 15px;">
-<a href="main.do"><img src="./img/Logo.png"></a>
-
-<c:choose>
-<c:when test="${session_stype eq '1'}">
-<a class="top_button">위시리스트</a>
-<a href="cart.do" class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
-<a href="mypage.do" class="top_button">마이페이지</a>
-<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
-</c:when>
-<c:when test="${session_stype eq '0'}">
-<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
-<a href="adminPage.do" class="top_button">관리페이지</a>
-</c:when>
-<c:otherwise>
-<a class="top_button">위시리스트</a>
-<a class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
-<a class="top_button">마이페이지</a>
-<a href="login.do" class="top_button">로그인/회원가입</a>
-</c:otherwise>
-</c:choose>
-</div>
-</div>
-<hr>
+	<div style="width: 900px; margin-left: 350px; position: relative;">
+		<img src="img/Logo.png"> <input type="button" value="로그아웃"
+			class="top"
+			style="float: right; background-color: white; border: 0px;"></input>
+		<input type="button" value="관리자페이지" class="top"
+			style="float: right; background-color: white; border: 0px;"
+			onclick="location.href='adminPage.do'"></input>
+	</div>
+	<hr>
 	<!--관리자메뉴  -->
-<div class="main">
-<div style="height: 17.33px;">
-<div class="nav_button" style="width: 300psx; height: 10px;"></div>
-<div class="nav_button"><a href="adminPage.do">ADMINISTRATOR SERVICE</a></div>
-<div class="nav_button" style="width: 300psx; height: 10px;"></div>
-</div>
-</div>
-<hr style="margin-bottom: 0px; border-bottom: 0px;">
-<div class="main">
+	<div
+		style="width: 900px; height: 10px; display: table-cell; vertical-align: middle; position: relative;">
+		<div style="width: 900px; margin-left: 350px;">
+			<div id="admin" style="position: relative; float: left;">
+				<input type="button"
+					style="width: 300px; background-color: white; border: 0px;"
+					value="ADMINISTRATOR SERVICE"
+					onclick="location.href='adminPage.do'">
+			</div>
+		</div>
+	</div>
+	<hr>
 	<div id="adminProduct">
 		<div id="sidebar">
 			<img src="./img/admin_product.JPG" id="img1">
@@ -105,8 +139,8 @@ a:link{
 			<br>
 			<div id="search_content">
 				<div id="search_content2">
-					<div id="search_table" style="margin-left:40px;">
-						<form action="productEditPro.do?pid=${pid }&pageNum=${pageNum}" method="post">
+					<div id="search_table">
+						<form action="productEditPro.do?pid=${pid }&pageNum=${pageNum}" method="post" enctype="Multipart/form-data">
 						<table>
 							<tr>
 								<td rowspan="3" colspan="2"><img src="${product.pthumbimg }" id="img2"></td>
@@ -115,7 +149,7 @@ a:link{
 							</tr>
 							<tr>
 								<td>상품 이름</td>
-								<td><input type="text" name="pname" value="${product.pname }" required="required"></td>
+								<td><input type="text" name="pname" value="${product.pname }" size="15" required="required"></td>
 							</tr>
 							<tr>
 								<td>상품종류</td>
@@ -133,19 +167,44 @@ a:link{
 							</tr>
 							<tr>
 								<td>가격</td>
-								<td><input type="text" name="pprice" value="${product.pprice }" required="required" size="10">원</td>
+								<td><input type="text" name="pprice" value="${product.pprice }" required="required" size="8">원</td>
 								<td>상품 조회수</td>
 								<td>${product.phit }</td>
 							</tr>
 							<tr>
 								<td>재고</td>
-								<td><input type="text" name="pinventory" value="${product.pinventory }" required="required" size="10">개</td>
+								<td><input type="text" name="pinventory" value="${product.pinventory }" required="required" size="5">개</td>
 								<td>판매량</td>
 								<td>${product.psell }개</td>
 							</tr>
 							<tr>
 								<td>할인율</td>
-								<td><input type="text" name="pdiscount" value="${product.pdiscount }" required="required"size="5">%</td>
+								<td><input type="text" name="pdiscount" value="${product.pdiscount }" required="required"size="4">%</td>
+								<td>옵션</td>
+								<td><input type="text" name="poption" value="${product.poption }" placeholder=",로 나눠서 입력하세요" size="15"></td>
+							</tr>
+							<tr>
+								<td>썸네일</td>
+								<td style="white-space:pre-line"><input type="file" name="pthumbimgE" onchange="changeThumb(this.value)">
+								<input type="text" name="pthumbimg" id="pthumbimg" value="${product.pthumbimg }" size="15" readonly="readonly"> 
+								<input type="button" value="삭제" onclick="removeThumb()">
+								</td>
+								<td>상세이미지1</td>
+								<td style="white-space:pre-line"><input type="file" name="col1E" onchange="changeCol1(this.value)">
+									<input type="text" name="col1" id="col1" value="${product.col1 }" size="15" readonly="readonly"> 
+									<input type="button" value="삭제" onclick="removeCol1()"></td>
+							</tr>
+							<tr>
+								<td>상세이미지2</td>
+								<td style="white-space:pre-line"><input type="file" name="col2E" onchange="changeCol2(this.value)">
+									<input type="text" name="col2" id="col2" value="${product.col2 }" size="15" readonly="readonly"> 
+									<input type="button" value="삭제" onclick="removeCol2()"></td>
+								<td>상세이미지3</td>
+								<td style="white-space:pre-line"><input type="file" name="col3E" onchange="changeCol3(this.value)">
+									<input type="text" name="col3" id="col3" value="${product.col3 }" size="15" readonly="readonly"> 
+									<input type="button" value="삭제" onclick="removeCol3()"></td>
+							</tr>
+							<tr>
 								<td>공개여부</td>
 								<td>
 									<c:if test="${product.ppublic eq 0 }">
@@ -156,12 +215,6 @@ a:link{
 									<input type="radio" name="ppublic" value="1" checked="checked"> 공개
 									<input type="radio" name="ppublic" value="0"> 비공개</c:if>
 								</td>
-							</tr>
-							<tr>
-								<td>썸네일</td>
-								<td><input type="file" name="pthumbimg" required="required"></td>
-							</tr>
-							<tr>
 								<td>상품등록일</td>
 								<td>${product.pregdate }</td>
 							</tr>
@@ -174,7 +227,6 @@ a:link{
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

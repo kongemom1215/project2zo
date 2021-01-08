@@ -1,6 +1,6 @@
 package dao.dragon;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,18 +30,19 @@ public class BoardDao {
 				ctx.lookup("java:comp/env/jdbc/OracleDB");
 			conn = ds.getConnection();
 		}catch(Exception e) { 
-			System.out.println(e.getMessage());	
+			System.out.println("오류 : "+ e.getMessage());
 			}
 		return conn;
 	}
 	
 	public List<Board> notice_list() throws SQLException {
+		System.out.println("-- dao.dragon.BoardDao.notice_list --");
 		List<Board> list = new ArrayList<Board>();
 		Connection conn = null;	
 		PreparedStatement pstmt= null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM notice";
-		System.out.println("sql 문 : " + sql);
+//		System.out.println("sql 문 : " + sql);
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -61,7 +62,7 @@ public class BoardDao {
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("오류 : "+ e.getMessage());
 		} finally {
 			if (rs !=null) rs.close();
 			if (pstmt != null) pstmt.close();
@@ -72,18 +73,19 @@ public class BoardDao {
 	}
 	
 	public void notice_nhit(int nid) throws SQLException {
+		System.out.println("-- dao.dragon.BoardDao.notice_nhit --");
 		Connection conn = null;	
 		PreparedStatement pstmt= null;
 		int rs;
 		String sql = "UPDATE notice SET nhit = nhit + 1 WHERE nid = ?";
-		System.out.println("sql 문 : " + sql);
+//		System.out.println("sql 문 : " + sql);
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, nid);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("오류 : "+ e.getMessage());
 		} finally {
 			if (pstmt != null) pstmt.close();
 			if (conn !=null) conn.close();
@@ -91,6 +93,7 @@ public class BoardDao {
 	}
 	
 	public List<Board> qna_list() throws SQLException {
+		System.out.println("-- dao.dragon.BoardDao.qna_list --");
 		List<Board> list = new ArrayList<Board>();
 		Connection conn = null;	
 		PreparedStatement pstmt= null;
@@ -132,7 +135,7 @@ public class BoardDao {
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("오류 : "+ e.getMessage());
 		} finally {
 			if (rs !=null) rs.close();
 			if (pstmt != null) pstmt.close();

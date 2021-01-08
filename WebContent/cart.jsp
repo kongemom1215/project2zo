@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
 <link rel="stylesheet" type="text/css" href="css/cartnbuy.css?ver=2"> 
@@ -20,20 +21,25 @@
 			}
 		});
 		});
-/* 		$(document).ready(function(){
+ 		$(document).ready(function(){
 		$('#checkdel').click(function(){
 			if(confirm("삭제하시겠습니까??")){
+				var tr_arr = new Array();
 				$("input[name=chekRow]:checked").each(function(){
 					var tr_value=$(this).val();
-					var tr=$("tr[value='"+tr_value+"']");
-					tr.remove();
+					alert(tr_value);
+					tr_arr.push(tr_value);
+					
 					});
+				alert(tr_arr);
+					
+				
 				}else{
 					return false;
 				}
 			});
 	});	
- */	
+	
  function cart_del(){
 		var input_cart = document.getElementsByName("chekRow");
 		var checked = false;
@@ -45,7 +51,12 @@
 				
 			}
 		}
-	
+
+ }
+ 
+
+		
+		
 </script>
 <style type="text/css">
 .cart_td{
@@ -75,7 +86,7 @@
 </c:when>
 <c:when test="${session_stype eq '0'}">
 <a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
+<a class="top_button">${session_semail } 님</a>
 <a href="adminPage.do" class="top_button">관리페이지</a>
 </c:when>
 <c:otherwise>
@@ -107,49 +118,51 @@
 	</div>
 	<div class="bb" style="z-index: 2">
 	<div style="margin-top: 20px; height: 20px;"></div>
-		<h2>${useremail }님의 장바구니</h2>
+		<h2>${session_sname }님의 장바구니</h2>
 		<h2><input type="hidden" value="${sid}"></h2>
-		<form name="cartForm">
-		<table class="cart_tb" id="cartList"  >
-		<thead>
-		<tr class="cart_tr" >
-			<th class="cart_td"><input type="checkbox"  name="chkAll" id="chkAll" ></th>
-			<th class="cart_td" >상품코드</th>
-			<th class="cart_td">상품명</th>
-			<th class="cart_td">판매가격</th>
-			<th class="cart_td">수량</th>
-			<th class="cart_td">주문금액</th>
-		
-		</tr>
-		</thead>
-		<tbody>
-			<c:choose>
-				<c:when test="${list == null }">
-					<tr class="cart_tr">
-						<td colspan="6" style="text-align: center;"><h4>장바구니에 담기 상품이 없습니다</h4></td>
-					</tr>
-				</c:when>
-				
-				<c:otherwise>
-				<c:if test=""></c:if>
-				<c:forEach var="arr" items="${list }">
- 				<tr value="${list}" class="cart_tr" >
-					<td class=cart_td><input type="checkbox" name="chekRow" value="${arr.cwid}"></td>
-					<td class="cart_td"><h4>${arr.pid}</h4></td>
-					<td class="cart_td"><h4>${arr.pname}</h4></td>
-					<td class="cart_td"><h4>${arr.pprice}</h4></td>
-					<td class="cart_td"><h4>${arr.cwqty}</h4></td>
-					<td class="cart_td"><h4></h4>${arr.pprice*arr.cwqty}</td>
-					<input type="hidden" name="cwid" value="${arr.cwid }">
+		<c:if test="${list == null }">
+			<form>
+			<table>
+				<tr height="100">
+					<td colspan="6" align="center">장바구니에 담기 상품이 없습니다</td>
 				</tr>
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-		</tbody>
-		</table>
+				<input type="button" value="메인으로" onclick="location.href='main.do'"/>
+			</table>
+			</form>
 		
+		</c:if>
+		<c:if test="${list != null }">
+			<form name="cartForm">
+				<table class="cart_tb" id="cartList"  >
+				<thead>
+					<tr class="cart_tr" >
+						<th class="cart_td"><input type="checkbox"  name="chkAll" id="chkAll" ></th>
+						<th class="cart_td" >상품코드</th>
+						<th class="cart_td" style="width: 300px;">상품명</th>
+						<th class="cart_td">옵션</th>
+						<th class="cart_td">판매가격</th>
+						<th class="cart_td">수량</th>
+					<th class="cart_td">주문금액</th>
+				</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="arr" items="${list }">
+ 					<tr value="${list}" class="cart_tr" >
+						<td class=cart_td><input type="checkbox" name="chekRow" value="${arr.pid}"></td>
+						<td class="cart_td"><h4>${arr.pid}</h4></td>
+						<td class="cart_td"><h4>${arr.pname}</h4></td>
+						<td class="cart_td"><h4>${arr.cwoption}</h4></td>
+						<td class="cart_td"><fmt:formatNumber value="${arr.pprice }"  pattern="#,###"></fmt:formatNumber></td>
+						<td class="cart_td"><fmt:formatNumber value="${arr.cwqty}" pattern="#,###"></fmt:formatNumber></td>
+						<td class="cart_td"><fmt:formatNumber value="${arr.pprice*arr.cwqty}" pattern="#,###"></fmt:formatNumber></td>
+						<input type="hidden" name="cwid" value="${arr.cwid }">
+					</tr>
+			</c:forEach>
+			</tbody>
+			</table>
+			<input type="hidden" name="checked_arr">
 		</form>
-	 		
+	 </c:if>	
 		
 		
 		
@@ -163,7 +176,7 @@
  		상품 총 금액
  		<b>
  			<c:set var="sum" value="0"/>
-			<c:forEach var="arr" items="${list }">
+			<c:forEach var="arr" items="${list}">
 				<c:set var="sum" value="${sum+arr.pprice*arr.cwqty}"></c:set>
 			</c:forEach>	
 			<fmt:formatNumber value="${sum }" pattern="#,###"></fmt:formatNumber>
@@ -201,7 +214,7 @@
 	<div class="main">
 	<span><input type="button" value="전체삭제 "onclick="location.href='cartDelete.do'" class="del" id="wholedel"></span>
 		<span><input type="button" value="선택삭제 "onclick="" class="del" id="checkdel"></span>
-		<span><input type="submit" value="전체주문 "onclick="location.href='order.do?sum=${sum}'" class="buy" id="wholebuy"></span>
+		<span><input type="submit" value="전체주문 "onclick="location.href='order.do?sum=${sum}&count=${count}'" class="buy" id="wholebuy"></span>
 		<span><input type="submit" value="선택주문 "onclick="" class="buy" id="checkbuy"></span>
 	</div>
 

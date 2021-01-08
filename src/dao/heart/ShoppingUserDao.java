@@ -16,6 +16,7 @@ import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 public class ShoppingUserDao {
@@ -104,6 +105,8 @@ public int login(String semail, String spwd) throws SQLException {
 				su.setSaddress(rs.getString("saddress"));
 				su.setSpost(rs.getInt("spost"));
 				su.setSagree(rs.getString("sagree"));
+				su.setSquestion(rs.getString("squestion"));
+				su.setSanswer(rs.getString("sanswer"));
 				list.add(su);
 			}
 		} catch (Exception e) {
@@ -141,6 +144,8 @@ public int login(String semail, String spwd) throws SQLException {
 				su.setSaddress(rs.getString("saddress"));
 				su.setSpost(rs.getInt("spost"));
 				su.setSagree(rs.getString("sagree"));
+				su.setSquestion(rs.getString("squestion"));
+				su.setSanswer(rs.getString("sanswer"));
 				list.add(su);
 			}
 		} catch (Exception e) {
@@ -210,6 +215,8 @@ public int login(String semail, String spwd) throws SQLException {
 				shoppinguser.setSaddress(rs.getString(8));
 				shoppinguser.setSpost(rs.getInt(9));
 				shoppinguser.setSagree(rs.getString(10));
+				shoppinguser.setSquestion(rs.getString("squestion"));
+				shoppinguser.setSanswer(rs.getString("sanswer"));
 			}
 		} catch (Exception e) {
 			System.out.println("ShoppingUser select error=>"+e.getMessage());
@@ -225,7 +232,7 @@ public int login(String semail, String spwd) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = "update shoppinguser set spwd=?, sname=?, scontact=?, saddress=?, spost=?, sagree=? where sid=?";
+		String sql = "update shoppinguser set spwd=?, sname=?, scontact=?, saddress=?, spost=?, sagree=?, squestion=?, sanswer=? where sid=?";
 
 		System.out.println("ShoppingUserDao edit shoppinguser.getSname() -> "+shoppinguser.getSname());
 		System.out.println("ShoppingUserDao edit shoppinguser.getSpwd() -> "+shoppinguser.getSpwd());
@@ -245,7 +252,9 @@ public int login(String semail, String spwd) throws SQLException {
 			pstmt.setInt(5, shoppinguser.getSpost());
 			pstmt.setString(6, shoppinguser.getSagree());
 			pstmt.setInt(7, shoppinguser.getSid());
-			
+			pstmt.setString(8, shoppinguser.getSquestion());
+			pstmt.setString(9, shoppinguser.getSanswer());
+					
 			result = pstmt.executeUpdate();
 			
 			System.out.println("ShoppingUserDao update result=>" + result);

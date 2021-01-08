@@ -77,4 +77,33 @@ public class ShoppingUserDao {
     }
 	
 	
+	public int confirm(String semail) throws SQLException {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int result = 0;
+		
+		System.out.println("semail : " + semail);
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement("SELECT * FROM shoppinguser where semail = ?");
+			psmt.setString(1, semail);
+			ResultSet rs = psmt.executeQuery();
+			if(rs.next() == true) result=1;
+			else result = 0;
+			System.out.println("result : " + result);
+		}catch(SQLException e) {
+			System.err.println(" * Error 이유 : Database 구문 오류, "+e.getMessage());			
+		}catch(Exception e) {
+			System.err.println(" * Error 이유 : "+e.getMessage());
+		}finally {
+			if(psmt != null) psmt.close();
+			if(conn != null) conn.close();
+			
+		}
+		
+		return result;
+		
+	}
+	
 }

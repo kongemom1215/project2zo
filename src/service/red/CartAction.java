@@ -34,16 +34,17 @@ public class CartAction implements CommandProcess {
 			
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
+			request.setCharacterEncoding("utf-8");
 			
-			String useremail = (String) session.getAttribute("session_semail");
-			int sid = (int) session.getAttribute("session_sid");
+			String session_semail = (String) session.getAttribute("session_semail");
+			int session_sid = (int) session.getAttribute("session_sid");
 			
 			CartnWishDao cartw= CartnWishDao.getInstance();
 			CartnWish cart = new CartnWish();
 			//장바구니에 담긴 상품에 대한 정보
-			ArrayList<CartnWish> list = cartw.select(sid);
+			ArrayList<CartnWish> list = cartw.select(session_sid);
 			//장바구니에 담긴 상품 갯수(상품개수)
-			int count = cartw.count(sid);		
+			int count = cartw.count(session_sid);		
 			
 			System.out.println("--------CartAction 파라미터----------------");
 			System.out.println("list ArrayList배열=>"+list);

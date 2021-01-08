@@ -4,87 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/mypage.css?ver=1">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
 <style type="text/css">
-	.mypagehead{
-		width: 900px;
-		/* margin-left: 350px; */
-		position: relative;
-		float: left;
-		background-color:white;
-		
-	}
-	.mypagepersonicon{
-		width: 180px;
-		float: left;
-		margin-left: 25px;
-		margin-top: 10px;
-	}
-	<!-- 쿠폰/이름 출력	-->
-	.mypageinfo{
-		width:690px;
-		float: right;
-		margin-left: 10px;
-	}
-	.mypagecoupon{
-		width:350px;
-		float: right;
-		margin-left: 10px;
-		margin-top: 85px;
-	}
-	.mypagename{
-		width:290px;
-		float: right;
-		margin-left: 10px;
-		margin-top: 85px;
-	}
-	.down {
-		width: 900px;
-		/* margin-left: 350px; */
-		position: relative;
-		float: left;
-		background-color:white;
-	}
-	.mypagemainside {
-	float: left;
-	width: 10%;
-	margin-left: 10px;
-	width: 180px;
-	height: 40%;
-	
-	font-size: 18px;
-	font-color: black;
-	margin-left: 10px;
-	background-color: #B9FFFF;
-}
 
-	.mypageside {
-		margin-left: 10px;
-		float: left;
-		height: 30%;
-		width: 160px;
-	
-	}
-	.myorderview {
-	float: right;
-	margin-left: 10px;
-	width: 690px;
-	height: 365px;
-	}
-	.myorderviewdetail {
-	float: right;
-	margin-left: 10px;
-	width: 690px;
-	height: 365px;
-	}
-	.myorderviewdetail_price {
-	float: right;
-	margin-left: 10px;
-	width: 100px;
-	height: 365px;
-	}
 	
 </style>
 </head>
@@ -156,11 +81,11 @@
 <div class="mypagemainside">
 	<div class="mypageside">
 		<br>
-		<a href="mypageOrder.do?sid=${2 }" style="text-decoration: none; color: black;">
+		<a href="mypageOrder.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
 		<span>주문조회</span>
 		<span style="float:right;">></span>
 		</a><p>
-		<a href="mypageCoupon.do?sid=${2 }" style="text-decoration: none; color: black;">
+		<a href="mypageCoupon.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
 		<span>쿠폰</span>
 		<span style="float:right;">></span>
 		</a><p>
@@ -168,11 +93,11 @@
 		<span>리뷰/문의</span>
 		<span style="float:right;">></span>
 		</a><p>
-		<a href="mypageEditForm.do?sid=${2 }" style="text-decoration: none; color: black;">
+		<a href="mypageEditForm.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
 		<span>회원정보수정</span>
 		<span style="float:right;">></span>
 		</a><p>
-		<a href="mypageDeleteForm.do?sid=${2 }" style="text-decoration: none; color: black;">
+		<a href="mypageDeleteForm.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
 		<span>회원탈퇴</span>
 		<span style="float:right;">></span>
 		</a><p>
@@ -181,6 +106,7 @@
 	<div class="myorderview">
 		<h3>주문내역</h3>
 	<div class="myorderviewdetail">
+	<c:forEach var="orderjoin" items="${list_main}">
 		<a href="mypageOrder.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
 		<span >${orderjoin.odate }</span>	
 		<span style="float:right; color:blue; font-weight:bold;"> ${orderjoin.oid }</span>
@@ -204,12 +130,12 @@
 				 	<c:when test="${ostate eq '1' }">
 				 		결제대기
 				 		<input type="button"  value=" 주문취소 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
-						onclick="location.href='mypageOrderdelete.do?sid=${shoppinguser.sid}&pid=${orderjoin.oid }'" >
+						onclick="location.href='mypageOrderdelete.do?oid=${orderjoin.oid }'" >
 				 	</c:when>
 				 	<c:when test="${ostate eq '2' }">
 				 		결제완료
 				 		<input type="button"  value=" 주문취소 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
-						onclick="location.href='mypageOrderdelete.do?sid=${shoppinguser.sid}&pid=${orderjoin.oid }'" >
+						onclick="location.href='mypageOrderdelete.do?sid=${shoppinguser.sid}&oid=${orderjoin.oid }'" >
 				 	</c:when>
 				 	<c:when test="${ostate eq '3' }">
 				 		배송중
@@ -227,6 +153,8 @@
 				 	<c:otherwise></c:otherwise>
 				</c:choose>
 				</span>
+				<p>
+			</c:forEach>
 	</div>
 	
 <!-- <c:forEach var="order_tb" items=""> -->	

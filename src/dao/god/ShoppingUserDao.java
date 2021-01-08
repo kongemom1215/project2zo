@@ -1,6 +1,6 @@
 package dao.god;
 
-import java.io.*; 
+import java.io.*;
 import java.net.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -305,7 +305,7 @@ public class ShoppingUserDao {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="insert into ShoppingUser values(?,1,?,?,?,?,sysdate,?,?,?)";
+		String sql="insert into ShoppingUser values(?,1,?,?,?,?,sysdate,?,?,?,?,?)";
 		String sql2="select max(sid)+1 from ShoppingUser";
 		int max=9999;
 		
@@ -327,6 +327,8 @@ public class ShoppingUserDao {
 			pstmt.setString(6, shoppinguser.getSaddress());
 			pstmt.setInt(7, shoppinguser.getSpost());
 			pstmt.setString(8, shoppinguser.getSagree());
+			pstmt.setString(9, shoppinguser.getSquestion());
+			pstmt.setString(10, shoppinguser.getSanswer());
 			
 			result=pstmt.executeUpdate();
 		} catch (Exception e) {

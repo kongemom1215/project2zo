@@ -41,7 +41,7 @@ public class ProductDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from (select rownum, a.* from (SELECT * from product a order by psell desc) a) where rownum <= 12";
+		String sql = "select * from (select rownum, a.* from (SELECT * from product a order by psell desc) a) where rownum <= 12 and ppublic = 1";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -54,8 +54,6 @@ public class ProductDao {
 					product.setCol1(rs.getString("col1"));
 					product.setCol2(rs.getString("col2"));
 					product.setCol3(rs.getString("col3"));
-					product.setCol4(rs.getString("col4"));
-					product.setCol5(rs.getString("col5"));
 					product.setPprice(rs.getInt("pprice"));
 					product.setPname(rs.getString("pname"));
 					product.setPregdate(rs.getDate("pregdate"));
@@ -84,6 +82,7 @@ public class ProductDao {
 	}
 
 	public int jjim(int sid, int pid) throws SQLException {
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs_same = null;
@@ -91,6 +90,9 @@ public class ProductDao {
 		int rs = 0;
 		String sql_same = "select * from cartnwish where cwtype='wish' and sid=? and pid=?";
 		try {
+			
+			System.out.println("1");
+			
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql_same);
 			pstmt.setInt(1, sid);
@@ -102,6 +104,9 @@ public class ProductDao {
 				same += 1;
 
 			} else {
+				
+				System.out.println("2");
+				
 				String sql = "insert into cartnwish (cwid, sid, pid, cwtype) SELECT max(cwid) + 1, ? ,?, 'wish' from cartnwish";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, sid);

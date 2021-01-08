@@ -15,6 +15,25 @@ public class ShoppingUser {
 	private String saddress;
 	private int spost;
 	private String sagree;
+	private String squestion;
+	
+	public String getSquestion() {
+		return squestion;
+	}
+
+	public void setSquestion(String squestion) {
+		this.squestion = squestion;
+	}
+
+	public String getSanswer() {
+		return sanswer;
+	}
+
+	public void setSanswer(String sanswer) {
+		this.sanswer = sanswer;
+	}
+
+	private String sanswer;
 
 	public int getSid() {
 		return sid;

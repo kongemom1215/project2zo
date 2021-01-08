@@ -26,6 +26,7 @@ public class MainAction implements CommandProcess  {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		System.out.println("-- service.dragon.MainAction --");
 		
 		try {
 			
@@ -46,10 +47,8 @@ public class MainAction implements CommandProcess  {
 			request.setAttribute("session_sid", session_sid);
 			request.setAttribute("session_stype", session_stype);
 			
-
-			
 		} catch (Exception e) {
-			System.out.println("MainAction Exception-> "+ e.getMessage());
+			System.out.println("오류 : "+ e.getMessage());
 		}
 		
 		ProductDao productdao = ProductDao.getInstance();
@@ -58,8 +57,7 @@ public class MainAction implements CommandProcess  {
 			main_img = productdao.main_img();
 			request.setAttribute("main_img", main_img);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("오류 : "+ e.getMessage());
 		}
 		
 		try {
@@ -138,13 +136,13 @@ public class MainAction implements CommandProcess  {
 				target_end = covid_19_live.indexOf(end); 
 				result = covid_19_live.substring(target_start,target_end);
 				day = result;
-				System.out.println("업데이트 시간 : " + day); 
+//				System.out.println("업데이트 시간 : " + day); 
 
 				target_start = covid_19_yesterday.indexOf(start) + start.length() ; 
 				target_end = covid_19_yesterday.indexOf(end); 
 				String result_yesterday = covid_19_yesterday.substring(target_start,target_end);
 				String yesterday = result_yesterday;
-				System.out.println("업데이트 전날 : " + yesterday); 
+//				System.out.println("업데이트 전날 : " + yesterday); 
 				
 			} catch(Exception e) {
 				
@@ -158,13 +156,13 @@ public class MainAction implements CommandProcess  {
 				target_end = covid_19_yesterday.indexOf(end); 
 				result = covid_19_yesterday.substring(target_start,target_end);
 				day = result;
-				System.out.println("업데이트 시간 : " + day); 
+//				System.out.println("업데이트 시간 : " + day); 
 
 				target_start = covid_19_two_days_ago.indexOf(start) + start.length() ; 
 				target_end = covid_19_two_days_ago.indexOf(end); 
 				String result_yesterday = covid_19_two_days_ago.substring(target_start,target_end);
 				String yesterday = result_yesterday;
-				System.out.println("업데이트 전날 : " + yesterday); 
+//				System.out.println("업데이트 전날 : " + yesterday); 
 				
 				covid_19_live = covid_19_yesterday;
 				covid_19_yesterday = covid_19_two_days_ago;
@@ -180,7 +178,7 @@ public class MainAction implements CommandProcess  {
 				target_end = covid_19_live.indexOf(end); 
 				result = covid_19_live.substring(target_start,target_end);
 				String confirmed = result;
-				System.out.println("확진환자 : " + confirmed); 
+//				System.out.println("확진환자 : " + confirmed); 
 
 				target_start = covid_19_date_first_time.indexOf(start) + start.length() ; 
 				target_end = covid_19_date_first_time.indexOf(end); 
@@ -221,7 +219,7 @@ public class MainAction implements CommandProcess  {
 				target_end = covid_19_yesterday.indexOf(end); 
 				result = covid_19_yesterday.substring(target_start,target_end);
 				String confirmed_yesterday = result;
-				System.out.println("하루 확진 : " + (Integer.parseInt(confirmed) - Integer.parseInt(confirmed_yesterday))); 
+//				System.out.println("하루 확진 : " + (Integer.parseInt(confirmed) - Integer.parseInt(confirmed_yesterday))); 
 				int confirmed_oneday = Integer.parseInt(confirmed) - Integer.parseInt(confirmed_yesterday);
 				
 				// --
@@ -233,13 +231,13 @@ public class MainAction implements CommandProcess  {
 				target_end = covid_19_live.indexOf(end); 
 				result = covid_19_live.substring(target_start,target_end);
 				String check = result;
-				System.out.println("검사중 : " + check); 
+//				System.out.println("검사중 : " + check); 
 
 				target_start = covid_19_yesterday.indexOf(start) + start.length() ; 
 				target_end = covid_19_yesterday.indexOf(end); 
 				result = covid_19_yesterday.substring(target_start,target_end);
 				String check_yesterday = result;
-				System.out.println("하루 검사 : " + (Integer.parseInt(check) - Integer.parseInt(check_yesterday))); 
+//				System.out.println("하루 검사 : " + (Integer.parseInt(check) - Integer.parseInt(check_yesterday))); 
 				int check_oneday = Integer.parseInt(check) - Integer.parseInt(check_yesterday);
 				
 				//--
@@ -251,13 +249,13 @@ public class MainAction implements CommandProcess  {
 				target_end = covid_19_live.indexOf(end); 
 				result = covid_19_live.substring(target_start,target_end);
 				String death = result;
-				System.out.println("사망자 : " + death);
+//				System.out.println("사망자 : " + death);
 
 				target_start = covid_19_yesterday.indexOf(start) + start.length() ; 
 				target_end = covid_19_yesterday.indexOf(end); 
 				result = covid_19_yesterday.substring(target_start,target_end);
 				String check_death = result;
-				System.out.println("하루 사망 : " + (Integer.parseInt(death) - Integer.parseInt(check_death))); 
+//				System.out.println("하루 사망 : " + (Integer.parseInt(death) - Integer.parseInt(check_death))); 
 				int death_oneday = Integer.parseInt(death) - Integer.parseInt(check_death);
 				
 				//--
@@ -269,7 +267,7 @@ public class MainAction implements CommandProcess  {
 				target_end = covid_19_live.indexOf(end); 
 				result = covid_19_live.substring(target_start,target_end);
 				String clear = result;
-				System.out.println("격리해제 : " + clear);
+//				System.out.println("격리해제 : " + clear);
 				
 				target_start = covid_19_date_first_time.indexOf(start) + start.length() ; 
 				target_end = covid_19_date_first_time.indexOf(end); 
@@ -310,7 +308,7 @@ public class MainAction implements CommandProcess  {
 				target_end = covid_19_yesterday.indexOf(end); 
 				result = covid_19_yesterday.substring(target_start,target_end);
 				String check_clear = result;
-				System.out.println("하루 격리해제 : " + (Integer.parseInt(clear) - Integer.parseInt(check_clear))); 
+//				System.out.println("하루 격리해제 : " + (Integer.parseInt(clear) - Integer.parseInt(check_clear))); 
 				int clear_oneday = Integer.parseInt(clear) - Integer.parseInt(check_clear);
 				
 				request.setAttribute("date_first_time_format2", date_first_time_format2);
@@ -351,7 +349,7 @@ public class MainAction implements CommandProcess  {
 				request.setAttribute("day", day);
 				
 			} catch (Exception e) {
-				// TODO: handle exception
+				System.out.println("오류 : "+ e.getMessage());
 			}
 		
 		return "main.jsp";

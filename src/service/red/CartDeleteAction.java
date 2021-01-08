@@ -22,11 +22,10 @@ public class CartDeleteAction implements CommandProcess {
 		
 		try {
 			//전체삭제
-			String useremail=(String)request.getSession().getAttribute("useremail");
-			int sid=(int)request.getSession().getAttribute("sid");
-			
+			int session_sid = (int) request.getSession().getAttribute("session_sid");
+
 			CartnWishDao cartw=CartnWishDao.getInstance();
-			int result=cartw.delete(sid);
+			int result=cartw.delete(session_sid);
 			
 			request.setAttribute("result", result);
 			
@@ -35,7 +34,7 @@ public class CartDeleteAction implements CommandProcess {
 		}
 		
 		
-		return "cartDelResult.jsp";
+		return "cart.jsp";
 	}
 
 }
