@@ -24,7 +24,7 @@ public class MemberInsertProAction implements CommandProcess {
 			shoppinguser.setSpwd(request.getParameter("spwd"));
 			shoppinguser.setScontact(request.getParameter("scontact"));
 			shoppinguser.setSpost(Integer.parseInt(request.getParameter("spost")));
-			shoppinguser.setSaddress(request.getParameter("saddress"));
+			shoppinguser.setSaddress(request.getParameter("saddress")+" "+request.getParameter("saddress2"));
 			shoppinguser.setSagree(request.getParameter("sagree"));
 			shoppinguser.setSquestion(request.getParameter("squestion"));
 			shoppinguser.setSanswer(request.getParameter("sanswer"));

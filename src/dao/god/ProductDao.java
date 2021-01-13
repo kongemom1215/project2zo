@@ -1,6 +1,6 @@
 package dao.god;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,38 +35,6 @@ public class ProductDao {
 		return conn;
 	}
 	
-	public int productAdd(String pname, String ptype, int pprice, int pinventory, String poption) {
-		
-		Connection conn = null;	
-		PreparedStatement pstmt= null;
-		ResultSet rs = null;
-		String sql_max = "SELECT max(pid) pid FROM product";
-		int pid_max = 0;
-		int result = 0;			
-		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql_max);
-			rs = pstmt.executeQuery();
-			rs.next();
-			pid_max = rs.getInt("pid");
-			System.out.println(pid_max + 1);
-			String sql = "insert into PRODUCT (pid, pname, ptype, pprice, pinventory, poption) values (?, ?, ?, ?, ?, ?)";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, pid_max + 1);
-			pstmt.setString(2, pname);
-			pstmt.setString(3, ptype);
-			pstmt.setInt(4, pprice);
-			pstmt.setInt(5, pinventory);
-			pstmt.setString(6, poption);
-			pstmt.executeUpdate();
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-		return result;
-	}
-	
-	
 	public List<Product> main_img() throws SQLException {
 		List<Product> list = new ArrayList<Product>();
 		Connection conn = null;	
@@ -89,7 +57,6 @@ public class ProductDao {
 				su.setPname(rs.getString("pname"));
 				su.setPregdate(rs.getDate("pregdate"));
 				su.setPsell(rs.getInt("psell"));
-				su.setPhit(rs.getInt("phit"));
 				su.setPdiscount(rs.getInt("pdiscount"));
 				su.setPpublic(rs.getInt("ppublic"));
 				su.setPthumbimg(rs.getString("pthumbimg"));
@@ -154,11 +121,10 @@ public class ProductDao {
 				product.setPname(rs.getString(9));
 				product.setPregdate(rs.getDate(10));
 				product.setPsell(rs.getInt(11));
-				product.setPhit(rs.getInt(12));
-				product.setPdiscount(rs.getInt(13));
-				product.setPpublic(rs.getInt(14));
-				product.setPthumbimg(rs.getString(15));
-				product.setPoption(rs.getString(16));
+				product.setPdiscount(rs.getInt(12));
+				product.setPpublic(rs.getInt(13));
+				product.setPthumbimg(rs.getString(14));
+				product.setPoption(rs.getString(15));
 				
 				productlist.add(product);
 			}
@@ -195,11 +161,10 @@ public class ProductDao {
 				product.setPname(rs.getString(8));
 				product.setPregdate(rs.getDate(9));
 				product.setPsell(rs.getInt(10));
-				product.setPhit(rs.getInt(11));
-				product.setPdiscount(rs.getInt(12));
-				product.setPpublic(rs.getInt(13));
-				product.setPthumbimg(rs.getString(14));
-				product.setPoption(rs.getString(15));
+				product.setPdiscount(rs.getInt(11));
+				product.setPpublic(rs.getInt(12));
+				product.setPthumbimg(rs.getString(13));
+				product.setPoption(rs.getString(14));
 			}
 		} catch (Exception e) {
 			System.out.println("product select() -> "+e.getMessage());
@@ -272,7 +237,7 @@ public class ProductDao {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="insert into Product values(?,?,?,?,?,?,?,?,sysdate,0,0,?,?,?,?)";
+		String sql="insert into Product values(?,?,?,?,?,?,?,?,sysdate,0,?,?,?,?)";
 		String sql2="select nvl(max(pid),0) from product";
 		int pid=0;
 		
@@ -345,11 +310,10 @@ public class ProductDao {
 				product.setPname(rs.getString(9));
 				product.setPregdate(rs.getDate(10));
 				product.setPsell(rs.getInt(11));
-				product.setPhit(rs.getInt(12));
-				product.setPdiscount(rs.getInt(13));
-				product.setPpublic(rs.getInt(14));
-				product.setPthumbimg(rs.getString(15));
-				product.setPoption(rs.getString(16));
+				product.setPdiscount(rs.getInt(12));
+				product.setPpublic(rs.getInt(13));
+				product.setPthumbimg(rs.getString(14));
+				product.setPoption(rs.getString(15));
 				
 				System.out.println("pthumbimg -> "+rs.getString(16));
 				productlist.add(product);

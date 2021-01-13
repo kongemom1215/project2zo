@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/memberadmin.css?ver=1">
-<link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=2">
 <style type="text/css">
 a{
 	color:black;
@@ -36,54 +35,37 @@ a:link{
 </head>
 <body>
 <!--로고 및 로그인 메뉴  -->
-<div class="main">
-<div style="margin-top: 15px;">
-<a href="main.do"><img src="./img/Logo.png"></a>
-
-<c:choose>
-<c:when test="${session_stype eq '1'}">
-<a href="jjimForm.do" class="top_button">위시리스트</a>
-<a href="cart.do" class="top_button">장바구니</a>
-<a href="mypageOrder.do" class="top_button">주문/배송</a>
-<a href="mypage.do" class="top_button">마이페이지</a>
-<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
-</c:when>
-<c:when test="${session_stype eq '0'}">
-<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
-<a href="adminPage.do" class="top_button">관리페이지</a>
-</c:when>
-<c:otherwise>
-<a href="login.do?url=jjimForm.do" class="top_button">위시리스트</a>
-<a href="login.do?url=cart.do" class="top_button">장바구니</a>
-<a href="login.do?url=mypageOrder.do" class="top_button">주문/배송</a>
-<a href="login.do?url=mypage.do" class="top_button">마이페이지</a>
-<a href="login.do?url=main.do" class="top_button">로그인/회원가입</a>
-</c:otherwise>
-</c:choose>
-
-</div>
-</div>
-<hr style="width: 900px; border-bottom: 0xp;">
+	<div style="width: 900px; margin-left: 350px; position: relative;">
+		<img src="img/Logo.png"> <input type="button" value="로그아웃"
+			class="top"
+			style="float: right; background-color: white; border: 0px;"></input>
+		<input type="button" value="관리자페이지" class="top"
+			style="float: right; background-color: white; border: 0px;"
+			onclick="location.href='adminPage.do'"></input>
+	</div>
+	<hr>
 	<!--관리자메뉴  -->
-<div class="main">
-<div style="height: 17.33px;">
-<div class="nav_button" style="width: 300psx; height: 10px;"></div>
-<div class="nav_button"><a href="adminPage.do">ADMINISTRATOR SERVICE</a></div>
-<div class="nav_button" style="width: 300psx; height: 10px;"></div>
-</div>
-</div>
-<hr style="width: 900px; margin-bottom: 0px; border-bottom: 0px;">
-
-	<div class="main" style="width: 1000px;">
+	<div
+		style="width: 900px; height: 10px; display: table-cell; vertical-align: middle; position: relative;">
+		<div style="width: 900px; margin-left: 350px;">
+			<div id="admin" style="position: relative; float: left;">
+				<input type="button"
+					style="width: 300px; background-color: white; border: 0px;"
+					value="ADMINISTRATOR SERVICE"
+					onclick="location.href='adminPage.do'">
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div id="adminMember">
 		<div id="sidebar">
 			<img src="./img/admin_member.JPG" id="img1">
 			<h2 class="memberMenu">회원 관리</h2>
 			<div class="memberMenuButton">
 				<form>
 					<input type="button" value="● 회원 정보 조회" class="button" style="color:#00B9FF; font-weight:bold;" onclick="location.href='memberAdminPage.do'" ></input><br>
-					<input type="button" value="● 회원 추가" class="button" onclick="location.href='memberInsert.do'"></input>
+					<input type="button" value="● 회원 추가" class="button" onclick="location.href='memberInsert.do'"></input><br>
+					<input type="button" value="● 쿠폰 등록" class="button" onclick="location.href='couponAdminPage.do'"></input>
 				</form>
 			</div>
 		</div>
@@ -116,7 +98,7 @@ a:link{
 						<c:forEach var="user" items="${userlist }">
 							<tr>
 								<td>${user.sid }</td>
-								<td><a href="memberInfo.do?sid=${user.sid }&pageNum=${pageNum}">${user.sname }</a></td>
+								<td><a href="memberInfo.do?sid=${user.sid }&pageNum=${pageNum}&option=${option}&search_value=${search_value}">${user.sname }</a></td>
 								<td>${user.semail }</td>
 								<td>${user.scontact }</td>
 								<td>${user.sregdate }</td>

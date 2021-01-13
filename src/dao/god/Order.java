@@ -14,7 +14,6 @@ public class Order {
 	private int opay;
 	private int ostate;
 	private int oamount;
-	private int oinvoice;
 	private int odelivery;
 	//조회용
 	private String sname;
@@ -91,12 +90,6 @@ public class Order {
 	}
 	public void setOamount(int oamount) {
 		this.oamount = oamount;
-	}
-	public int getOinvoice() {
-		return oinvoice;
-	}
-	public void setOinvoice(int oinvoice) {
-		this.oinvoice = oinvoice;
 	}
 	public int getOdelivery() {
 		return odelivery;

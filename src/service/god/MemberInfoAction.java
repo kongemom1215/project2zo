@@ -24,6 +24,13 @@ public class MemberInfoAction implements CommandProcess {
 			ShoppingUser shoppinguser=new ShoppingUser();
 			shoppinguser=sd.select(sid);
 			
+			String option=request.getParameter("option");
+			String search_value=request.getParameter("search_value");
+			if(!(option==null || option.equals(""))) {
+				request.setAttribute("option", option);
+				request.setAttribute("search_value", search_value);
+			}
+			
 			request.setAttribute("sid", sid);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("shoppinguser", shoppinguser);

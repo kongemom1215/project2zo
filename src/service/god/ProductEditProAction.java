@@ -44,7 +44,7 @@ public class ProductEditProAction implements CommandProcess {
 			
 			Product product=new Product();
 			String pageNum=multi.getParameter("pageNum");
-			int pid=Integer.parseInt(request.getParameter("pid"));
+			int pid=Integer.parseInt(multi.getParameter("pid"));
 			
 			product.setPid(pid);
 			product.setPname(multi.getParameter("pname"));
@@ -79,6 +79,13 @@ public class ProductEditProAction implements CommandProcess {
 			request.setAttribute("result", result);
 			request.setAttribute("pid", pid);
 			request.setAttribute("pageNum", pageNum);
+			
+			String option=request.getParameter("option");
+			String search_value=request.getParameter("search_value");
+			if(!(option==null || option.equals(""))) {
+				request.setAttribute("option", option);
+				request.setAttribute("search_value", search_value);
+			}
 			
 		} catch (Exception e) {
 			System.out.println("ProductEditProAction -> "+e.getMessage());

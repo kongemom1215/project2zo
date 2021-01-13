@@ -1,6 +1,6 @@
 package service.god;
 
-import java.io.IOException; 
+import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +28,11 @@ public class NoticeInfoAction implements CommandProcess {
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("preNotice", preNotice);
 			request.setAttribute("nextNotice", nextNotice);
+			if(notice.getNfile()!=null) {
+				String nfile=notice.getNfile().substring(13);
+				request.setAttribute("nfile", nfile);
+			}
+			
 		} catch (Exception e) {
 			System.out.println("NoticeInfoAction -> "+e.getMessage());
 		}

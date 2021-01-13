@@ -14,7 +14,6 @@ public class Product {
 	private String pname;
 	private Date pregdate;
 	private int psell;
-	private int phit;
 	private int pdiscount;
 	private int ppublic;
 	private String pthumbimg;
@@ -97,14 +96,6 @@ public class Product {
 
 	public void setPsell(int psell) {
 		this.psell = psell;
-	}
-
-	public int getPhit() {
-		return phit;
-	}
-
-	public void setPhit(int phit) {
-		this.phit = phit;
 	}
 
 	public int getPdiscount() {

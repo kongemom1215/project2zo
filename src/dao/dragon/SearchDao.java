@@ -130,19 +130,19 @@ public class SearchDao {
 		 try {
 				int add_i = 0;
 				
-				String sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product ORDER by psell desc";
+				String sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product where PPUBLIC = 1 ORDER by psell desc";
 				
 				try {
 					if (shopping_select.equals("sell_hit")) {
-						sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product ORDER by (psell*phit) desc";
+						sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product where PPUBLIC = 1 ORDER by psell desc";
 					} else if (shopping_select.equals("price_high")) {
-						sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product ORDER by pprice desc";
+						sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product where PPUBLIC = 1 ORDER by pprice desc";
 					} else if (shopping_select.equals("price_low")) {
-						sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product ORDER by pprice";
+						sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product where PPUBLIC = 1 ORDER by pprice";
 					} else if (shopping_select.equals("pregdate")) {
-						sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product ORDER by pregdate desc";
+						sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product where PPUBLIC = 1 ORDER by pregdate desc";
 					} else {
-						sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product ORDER by psell desc";
+						sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product where PPUBLIC = 1 ORDER by psell desc";
 					}
 					
 				} catch (Exception e) {

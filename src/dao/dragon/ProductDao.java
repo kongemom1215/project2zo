@@ -58,7 +58,6 @@ public class ProductDao {
 					product.setPname(rs.getString("pname"));
 					product.setPregdate(rs.getDate("pregdate"));
 					product.setPsell(rs.getInt("psell"));
-					product.setPhit(rs.getInt("phit"));
 					product.setPdiscount(rs.getInt("pdiscount"));
 					product.setPpublic(rs.getInt("ppublic"));
 					product.setPthumbimg(rs.getString("pthumbimg"));

@@ -21,6 +21,13 @@ public class ProductInfoAction implements CommandProcess {
 				pageNum="1";
 			int pid=Integer.parseInt(request.getParameter("pid"));
 			
+			String option=request.getParameter("option");
+			String search_value=request.getParameter("search_value");
+			if(!(option==null || option.equals(""))) {
+				request.setAttribute("option", option);
+				request.setAttribute("search_value", search_value);
+			}
+			
 			ProductDao pd=ProductDao.getInstance();
 			Product product=pd.select(pid);
 			

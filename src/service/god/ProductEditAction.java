@@ -24,6 +24,13 @@ public class ProductEditAction implements CommandProcess {
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("product", product);
 			request.setAttribute("pid", pid);
+			
+			String option=request.getParameter("option");
+			String search_value=request.getParameter("search_value");
+			if(!(option==null || option.equals(""))) {
+				request.setAttribute("option", option);
+				request.setAttribute("search_value", search_value);
+			}
 		} catch (Exception e) {
 			System.out.println("ProductEditAction -> "+e.getMessage());
 		}

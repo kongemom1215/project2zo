@@ -57,8 +57,7 @@ public class OrderDao {
 				order.setOpay(rs.getInt(9));
 				order.setOstate(rs.getInt(10));
 				order.setOamount(rs.getInt(11));
-				order.setOinvoice(rs.getInt(12));
-				order.setOdelivery(rs.getInt(13));
+				order.setOdelivery(rs.getInt(12));
 				
 				orderlist.add(order);
 			}
@@ -102,8 +101,7 @@ public class OrderDao {
 				order.setOpay(rs.getInt(9));
 				order.setOstate(rs.getInt(10));
 				order.setOamount(rs.getInt(11));
-				order.setOinvoice(rs.getInt(12));
-				order.setOdelivery(rs.getInt(13));
+				order.setOdelivery(rs.getInt(12));
 			}
 		} catch (Exception e) {
 			System.out.println("order select()->"+e.getMessage());
@@ -142,8 +140,7 @@ public class OrderDao {
 				order.setOpay(rs.getInt(9));
 				order.setOstate(rs.getInt(10));
 				order.setOamount(rs.getInt(11));
-				order.setOinvoice(rs.getInt(12));
-				order.setOdelivery(rs.getInt(13));
+				order.setOdelivery(rs.getInt(12));
 			}
 		} catch (Exception e) {
 			System.out.println("order select2()->"+e.getMessage());
@@ -203,9 +200,8 @@ public class OrderDao {
 				order.setOpay(rs.getInt(9));
 				order.setOstate(rs.getInt(10));
 				order.setOamount(rs.getInt(11));
-				order.setOinvoice(rs.getInt(12));
-				order.setOdelivery(rs.getInt(13));
-				order.setSname(rs.getString(14));
+				order.setOdelivery(rs.getInt(12));
+				order.setSname(rs.getString(13));
 				
 				orderlist.add(order);
 			}
@@ -246,9 +242,8 @@ public class OrderDao {
 				order.setOpay(rs.getInt(9));
 				order.setOstate(rs.getInt(10));
 				order.setOamount(rs.getInt(11));
-				order.setOinvoice(rs.getInt(12));
-				order.setOdelivery(rs.getInt(13));
-				order.setSname(rs.getString(14));
+				order.setOdelivery(rs.getInt(12));
+				order.setSname(rs.getString(13));
 				
 				orderlist.add(order);
 			}
@@ -290,9 +285,8 @@ public class OrderDao {
 				order.setOpay(rs.getInt(9));
 				order.setOstate(rs.getInt(10));
 				order.setOamount(rs.getInt(11));
-				order.setOinvoice(rs.getInt(12));
-				order.setOdelivery(rs.getInt(13));
-				order.setSname(rs.getString(14));
+				order.setOdelivery(rs.getInt(12));
+				order.setSname(rs.getString(13));
 				
 				orderlist.add(order);
 			}
@@ -334,9 +328,8 @@ public class OrderDao {
 				order.setOpay(rs.getInt(9));
 				order.setOstate(rs.getInt(10));
 				order.setOamount(rs.getInt(11));
-				order.setOinvoice(rs.getInt(12));
-				order.setOdelivery(rs.getInt(13));
-				order.setSname(rs.getString(14));
+				order.setOdelivery(rs.getInt(12));
+				order.setSname(rs.getString(13));
 				
 				orderlist.add(order);
 			}

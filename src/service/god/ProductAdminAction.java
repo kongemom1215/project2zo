@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.god.Product;
 import dao.god.ProductDao;
+import dao.god.ShoppingUser;
+import dao.god.ShoppingUserDao;
 import service.CommandProcess;
 
 public class ProductAdminAction implements CommandProcess {
