@@ -15,6 +15,9 @@ public class LoginFormAction implements CommandProcess {
 			throws ServletException, IOException {
 		try {
 			
+			request.setAttribute("url", request.getParameter("url"));
+			request.setAttribute("pid", request.getParameter("pid"));
+			
 		} catch (Exception e) {
 			
 		}

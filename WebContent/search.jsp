@@ -22,9 +22,9 @@
 
 <c:choose>
 <c:when test="${session_stype eq '1'}">
-<a class="top_button">위시리스트</a>
+<a href="jjimForm.do" class="top_button">위시리스트</a>
 <a href="cart.do" class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
+<a href="mypageOrder.do" class="top_button">주문/배송</a>
 <a href="mypage.do" class="top_button">마이페이지</a>
 <a href="main.do?logout=logout" class="top_button">로그아웃</a>
 <a class="top_button">${session_sname } 님</a>
@@ -35,16 +35,17 @@
 <a href="adminPage.do" class="top_button">관리페이지</a>
 </c:when>
 <c:otherwise>
-<a class="top_button">위시리스트</a>
-<a class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
-<a class="top_button">마이페이지</a>
-<a href="login.do" class="top_button">로그인/회원가입</a>
+<a href="login.do?url=jjimForm.do" class="top_button">위시리스트</a>
+<a href="login.do?url=cart.do" class="top_button">장바구니</a>
+<a href="login.do?url=mypageOrder.do" class="top_button">주문/배송</a>
+<a href="login.do?url=mypage.do" class="top_button">마이페이지</a>
+<a href="login.do?url=main.do" class="top_button">로그인/회원가입</a>
 </c:otherwise>
 </c:choose>
+
 </div>
 </div>
-<hr>
+<hr style="width: 900px; border-bottom: 0xp;">
 <div class="main">
 <div style="height: 17.33px;">
 <div class="nav_button"><a href="aboutUs.do">ABOUT US</a></div>
@@ -52,14 +53,15 @@
 <div class="nav_button"><a href="board.do?type=notice">BOARD</a></div>
 </div>
 </div>
-<hr style="margin-bottom: 0px; border-bottom: 0px;">
+<hr style="width: 900px; margin-bottom: 0px; border-bottom: 0px;">
+
 <div class="main">
 <div class="search_box1">
 <div class="search_box2">
 무엇을 찾으시나요? (상품코드, 상품명, 초성 등)
 </div>
 </div>
-<div class="search_box1">
+<div class="search_box1_1">
 <div class="search_box2">
 <form action="search.do">
 <img class="search_side" src="./img/S_side.png">
@@ -90,37 +92,58 @@ function sub() {
 </form>
 </div>
 </div>
-<hr>
+<hr style="width: 900px; border-bottom: 0xp;">
 <div class="main" style="text-align: center;">
 	<table style="text-align: center;">
 		<tr>
 			<c:forEach var="main_img" items="${main_img }" begin="${(16*select_page) }" end="${3 + (16*select_page) }">
-			<td><a href="productDetail.do?pid=${main_img.pid }"><img src="${main_img.pthumbimg}" class="search_img"> <br> ${main_img.pname } <br> <fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </a> </td>
+			<td><a href="productDetail.do?pid=${main_img.pid }">
+			<img src="${main_img.pthumbimg}" class="search_img">
+			<br> ${main_img.pname } <c:if test="${main_img.pdiscount != 0 }">${main_img.pdiscount}% 할인</c:if>
+			<br> <fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </a> </td>
 			</c:forEach>
 		</tr>
 		<tr>
 			<c:forEach var="main_img" items="${main_img }" begin="${4 + (16*select_page) }" end="${7 + (16*select_page) }">
-			<td><a href="productDetail.do?pid=${main_img.pid }"><img src="${main_img.pthumbimg}" class="search_img"> <br> ${main_img.pname } <br> <fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </a> </td>
+			<td><a href="productDetail.do?pid=${main_img.pid }">
+			<img src="${main_img.pthumbimg}" class="search_img">
+			<br> ${main_img.pname } <c:if test="${main_img.pdiscount != 0 }">${main_img.pdiscount}% 할인</c:if>
+			<br>
+			<fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </a> </td>
 			</c:forEach>
 		</tr>
 		<tr>
 			<c:forEach var="main_img" items="${main_img }" begin="${8 + (16*select_page) }" end="${11 + (16*select_page) }">
-			<td><a href="productDetail.do?pid=${main_img.pid }"><img src="${main_img.pthumbimg}" class="search_img"> <br> ${main_img.pname } <br> <fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </a> </td>
+			<td><a href="productDetail.do?pid=${main_img.pid }">
+			<img src="${main_img.pthumbimg}" class="search_img">
+			<br> ${main_img.pname } <c:if test="${main_img.pdiscount != 0 }">${main_img.pdiscount}% 할인</c:if>
+			<br> <fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </a> </td>
 			</c:forEach>
 		</tr>
 		<tr>
 			<c:forEach var="main_img" items="${main_img }" begin="${12 + (16*select_page) }" end="${15 + (16*select_page)  }">
-			<td><a href="productDetail.do?pid=${main_img.pid }"><img src="${main_img.pthumbimg}" class="search_img"> <br> ${main_img.pname } <br> <fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </a> </td>
+			<td><a href="productDetail.do?pid=${main_img.pid }">
+			<img src="${main_img.pthumbimg}" class="search_img">
+			<br> ${main_img.pname } <c:if test="${main_img.pdiscount != 0 }">${main_img.pdiscount}% 할인</c:if>
+			<br> <fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </a> </td>
 			</c:forEach>
 		</tr>
 	</table>
-	<c:forEach var="page" begin="1" end="${page_num }">
-		<a href="search.do?page=${page}&search_text=${search_text }&shopping_select=${shopping_select }">${page }</a>
-	</c:forEach>
+	<c:if test="${startPage > blockSize }">
+	
+						<a href='search.do?pageNum=${startPage-blockSize }&page=${i}&search_text=${search_text }&shopping_select=${shopping_select }'>[이전]</a>
+
+					</c:if>
+					<c:forEach var="i" begin="${startPage }" end="${endPage }">
+						<a
+							href='search.do?pageNum=${i}&display_select=${display_select }&cate=${cate}&page=${i}&search_text=${search_text }&shopping_select=${shopping_select }'>[${i }]
+						</a>
+					</c:forEach>
+					<c:if test="${endPage < pageCnt }">
+						<a href='search.do?pageNum=${startPage+blockSize }&page=${i}&search_text=${search_text }&shopping_select=${shopping_select }'>[다음]</a>
+					</c:if>
 </div>
-	<div style="height: 340px;">
-</div>
-<div style="height: 340px;">
+<div style="height: 170px;">
 </div>
 <div class="main" style="height: 50px; background-color: #767171; display: table;">
 <div style="width: 10px;">

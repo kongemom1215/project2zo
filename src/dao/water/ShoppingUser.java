@@ -16,6 +16,7 @@ public class ShoppingUser {
 	private int spost;
 	private String sagree;
 	private String squestion;
+	private Date qcmtdate;
 	
 	public String getSquestion() {
 		return squestion;
@@ -121,5 +122,13 @@ public class ShoppingUser {
 
 	public void setSagree(String sagree) {
 		this.sagree = sagree;
+	}
+
+	public Date getQcmtdate() {
+		return qcmtdate;
+	}
+
+	public void setQcmtdate(Date qcmtdate) {
+		this.qcmtdate = qcmtdate;
 	}
 }

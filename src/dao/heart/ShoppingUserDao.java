@@ -16,7 +16,6 @@ import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 public class ShoppingUserDao {
@@ -228,7 +227,7 @@ public int login(String semail, String spwd) throws SQLException {
 		
 		return shoppinguser;
 	}
-	public int edit(ShoppingUser shoppinguser) throws SQLException {
+	public int edit(ShoppingUser shoppinguser, int sid) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -251,9 +250,10 @@ public int login(String semail, String spwd) throws SQLException {
 			pstmt.setString(4, shoppinguser.getSaddress());
 			pstmt.setInt(5, shoppinguser.getSpost());
 			pstmt.setString(6, shoppinguser.getSagree());
-			pstmt.setInt(7, shoppinguser.getSid());
-			pstmt.setString(8, shoppinguser.getSquestion());
-			pstmt.setString(9, shoppinguser.getSanswer());
+
+			pstmt.setString(7, shoppinguser.getSquestion());
+			pstmt.setString(8, shoppinguser.getSanswer());
+			pstmt.setInt(9, sid);
 					
 			result = pstmt.executeUpdate();
 			

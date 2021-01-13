@@ -58,8 +58,7 @@ public class SearchAction implements CommandProcess {
 		
 		request.setAttribute("search_text", search_text);
 		request.setAttribute("main_img", main_img);
-		System.out.println(request.getParameter("page"));
-		request.setAttribute("page", request.getParameter("page"));
+ 		request.setAttribute("page", request.getParameter("page"));
 		
 		int select_page = 0;
 		try {
@@ -73,15 +72,45 @@ public class SearchAction implements CommandProcess {
 		int page_full_num = main_img.size();
 		request.setAttribute("page_full_num", page_full_num);
 		
-		double page_num = (double)page_full_num/16;
+		System.out.println("확인용 : " + page_full_num);
 		
-		if (page_num <= 0) {
-			page_num = 0;
-		} else if (page_num >0) {
-			page_num = Math.ceil(page_num);
+		double page_num_1 = (double)page_full_num/16;
+		
+		if (page_num_1 <= 0) {
+			page_num_1 = 0;
+		} else if (page_num_1 >0) {
+			page_num_1 = Math.ceil(page_num_1);
 		}
 		
-		request.setAttribute("page_num", page_num);
+		for (int i = 1; i <= page_num_1; i += 10) {
+			System.out.println(i);
+		}
+		
+		String pageNum = request.getParameter("pageNum");
+		if (pageNum == null || pageNum.equals("")) {
+			pageNum = "1";
+		}
+		int currentPage = Integer.parseInt(pageNum);
+		int pageSize = 16, blockSize = 10;
+		int startRow = (currentPage - 1) * pageSize + 1; // 첫글
+		int endRow = startRow + pageSize - 1; // 끝글
+		int totCnt = (int)page_full_num; // 총 갯수
+		int startNum = totCnt - startRow + 1;
+		int pageCnt = (int) Math.ceil((double) totCnt / pageSize);
+		int startPage = (int) (currentPage - 1) / blockSize * blockSize + 1;
+		int endPage = startPage + blockSize - 1;
+		if (endPage > pageCnt) {
+			endPage = pageCnt;
+		}
+		
+
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("startNum", startNum);
+		request.setAttribute("blockSize", blockSize);
+		request.setAttribute("pageCnt", pageCnt);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
 		
 		return "search.jsp";
 	}

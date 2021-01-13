@@ -1,6 +1,6 @@
 package service.water;
 
-import java.io.IOException; 
+import java.io.IOException;  
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +22,7 @@ public class JoinProAction implements CommandProcess {
 			 * "sid"));
 			 */
 			try {       
+				if (request.getParameter("spwd").equals(request.getParameter("spwd2"))) {
 				ShoppingUser user = new ShoppingUser();
 				
 				//user.setSid(Integer.parseInt(request.getParameter("sid")));
@@ -48,6 +49,10 @@ public class JoinProAction implements CommandProcess {
 				/* request.setAttribute("sid", user.getSid()); */
 		        
 		        request.setAttribute("result", result);
+				} else {
+					request.setAttribute("pwsdsame", "no");
+					return "join.jsp";
+				}
 			} catch(Exception e) { 
 				System.out.println("JoinProAction Exception->"+e.getMessage());
 			}       

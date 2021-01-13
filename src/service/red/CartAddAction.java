@@ -26,9 +26,8 @@ public class CartAddAction implements CommandProcess {
 			int pid = Integer.parseInt(request.getParameter("pid"));
 			String option = request.getParameter("option");
 			int howmany = Integer.parseInt(request.getParameter("howmany"));
-			//선택한 수량값 받기==>반야의 howmany를 홍주의 number로 바꿈 
-			//int number = Integer.parseInt(request.getParameter("howmany"));
 			
+//			int sumDiscount = Integer.parseInt(request.getParameter("sum"));
 			
 			System.out.println("cart pid check ->" + pid );
 			System.out.println("cart howmany check ->" + howmany );
@@ -40,25 +39,23 @@ public class CartAddAction implements CommandProcess {
 			session.setAttribute("session_stype", session.getAttribute("session_stype"));
 			session.setAttribute("session_semail", session.getAttribute("session_semail"));
 			//세션 로그인 유지
-			
+			System.out.println("확인1");
 			//세션으로 로그인한 회원의 이메일과 회원번호
 			String session_semail = (String) session.getAttribute("session_semail");
 			int session_sid = (int) session.getAttribute("session_sid");
-			
+			System.out.println("확인2");
 			System.out.println("session_semail=>"+session_semail);
 			System.out.println("session_sid=>"+session_sid);
 			
+			
 			CartnWishDao cartw = CartnWishDao.getInstance();
+			int result=0;
+			if (option == null) option = " ";
+	       
+            result=cartw.insert(pid, session_sid, howmany, option);
+
 			
 			
-			int result= 0;
-					
-			if (option == null) {
-				option = " ";
-				result=cartw.insert(pid, session_sid, howmany, option);
-			} else {
-				result=cartw.insert(pid, session_sid, howmany, option);
-			}
 					
 			System.out.println("--------CartAddAction 파라미터 확인--------------");
 			System.out.println("cart pid check ->" + pid );
@@ -68,10 +65,12 @@ public class CartAddAction implements CommandProcess {
 			System.out.println("session_sid=>"+session_sid);
 			System.out.println("pid=>"+pid);
 			System.out.println("result=>"+result);
+			System.out.println("pid=>"+pid);
 			System.out.println("-----------------------------------------------");
 			//값 보내기
 			request.setAttribute("result", result);
 			request.setAttribute("pid", pid);
+//			request.setAttribute("sumDiscount", sumDiscount);
 			
 			
 		}catch(Exception e) {

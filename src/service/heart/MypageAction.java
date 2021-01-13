@@ -29,30 +29,30 @@ public class MypageAction implements CommandProcess {
 			int sid = (int) session.getAttribute("session_sid");
 			
 			System.out.println("MypageAction sid BEFORE");
-		CouponDao cp = CouponDao.getInstance();
-		System.out.println("MypageAction sid->"+sid);
-		int count = cp.getCount(sid);
-		System.out.println("MypageAction count->"+count);
-		ShoppingUserDao su = ShoppingUserDao.getInstance();
-		ShoppingUser shoppinguser = su.select(sid);
-		Order_tbDao oddao = Order_tbDao.getInstance();
-		Order_Join orderjoin = new Order_Join();
-		orderjoin = oddao.select(sid);
-		List<Order_Join> list_main = oddao.list_main(sid);
-		System.out.println("MypageAction orderjoin.getOname()->"+orderjoin.getOname());
-		System.out.println("MypageAction orderjoin.getPname()->"+orderjoin.getPname());
-		
-		
-		
-		int count_Order = oddao.getCount(sid);
-		System.out.println("MypageAction count_Order->"+count_Order);
-		
-		request.setAttribute("count", count);
-		request.setAttribute("sid", sid);
-		request.setAttribute("shoppinguser", shoppinguser);
-		request.setAttribute("orderjoin", orderjoin);	
-		request.setAttribute("count_Order", count_Order);
-		request.setAttribute("list_main", list_main);
+			CouponDao cp = CouponDao.getInstance();
+			System.out.println("MypageAction sid->"+sid);
+			int count = cp.getCount(sid);
+			System.out.println("MypageAction count->"+count);
+			ShoppingUserDao su = ShoppingUserDao.getInstance();
+			ShoppingUser shoppinguser = su.select(sid);
+			Order_tbDao oddao = Order_tbDao.getInstance();
+			Order_Join orderjoin = new Order_Join();
+			orderjoin = oddao.select(sid);
+			List<Order_Join> list_main = oddao.list_main(sid);
+			System.out.println("MypageAction orderjoin.getOname()->"+orderjoin.getOname());
+			System.out.println("MypageAction orderjoin.getPname()->"+orderjoin.getPname());
+			
+			
+			
+			int count_Order = oddao.getCount(sid);
+			System.out.println("MypageAction count_Order->"+count_Order);
+			
+			request.setAttribute("count", count);
+			request.setAttribute("sid", sid);
+			request.setAttribute("shoppinguser", shoppinguser);
+			request.setAttribute("orderjoin", orderjoin);	
+			request.setAttribute("count_Order", count_Order);
+			request.setAttribute("list_main", list_main);
 		} catch (SQLException e) {
 			System.out.println("MypageAction.java Error ->"+e.getMessage());
 		}

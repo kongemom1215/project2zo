@@ -675,4 +675,67 @@ public List<Product> select() throws SQLException {
 		
 		return list;
 	}
+
+//홍주 goOrderAction
+	public Product select(int pid) throws SQLException {
+		Product product = new Product();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select pprice,pdiscount,pname from product where pid=?";
+		
+		try {
+			
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, pid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				product.setPprice(rs.getInt("pprice"));
+				product.setPdiscount(rs.getInt("pdiscount"));
+				product.setPname(rs.getString("pname"));
+			}
+			
+			
+		}catch(Exception e) {
+			System.out.println("ProductDao select error!!==>"+e.getMessage());
+		}finally{
+			if(conn != null) conn.close();
+			if(pstmt != null) pstmt.close();
+			if(rs != null) rs.close();
+		}
+
+		
+		return product;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

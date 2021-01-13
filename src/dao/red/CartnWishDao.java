@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,7 @@ public class CartnWishDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql=
-				"Select p.pid, p.pname,p.pprice, c.cwid, c.cwqty, s.sid, c.cwoption\r\n"
+				"Select p.pid, p.pname,p.pprice,p.PDISCOUNT, c.cwid, c.cwqty, s.sid, c.cwoption\r\n"
 				+ "From product p , cartnwish c , SHOPPINGUSER s\r\n"
 				+ "where p.pid = c.pid\r\n"
 				+ "And c.sid = s.sid\r\n"
@@ -68,6 +69,7 @@ public class CartnWishDao {
 					cart.setCwqty(rs.getInt("cwqty"));
 					cart.setSid(rs.getInt("sid"));
 					cart.setCwoption(rs.getString("cwoption"));
+					cart.setPdiscount(rs.getInt("pdiscount"));
 					list.add(cart);
 					
 				}while(rs.next());	
@@ -77,7 +79,7 @@ public class CartnWishDao {
 			
 			
 		} catch (Exception e) {
-			System.out.println("CartnWishDao error !!"+e.getMessage());
+			System.out.println("CartnWishDao select error !!"+e.getMessage());
 		}finally {
 			if(conn != null) conn.close();
 			if(pstmt != null)pstmt.close();
@@ -87,101 +89,96 @@ public class CartnWishDao {
 		return list;
 	}
 	
-//선택된 값 장바구니 테이블에 insert
-	public int insert (int pid,int session_sid,int howmany,String option) throws SQLException{
-		
-		
-		
-		int result=0;
-		Connection conn =null;
-		PreparedStatement pstmt = null;
-		ResultSet rs =null;
-		
-		System.out.println("확인 insert3");
-		
-		String sql1 = "select nvl(max(cwid),0) from cartnwish";
-		String sql2 = "select count(*) from cartnwish where sid=? and pid=?";
-		String sql3 = "Insert into cartnwish values(?,?,?,?,?,?)";
-		String sql4 = "update cartnwish set cwqty=cwqty+? where sid=? and pid=? and cwoption=?";
-	
-		System.out.println("확인 insert1");
-		System.out.println("CartnWishDao insert sql3 ->" + sql3 );
-		System.out.println("확인 insert2");
+	//선택된 값 장바구니 테이블에 insert
+		public int insert (int pid,int session_sid,int howmany,String option) throws SQLException{
 			
-		try {
-			conn=getConnection();
-			//카트번호 순서쌍
-			int num=0;
-			pstmt=conn.prepareStatement(sql1);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				num=rs.getInt(1)+1;
+			int result=0;
+			Connection conn =null;
+			PreparedStatement pstmt = null;
+			ResultSet rs =null;
+			System.out.println("insert1 ");
+			
+			String sql1 = "select nvl(max(cwid),0) from cartnwish";
+			String sql2 = "select count(*) from cartnwish where  pid=? and sid=? and CWTYPE='cart' and cwoption=? ";
+			String sql3 = "Insert into cartnwish values(?,?,?,?,?,?)";
+			String sql4 = "update cartnwish set cwqty=cwqty+? where sid=? and pid=? and CWTYPE='cart' and cwoption=?";
+			System.out.println("insert2 ");		
+			System.out.println("CartnWishDao insert pid->"+pid);		
+			System.out.println("CartnWishDao insert session_sid->"+session_sid);		
+			System.out.println("CartnWishDao insert option->"+option);		
+			System.out.println("CartnWishDao insert howmany->"+howmany);		
+				
+			
+			try {
+				conn=getConnection();
+				  
+				 pstmt=conn.prepareStatement(sql2);
+				 pstmt.setInt(1, pid );
+				 pstmt.setInt(2,session_sid);
+				 pstmt.setString(3, option);
+				 rs=pstmt.executeQuery(); 
+				 System.out.println("insert3 ");
+				 if(rs.next()) {
+					 int count=rs.getInt(1);
+					System.out.println("CartnWishDao insert count->"+count);
+					if(count == 0) {
+						  //장바구니에 담긴 상품이 없으면 insert
+						 pstmt.close();
+						 rs.close();
+						 pstmt=conn.prepareStatement(sql1);
+						 rs=pstmt.executeQuery();
+						 rs.next();
+						 int num=rs.getInt(1)+1;
+						 pstmt.close();
+						 rs.close();
+						 System.out.println("cwid =>"+num);
+						 System.out.println("insert4 ");
+						 
+						 pstmt=conn.prepareStatement(sql3);
+						 pstmt.setInt(1, num);//카트위시번호
+						 pstmt.setInt(2, session_sid); //유저번호 가져오기
+						 pstmt.setInt(3, pid); //상품번호 가져오기
+						 pstmt.setString(4, "cart");
+						 pstmt.setInt(5,howmany); 
+						 pstmt.setString(6, option);
+						 rs=pstmt.executeQuery();
+						 result=0;
+//						 result=pstmt.executeUpdate();
+						 
+					 }else {
+						  //장바구니에 담긴 상품이 있으면 update
+					  pstmt.close();
+					  rs.close();
+					  System.out.println("insert5 ");
+					  pstmt=conn.prepareStatement(sql4); 
+					  pstmt.setInt(1, howmany);
+					  pstmt.setInt(2, session_sid);
+					  pstmt.setInt(3, pid);
+					  pstmt.setString(4, option);
+					  rs=pstmt.executeQuery();
+					  result=1;
+//					  result=pstmt.executeUpdate();
+					  
+					 }
+					
+				  }else {
+					  result=-1;
+				  }
+					
+				
+				System.out.println("result 값은??=>"+result);
+				
+			}catch(Exception e) {
+				System.out.println("CartnWhisDao insert error!!"+e.getMessage());
+			}finally {
+				if(conn !=null) conn.close();
+				if(pstmt !=null) pstmt.close();
+				if(rs != null)rs.close();
+				
 			}
 			
-			//중복확인
-//			rs.close();
-//			pstmt.close();
-//			
-//			pstmt=conn.prepareStatement(sql2);
-//			pstmt.setInt(1, session_sid);
-//			pstmt.setInt(2, pid);
-//			pstmt.setString(3, option);
-//			rs=pstmt.executeQuery();
-//			System.out.println("CartnWishDao insert rs=>"+rs);
-//			if(rs.next()) {
-				rs.close();
-				pstmt.close();
-				pstmt=conn.prepareStatement(sql3);
-				System.out.println("CartnWishDao insert num ->" + num );
-				System.out.println("CartnWishDao insert session_sid ->" + session_sid );
-				System.out.println("CartnWishDao insert pid ->" + pid );
-				pstmt.setInt(1, num);
-				pstmt.setInt(2, session_sid);
-				pstmt.setInt(3, pid);
-				pstmt.setString(4, "cart");
-				System.out.println("CartnWishDao insert howmany ->" + howmany );
-				System.out.println("CartnWishDao insert option ->" + option );
-				pstmt.setInt(5, howmany);
-				pstmt.setString(6, option);
-				
-				result=pstmt.executeUpdate();
-				
-//			}
-			
-//			if(rs.) {
-//				 //값이 있으면 update
-//				rs.close();
-//				pstmt.close();
-//				 
-//				pstmt=conn.prepareStatement(sql3);
-//				pstmt.setInt(1, num);
-//				pstmt.setInt(2, session_sid);
-//				pstmt.setInt(3, pid);
-//				pstmt.setString(4, "cart");
-//				pstmt.setInt(5, howmany);
-//				pstmt.setString(6, option);
-//				result=pstmt.executeUpdate();
-//				 
-//				 System.out.println("Insert result"+result);
-//
-//			 }else {
-//				 
-//			 }
-
-				
-			System.out.println("======================");
-			System.out.println("result 값은??=>"+result);
-			
-		}catch(Exception e) {
-			System.out.println("CartnWhisDao insert error!!"+e.getMessage());
-		}finally {
-			if(conn !=null) conn.close();
-			if(pstmt !=null) pstmt.close();
-			
+			return result;
 		}
-		
-		return result;
-	}
 //전체 장바구니 상품 지우기	
 	public int delete(int session_sid) throws SQLException {
 		int result=0;
@@ -230,7 +227,111 @@ public class CartnWishDao {
 			System.out.println("장바구니 상품 총 개수 =>"+count);
 			
 		}catch(Exception e) {
-			System.out.println("CartnWishDao error!!"+e.getMessage());
+			System.out.println("CartnWishDao count error!!"+e.getMessage());
+		}finally {
+			if(conn != null) conn.close();
+			if(pstmt != null)pstmt.close();
+			if(rs != null) rs.close();
+		}
+		return count;
+		
+	}
+//장바구니에서 개별삭제
+	public int CheckDelete(CartnWish cart) throws SQLException {
+		int result = 0;
+		
+		Connection conn =null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "delete from cartnwish where cwid=?";
+		
+		try {
+			
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, cart.getCwid());
+			System.out.println("cart.getCwid()==>"+ cart.getCwid());
+			result=pstmt.executeUpdate();
+			
+			
+			
+		}catch(Exception e) {
+			System.out.println("CartnWish CheckDelete error!! "+ e.getMessage());
+		}finally {
+			if(conn != null) conn.close();
+			if(pstmt != null)pstmt.close();
+			if(rs != null) rs.close();
+		}
+		
+		return result;
+	}
+	
+//개별주문
+	public ArrayList<CartnWish> checkSelect(int check_cwid) throws SQLException{
+		ArrayList<CartnWish> list = new ArrayList<CartnWish>();
+		Connection conn =null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select p.pid,p.pname,p.pdiscount,p.pprice,c.cwqty,c.cwoption"
+				  + " from cartnwish c ,product p "
+					+ "where p.pid = c.pid\r\n"
+					+ "ANd c.cwid=? \r\n";
+		
+		try {
+			
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,check_cwid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				do {
+					CartnWish cart = new CartnWish();
+					cart.setPid(rs.getInt("pid"));
+					cart.setPname(rs.getString("pname"));
+					cart.setPdiscount(rs.getInt("pdiscount"));
+					cart.setPprice(rs.getInt("pprice"));
+					cart.setCwqty(rs.getInt("cwqty"));
+					cart.setCwoption(rs.getString("cwoption"));
+					list.add(cart);
+					
+				}while(rs.next());	
+					
+				System.out.println("list==>"+list);
+			}
+
+		}catch(Exception e) {
+			System.out.println("CartnwishDao checkSelect error!! "+e.getMessage());
+
+		}finally {
+			if(conn != null) conn.close();
+			if(pstmt != null)pstmt.close();
+			if(rs != null) rs.close();
+		}
+
+		
+		return list;
+	}
+//개별주문의 상품 개수
+	public int countCheck(int check_cwid) throws SQLException {
+		int count =0;
+		Connection conn= null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql= "select sum(cwqty) from cartnwish where cwid = ?";
+		
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,check_cwid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				count=rs.getInt(1);
+			}
+			System.out.println("======================");
+			System.out.println("선택한 상품 총 개수 =>"+count);
+			
+		}catch(Exception e) {
+			System.out.println("CartnWishDao countCheck error!!"+e.getMessage());
 		}finally {
 			if(conn != null) conn.close();
 			if(pstmt != null)pstmt.close();
@@ -240,6 +341,52 @@ public class CartnWishDao {
 		
 	}
 
+//선택상품의 총액구하기
+	public int sum(CartnWish cart) throws SQLException {
+		int sum = 0;
+		Connection conn= null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select (p.pprice*c.cwqty)\n"
+				+ "from cartnwish c , product p\n"
+				+ "where c.pid = p.pid\n"
+				+ "and c.cwid = ?";
+		System.out.println("확인1");		
+
+		
+		try {
+			
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, cart.getCwid());
+			rs=pstmt.executeQuery();
+			System.out.println("확인2");
+			while(rs.next()) {
+				sum=rs.getInt(1);
+				System.out.println("확인3");
+			}
+		}catch(Exception e) {
+			System.out.println("CartnWishDao sum error!!"+e.getMessage());
+		}finally {
+			if(conn != null) conn.close();
+			if(pstmt != null)pstmt.close();
+			if(rs != null) rs.close();
+		}
+		
+		
+		return sum;
+	}
+//장바구니에 담긴 전체 상품pid 가져오기
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

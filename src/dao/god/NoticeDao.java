@@ -132,32 +132,116 @@ public class NoticeDao {
 		}
 		return notice;
 	}
-	
 	public String getTitle(int i) throws SQLException {
-        String ntitle=null;
-        String sql="select ntitle from notice where nid=?";
-        Connection conn=null;
-        PreparedStatement pstmt=null;
-        ResultSet rs=null;
-
-        try {
-            conn=getConnection();
-            pstmt=conn.prepareStatement(sql);
-            pstmt.setInt(1, i);
-            rs=pstmt.executeQuery();
-
-            if(rs.next())
-                ntitle=rs.getString(1);
-        } catch (Exception e) {
-            System.out.println("notice getTitle -> "+e.getMessage());
-        } finally {
-            if(rs!=null)
-                rs.close();
-            if(pstmt!=null)
-                pstmt.close();
-            if(conn!=null)
-                conn.close();
-        }
-        return ntitle;
-    }
+		String ntitle=null;
+		String sql="select ntitle from notice where nid=?";
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, i);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next())
+				ntitle=rs.getString(1);
+		} catch (Exception e) {
+			System.out.println("notice getTitle -> "+e.getMessage());
+		} finally {
+			if(rs!=null)
+				rs.close();
+			if(pstmt!=null)
+				pstmt.close();
+			if(conn!=null)
+				conn.close();
+		}
+		return ntitle;
+	}
+	
+	public int delete(int nid) throws SQLException {
+		int result=0;
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		String sql="delete from notice where nid=?";
+		
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, nid);
+			
+			result=pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("notice delete() -> "+e.getMessage());
+		} finally {
+			if(pstmt!=null)
+				pstmt.close();
+			if(conn!=null)
+				conn.close();
+		}
+		return result;
+	}
+	public int updateNotice(Notice notice) throws SQLException {
+		int result=0;
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		String sql="update Notice set ntitle=?, ncontent=?, npublic=?, ndate=sysdate, nfile=? where nid=?";
+		
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, notice.getNtitle());
+			pstmt.setString(2, notice.getNcontent());
+			pstmt.setInt(3, notice.getNpublic());
+			pstmt.setString(4, notice.getNfile());
+			pstmt.setInt(5, notice.getNid());
+			
+			result=pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("updateNotice() -> "+e.getMessage());
+		} finally {
+			if(pstmt!=null)
+				pstmt.close();
+			if(conn!=null)
+				conn.close();
+		}
+		return result;
+	}
+	public int insert(Notice notice) throws SQLException {
+		int result=0;
+		int nid=0;
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql1="insert into notice values(?,?,?,?,sysdate,?,0)";
+		String sql2="select nvl(max(nid)+1,0) from notice";
+		
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql2);
+			rs=pstmt.executeQuery();
+			if(rs.next())
+				nid=rs.getInt(1);
+			rs.close();
+			pstmt.close();
+			
+			pstmt=conn.prepareStatement(sql1);
+			pstmt.setInt(1, nid);
+			pstmt.setString(2, notice.getNtitle());
+			pstmt.setString(3, notice.getNcontent());
+			pstmt.setInt(4, notice.getNpublic());
+			pstmt.setString(5, notice.getNfile());
+			
+			result=pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("notice insert() -> "+e.getMessage());
+		} finally {
+			if(pstmt!=null)
+				pstmt.close();
+			if(conn!=null)
+				conn.close();
+		}
+		return result;
+	}
 }

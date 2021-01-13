@@ -21,9 +21,7 @@ public class MypageEditAction implements CommandProcess {
 		try {
 			request.setCharacterEncoding("utf-8");
 			
-			HttpSession session = request.getSession(true);
-			
-			int sid = (int) session.getAttribute("session_sid");
+			int sid=Integer.parseInt(request.getParameter("sid"));
 			
 			ShoppingUserDao su = ShoppingUserDao.getInstance();
 			ShoppingUser shoppinguser = new ShoppingUser();
@@ -44,7 +42,7 @@ public class MypageEditAction implements CommandProcess {
 			System.out.println("UpdateProAction shoppinguser.getSpost() -> "+shoppinguser.getSpost());
 			System.out.println("UpdateProAction shoppinguser.getSagree() -> "+shoppinguser.getSagree());
 			
-			int result = su.edit(shoppinguser);
+			int result = su.edit(shoppinguser,sid);
 			System.out.println("UpdateProAction result -> "+result);
 			
 			request.setAttribute("sid", sid);

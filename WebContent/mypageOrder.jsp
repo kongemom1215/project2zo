@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +64,7 @@
 		<span>쿠폰</span>
 		<span style="float:right;">></span>
 		</a><p>
-		<a href="mypageWrite.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+		<a href="mypageReview.do" style="text-decoration: none; color: black;">
 		<span>리뷰/문의</span>
 		<span style="float:right;">></span>
 		</a><p>
@@ -79,23 +80,33 @@
 	</div>
 		<h2>주문 내역</h2>
 	<div class="myorderviewdetail">
-	<form action="mypageOrder.do">
-	<select name="orderdate" onchange="sub()">
-		<option value="onemonth" selected="selected" ${onemonth }>1개월이내</option>
-		<option value="threemonth" ${threemonth }>3개월이내</option>
-		<option value="sixmonth" ${sixmonth }>6개월이내</option>
-	</select>
+	<script type="text/javascript">
+		function sub() {
+		   document.frm.submit();
+		}
+	</script>
+	<!-- 기간별 주문내역 보기 -->
+	<form name="frm" action="mypageOrder.do">
+		<select name="orderdate_select" onchange="sub()">
+		    <option selected="selected">--기간선택--</option>
+		    <option value="oneM" ${selected1}>1개월이내</option>
+		    <option value="threeM" ${selected2}>1 ~ 3개월이내</option>
+		    <option value="sixM" ${selected3}>3 ~ 6개월이내</option>
+		</select>
 	</form>
+
 	<c:forEach var="orderjoin" items="${list}">
 		<span>${orderjoin.getOdate()}</span>
-		<span style="float:right; color:blue; font-weight:bold;">${orderjoin.getOid() }</span>
+		<span style="float:right; color:blue; font-weight:bold;"><fmt:formatDate pattern="yyyyMMdd"
+                                    value="${orderjoin.odate }" /> - <fmt:formatNumber
+                                    value="${orderjoin.oid }" pattern="00000" /></span>
 		<span style="float:right;">주문번호 : </span>
 		<br><hr>
 		<table>
 		<!-- 주문상품 중 대표 사진 -->
 			<tr><td rowspan="4"><img src="${orderjoin.getPthumbimg() }" width="100"/></td>
 			<td colspan="6">${orderjoin.getPname() }</td><td></td></tr>
-			<tr><td>수량 : ${orderjoin.getDqty() }</td><td>송장번호 : ${orderjoin.getOinvoice() }</td></tr>
+			<tr><td>수량 : ${orderjoin.getDqty() }</td></tr>
 			<tr><td>주문총액 : ${orderjoin.getOamount() } 원 </td></tr>
 			<tr></tr></table>
 			<span style="font-size:large; color:blue; font-weight:bold;">
@@ -112,7 +123,7 @@
 				 	<c:when test="${ostate eq '2' }">
 				 		결제완료
 				 		<input type="button"  value=" 주문취소 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
-						onclick="location.href='mypageOrderdelete.do?sid=${shoppinguser.sid}&oid=${orderjoin.oid }'" >
+						onclick="location.href='mypageOrderdelete.do?oid=${orderjoin.oid }'" >
 				 	</c:when>
 				 	<c:when test="${ostate eq '3' }">
 				 		배송중
@@ -120,12 +131,17 @@
 				 	<c:when test="${ostate eq '4' }">
 				 		배송완료
 				 		<input type="button"  value=" 구매확정 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
-						onclick="location.href='reviewForm.do?sid=${shoppinguser.sid}&oid=${orderjoin.oid }'" >
+						onclick="location.href='mypageOrderhwakjeong.do?oid=${orderjoin.oid }'" >
+						<input type="button"  value=" 문의하기 " style="background-color:white; font-size:large; color:black; font-weight:bold; border: 0; outline: 0;" 
+						onclick="location.href='qnaWrite.do?oid=${orderjoin.oid }'" >
 				 	</c:when>
 				 	<c:when test="${ostate eq '5' }">
 				 		구매확정
 				 		<input type="button"  value=" 리뷰쓰기 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
-						onclick="location.href='reviewForm.do?sid=${shoppinguser.sid}&oid=${orderjoin.oid }'" >
+						onclick="location.href='reviewWrite.do?oid=${orderjoin.oid }'" >
+				 	</c:when>
+				 	<c:when test="${ostate eq '6' }">
+				 		구매확정
 				 	</c:when>
 				 	<c:otherwise></c:otherwise>
 				</c:choose>

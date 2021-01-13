@@ -9,8 +9,15 @@ public class CartnWish {
 	private String pname;
 	private int pprice;
 	private String cwoption;
+	private int pdiscount;
 	
 	
+	public int getPdiscount() {
+		return pdiscount;
+	}
+	public void setPdiscount(int pdiscount) {
+		this.pdiscount = pdiscount;
+	}
 	public String getCwoption() {
 		return cwoption;
 	}

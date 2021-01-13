@@ -13,6 +13,8 @@
 <%
 	String semail = request.getParameter("semail");
 	
+	System.out.println(semail);
+
 	boolean b = Pattern.matches("[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+",semail.trim());
 
 	if (b) {

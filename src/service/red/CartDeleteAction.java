@@ -34,7 +34,7 @@ public class CartDeleteAction implements CommandProcess {
 		}
 		
 		
-		return "cart.jsp";
+		return "cartDelResult.jsp";
 	}
 
 }

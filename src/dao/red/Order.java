@@ -12,27 +12,11 @@ public class Order {
 	private int opost;
 	private int opay;
 	private int ostate;
-	private int oamount;
-	private int oinvoice;
+	private double oamount;
 	private int odeliverey;
 	private int dqty;
 	private String ocontact;
 	private int pid;
-	
-	
-
-	public int getPid() {
-		return pid;
-	}
-	public void setPid(int pid) {
-		this.pid = pid;
-	}
-	public String getOcontact() {
-		return ocontact;
-	}
-	public void setOcontact(String ocontact) {
-		this.ocontact = ocontact;
-	}
 	public int getOid() {
 		return oid;
 	}
@@ -87,18 +71,13 @@ public class Order {
 	public void setOstate(int ostate) {
 		this.ostate = ostate;
 	}
-	public int getOamount() {
+	public double getOamount() {
 		return oamount;
 	}
-	public void setOamount(int oamount) {
+	public void setOamount(double oamount) {
 		this.oamount = oamount;
 	}
-	public int getOinvoice() {
-		return oinvoice;
-	}
-	public void setOinvoice(int oinvoice) {
-		this.oinvoice = oinvoice;
-	}
+	
 	public int getOdeliverey() {
 		return odeliverey;
 	}
@@ -111,4 +90,18 @@ public class Order {
 	public void setDqty(int dqty) {
 		this.dqty = dqty;
 	}
+	public String getOcontact() {
+		return ocontact;
+	}
+	public void setOcontact(String ocontact) {
+		this.ocontact = ocontact;
+	}
+	public int getPid() {
+		return pid;
+	}
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
+	
+
 }

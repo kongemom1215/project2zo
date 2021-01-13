@@ -33,7 +33,7 @@ public class CouponDao {
 		}
 		return conn;
 	}
-	public Coupon select(int sid) throws SQLException {
+	public Coupon select(int session_sid) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs =null;
@@ -44,7 +44,7 @@ public class CouponDao {
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, sid);
+			pstmt.setInt(1, session_sid);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				coupon.setCid(rs.getInt("cid"));
@@ -107,26 +107,40 @@ public class CouponDao {
 		}
 		return tot;
 	}
-	public List<Coupon> list(int sid) throws SQLException {
-		List<Coupon> list= new ArrayList<Coupon>();
+	public ArrayList<Coupon> list(int session_sid) throws SQLException {
+		ArrayList<Coupon> cu= new ArrayList<Coupon>();
 		Connection conn =null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		 String sql = "select * from (select a.* from (select * from coupon where sid=? and cenddate>sysdate and cusedate is null order by cenddate) a )";
-		 try {
+		 String sql = "select cid,sid,cdiscount from coupon where sid=? and cenddate >= sysdate and cstartDate <=sysdate and cusedate is null ";
+		System.out.println("CouponDao 확인1"); 
+		try {
 				conn = getConnection();
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, sid);
+				pstmt.setInt(1, session_sid);
 				rs = pstmt.executeQuery();
-				while (rs.next()) {
-					Coupon coupon = new Coupon();
-					coupon.setCid(rs.getInt(1));
-					coupon.setSid(rs.getInt(2));
-					coupon.setCstartdate(rs.getDate(3));
-					coupon.setCenddate(rs.getDate(4));
-					coupon.setCdiscount(rs.getInt(5));
-					coupon.setCusedate(rs.getDate(6));
-					list.add(coupon);
+				System.out.println("CouponDao 확인2"); 
+				if(rs.next()) {
+						do{
+	//홍주					
+						Coupon coupon = new Coupon();
+						System.out.println("CouponDao 확인3"); 
+						coupon.setCid(rs.getInt("cid"));
+						coupon.setSid(session_sid);
+						coupon.setCdiscount(rs.getInt("cdiscount"));
+						System.out.println("CouponDao 확인4"); 
+//						System.out.println("CouponDao 확인5"); 
+//						coupon.setCstartdate(rs.getDate());
+//						System.out.println("CouponDao 확인6"); 
+//						coupon.setCenddate(rs.getDate(4));
+//						System.out.println("CouponDao 확인7"); 
+//						
+//						System.out.println("CouponDao 확인8"); 
+//						coupon.setCusedate(rs.getDate(6));
+//						System.out.println("CouponDao 확인9"); 
+						cu.add(coupon);
+					
+				}while(rs.next());
 				}
 			} catch(Exception e) {	System.out.println(e.getMessage());
 			} finally {
@@ -134,6 +148,114 @@ public class CouponDao {
 				if (pstmt != null) pstmt.close();
 				if (conn !=null) conn.close();
 			}
-		return list;
+		return cu;
+	}
+//주문결제시 필요한 쿠폰 가져오기==>홍주 적용
+	public ArrayList<Coupon> selectCoupon(int session_sid) throws SQLException{
+		ArrayList<Coupon> cu = new ArrayList<Coupon>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select cid,cdiscount,cstartdate,cenddate from coupon "
+				+ "where sid=? and cenddate >= sysdate "
+				+ "and CSTARTDATE <=sysdate and cusedate is null";
+
+		System.out.println("CouponDao selectCoupon 확인1"); 
+		try {
+			System.out.println("CouponDao selectCoupon 확인2"); 	
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			System.out.println("CouponDao selectCoupon 확인3"); 
+			pstmt.setInt(1, session_sid);
+			System.out.println("CouponDao selectCoupon 확인4"); 
+			rs=pstmt.executeQuery();
+			System.out.println("CouponDao selectCoupon 확인5"); 
+			
+			if(rs.next()) {
+				do {
+					System.out.println("CouponDao selectCoupon 확인4"); 
+					Coupon coupon = new Coupon();
+					coupon.setCid(rs.getInt("cid"));
+					coupon.setCdiscount(rs.getInt("cdiscount"));
+					coupon.setCstartdate(rs.getDate("cstartdate"));
+					coupon.setCenddate(rs.getDate("cenddate"));
+					
+//					coupon.setSid(rs.getInt("sid"));
+//					coupon.setCusedate(rs.getDate("cusedate"));
+//					coupon.setCouponimg(rs.getString("couponimg"));					
+					System.out.println("CouponDao selectCoupon 확인5"); 
+					cu.add(coupon);
+				}while(rs.next());
+			
+			}
+			System.out.println("CouponDao 확인6"); 
+			
+		}catch (Exception e) {
+			System.out.println("CouponDao selectCoupon error!!"+e.getMessage());
+		}finally {
+			if (rs !=null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (conn !=null) conn.close();
+		}
+		
+		return cu;
+	}
+//적용할 쿠폰 정보 가져오기
+	public int discount (int Vcid) throws SQLException {
+		int dis=0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select cdiscount from coupon where cid =?";
+		
+		
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, Vcid);
+			rs=pstmt.executeQuery();
+			if(rs.next())
+			dis=rs.getInt(1);
+			
+			
+		}catch (Exception e) {
+			System.out.println("CouponDao discount error!!"+e.getMessage());
+		}finally {
+			if (rs !=null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (conn !=null) conn.close();
+		}
+		
+		
+		
+		
+		return dis;
+		
+		
+	}
+//사용한 쿠폰에 사용날짜 입력
+	public int checkUsedDate(int cid) throws SQLException {
+		int used_couponCheck = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "update coupon set CUSEDATE=sysdate where cid=?";
+		
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, cid);
+			used_couponCheck = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			System.out.println("CouponDao checkUsedDate error!!!"+e.getMessage());
+		}finally {
+			if (rs !=null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (conn !=null) conn.close();
+		}
+	
+		
+		return used_couponCheck;
 	}
 }

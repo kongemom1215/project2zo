@@ -8,7 +8,12 @@
 <meta charset="UTF-8">
 <title>Welcome to Byerus</title>
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
-<link rel="stylesheet" href="./css/ShoppingMainCss.css?ver=2">
+<link rel="stylesheet" href="./css/ShoppingMainCss.css?ver=4">
+<style>
+.displaytable {
+	padding-down: 5px;
+}
+</style>
 <script type="text/javascript">
 	function submit() {
 		document.displayform.submit();
@@ -22,27 +27,28 @@
 			<a href="main.do"><img src="./img/Logo.png"></a>
 
 			<c:choose>
-				<c:when test="${session_stype eq '1'}">
-					<a class="top_button">위시리스트</a>
-					<a href="cart.do" class="top_button">장바구니</a>
-					<a class="top_button">주문/배송</a>
-					<a class="top_button">마이페이지</a>
-					<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-					<a class="top_button">${session_sname } 님</a>
-				</c:when>
-				<c:when test="${session_stype eq '0'}">
-					<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-					<a class="top_button">${session_sname } 님</a>
-					<a href="adminPage.do" class="top_button">관리페이지</a>
-				</c:when>
-				<c:otherwise>
-					<a class="top_button">위시리스트</a>
-					<a class="top_button">장바구니</a>
-					<a class="top_button">주문/배송</a>
-					<a class="top_button">마이페이지</a>
-					<a href="login.do" class="top_button">로그인/회원가입</a>
-				</c:otherwise>
-			</c:choose>
+<c:when test="${session_stype eq '1'}">
+<a href="jjimForm.do" class="top_button">위시리스트</a>
+<a href="cart.do" class="top_button">장바구니</a>
+<a href="mypageOrder.do" class="top_button">주문/배송</a>
+<a href="mypage.do" class="top_button">마이페이지</a>
+<a href="main.do?logout=logout" class="top_button">로그아웃</a>
+<a class="top_button">${session_sname } 님</a>
+</c:when>
+<c:when test="${session_stype eq '0'}">
+<a href="main.do?logout=logout" class="top_button">로그아웃</a>
+<a class="top_button">${session_sname } 님</a>
+<a href="adminPage.do" class="top_button">관리페이지</a>
+</c:when>
+<c:otherwise>
+<a href="login.do?url=jjimForm.do" class="top_button">위시리스트</a>
+<a href="login.do?url=cart.do" class="top_button">장바구니</a>
+<a href="login.do?url=mypageOrder.do" class="top_button">주문/배송</a>
+<a href="login.do?url=mypage.do" class="top_button">마이페이지</a>
+<a href="login.do?url=main.do" class="top_button">로그인/회원가입</a>
+</c:otherwise>
+</c:choose>
+
 		</div>
 	</div>
 	<hr style="width: 900px; border-bottom: 0xp;">
@@ -73,24 +79,24 @@
 					href='shoppingMain.do?cate=sodok'> </a><input type="button"
 					style="width: 170px; background-color: white; border: 0px; font-size: 16px;"
 					value="소독 / 손 (${sodokCnt})"></input><a> <br /> <a
-						href='shoppingMain.do?cate=alco'> </a><input type="button"
-							style="width: 170px; background-color: white; border: 0px; font-size: 16px;"
-							value="소독 / 알콜 (${alcoCnt})"></input></a> <br /> <a
-						href='shoppingMain.do?cate=mask'><input type="button"
-							style="width: 170px; background-color: white; border: 0px; font-size: 16px;"
-							value="마스크 (${maskCnt })"></input></a> <br /> <a
-						href='shoppingMain.do?cate=bangdok'><input type="button"
-							style="width: 170px; background-color: white; border: 0px; font-size: 16px;"
-							value="방독면 등 (${bangdokCnt })"></input> </a><br /> <a
-						href='shoppingMain.do?cate=sejung'><input type="button"
-							style="width: 170px; background-color: white; border: 0px; font-size: 16px;"
-							value="세정제 (${sejungCnt})"></input></a> <br /> <a
-						href='shoppingMain.do?cate=home'><input type="button"
-							style="width: 170px; background-color: white; border: 0px; font-size: 16px;"
-							value="재택용품 (${homeCnt})"></input></a> <br /> <a
-						href='shoppingMain.do?cate=etc'><input type="button"
-							style="width: 170px; background-color: white; border: 0px; font-size: 16px;"
-							value="기타 (${etcCnt })"></input></a> <br />
+					href='shoppingMain.do?cate=alco'> </a><input type="button"
+					style="width: 170px; background-color: white; border: 0px; font-size: 16px;"
+					value="소독 / 알콜 (${alcoCnt})"></input></a> <br /> <a
+					href='shoppingMain.do?cate=mask'><input type="button"
+					style="width: 170px; background-color: white; border: 0px; font-size: 16px;"
+					value="마스크 (${maskCnt })"></input></a> <br /> <a
+					href='shoppingMain.do?cate=bangdok'><input type="button"
+					style="width: 170px; background-color: white; border: 0px; font-size: 16px;"
+					value="방독면 등 (${bangdokCnt })"></input> </a><br /> <a
+					href='shoppingMain.do?cate=sejung'><input type="button"
+					style="width: 170px; background-color: white; border: 0px; font-size: 16px;"
+					value="세정제 (${sejungCnt})"></input></a> <br /> <a
+					href='shoppingMain.do?cate=home'><input type="button"
+					style="width: 170px; background-color: white; border: 0px; font-size: 16px;"
+					value="재택용품 (${homeCnt})"></input></a> <br /> <a
+					href='shoppingMain.do?cate=etc'><input type="button"
+					style="width: 170px; background-color: white; border: 0px; font-size: 16px;"
+					value="기타 (${etcCnt })"></input></a> <br />
 			</div>
 			<div class="catespecialmenu">
 				<a href='shoppingMain.do?cate=sale'><input type="button"
@@ -100,35 +106,51 @@
 		</div>
 		<div class="product">
 			<div class="bestimages">
-				<table class="besttable">
-					<tr height="50px">
-						<th><img src="./img/crown.png" width="30" height="30">Top
-							1</th>
-						<th><img src="./img/crown.png" width="20" height="20">Top
-							2</th>
-						<th><img src="./img/crown.png" width="20" height="20">Top
-							3</th>
+				<table class="besttable" style="table-layout: fixed">
+					<tr height="40px">
+						<th width="151px"><img src="./img/crown.png" width="30"
+							height="30">Top 1</th>
+						<th width="151px"><img src="./img/crown.png" width="20"
+							height="20">Top 2</th>
+						<th width="151px"><img src="./img/crown.png" width="20"
+							height="20">Top 3</th>
 					</tr>
 
-					<tr height="165px">
+					<tr height="165px"
+						style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
 						<c:forEach var="best3" items="${BESTPRODUCTS }">
-							<td><a href='productDetail.do?pid=${best3.pid }'> <img
+							<td width="151px"
+								style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><a
+								href='productDetail.do?pid=${best3.pid }'> <img
 									src="${best3.pthumbimg }" width="150" height="150"></img></a></td>
 						</c:forEach>
 					</tr>
-					<tr height="20px">
+					<tr height="20px"
+						style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
 						<c:forEach var="best3" items="${BESTPRODUCTS }">
-							<td><a href='productDetail.do?pid=${best3.pid }'>${best3.pname }</a></td>
+							<td width="151px"
+								style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><a
+								href='productDetail.do?pid=${best3.pid }'>${best3.pname }</a></td>
 						</c:forEach>
 					</tr>
 					<tr>
 						<c:forEach var="best3" items="${BESTPRODUCTS }">
-							<td><font color="gray"><fmt:formatNumber
+							<td width="151px"
+								style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
+
+								<c:if test="${best3.pdiscount > 0 }">
+									<font color="gray"><span
+										style="text-decoration: line-through;"> <fmt:formatNumber
+												type="number" pattern="#,###" value="${best3.pprice}" />원
+									</span><br />
+								</c:if> <span style="font-color: black;"> <fmt:formatNumber
 										type="number" pattern="#,###"
 										value="${best3.pprice - (best3.pdiscount / 100 * best3.pprice) }" />원
-
-									<c:if test="${best3.pdiscount > 0 }"></font><font color="red">
-									(${best3.pdiscount }% off)</font> </c:if></td>
+							</span> <c:if test="${best3.pdiscount > 0 }">
+									</font>
+									<font color="red"> (${best3.pdiscount }% off)</font>
+								</c:if>
+							</td>
 						</c:forEach>
 					</tr>
 				</table>
@@ -179,14 +201,14 @@
 					<div class="downside">
 
 						<c:forEach var="hotproduct" items="${hotlist }">
-							<table class="displaytable">
+							<table class="displaytable" style="table-layout: fixed">
 								<tr height="120px">
 									<td width="160px"><a
 										href='productDetail.do?pid=${hotproduct.pid }'> <img
 											src="${hotproduct.pthumbimg }" width="120" height="120"></img>
 									</a></td>
 								</tr>
-								<tr height="45px">
+								<tr height="40px">
 									<td width="160px"><a
 										href='productDetail.do?pid=${hotproduct.pid }'>${hotproduct.pname }
 									</a> <c:if test="${hotproduct.pdiscount > 0 }">
@@ -194,11 +216,19 @@
 										</c:if></td>
 								</tr>
 								<tr>
-									<td width="160px"><font color="gray"><fmt:formatNumber
-												type="number" pattern="#,###"
-												value="${hotproduct.pprice - (hotproduct.pdiscount / 100 * hotproduct.pprice) }" />원
-											<c:if test="${hotproduct.pdiscount > 0 }"></font><font
-										color="red" size="2"> (${hotproduct.pdiscount }% off)</font> </c:if></td>
+									<td width="160px"><c:if
+											test="${hotproduct.pdiscount > 0 }">
+											<font color="gray"><span
+												style="text-decoration: line-through;"> <fmt:formatNumber
+														type="number" pattern="#,###" value="${hotproduct.pprice}" />원
+											</span><br />
+										</c:if> <font color="gray"><fmt:formatNumber type="number"
+												pattern="#,###"
+												value="${hotproduct.pprice - (hotproduct.pdiscount / 100 * hotproduct.pprice) }" />원</font>
+										<c:if test="${hotproduct.pdiscount > 0 }">
+											<font color="red" size="2"> (${hotproduct.pdiscount }%
+												off)</font>
+										</c:if></td>
 								</tr>
 
 							</table>

@@ -83,6 +83,7 @@ public class SearchDao {
 						search.setPprice(rs.getInt("pprice"));
 						search.setPthumbimg(rs.getString("pthumbimg"));
 						search.setPid(rs.getInt("pid"));
+						search.setPdiscount(rs.getInt("pdiscount"));
 						al_initial.add(search);
 						} while (rs.next());
 					}
@@ -129,19 +130,19 @@ public class SearchDao {
 		 try {
 				int add_i = 0;
 				
-				String sql = "SELECT pname, pprice, PTHUMBIMG, pid from product ORDER by psell desc";
+				String sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product ORDER by psell desc";
 				
 				try {
 					if (shopping_select.equals("sell_hit")) {
-						sql = "SELECT pname, pprice, PTHUMBIMG, pid from product ORDER by (psell*phit) desc";
+						sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product ORDER by (psell*phit) desc";
 					} else if (shopping_select.equals("price_high")) {
-						sql = "SELECT pname, pprice, PTHUMBIMG, pid from product ORDER by pprice desc";
+						sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product ORDER by pprice desc";
 					} else if (shopping_select.equals("price_low")) {
-						sql = "SELECT pname, pprice, PTHUMBIMG, pid from product ORDER by pprice";
+						sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product ORDER by pprice";
 					} else if (shopping_select.equals("pregdate")) {
-						sql = "SELECT pname, pprice, PTHUMBIMG, pid from product ORDER by pregdate desc";
+						sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product ORDER by pregdate desc";
 					} else {
-						sql = "SELECT pname, pprice, PTHUMBIMG, pid from product ORDER by psell desc";
+						sql = "SELECT pname, (pprice - TRUNC (pprice * (PDISCOUNT/100))) pprice, PTHUMBIMG, pid, PDISCOUNT from product ORDER by psell desc";
 					}
 					
 				} catch (Exception e) {

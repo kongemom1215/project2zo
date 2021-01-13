@@ -19,37 +19,39 @@ public class MypageOrderAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	try {
+			request.setCharacterEncoding("utf-8");
+			HttpSession session = request.getSession(true);
 			
-		HttpSession session = request.getSession(true);
-		
-		int sid = (int) session.getAttribute("session_sid");
+			int sid = (int) session.getAttribute("session_sid");
 		
 			System.out.println("sid ->"+sid);
 			Order_tbDao oddao = Order_tbDao.getInstance();
 			Order_Join orderjoin = new Order_Join();
 			
-			String orderdate = request.getParameter("orderdate");
-			request.setAttribute("orderdate", orderdate);
+			String orderdate_select  = request.getParameter("orderdate_select");
+			request.setAttribute("orderdate_select", orderdate_select);
 			try {
-				if(orderdate.equals("onemonth")) {
-					request.setAttribute("onemonth", "selected");
-				}else if(orderdate.equals("threemonth")) {
-					request.setAttribute("threemonth", "selected");
-				}else if(orderdate.equals("sixmonth")) {
-					request.setAttribute("sixmonth", "selected");
-				}else {}
-			} catch (Exception e) {
-				System.err.println("MypageOrderAction orderdate Error->"+e.getMessage());
-			}
-			
+				if (orderdate_select.equals("oneM")) {
+					request.setAttribute("selected1", "selected");
+				} else if (orderdate_select.equals("threeM")) {
+					request.setAttribute("selected2", "selected");
+				} else if (orderdate_select.equals("sixM")) {
+					request.setAttribute("selected3", "selected");
+				} else {
+				}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+				System.out.println("select : " + orderdate_select);
+	
 			
 			orderjoin = oddao.select(sid);
-			List<Order_Join> list = oddao.list(sid, orderdate);
-			
+			List<Order_Join> list = oddao.list_order(sid, orderdate_select);
 			
 			request.setAttribute("sid", sid);
-			request.setAttribute("orderjoin", orderjoin);
 			request.setAttribute("list", list);		 
+			request.setAttribute("orderjoin", orderjoin);
 
 		} catch (Exception e) {
 			System.out.println("MypageOrderAction error=> "+e.getMessage());

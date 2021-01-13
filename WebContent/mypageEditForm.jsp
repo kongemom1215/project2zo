@@ -64,7 +64,7 @@
 		<span>쿠폰</span>
 		<span style="float:right;">></span>
 		</a><p>
-		<a href="mypageWrite.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+		<a href="mypageReview.do" style="text-decoration: none; color: black;">
 		<span>리뷰/문의</span>
 		<span style="float:right;">></span>
 		</a><p>
@@ -80,13 +80,23 @@
 	</div>
 
 <div class="useredit">
-<form action="mypageEdit.do" method="post">
+<script type="text/javascript">
+	function chk(){
+		if(document.editForm.spwd.value != document.editForm.respwd.value){
+			alert("비밀번호가 맞지않습니다. 비밀번호확인을 다시 입력해주세요.");
+			document.editForm.respwd.focus();	
+			return false;
+		}
+	}
+</script>
+
+<form action="mypageEdit.do" method="post" name="editForm" onsubmit="return chk()">
 	<input type="hidden" name="sid" value="${shoppinguser.sid }">
 	<table>
 		<caption><h2>회원정보 수정</h2></caption>
 		<tr><td style="font-size:15px;">이메일	</td><td>></td><td style="background-color:#B9FFFF;">${shoppinguser.getSemail() }</td></tr>
 		<tr><td style="font-size:15px;">비밀번호	</td><td>></td><td style="background-color:#B9FFFF;"><input type="password" name="spwd"  required="required" value="${shoppinguser.spwd }" class="input"></td></tr>
-		<tr><td style="font-size:15px;">비밀번호 확인	</td><td>></td><td style="background-color:#B9FFFF;"><input type="password" name="spwd2" required="required" value="${shoppinguser.spwd }" class="input"></td></tr>
+		<tr><td style="font-size:15px;">비밀번호 확인 </td><td>></td><td style="background-color:#B9FFFF;"><input type="password" name="respwd" required="required"  class="input"></td></tr>
 		<tr><td style="font-size:15px;">이름	</td><td>></td><td style="background-color:#B9FFFF;"><input type="text" name="sname" required="required" value="${shoppinguser.sname }" class="input"></td></tr>
 		<tr><td style="font-size:15px;">우편번호	</td><td>></td><td style="background-color:#B9FFFF;"><input type="text" name="spost" required="required" value="${shoppinguser.spost }" class="input"></td></tr>
 		<tr><td style="font-size:15px;">주소	</td><td>></td><td style="background-color:#B9FFFF;"><input type="text" name="saddress" required="required" value="${shoppinguser.saddress }" class="input"></td></tr>

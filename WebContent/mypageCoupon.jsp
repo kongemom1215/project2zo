@@ -64,7 +64,7 @@
 		<span>쿠폰</span>
 		<span style="float:right;">></span>
 		</a><p>
-		<a href="mypageWrite.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+		<a href="mypageReview.do" style="text-decoration: none; color: black;">
 		<span>리뷰/문의</span>
 		<span style="float:right;">></span>
 		</a><p>
@@ -80,13 +80,26 @@
 	</div>
 	<table>
 	<caption><h2>쿠폰</h2></caption>
-	<tr><th style="background-color:white;"></th><th>번호</th><th>할인율</th><th>유효기간</th></tr>
+	<tr><th>번호</th><th>할인율</th><th>유효기간</th><th style="background-color:white;"></th></tr>
 		<c:forEach var="coupon" items="${listC}">
-			<tr><td style="background-color:white;"><img src="${coupon.getCouponimg() }" width="150"/></td>
+			<tr>
 			<td>${coupon.getCid()}</td><td>${coupon.getCdiscount() } %</td>
-			<td>${coupon.getCstartdate() } ~ ${coupon.getCenddate()}</td></tr>			
+			<td>${coupon.getCstartdate() } ~ ${coupon.getCenddate()}</td>
+			<td style="background-color:white; width:155px"><img src="${coupon.getCouponimg() }"  width="150"/></td>
+			</tr>			
 		</c:forEach>
 	</table>
+						<div style="text-align : center">
+						<c:if test="${startPage>blockSize }">
+							<a href="mypageCoupon.do?pageNum=${startPage-blockSize }">[이전]</a>
+						</c:if>
+						<c:forEach var="i" begin="${startPage }" end="${endPage}">
+							<a href="mypageCoupon.do?pageNum=${i }">[${i }]</a>
+						</c:forEach>
+						<c:if test="${endPage< pageCnt}">
+							<a href="mypageCoupon.do?pageNum=${startPage+blockPage }">[다음]</a>
+						</c:if>
+					</div>
 	</div>
 	</div>
 		<div style="height: 90%;">

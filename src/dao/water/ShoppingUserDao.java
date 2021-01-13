@@ -136,6 +136,8 @@ public class ShoppingUserDao {
 				shoppinguser.setSpwd(rs.getString(4));
 				shoppinguser.setSregdate(rs.getDate(7));
 				shoppinguser.setStype(rs.getInt(2));
+				shoppinguser.setSquestion(rs.getString(11));
+				shoppinguser.setSanswer(rs.getString(12));
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -158,7 +160,7 @@ public class ShoppingUserDao {
 		int result = 0;
 		ResultSet rs = null;
 		String sql1 = "select nvl(max(sid),0) from shoppinguser";
-		String sql="insert into shoppinguser values(?,1,?,?,?,?,sysdate,?,?,?,?,?)";
+		String sql="insert into shoppinguser values(?,?,?,?,?,?,sysdate,?,?,?,?,?)";
 
 		try { 
 			conn  = getConnection();
@@ -174,16 +176,16 @@ public class ShoppingUserDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, number);
-            pstmt.setInt(2, user.getStype());
-            pstmt.setString(3, user.getSemail());
-            pstmt.setString(4, user.getSpwd());
-            pstmt.setString(5, user.getSname());
-            pstmt.setString(6, user.getScontact());
-            pstmt.setString(7, user.getSaddress());
-            pstmt.setInt(8, user.getSpost());
-            pstmt.setString(9, user.getSagree());
-            pstmt.setString(10, user.getSquestion());
-            pstmt.setString(11, user.getSanswer());
+			pstmt.setInt(2, user.getStype());
+			pstmt.setString(3, user.getSemail());
+			pstmt.setString(4, user.getSpwd());
+			pstmt.setString(5, user.getSname());
+			pstmt.setString(6, user.getScontact());
+			pstmt.setString(7, user.getSaddress());
+			pstmt.setInt(8, user.getSpost());
+			pstmt.setString(9, user.getSagree());
+			pstmt.setString(10, user.getSquestion());
+			pstmt.setString(11, user.getSanswer());
 			result = pstmt.executeUpdate();
 		} catch(Exception e) { System.out.println(e.getMessage());
 		} finally {
@@ -281,5 +283,7 @@ public class ShoppingUserDao {
 		
 		return shoppinguser;
 	}
+	
+
 	
 }

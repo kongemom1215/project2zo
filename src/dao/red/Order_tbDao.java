@@ -35,36 +35,40 @@ public class Order_tbDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql1 = "select to_number(to_char(sysdate, 'yymmdd')) || LPAD(oid_num.NEXTVAL,4,0) from dual";
-		String sql2 = "SELECT inv_num.NEXTVAL FROM DUAL ";
-		String sql3 = "Insert INTO order_tb (oid, ODATE, sid, cid, oname, ocontact, Oaddress, Opost, Opay, Ostate, Oamount, oinvoice, Odeliverey) values(?,sysdate,?,?,?,?,?,?,?,?,?,?,?)";
+
+//		String sql1 = "select to_number(to_char(sysdate, 'yymmdd')) || LPAD(oid_num.NEXTVAL,4,0) from dual";
+//		String sql2 = "SELECT inv_num.NEXTVAL FROM DUAL ";
+		String sql3 = "Insert INTO order_tb values(?,sysdate,?,?,?,?,?,?,?,?,?,?)";
 		
+
 		try {
-			int count=0;
+//oid sequence 는 따로 만듬			
+//			int count=0;
+//			
+//			pstmt=conn.prepareStatement(sql1);
+//			rs=pstmt.executeQuery();
+//			if(rs.next()) {
+//				count = rs.getInt(1);
+//			}
+//			pstmt.close();
+//			rs.close();
+//
+//			System.out.println("count=>"+count);
+
+
+//			conn=getConnection();
+//			int invoice=0;
+//			pstmt=conn.prepareStatement(sql2);
+//			rs=pstmt.executeQuery();
+//			if(rs.next()) {
+//				invoice=rs.getInt(1);
+//			}
+//
+//			System.out.println("invoice=>"+invoice);
+
 			conn=getConnection();
-			pstmt=conn.prepareStatement(sql1);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				count = rs.getInt(1);
-			}
-			pstmt.close();
-			rs.close();
-			System.out.println("count=>"+count);
-			
-			int invoice=0;
-			pstmt=conn.prepareStatement(sql2);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				invoice=rs.getInt(1);
-			}
-			System.out.println("invoice=>"+invoice);
-			
-			
-			pstmt.close();
-			rs.close();
-			
 			pstmt=conn.prepareStatement(sql3);
-			pstmt.setInt(1, count);
+			pstmt.setInt(1, order.getOid());
 			//sysdate
 			pstmt.setInt(2, order.getSid());
 			pstmt.setInt(3, order.getCid());
@@ -74,9 +78,8 @@ public class Order_tbDao {
 			pstmt.setInt(7, order.getOpost());
 			pstmt.setInt(8, order.getOpay());
 			pstmt.setInt(9, order.getOstate());
-			pstmt.setInt(10, order.getOamount());
-			pstmt.setInt(11, invoice);
-			pstmt.setInt(12, order.getOdeliverey());
+			pstmt.setDouble(10, order.getOamount());
+			pstmt.setInt(11, order.getOdeliverey());
 			
 			result=pstmt.executeUpdate();
 			
@@ -84,8 +87,10 @@ public class Order_tbDao {
 			System.out.println("result =>"+ result);
 			
 		}catch(Exception e) {
+
 			System.out.println("Order_tdDao error insert!!"+e.getMessage());
-			System.out.println("Order_tdDao error!!"+e.getMessage());
+
+
 		}finally {
 			if(rs != null) rs.close();
 			if(conn != null) conn.close();
@@ -96,21 +101,25 @@ public class Order_tbDao {
 		return result;
 	
 }
-	public Order select(int session_sid) throws SQLException {
+
+	public Order select(int oid) throws SQLException {
 		Order order_select = new Order();
 		Connection conn= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs= null;
-		String sql = "select oid,odate from order_tb where sid=?";
+		String sql = "select oid,odate from order_tb where oid=?";
 		
 		try {
 			
 			conn=getConnection();
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, session_sid);
+			pstmt.setInt(1,oid);
+			System.out.println("oid==>"+oid);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				order_select.setOid(rs.getInt("oid"));
+				order_select.setOid(oid);
+				order_select.setOdate(rs.getDate("odate"));
+				
 //				order_select.setSid(rs.getInt("sid"));
 //				order_select.setCid(rs.getInt("cid"));
 //				order_select.setOname(rs.getString("oname"));
@@ -120,10 +129,11 @@ public class Order_tbDao {
 //				order_select.setOamount(rs.getInt("oamount"));
 //				order_select.setOdeliverey(rs.getInt("odeliverey"));
 //				order_select.setOstate(rs.getInt("ostate"));
-				order_select.setOdate(rs.getDate("odate"));
+				
 //				order_select.setDqty(rs.getInt("dqty"));
-//				order_select.setOinvoice(rs.getInt("oinvoice"));
+//				
 			}
+			
 			
 		}catch(Exception e) {
 			System.out.println("Order_tbDao error select!!"+e.getMessage());
@@ -136,5 +146,33 @@ public class Order_tbDao {
 		
 		return order_select;
 	}
-	
+
+//주문번호 받기
+	public int countOid() throws SQLException {
+		int oid =0;
+		Connection conn= null;
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		//String sql = "select to_number(to_char(sysdate, 'yymmdd')) || LPAD(oid_num.NEXTVAL,4,0) from dual";
+		String sql = "select nvl(max(oid),0) from order_tb";
+		
+		try {
+			
+		conn=getConnection();
+		pstmt=conn.prepareStatement(sql);
+		rs=pstmt.executeQuery();
+		if(rs.next()) {
+			oid=rs.getInt(1)+1;
+		}
+			
+		}catch(Exception e) {
+			System.out.println("order_tbDao countOid error !!"+e.getMessage());
+		}finally {
+			if(rs != null) rs.close();
+			if(conn != null) conn.close();
+			if(pstmt != null) pstmt.close();
+		}
+		
+		return oid;
+	}
 }

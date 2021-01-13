@@ -60,7 +60,7 @@
 		<span>쿠폰</span>
 		<span style="float:right;">></span>
 		</a><p>
-		<a href="mypageWrite.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+		<a href="mypageReview.do" style="text-decoration: none; color: black;">
 		<span>리뷰/문의</span>
 		<span style="float:right;">></span>
 		</a><p>

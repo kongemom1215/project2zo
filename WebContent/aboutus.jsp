@@ -25,9 +25,9 @@
 
 <c:choose>
 <c:when test="${session_stype eq '1'}">
-<a class="top_button">위시리스트</a>
+<a href="jjimForm.do" class="top_button">위시리스트</a>
 <a href="cart.do" class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
+<a href="mypageOrder.do" class="top_button">주문/배송</a>
 <a href="mypage.do" class="top_button">마이페이지</a>
 <a href="main.do?logout=logout" class="top_button">로그아웃</a>
 <a class="top_button">${session_sname } 님</a>
@@ -38,13 +38,14 @@
 <a href="adminPage.do" class="top_button">관리페이지</a>
 </c:when>
 <c:otherwise>
-<a class="top_button">위시리스트</a>
-<a class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
-<a class="top_button">마이페이지</a>
-<a href="login.do" class="top_button">로그인/회원가입</a>
+<a href="login.do?url=jjimForm.do" class="top_button">위시리스트</a>
+<a href="login.do?url=cart.do" class="top_button">장바구니</a>
+<a href="login.do?url=mypageOrder.do" class="top_button">주문/배송</a>
+<a href="login.do?url=mypage.do" class="top_button">마이페이지</a>
+<a href="login.do?url=main.do" class="top_button">로그인/회원가입</a>
 </c:otherwise>
 </c:choose>
+
 </div>
 </div>
 <hr style="width: 900px; border-bottom: 0xp;">
@@ -56,14 +57,15 @@
 </div>
 </div>
 <hr style="width: 900px; margin-bottom: 0px; border-bottom: 0px;">
+
 <div class="main">
 	<div class="downside">
 		<img src="./img/aboutus.png" width="900" height="600"></img>
 		<h4>Contact Us : 02) 123-4567</h4>
 	</div>
 	</div>
-<div style="height: 340px;">
-</div>
+	
+<div style="margin-top: 200px;">
 <div class="main" style="height: 50px; background-color: #767171; display: table;">
 <div style="width: 10px;">
 </div>
@@ -76,6 +78,7 @@
 <a>입점문의</a>
 </div>
 <div style="width: 10px;">
+</div>
 </div>
 </div>
 </body>

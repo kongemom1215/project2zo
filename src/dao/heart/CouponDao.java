@@ -91,12 +91,12 @@ public class CouponDao {
 	   return cnt;
 	}
 	
-	public List<Coupon> list(int sid) throws SQLException {
+	public List<Coupon> list(int sid,int startRow, int endRow) throws SQLException {
 		List<Coupon> listC= new ArrayList<Coupon>();
 		Connection conn =null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		 String sql = "select * from coupon where sid=? and cenddate >= sysdate and cusedate is null order by cenddate";
+		 String sql = "select * from (select rownum rn, q.* from (select * from coupon where sid=? and cenddate >= sysdate and cusedate is null order by cenddate) q) where rn between ? and ?";
 			System.out.println("Coupon list sql -> "+ sql);
 		 try {
 				conn = getConnection();
@@ -105,6 +105,10 @@ public class CouponDao {
 				System.out.println("Coupon list 2");
 				pstmt.setInt(1, sid);
 				System.out.println("Coupon list 3");
+				pstmt.setInt(2, startRow+1);
+				pstmt.setInt(3, endRow+1);
+				System.out.println("startRow->"+startRow);
+				System.out.println("endRow"+endRow);
 				rs = pstmt.executeQuery();
 				System.out.println("Coupon list 4");
 				

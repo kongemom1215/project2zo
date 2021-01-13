@@ -273,7 +273,7 @@ public class ProductDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql="insert into Product values(?,?,?,?,?,?,?,?,sysdate,0,0,?,?,?,?)";
-		String sql2="select max(pid) from product";
+		String sql2="select nvl(max(pid),0) from product";
 		int pid=0;
 		
 		try {

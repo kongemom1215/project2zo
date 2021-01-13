@@ -1,10 +1,12 @@
 package control;
 
-import java.io.FileInputStream;
+import java.io.FileInputStream; 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -93,6 +95,9 @@ public class Controller extends HttpServlet {
 		String view = null;
 	    CommandProcess com=null;
 	    String command = request.getRequestURI();
+	    
+	   
+	    
 	    try {	
 //				System.out.println("requestPro command 1=>"+ command);  // /och16/list.do
 	              command = command.substring(request.getContextPath().length());
@@ -107,8 +112,25 @@ public class Controller extends HttpServlet {
 	    } catch(Throwable e) {  
 	    	throw new ServletException(e); 
 	    } 
+	    
+	    if(command.contains("ajaxDiscount")) {
+	    	System.out.println("ajaxDiscount controller start!!!");
+	    	String total = request.getAttribute("total").toString();
+	    	System.out.println("con_total : " + total);
+	    	PrintWriter pw = response.getWriter();
+	    	pw.write(total);
+	    	pw.flush();
+	    } else if (command.contains("ajaxSemail")) {
+			System.out.println("ajaxSemail ajax String->"+command);  // /ch16/list.do
+			String retStr =  (String) request.getAttribute("retStr");
+			PrintWriter pw = response.getWriter();
+			pw.write(retStr);
+			pw.flush();
+
+	    } else {	
 	    RequestDispatcher dispatcher =   request.getRequestDispatcher(view);
         dispatcher.forward(request, response);
+	    }
 		
 	}
 	

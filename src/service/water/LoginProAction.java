@@ -40,6 +40,10 @@ public class LoginProAction implements CommandProcess {
 			request.setAttribute("sid", shoppinguser.getSid());
 			request.setAttribute("stype", shoppinguser.getStype());
 			request.setAttribute("result", result);
+			
+			System.out.println(request.getParameter("url"));
+			request.setAttribute("url", request.getParameter("url"));
+			request.setAttribute("pid", request.getParameter("pid"));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

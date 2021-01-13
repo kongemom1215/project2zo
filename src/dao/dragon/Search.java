@@ -157,6 +157,11 @@ public class Search {
 	public void setPoption(String poption) {
 		this.poption = poption;
 	}
+
+	public String getQcontent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

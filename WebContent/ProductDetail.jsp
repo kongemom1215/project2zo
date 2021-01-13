@@ -7,8 +7,45 @@
 <head>
 <meta charset="UTF-8">
 <title>Welcome to Byerus</title>
-<link rel="stylesheet" href="./css/ProductDetailCss.css?ver=1">
+<link rel="stylesheet" href="./css/ProductDetailCss.css?ver=3">
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=2s">
+<style>
+.qnaboard {
+	text-align: center;
+	float: left;
+}
+
+.qnaboardtable {
+	margin-top: 40px;
+	padding: 5px;
+	margin-left: 40px;
+	float: left;
+}
+
+.qnaboardtable th {
+	background-color: #C8FFFF;
+	height: 30px;
+	border-bottom: 3px solid #E1F6FA;
+}
+
+.reviewboard {
+	text-align: center;
+	float: left;
+}
+
+.reviewboardtable {
+	margin-top: 40px;
+	padding: 5px;
+	margin-left: 40px;
+	padding: 5px;
+}
+
+.reviewboardtable th {
+	background-color: #C8FFFF;
+	height: 30px;
+	border-bottom: 3px solid #E1F6FA;
+}
+</style>
 </head>
 <body onload="init();">
 	<script type="text/javascript">
@@ -21,7 +58,6 @@
 		var howmany;
 
 		function init() {
-			remoconSwitch();
 			sell_price = document.form.sell_price.value;
 			howmany = document.form.howmany.value;
 			document.form.sum.value = addComma(Math.round(sell_price));
@@ -55,6 +91,7 @@
 			}
 
 			addComma(Math.round(parseInt(hm.value) * sell_price));
+			remoconSwitch();
 		}
 	</script>
 	<div class="main">
@@ -62,27 +99,28 @@
 			<a href="main.do"><img src="./img/Logo.png"></a>
 
 			<c:choose>
-				<c:when test="${session_stype eq '1'}">
-					<a class="top_button">위시리스트</a>
-					<a href="cart.do" class="top_button">장바구니</a>
-					<a class="top_button">주문/배송</a>
-					<a class="top_button">마이페이지</a>
-					<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-					<a class="top_button">${session_sname } 님</a>
-				</c:when>
-				<c:when test="${session_stype eq '0'}">
-					<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-					<a class="top_button">${session_sname } 님</a>
-					<a href="adminPage.do" class="top_button">관리페이지</a>
-				</c:when>
-				<c:otherwise>
-					<a class="top_button">위시리스트</a>
-					<a class="top_button">장바구니</a>
-					<a class="top_button">주문/배송</a>
-					<a class="top_button">마이페이지</a>
-					<a href="login.do" class="top_button">로그인/회원가입</a>
-				</c:otherwise>
-			</c:choose>
+<c:when test="${session_stype eq '1'}">
+<a href="jjimForm.do" class="top_button">위시리스트</a>
+<a href="cart.do" class="top_button">장바구니</a>
+<a href="mypageOrder.do" class="top_button">주문/배송</a>
+<a href="mypage.do" class="top_button">마이페이지</a>
+<a href="main.do?logout=logout" class="top_button">로그아웃</a>
+<a class="top_button">${session_sname } 님</a>
+</c:when>
+<c:when test="${session_stype eq '0'}">
+<a href="main.do?logout=logout" class="top_button">로그아웃</a>
+<a class="top_button">${session_sname } 님</a>
+<a href="adminPage.do" class="top_button">관리페이지</a>
+</c:when>
+<c:otherwise>
+<a href="login.do?url=jjimForm.do" class="top_button">위시리스트</a>
+<a href="login.do?url=cart.do" class="top_button">장바구니</a>
+<a href="login.do?url=mypageOrder.do" class="top_button">주문/배송</a>
+<a href="login.do?url=mypage.do" class="top_button">마이페이지</a>
+<a href="login.do?url=main.do" class="top_button">로그인/회원가입</a>
+</c:otherwise>
+</c:choose>
+
 		</div>
 	</div>
 	<hr>
@@ -186,15 +224,20 @@
 									onchange="change();"> <input type="button" value=" + "
 									onclick="add();"></td>
 							</tr>
-							<tr height="30">
-								<td width="130">옵션선택</td>
-								<td><select name="option" style="width: 100px;">
 
-										<c:forEach var="options" items="${poptions }">
-											<option value="${options }">${options }</option>
-										</c:forEach>
-								</select></td>
-							</tr>
+							<c:if test="${poptions ne null}">
+
+								<tr height="30">
+									<td width="130">옵션선택</td>
+									<td><select name="option" style="width: 100px;">
+
+											<c:forEach var="options" items="${poptions }">
+												<option value="${options }">${options }</option>
+											</c:forEach>
+									</select></td>
+								</tr>
+							</c:if>
+
 							<tr height="50"></tr>
 							<tr height="50">
 
@@ -210,10 +253,10 @@
 					<!-- infotablediv close -->
 					<!-- 홍주님과 협업 -->
 					<div class="purchase">
-						<input type="submit" value="바로구매" class="bbuttons"
-							formaction="order.do"></input> <input type="submit" value="장바구니"
-							class="pbuttons" formaction="cartAdd.do"></input> <input
-							type="button" value="찜" class="pbuttons"></input>
+						<input type="submit" value="바로구매" class="pbuttons"
+								formaction="goOrder.do?pid=${pid}&option=${option}&howmany=${howmany}"></input>  <input type="submit" value="장바구니"
+								class="pbuttons" formaction="cartAdd.do?pid=${pid}&option=${option}&howmany=${howmany}&sum=${sum}"></input> 
+							<input type="submit" value="찜" class="pbuttons" formaction="jjim.do"></input>
 					</div>
 				</form>
 				<!-- purchase close -->
@@ -229,44 +272,163 @@
 						src="${pobject.col3 }" width="690"></img>
 
 				</div>
-				<div class="reviewboard">
-					<br /> <br /> 후기게시판 <br /> <br /> 후기 영역입니다. <br /> <br />
+
+
+
+				<div class="boardzone">
+
+					<div class="reviewboard">
+						<table class="reviewboardtable">
+							<a name="revlocation"></a>
+							<tr hegiht="30px">
+								<td colspan=4><span style="color: navy;">후기게시판</span></td>
+							</tr>
+							<tr height="40px">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td>
+									<form>
+										<input type="submit" value="리뷰글 쓰기" class="pbuttons"></input>
+									</form> <br />
+								</td>
+							</tr>
+							<tr height="25px">
+								<th width="100px">글번호</th>
+								<th width="400px">리뷰제목</th>
+								<th width="200px">작성자</th>
+								<th width="100px">작성일</th>
+							</tr>
+							<c:if test="${qtotCnt > 0 }">
+								<c:forEach var="reviews" items="${rlist }">
+									<tr height="25px">
+										<td>${rstartNum }</td>
+										<td><a href=''>${reviews.rtitle }</a></td>
+										<td>${reviews.sname }</td>
+										<td>${reviews.rdate }</td>
+									</tr>
+									<tr height="40px">
+										<td></td>
+										<td colspan=3 align=left><span
+											style="font-size: x-small; color: gray;">
+												${reviews.rcontent }</span></td>
+									</tr>
+									<c:set var="rstartNum" value="${rstartNum - 1 }" />
+								</c:forEach>
+							</c:if>
+							<c:if test="${rtotCnt == 0 }">
+								<tr>
+									<td colspan=4>작성된 리뷰가 없습니다.</td>
+								</tr>
+							</c:if>
+						</table>
+						<br />
+
+						<div style="text-align: center;">
+							<c:if test="${rstartPage > rblockSize }">
+								<a
+									href='productDetail.do?rpageNum=${rstartPage-rblockSize}&pid=${pid }#revlocation'>[이전]</a>
+							</c:if>
+							<c:forEach var="i" begin="${rstartPage}" end="${rendPage}">
+								<a href='productDetail.do?rpageNum=${i}&pid=${pid }#revlocation'>[${i}]</a>
+							</c:forEach>
+							<c:if test="${rendPage < rpageCnt }">
+								<a
+									href='productDetail.do?rpageNum=${rstartPage+rblockSize}&pid=${pid }#revlocation'>[다음]</a>
+							</c:if>
+						</div>
+					</div>
+
+
+					<div class="qnaboard">
+						<table class="qnaboardtable">
+							<a name="qnalocation"></a>
+							<tr hegiht="30px">
+								<td colspan=4><span style="color: navy;">문의게시판</span></td>
+							</tr>
+							<tr height="40px">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td>
+									<form>
+										<input type="submit" value="문의글 쓰기" class="pbuttons"></input>
+									</form> <br />
+								</td>
+							</tr>
+							<tr height="25px">
+								<th width="100px">글번호</th>
+								<th width="400px">문의제목</th>
+								<th width="200px">작성자</th>
+								<th width="100px">작성일</th>
+							</tr>
+							<c:if test="${qtotCnt > 0 }">
+								<c:forEach var="qnas" items="${qlist }">
+									<tr height="25px">
+										<td>${qstartNum }</td>
+										<td><a href=''>문의 드립니다</a></td>
+										<td>${qnas.sname }</td>
+										<td>${qnas.qdate }</td>
+									</tr>
+									<c:set var="qstartNum" value="${qstartNum - 1 }" />
+								</c:forEach>
+							</c:if>
+							<c:if test="${qtotCnt == 0 }">
+								<tr>
+									<td colspan=4>작성된 문의가 없습니다.</td>
+								</tr>
+							</c:if>
+						</table>
+						<br />
+
+						<div style="text-align: center;">
+							<c:if test="${qstartPage > qblockSize }">
+								<a
+									href='productDetail.do?qpageNum=${qstartPage-qblockSize}&pid=${pid }#qnalocation'>[이전]</a>
+							</c:if>
+							<c:forEach var="i" begin="${qstartPage}" end="${qendPage}">
+								<a href='productDetail.do?qpageNum=${i}&pid=${pid }#qnalocation'>[${i}]</a>
+							</c:forEach>
+							<c:if test="${qendPage < qpageCnt }">
+								<a
+									href='productDetail.do?qpageNum=${qstartPage+qblockSize}&pid=${pid }#qnalocation'>[다음]</a>
+							</c:if>
+						</div>
+					</div>
+
+
+					<a
+						style="display: scroll; position: fixed; bottom: 10px; right: 200px;"
+						href="#" title=”맨위로"> <img src="./img/top.png" width="50"
+						height="40">
+					</a> <br /> <br />
+
+					<div class="recom">
+						<img src="./img/bulb.gif" width="50">이 카테고리의 인기 상품
+					</div>
+					<br /> <br />
+					<table class="recomproduct" id="rptable">
+						<tr height="180px">
+
+							<c:forEach var="best4" items="${BEST4PRODUCTS }">
+
+								<td width="180px"><a
+									href='productDetail.do?pid=${best4.pid }'><img
+										src="${best4.pthumbimg }" width="150" height="150"></img></td>
+								<td width="50px"></td>
+							</c:forEach>
+
+						</tr>
+						<tr height="40px">
+							<c:forEach var="best4" items="${BEST4PRODUCTS }">
+								<td><font color="gray">${best4.pname }</font></td>
+								<td></td>
+							</c:forEach>
+
+						</tr>
+
+					</table>
 				</div>
-				<div class="qnaboard">
-					<br /> <br /> 문의게시판 <br /> <br /> 문의 영역입니다. <br /> <br />
-				</div>
-
-
-				<a
-					style="display: scroll; position: fixed; bottom: 10px; right: 200px;"
-					href="#" title=”맨위로"><img src="./img/top.png" width="50"
-					height="40"></a> <br /> <br />
-
-				<div class="recom">
-					<img src="./img/bulb.gif" width="50">이 카테고리의 인기 상품
-				</div>
-				<br /> <br />
-				<table class="recomproduct" id="rptable">
-					<tr height="180px">
-
-						<c:forEach var="best4" items="${BEST4PRODUCTS }">
-
-							<td width="180px"><a
-								href='productDetail.do?pid=${best4.pid }'><img
-									src="${best4.pthumbimg }" width="150" height="150"></img></td>
-							<td width="50px"></td>
-						</c:forEach>
-
-					</tr>
-					<tr height="40px">
-						<c:forEach var="best4" items="${BEST4PRODUCTS }">
-							<td><font color="gray">${best4.pname }</font></td>
-							<td></td>
-						</c:forEach>
-
-					</tr>
-
-				</table>
 				<br /> <br />
 
 				<div class="main"
@@ -281,7 +443,6 @@
 					</div>
 					<div style="width: 10px;"></div>
 				</div>
-
 			</div>
 		</div>
 	</div>

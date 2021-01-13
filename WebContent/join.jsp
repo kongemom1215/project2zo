@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
 <!-- autoload=false 파라미터를 이용하여 자동으로 로딩되는것을 막는다 -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
+<script type="text/javascript">
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -57,9 +57,68 @@
             }
         }).open();
     }
+    
 </script>
 
+<%
+	String context = request.getContextPath();
+%>
 
+		<script type="text/javascript" src="./js/jquery.js"></script>
+				<script type="text/javascript">
+				
+				$(function() {
+					
+					$('#semail').change(function() {
+						var semail = $('#semail').val();
+						$.ajax({
+							url:"<%=context%>/ajaxSemail.do",  
+							data:{semail : semail},
+							dataType:'text',
+							success:function(msg){
+								$('#msg').html(msg);
+							}
+						})
+					})
+				})
+				
+				<%-- $(function() {
+					$('#chk').click(function() {
+						alert("야");
+					var semail = $('#semail').val();
+					$.ajax({
+						url:"<%=context%>/ajaxSemail.do",  
+						data:{semail : semail},
+						dataType:'text',
+						success:function(msg){
+							$('#msg').html(msg);     /* span  id Tag */
+						}
+					});
+					}
+				}) --%>
+				
+				/* $(function() {
+					$('#chk').click(function() {
+						var semail = $('#semail').val();
+						var sendData = "semail=" + semail
+						$.post('confirmId.jsp', sendData, function(msg) {
+							$('#msg').html(msg);
+						});
+					});
+				}); */
+				
+				$(document).ready(function(){
+				    $('.main2 i').on('click',function(){
+				        $('input').toggleClass('active');
+				        if($('input').hasClass('active')){
+				            $(this).prev('input').attr('type',"text");
+				        }else{
+				            $(this).prev('input').attr('type','password');
+				        }
+				    });
+				});
+				
+				</script>
 
 <style type="text/css">
 	h1{font-weight: 900;}
@@ -99,9 +158,9 @@
 
 <c:choose>
 <c:when test="${session_stype eq '1'}">
-<a class="top_button">위시리스트</a>
+<a href="jjimForm.do" class="top_button">위시리스트</a>
 <a href="cart.do" class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
+<a href="mypageOrder.do" class="top_button">주문/배송</a>
 <a href="mypage.do" class="top_button">마이페이지</a>
 <a href="main.do?logout=logout" class="top_button">로그아웃</a>
 <a class="top_button">${session_sname } 님</a>
@@ -112,13 +171,14 @@
 <a href="adminPage.do" class="top_button">관리페이지</a>
 </c:when>
 <c:otherwise>
-<a class="top_button">위시리스트</a>
-<a class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
-<a class="top_button">마이페이지</a>
-<a href="login.do" class="top_button">로그인/회원가입</a>
+<a href="login.do?url=jjimForm.do" class="top_button">위시리스트</a>
+<a href="login.do?url=cart.do" class="top_button">장바구니</a>
+<a href="login.do?url=mypageOrder.do" class="top_button">주문/배송</a>
+<a href="login.do?url=mypage.do" class="top_button">마이페이지</a>
+<a href="login.do?url=main.do" class="top_button">로그인/회원가입</a>
 </c:otherwise>
 </c:choose>
+
 </div>
 </div>
 <hr style="width: 900px; border-bottom: 0xp;">
@@ -148,7 +208,7 @@
 			 <tr><td>주소 </td><td>   <input  type="text" name="saddress" class="saddress" required="required"></td></tr>
 			 <tr><td>우편번호 </td><td>   <input  type="number" name="spost" class="spost"
 			 title="숫자만 입력" placeholder="숫자만 입력가능합니다."
-			 required="required"></td></tr>
+			 required="required"></td></tr> 
 			 <tr><td>마케팅동의</td><td>   Y<input  type="radio" name="sagree" value="y">
 			N<input  type="radio" name="sagree" value="n" > </td></tr>
 		</table>
@@ -157,14 +217,23 @@
  </div> -->
  
  
-   <div id="join">
+   <div class="main" style="text-align: center;">
+   <c:if test="${pwsdsame eq 'no' }">
+   	<script type="text/javascript">
+   	alert("비밀번호가 동일하지 않습니다");
+   	</script>
+   </c:if>
 <h1>SIGN UP</h1>
  <form action="joinPro.do">
+
 		<table>
-			<tr><td>이메일 </td><td><input   type="email" name="semail"  class="semail" required="required" placeholder="아이디로 사용할 이메일 주소를 입력해주세요."></td></tr>
+			<tr><td>이메일</td> <td><input type="email" name="semail" id="semail" class="semail" required="required" placeholder="아이디로 사용할 이메일 주소를 입력해주세요."></td></tr>
+			<tr><td></td><td style="background-color: white;"></td></tr>
 	<!-- 		<td><input type="button" value="중복확인" ></td> -->
-	
-			<tr><td>비밀번호 </td><td>   <input  type="password" name="spwd" class="spwd" required="required" placeholder="비밀번호를 입력해주세요."></td></tr>
+			
+			<tr><td>비밀번호 </td><td>  <div class="main2"><input  type="password" id="spwd" name="spwd" class="spwd" required="required" placeholder="비밀번호를 입력해주세요."><i>확인</i></div></td></tr>
+			<tr><td>비밀번호 </td><td>  <div class="main2"><input  type="password" id="spwd2" name="spwd2" class="spwd" required="required" placeholder="비밀번호를 입력해주세요."><i>확인</i></div></td></tr>
+			
 			<tr><td>이름 </td><td>   <input  type="text" name="sname" class="sname" required="required" placeholder="한글 15자까지 가능합니다." maxlength="15"></td></tr>
 			<tr><td>연락처 </td><td>   <input  type="text" name="scontact" class="scontact" required="required"
 			pattern="\d{2,3}-\d{3,4}-\d{4}"
@@ -188,6 +257,24 @@
 		</table>
 		<input type="submit" value="회원가입" class="button">
   </form><p>
+ <div style="width: 300px;  position: relative; bottom: 565px; left:655px;  text-align: left;"> <span id="msg" style="color: red; font-size: 18px;"></span></div>
  </div>
+
+<div style="margin-top: 200px;">
+<div class="main" style="height: 50px; background-color: #767171; display: table;">
+<div style="width: 10px;">
+</div>
+<div style="display: table-cell; vertical-align: middle; margin-left: 5px;">
+대표 : 임주혜 / 사업자등록번호 : 123-45-67899
+</div>
+<div style="display: table-cell; vertical-align: middle; text-align: right;">
+<a>이용약관</a> /
+<a>개인정보처리방침</a> /
+<a>입점문의</a>
+</div>
+<div style="width: 10px;">
+</div>
+</div>
+</div>
 </body>
 </html>

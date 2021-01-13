@@ -306,7 +306,7 @@ public class ShoppingUserDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql="insert into ShoppingUser values(?,1,?,?,?,?,sysdate,?,?,?,?,?)";
-		String sql2="select max(sid)+1 from ShoppingUser";
+		String sql2="select nvl(max(sid)+1,0) from ShoppingUser";
 		int max=9999;
 		
 		try {

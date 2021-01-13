@@ -64,7 +64,17 @@ ul,li{list-style:none;}
 }
 
 .search_box1 {
-	background-color: #0881C3;
+	background-image: url('../img/search_bg_img_1.png');
+	display: table;
+	width: 900px;
+	height: 70px;
+	color: white;
+	font-size: 25px;
+	text-shadow: 0 0 5px black;
+}
+
+.search_box1_1 {
+	background-image: url('../img/search_bg_img_2.png');
 	display: table;
 	width: 900px;
 	height: 70px;

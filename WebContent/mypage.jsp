@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,7 +90,7 @@
 		<span>쿠폰</span>
 		<span style="float:right;">></span>
 		</a><p>
-		<a href="mypageWrite.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+		<a href="mypageReview.do" style="text-decoration: none; color: black;">
 		<span>리뷰/문의</span>
 		<span style="float:right;">></span>
 		</a><p>
@@ -108,7 +109,9 @@
 	<div class="myorderviewdetail">
 	<c:forEach var="orderjoin" items="${list_main}">
 		<a href="mypageOrder.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
-		<span >${orderjoin.odate }</span>	
+		<span ><fmt:formatDate pattern="yyyyMMdd"
+                                    value="${orderjoin.odate }" /> - <fmt:formatNumber
+                                    value="${orderjoin.oid }" pattern="00000" /></span>	
 		<span style="float:right; color:blue; font-weight:bold;"> ${orderjoin.oid }</span>
 		<span style="float:right;">주문번호 : </span>
 		</a>
@@ -143,12 +146,15 @@
 				 	<c:when test="${ostate eq '4' }">
 				 		배송완료
 				 		<input type="button"  value=" 구매확정 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
-						onclick="location.href='reviewForm.do?sid=${shoppinguser.sid}&pid=${orderjoin.pid }'" >
+						onclick="location.href='mypageOrderhwakjeong.do?oid=${orderjoin.oid }'" >
 				 	</c:when>
 				 	<c:when test="${ostate eq '5' }">
 				 		구매확정
 				 		<input type="button"  value=" 리뷰쓰기 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
-						onclick="location.href='reviewForm.do?sid=${shoppinguser.sid}&pid=${orderjoin.pid }'" >
+						onclick="location.href='reviewWrite.do?oid=${orderjoin.oid }'" >
+				 	</c:when>
+				 	<c:when test="${ostate eq '6' }">
+				 		구매확정
 				 	</c:when>
 				 	<c:otherwise></c:otherwise>
 				</c:choose>

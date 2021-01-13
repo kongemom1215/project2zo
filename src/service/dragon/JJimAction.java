@@ -36,7 +36,6 @@ public class JJimAction implements CommandProcess {
 			System.out.println("오류 : "+ e.getMessage());
 		}
 		
-		String before_address = request.getHeader("referer");
 //		System.out.println(before_address);
 		
 		} catch (Exception e) {
@@ -46,7 +45,7 @@ public class JJimAction implements CommandProcess {
 //		redirect:productDetail.do
         
 		 request.setAttribute("pid",pid);
-		    return "forward:productDetail.do";
+		    return "jjimPro.jsp";
 
 	}
 

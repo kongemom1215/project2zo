@@ -48,7 +48,7 @@ public class MainAction implements CommandProcess  {
 			request.setAttribute("session_stype", session_stype);
 			
 		} catch (Exception e) {
-			System.out.println("오류 : "+ e.getMessage());
+			System.out.println("오류 1 : "+ e.getMessage());
 		}
 		
 		ProductDao productdao = ProductDao.getInstance();
@@ -57,7 +57,7 @@ public class MainAction implements CommandProcess  {
 			main_img = productdao.main_img();
 			request.setAttribute("main_img", main_img);
 		} catch (SQLException e) {
-			System.out.println("오류 : "+ e.getMessage());
+			System.out.println("오류 2 : "+ e.getMessage());
 		}
 		
 		try {
@@ -102,12 +102,13 @@ public class MainAction implements CommandProcess  {
 			String calendar_3_7 = format.format(time);
 			String calendar_3_7_format2 = format2.format(time);
 			String covid_calendar_3_7 = shoppinguserdao.covid_19_live(calendar_3_7, calendar_3_7);
-
+			
 			time = new Date(start_calendar.getTimeInMillis() + ((now_calendar.getTimeInMillis() - start_calendar.getTimeInMillis()))/7*4);
 			String calendar_4_7 = format.format(time);
 			String calendar_4_7_format2 = format2.format(time);
+			if (calendar_4_7.equals("20200817")) { calendar_4_7 = "20200816"; calendar_4_7_format2 = "2020-08-16"; }
 			String covid_calendar_4_7 = shoppinguserdao.covid_19_live(calendar_4_7, calendar_4_7);
-
+			
 			time = new Date(start_calendar.getTimeInMillis() + ((now_calendar.getTimeInMillis() - start_calendar.getTimeInMillis()))/7*5);
 			String calendar_5_7 = format.format(time);
 			String calendar_5_7_format2 = format2.format(time);
@@ -170,7 +171,7 @@ public class MainAction implements CommandProcess  {
 			}
 
 			//--
-
+			
 				start = "<decideCnt>"; // 총 확진자
 				end = "</decideCnt>";
 
@@ -178,7 +179,7 @@ public class MainAction implements CommandProcess  {
 				target_end = covid_19_live.indexOf(end); 
 				result = covid_19_live.substring(target_start,target_end);
 				String confirmed = result;
-//				System.out.println("확진환자 : " + confirmed); 
+				System.out.println("확진환자 : " + confirmed); 
 
 				target_start = covid_19_date_first_time.indexOf(start) + start.length() ; 
 				target_end = covid_19_date_first_time.indexOf(end); 
@@ -199,7 +200,7 @@ public class MainAction implements CommandProcess  {
 				target_end = covid_calendar_3_7.indexOf(end); 
 				result = covid_calendar_3_7.substring(target_start,target_end);
 				String confirmed_covid_calendar_3_7 = result;
-
+				
 				target_start = covid_calendar_4_7.indexOf(start) + start.length() ; 
 				target_end = covid_calendar_4_7.indexOf(end); 
 				result = covid_calendar_4_7.substring(target_start,target_end);
@@ -349,7 +350,7 @@ public class MainAction implements CommandProcess  {
 				request.setAttribute("day", day);
 				
 			} catch (Exception e) {
-				System.out.println("오류 : "+ e.getMessage());
+				System.out.println("오류 3 : "+ e.getMessage());
 			}
 		
 		return "main.jsp";

@@ -31,11 +31,12 @@ public class MypageDeleteAction implements CommandProcess {
 	        System.out.println("MypageDeleteAction sid->"+sid);
 	        System.out.println("MypageDeleteAction spwd->"+spwd);
 			int result = su.delete(sid, spwd);
-			if (result > 0) {
-				session.invalidate();
-			}
 	        System.out.println("MypageDeleteAction result->"+result);
 			
+	        if (result > 0) {
+	            session.invalidate();
+	         }
+	        
 			request.setAttribute("sid", sid);
 			request.setAttribute("spwd", spwd);
 			request.setAttribute("result", result);

@@ -1,13 +1,19 @@
 package dao.red;
 
-import java.util.Date;
+
 
 public class OrderDetail {
 	private int oid;
 	private int pid;
 	private int dqty;
-	private Date odate;
+	private String poption;
 	
+	public String getPoption() {
+		return poption;
+	}
+	public void setPoption(String poption) {
+		this.poption = poption;
+	}
 	public int getOid() {
 		return oid;
 	}
@@ -26,12 +32,7 @@ public class OrderDetail {
 	public void setDqty(int dqty) {
 		this.dqty = dqty;
 	}
-	public Date getOdate() {
-		return odate;
-	}
-	public void setOdate(Date odate) {
-		this.odate = odate;
-	}
+	
 	
 	
 }
