@@ -215,8 +215,10 @@ var chart = bb.generate({
 </div>
 </div>
 
+<div style="position:absolute; bottom:0; left: 0; width: 100%; text-align: center;">
+123
+</div>
 
-<div style="margin-top: 200px;">
 <div class="main" style="height: 50px; background-color: #767171; display: table;">
 <div style="width: 10px;">
 </div>
@@ -229,7 +231,6 @@ var chart = bb.generate({
 <a>입점문의</a>
 </div>
 <div style="width: 10px;">
-</div>
 </div>
 </div>
 </body>

@@ -240,7 +240,7 @@
 				<!-- 쪽번호 구역 -->
 				<div class="pages">
 					<c:if test="${startPage > blockSize }">
-						<a href='shoppingMain.do?pageNum=${startPage-blockSize }'>[이전]</a>
+						<a href='shoppingMain.do?pageNum=${startPage-blockSize }&display_select=${display_select }&cate=${cate}'>[이전]</a>
 
 					</c:if>
 					<c:forEach var="i" begin="${startPage }" end="${endPage }">
@@ -249,7 +249,7 @@
 						</a>
 					</c:forEach>
 					<c:if test="${endPage < pageCnt }">
-						<a href='shoppingMain.do?pageNum=${startPage+blockSize }'>[다음]</a>
+						<a href='shoppingMain.do?pageNum=${startPage+blockSize }&display_select=${display_select }&cate=${cate}'>[다음]</a>
 					</c:if>
 				</div>
 				<a

@@ -147,7 +147,7 @@ a:link{
 								<td>썸네일</td>
 								<td><a href="${product.pthumbimg }" class="download" onclick="window.open(this.href, '_blank'); return false;">조회</a><a class="download" href="${product.pthumbimg }" style="width:70px;" download>다운로드</a></td>
 								<td>상세이미지</td>
-								<td><input type="button" value="페이지로확인" onclick="location.href=productDetail.do?pid=${product.pid}" class="download" style="width:90px; color:black;"></td>
+								<td><input type="button" value="페이지로확인" onclick="location.href='productDetail.do?pid=${product.pid}'" class="download" style="width:90px; color:black;"></td>
 							</tr>
 							<tr>
 								<td>옵션</td>

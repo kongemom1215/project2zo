@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.half.OrderDao;
 import dao.half.Product;
 import dao.half.ProductDao;
 import dao.half.Qna;
@@ -28,6 +29,7 @@ public class ProductDetailAction implements CommandProcess {
 		Product prdt = new Product();
 
 		try {
+			HttpSession session = request.getSession(true);
 			// 보고 싶은 제품의 제품번호 읽어옴
 			int pid = Integer.parseInt(request.getParameter("pid"));
 			System.out.println("pid test" + pid);
@@ -45,6 +47,45 @@ public class ProductDetailAction implements CommandProcess {
 			List<Product> best4products = pdao.getbest4products(cate);
 			request.setAttribute("BEST4PRODUCTS", best4products);
 			System.out.println("BEST4 :" + best4products.size());
+
+			// 구매내역 체크
+			OrderDao od = OrderDao.getInstance();
+			try {
+				session.setAttribute("session_sid", session.getAttribute("session_sid"));
+				String sssid = String.valueOf(session.getAttribute("session_sid"));
+				System.out.println("세션 회원번호 : " + sssid);
+				session.setAttribute("session_sname", session.getAttribute("session_sname"));
+				session.setAttribute("session_stype", session.getAttribute("session_stype"));
+				session.setAttribute("session_semail", session.getAttribute("session_semail"));
+				int buycheck = 1;
+				
+				try {
+					
+					System.out.println("String sssid : " + sssid);
+					int sid = Integer.parseInt(sssid);
+					System.out.println("로그인 / half productdetailaction sid 값 : " + sid);
+					buycheck = od.buycheck(sid, pid);
+					// 0이면 구매이력있음, -1이면 구매이력없음
+					System.out.println("half productdetailaction buycheck 값 : " + buycheck);
+					
+					if (buycheck == 0) {
+						int writecheck = 0;
+						writecheck = od.writecheck(sid, pid);
+						buycheck = writecheck;
+						System.out.println("half productdetailaction writecheck 값 : " + writecheck);
+					}
+
+				} catch (Exception e) {
+					System.out.println("로그인 상태가 아님");
+					buycheck = 1;
+				}
+				
+				System.out.println("최종 buycheck 값 : " + buycheck);
+				request.setAttribute("buycheck", buycheck);
+
+			} catch (Exception e) {
+				System.out.println("half orderdao error : " + e.getMessage());
+			}
 
 			// 보고 싶은 제품 관련 문의글을 읽어옴
 
@@ -79,14 +120,14 @@ public class ProductDetailAction implements CommandProcess {
 				request.setAttribute("qstartPage", qstartPage);
 				request.setAttribute("qendPage", qendPage);
 
-				System.out.println("qstartNum-->" + qstartNum); // /och16/list.do
-				System.out.println("qtotCnt-->" + qtotCnt); // /och16/list.do
-				System.out.println("qcurrentPage-->" + qcurrentPage); // /och16/list.do
-				System.out.println("qblockSize-->" + qblockSize); // /och16/list.do
-				System.out.println("qpageSize-->" + qpageSize); // /och16/list.do
-				System.out.println("qpageCnt-->" + qpageCnt); // /och16/list.do
-				System.out.println("qstartPage-->" + qstartPage); // /och16/list.do
-				System.out.println("qendPage-->" + qendPage); // /och16/list.do
+				System.out.println("qstartNum-->" + qstartNum);
+				System.out.println("qtotCnt-->" + qtotCnt);
+				System.out.println("qcurrentPage-->" + qcurrentPage);
+				System.out.println("qblockSize-->" + qblockSize);
+				System.out.println("qpageSize-->" + qpageSize);
+				System.out.println("qpageCnt-->" + qpageCnt);
+				System.out.println("qstartPage-->" + qstartPage);
+				System.out.println("qendPage-->" + qendPage);
 
 			} catch (Exception e) {
 				System.out.println("QnaDao 에러 발생 : " + e.getMessage());
@@ -129,7 +170,6 @@ public class ProductDetailAction implements CommandProcess {
 				System.out.println("ReviewDao 에러 발생 : " + e.getMessage());
 			}
 
-			HttpSession session = request.getSession(true);
 			String new_session_pid = (String) session.getAttribute("new_session_pid");
 			new_session_pid = pid + "," + new_session_pid;
 			System.out.println("클릭했던 제품 번호(최신순): " + new_session_pid);
@@ -142,9 +182,9 @@ public class ProductDetailAction implements CommandProcess {
 					parraylist.add(pidlist);
 			}
 
-			System.out.println(parraylist.get(0));
-			System.out.println(parraylist.get(1));
-			System.out.println(parraylist.get(2));
+			System.out.println("첫번째칸 : " + parraylist.get(0));
+			System.out.println("두번째칸 : " + parraylist.get(1));
+			System.out.println("세번째칸 : " + parraylist.get(2));
 
 			Product nprdt = new Product();
 			nprdt = pdao.getDetailInfo(Integer.parseInt(parraylist.get(0)));

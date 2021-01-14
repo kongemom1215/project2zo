@@ -99,6 +99,9 @@ public class QnaDao {
 				qna.setPid(pid);
 				qna.setQcontent(rs.getString("qcontent"));
 				qna.setQdate(rs.getDate("qdate"));
+				qna.setQfile(rs.getString("qfile"));
+				qna.setQcmt(rs.getString("qcmt"));
+				
 				qlist.add(qna);
 			}
 

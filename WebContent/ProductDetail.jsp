@@ -99,27 +99,27 @@
 			<a href="main.do"><img src="./img/Logo.png"></a>
 
 			<c:choose>
-<c:when test="${session_stype eq '1'}">
-<a href="jjimForm.do" class="top_button">위시리스트</a>
-<a href="cart.do" class="top_button">장바구니</a>
-<a href="mypageOrder.do" class="top_button">주문/배송</a>
-<a href="mypage.do" class="top_button">마이페이지</a>
-<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
-</c:when>
-<c:when test="${session_stype eq '0'}">
-<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
-<a href="adminPage.do" class="top_button">관리페이지</a>
-</c:when>
-<c:otherwise>
-<a href="login.do?url=jjimForm.do" class="top_button">위시리스트</a>
-<a href="login.do?url=cart.do" class="top_button">장바구니</a>
-<a href="login.do?url=mypageOrder.do" class="top_button">주문/배송</a>
-<a href="login.do?url=mypage.do" class="top_button">마이페이지</a>
-<a href="login.do?url=main.do" class="top_button">로그인/회원가입</a>
-</c:otherwise>
-</c:choose>
+				<c:when test="${session_stype eq '1'}">
+					<a href="jjimForm.do" class="top_button">위시리스트</a>
+					<a href="cart.do" class="top_button">장바구니</a>
+					<a href="mypageOrder.do" class="top_button">주문/배송</a>
+					<a href="mypage.do" class="top_button">마이페이지</a>
+					<a href="main.do?logout=logout" class="top_button">로그아웃</a>
+					<a class="top_button">${session_sname } 님</a>
+				</c:when>
+				<c:when test="${session_stype eq '0'}">
+					<a href="main.do?logout=logout" class="top_button">로그아웃</a>
+					<a class="top_button">${session_sname } 님</a>
+					<a href="adminPage.do" class="top_button">관리페이지</a>
+				</c:when>
+				<c:otherwise>
+					<a href="login.do?url=jjimForm.do" class="top_button">위시리스트</a>
+					<a href="login.do?url=cart.do" class="top_button">장바구니</a>
+					<a href="login.do?url=mypageOrder.do" class="top_button">주문/배송</a>
+					<a href="login.do?url=mypage.do" class="top_button">마이페이지</a>
+					<a href="login.do?url=main.do" class="top_button">로그인/회원가입</a>
+				</c:otherwise>
+			</c:choose>
 
 		</div>
 	</div>
@@ -254,9 +254,11 @@
 					<!-- 홍주님과 협업 -->
 					<div class="purchase">
 						<input type="submit" value="바로구매" class="pbuttons"
-								formaction="goOrder.do?pid=${pid}&option=${option}&howmany=${howmany}"></input>  <input type="submit" value="장바구니"
-								class="pbuttons" formaction="cartAdd.do?pid=${pid}&option=${option}&howmany=${howmany}&sum=${sum}"></input> 
-							<input type="submit" value="찜" class="pbuttons" formaction="jjim.do"></input>
+							formaction="goOrder.do?pid=${pid}&option=${option}&howmany=${howmany}"></input>
+						<input type="submit" value="장바구니" class="pbuttons"
+							formaction="cartAdd.do?pid=${pid}&option=${option}&howmany=${howmany}&sum=${sum}"></input>
+						<input type="submit" value="찜" class="pbuttons"
+							formaction="jjim.do"></input>
 					</div>
 				</form>
 				<!-- purchase close -->
@@ -274,6 +276,25 @@
 				</div>
 
 
+				<script>
+					function reviewchk() {
+						let buycheck = ${buycheck};
+
+						if (buycheck < 0) {
+							alert('구매이력이 없습니다');
+							return false;
+						} else if (buycheck == 1) {
+							alert('구매이력 확인을 위해 로그인하세요.');
+							return false;
+						} else if (buycheck == 7) {
+							alert('이미 리뷰를 작성하셨습니다');
+							return false;
+						} else if (buycheck == 0) {
+							return true;
+						}
+					}
+				</script>
+
 
 				<div class="boardzone">
 
@@ -288,7 +309,7 @@
 								<td></td>
 								<td></td>
 								<td>
-									<form>
+									<form onsubmit="return reviewchk();">
 										<input type="submit" value="리뷰글 쓰기" class="pbuttons"></input>
 									</form> <br />
 								</td>
@@ -309,7 +330,7 @@
 									</tr>
 									<tr height="40px">
 										<td></td>
-										<td colspan=3 align=left><span
+										<td style="text-align: left;" colspan=3 align=left><span
 											style="font-size: x-small; color: gray;">
 												${reviews.rcontent }</span></td>
 									</tr>
@@ -366,10 +387,28 @@
 								<c:forEach var="qnas" items="${qlist }">
 									<tr height="25px">
 										<td>${qstartNum }</td>
-										<td><a href=''>문의 드립니다</a></td>
+										<td style="text-align: left;"><a href=''>${qnas.qcontent }</a></td>
 										<td>${qnas.sname }</td>
 										<td>${qnas.qdate }</td>
 									</tr>
+									<c:if test="${qnas.qfile ne null}">
+										<tr>
+											<td></td>
+											<td colspan="2"><img src="${qnas.qfile }" height="300">
+											</td>
+											<td></td>
+										</tr>
+									</c:if>
+									<c:if test="${qnas.qcmt ne null}">
+										<tr>
+											<td></td>
+											<td style="text-align: left;"><span
+												style="font-size: x-small; color: #14D3FF;">${qnas.qcmt }</span>
+											</td>
+											<td>BYE-RUS</td>
+											<td></td>
+										</tr>
+									</c:if>
 									<c:set var="qstartNum" value="${qstartNum - 1 }" />
 								</c:forEach>
 							</c:if>
@@ -378,6 +417,7 @@
 									<td colspan=4>작성된 문의가 없습니다.</td>
 								</tr>
 							</c:if>
+
 						</table>
 						<br />
 
