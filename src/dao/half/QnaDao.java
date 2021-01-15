@@ -38,23 +38,21 @@ public class QnaDao {
 		return conn;
 	}
 
-	
-	
 	public String getWritername(int sid) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sname = null;
-		String sql = "select sname from (select q.sid, s.sname from qna q, shoppinguser s where q.sid = s.sid )"
-				+ "where sid = ?";
+		String sql = "select rownum, a.* from (select q.sid, s.sname from qna q, shoppinguser s where q.sid = s.sid ) a where rownum <= 1 and sid = ?";
 
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, sid);
 			rs = pstmt.executeQuery();
-			if (rs.next())
-			sname = rs.getString(1);
+			if (rs.next()) {
+				sname = rs.getString(3);
+			}
 		} catch (Exception e) {
 			System.out.println("qna sname 가져오기 에러 : " + e.getMessage());
 		} finally {
@@ -68,20 +66,20 @@ public class QnaDao {
 		return sname;
 
 	}
-	
-	
-	
+
 	public List<Qna> qlist(int startRow, int endRow, int pid) throws SQLException {
 		List<Qna> qlist = new ArrayList<Qna>();
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sname = null;
 
-		String sql = "select * from (select rownum rn ,a.* from "
-				+ " (select * from qna where pid = ? order by qdate desc) a ) " + " where rn between ? and ?";
+		System.out.println("startrow : " + startRow);
+		System.out.println("endrow : " + endRow);
+		System.out.println("pid : " + pid);
 
+		String sql = "select * from (select rownum rn ,a.* from (select q.*, s.sname from qna q, shoppinguser s where q.pid = ? and q.sid = s.sid order by qdate desc) a ) where rn between ? and ?";
+		System.out.println("--------------------------------------------------------------");
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -90,18 +88,25 @@ public class QnaDao {
 			pstmt.setInt(3, endRow);
 			rs = pstmt.executeQuery();
 
+			/*
+			 * if (rs.next()) { System.out.println("o"); } else { System.out.println("x"); }
+			 */
+			
 			while (rs.next()) {
+				System.out.println("rs가 있는가?");
 				Qna qna = new Qna();
 				qna.setQid(rs.getInt("qid"));
 				qna.setSid(rs.getInt("sid"));
-				qna.setSname(getWritername(rs.getInt("sid")));
 				qna.setQctg(rs.getString("qctg"));
 				qna.setPid(pid);
 				qna.setQcontent(rs.getString("qcontent"));
 				qna.setQdate(rs.getDate("qdate"));
 				qna.setQfile(rs.getString("qfile"));
 				qna.setQcmt(rs.getString("qcmt"));
-				
+				qna.setSname(rs.getString("sname"));
+				System.out.println("문의남긴회원번호 : " + rs.getInt("sid"));
+				System.out.println("문의남긴회원이름 : " + rs.getString("sname"));
+
 				qlist.add(qna);
 			}
 
@@ -148,7 +153,5 @@ public class QnaDao {
 		return tot;
 
 	}
-	
-	
 
 }

@@ -26,16 +26,14 @@ public class BoardAction implements CommandProcess {
 			throws ServletException, IOException {
 		
 		System.out.println("-- service.dragon.BoardAction --");
+		 request.setCharacterEncoding("utf-8");
+		 response.setContentType("text/html;charset=UTF-8");
 		
-		try {
 		HttpSession session = request.getSession(true);
 		session.setAttribute("session_sid", session.getAttribute("session_sid"));
 		session.setAttribute("session_sname", session.getAttribute("session_sname"));
 		session.setAttribute("session_stype", session.getAttribute("session_stype"));
 		session.setAttribute("session_semail", session.getAttribute("session_semail"));
-		} catch (Exception e) {
-			System.out.println("오류 : "+ e.getMessage());
-		}
 		
 		String pageNum = "";	
 		int currentPage = 0;
@@ -68,6 +66,10 @@ public class BoardAction implements CommandProcess {
 		}
 		
 		try {
+		if (type == null || type == "") {
+			type="notice";
+		}
+			
 		if (type.equals("notice")) {
 			try {
 				try {
@@ -175,14 +177,36 @@ public class BoardAction implements CommandProcess {
 				
 				request.setAttribute("list",  list_qna);
 				
-				request.setAttribute("sid", request.getParameter("sid"));
-				request.setAttribute("qid", request.getParameter("qid"));
-				request.setAttribute("sname", request.getParameter("sname"));
-				request.setAttribute("qdate", request.getParameter("qdate"));
-				request.setAttribute("qctg", request.getParameter("qctg"));
-				request.setAttribute("qcontent", request.getParameter("qcontent"));
-				request.setAttribute("qcmt", request.getParameter("qcmt"));
-				request.setAttribute("qcmtdate", request.getParameter("qcmtdate"));
+				int qid_num = Integer.parseInt(request.getParameter("qid_num"));
+				
+				if (request.getParameter("qid_num") != null) {
+					Board board = new Board();
+					board = boarddao.select_qna(qid_num);
+					request.setAttribute("sid", session.getAttribute("session_sid"));
+					System.out.println(session.getAttribute("session_sid"));
+					request.setAttribute("qid", qid_num);
+					System.out.println(board.getQid());
+					request.setAttribute("sname", board.getSname());
+					request.setAttribute("qdate", board.getQdate());
+					request.setAttribute("qctg", board.getQctg());
+					request.setAttribute("qcontent", board.getQcontent());
+					request.setAttribute("qcmt", board.getQcmt());
+					request.setAttribute("qcmtdate", board.getQcmtdate());
+					request.setAttribute("qfile", board.getQfile());
+					
+				} else {
+					request.setAttribute("sid", request.getParameter("sid"));
+					request.setAttribute("qid", request.getParameter("qid"));
+					request.setAttribute("sname", request.getParameter("sname"));
+					request.setAttribute("qdate", request.getParameter("qdate"));
+					request.setAttribute("qctg", request.getParameter("qctg"));
+					request.setAttribute("qcontent", request.getParameter("qcontent"));
+					request.setAttribute("qcmt", request.getParameter("qcmt"));
+					request.setAttribute("qcmtdate", request.getParameter("qcmtdate"));
+					request.setAttribute("qfile", request.getParameter("qfile"));
+				}
+				
+				
 			} catch (Exception e) {
 				
 			}

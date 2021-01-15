@@ -13,6 +13,7 @@ import dao.red.CouponDao;
 import dao.red.Order;
 import dao.red.OrderDetailDao;
 import dao.red.Order_tbDao;
+import dao.red.ProductDao;
 import service.CommandProcess;
 
 public class GoOrderResultAction implements CommandProcess {
@@ -20,7 +21,7 @@ public class GoOrderResultAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("결제창에서 입력한 내용 주문DB에 insert");
+		System.out.println("바로구매->결제창에서 입력한 내용 주문DB에 insert");
 		System.out.println("GoOrderResultAction Start!!");
 		
 		try {
@@ -85,16 +86,21 @@ public class GoOrderResultAction implements CommandProcess {
 				order.setOdeliverey(sumPost);//택배비
 				if(backNum == null || bank.equals("해당사항없음")) {
 					//신용카드 결제
-					order.setOpay(2);
-					order.setOstate(0);
+					order.setOpay(2); //신용카드결제
+					order.setOstate(2); //결제완료
 				}else if(credit.equals("해당사항없음") || creditNum == null || creditPass == null  ) {
 					//무통장 결제
-					order.setOpay(1);
-					order.setOstate(1);
+					order.setOpay(1); //무통장결제
+					order.setOstate(1); //결제대기
 				}
+				
 			
 			//Order DB에 넣기
 			int result = orderTb.insert(order);
+			
+			//상품재고관리
+			ProductDao pd = ProductDao.getInstance();
+			int reduce = pd.reduce(pid);
 			
 			//사용한 쿠폰에 사용날짜 업데이트
 			CouponDao cu = CouponDao.getInstance();
@@ -116,14 +122,14 @@ public class GoOrderResultAction implements CommandProcess {
 			request.setAttribute("result",result );
 			request.setAttribute("result2",result2 );
 			request.setAttribute("order_selct",order_selct );
-//			request.setAttribute("sum", sum);
+			request.setAttribute("reduce", reduce);
 			request.setAttribute("order", order);
 			
 			System.out.println("-----------------");
 			System.out.println("result=>"+result);
 			System.out.println("result2=>"+result2);
 			System.out.println("order_selct=>"+order_selct);
-//			System.out.println("sum=>"+sum);
+			System.out.println("reduce=>"+reduce);
 			
 			
 			

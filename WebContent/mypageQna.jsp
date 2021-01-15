@@ -89,19 +89,15 @@
 			<table>
 					<tr>
 						<th>문의카테고리</th>
-						<th>주문번호</th>
 						<th>상품명</th>
 						<th>문의내용</th>
 						<th>작성일</th>
 					</tr>
 					<c:forEach var="qna" items="${list }">						
 						<tr>					
-							<td>${qna.getQctg() }</td>			
-							<td><fmt:formatDate pattern="yyyyMMdd"
-                                    value="${qna.odate }" /> - <fmt:formatNumber
-                                    value="${qna.oid }" pattern="00000" /></td>
+							<td>${qna.getQctg() }</td>	
 							<td>${qna.getPname() }</td>
-							<td><a href="qnaForm.do">${qna.getQcontent() }</a></td>
+							<td><a href="board.do?type=qna&qid_num=${qna.qid }">${qna.getQcontent() }</a></td>
 							<td>${qna.getQdate() }</td>
 						</tr>
 						</c:forEach>	

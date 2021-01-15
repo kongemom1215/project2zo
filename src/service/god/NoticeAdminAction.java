@@ -32,7 +32,6 @@ public class NoticeAdminAction implements CommandProcess {
 			int startNum=totalNotice-startRow+1; //시작 게시글번호
 			List<Notice> noticelist=nd.list(startRow, endRow);
 			
-			
 			int pageCnt=(int)Math.ceil((double)totalNotice/pageSize);
 			int startPage=(int)(currentPage-1)/blockSize*blockSize+1;
 			int endPage=startPage+blockSize-1;

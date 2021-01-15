@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/cartnbuy.css?ver=1"> 
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=2">
@@ -65,25 +66,31 @@
 		<br>
 		<div style="width: 800px; height: 800px; background-color: white; margin-left: 50px; ">
 		<!--if 문으로 성공이면 성공내용 보이게  -->
+		<c:if test="${result >0 }">
 				<br><br><br><br><br>
 				<div style="text-align: center; " ><h2>주문/결제 요청이 정상적으로 완료되었습니다</h2></div>
 				<br><br><br>
 				<form action="">
 				<table class="order">
 					<tr class="info_tr">
-						<td>결제번호</td>
-						<td><input type="text" name="orderNum"></td>
+						<td>주문번호</td>
+						<td>
+						<fmt:formatDate value="${order_selct.odate }" pattern="yyyyMMdd"/>-
+						<fmt:formatNumber value="${order_selct.oid }" pattern="00000"/>
+						
+						</td>
 					</tr>
 					<tr class="info_tr">
 						<td>주문일자</td>
-						<td><input type="text" name="orderDate"></td>
+						<td>${order_selct.odate }</td>
 					</tr>
 				
 				</table>
 				
 				</form>
+		</c:if>		
 				<!--결제실패시   -->
-				
+		<c:if test="${result == 0 }">	
 				<br><br><br><br><br>
 				<div style="text-align: center; " ><h2>주문/결제 실패되었습니다</h2></div>
 				<br><br><br>
@@ -97,14 +104,14 @@
 				</table>
 				
 				</form>
-				
+		</c:if>		
 			
 			
 		
 		</div>
 	<form action="">
 			<span><input type="button" class="pay" id="cancel" value="주문내역 확인" onclick=""></span>
-			<span><input type="button" class="pay" id="pay" value="메인화면" onclick=""></span>
+			<span><input type="button" class="pay" id="pay" value="메인화면" onclick="location.href='index.jsp'"></span>
 		</form>
 	
 	

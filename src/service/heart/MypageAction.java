@@ -36,11 +36,8 @@ public class MypageAction implements CommandProcess {
 			ShoppingUserDao su = ShoppingUserDao.getInstance();
 			ShoppingUser shoppinguser = su.select(sid);
 			Order_tbDao oddao = Order_tbDao.getInstance();
-			Order_Join orderjoin = new Order_Join();
-			orderjoin = oddao.select(sid);
 			List<Order_Join> list_main = oddao.list_main(sid);
-			System.out.println("MypageAction orderjoin.getOname()->"+orderjoin.getOname());
-			System.out.println("MypageAction orderjoin.getPname()->"+orderjoin.getPname());
+			System.out.println("list main ostate -> "+list_main.get(0).getOstate());
 			
 			
 			
@@ -50,7 +47,6 @@ public class MypageAction implements CommandProcess {
 			request.setAttribute("count", count);
 			request.setAttribute("sid", sid);
 			request.setAttribute("shoppinguser", shoppinguser);
-			request.setAttribute("orderjoin", orderjoin);	
 			request.setAttribute("count_Order", count_Order);
 			request.setAttribute("list_main", list_main);
 		} catch (SQLException e) {

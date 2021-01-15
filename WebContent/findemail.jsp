@@ -67,10 +67,13 @@ h1{font-weight: 900;}
 				<table style="margin-left: auto; margin-right: auto;">
 					<tr><td><input type="text" name="sname" required="required" placeholder="이름" class="sname"></td></tr>
 					<tr><td><select name="squestion">
-						<option>출신 고등학교는?</option>
-						<option>현재 사는 지역은?</option>
-						<option>어떻게 오셨나요?</option>
-						<option>성별은?</option>
+						<<option>1. 기억에 남는 추억의 장소는?</option>
+            <option>2. 자신의 인생 좌우명은?</option>
+            <option>3. 자신의 보물 제1호는?</option>
+            <option>4. 가장 기억에 남는 선생님 성함은?</option>
+            <option>5. 타인이 모르는 자신만의 신체비밀이 있다면?</option>
+            <option>6. 추억하고 싶은 날짜가 있다면?</option>
+            <option>7. 받았던 선물 중 기억에 남는 독특한 선물은?</option>
 					</select></td></tr>
 					<tr><td><input type="text" name="sanswer" required="required" placeholder="위 질문의 답변"></td></tr>
 					<tr><td><input type="submit" value="아이디찾기" class="find" ></td></tr>

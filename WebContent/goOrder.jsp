@@ -63,6 +63,9 @@ function send_it(){
 	if(bank == ""){
 		alert("은행사를 선택해 주세요");
 		return false;
+	}if(card=="해당사항없음" && bank=="해당사항없음"){
+		alert("결제수단을 선택해 주세요");
+		return false;
 	}
 }
 

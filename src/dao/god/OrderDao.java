@@ -345,4 +345,97 @@ public class OrderDao {
 		}
 		return orderlist;
 	}
+	public double[] selectSales(String[] sixdate) throws SQLException {
+		double[] salesAmount=new double[6];
+		String sql="select sum(oamount-odelivery) from order_tb where to_char(odate,'YY/MM/DD') = ? and ostate>0";
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			conn=getConnection();
+			for(int i=0; i<6; i++) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, sixdate[i]);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					if(rs.getString(1)==null)
+						salesAmount[i]=0;
+					else
+						salesAmount[i]=rs.getInt(1)/10000.0;
+					System.out.println("salesAmount[i] -> "+salesAmount[i]);
+				}
+				rs.close();
+				pstmt.close();
+			}
+		} catch (Exception e) {
+			System.out.println("selectSales() -> "+e.getMessage());
+		} finally {
+			if(conn!=null)
+				conn.close();
+		}
+		
+		return salesAmount;
+	}
+	public double[] selectSales2(String[] sixdate) throws SQLException {
+		double[] salesAmount=new double[6];
+		String sql="select sum(oamount-odelivery) from order_tb where to_char(odate,'YY/MM') = ? and ostate>0";
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			conn=getConnection();
+			for(int i=0; i<6; i++) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, sixdate[i]);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					if(rs.getString(1)==null)
+						salesAmount[i]=0;
+					else
+						salesAmount[i]=rs.getInt(1)/10000.0;
+					System.out.println("salesAmount[i] -> "+salesAmount[i]);
+				}
+				rs.close();
+				pstmt.close();
+			}
+		} catch (Exception e) {
+			System.out.println("selectSales() -> "+e.getMessage());
+		} finally {
+			if(conn!=null)
+				conn.close();
+		}
+		
+		return salesAmount;
+	}
+	public double[] selectSales3(String[] sixdate) throws SQLException {
+		double[] salesAmount=new double[6];
+		String sql="select sum(oamount-odelivery) from order_tb where to_char(odate,'YYYY') = ? and ostate>0";
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			conn=getConnection();
+			for(int i=0; i<6; i++) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, sixdate[i]);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					if(rs.getString(1)==null)
+						salesAmount[i]=0;
+					else
+						salesAmount[i]=rs.getInt(1)/10000.0;
+					System.out.println("salesAmount[i] -> "+salesAmount[i]);
+				}
+				rs.close();
+				pstmt.close();
+			}
+		} catch (Exception e) {
+			System.out.println("selectSales() -> "+e.getMessage());
+		} finally {
+			if(conn!=null)
+				conn.close();
+		}
+		
+		return salesAmount;
+	}
 }

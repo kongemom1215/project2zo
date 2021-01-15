@@ -260,6 +260,7 @@
 						<input type="submit" value="찜" class="pbuttons"
 							formaction="jjim.do"></input>
 					</div>
+					
 				</form>
 				<!-- purchase close -->
 			</div>
@@ -320,11 +321,12 @@
 								<th width="200px">작성자</th>
 								<th width="100px">작성일</th>
 							</tr>
-							<c:if test="${qtotCnt > 0 }">
+							<c:if test="${rtotCnt > 0 }">
+
 								<c:forEach var="reviews" items="${rlist }">
 									<tr height="25px">
 										<td>${rstartNum }</td>
-										<td><a href=''>${reviews.rtitle }</a></td>
+										<td>${reviews.rtitle }</td>
 										<td>${reviews.sname }</td>
 										<td>${reviews.rdate }</td>
 									</tr>

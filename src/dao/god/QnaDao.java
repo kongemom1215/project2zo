@@ -261,7 +261,7 @@ public class QnaDao {
 				qna.setQcmtdate(rs.getDate(10));
 				qna.setOdate(rs.getDate(11));
 				qna.setSname(rs.getString(12));
-				qna.setPname(rs.getString(13).substring(0, 15));
+				qna.setPname(rs.getString(13));
 			}
 		} catch (Exception e) {
 			System.out.println("qna select() -> "+e.getMessage());

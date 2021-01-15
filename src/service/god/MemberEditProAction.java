@@ -29,6 +29,15 @@ public class MemberEditProAction implements CommandProcess {
 			int result=sd.updateUser(shoppinguser, sid);
 			request.setAttribute("result", result);
 			request.setAttribute("sid", sid);
+			
+			String option=request.getParameter("option");
+			String search_value=request.getParameter("search_value");
+			if(!(option==null || option.equals(""))) {
+				request.setAttribute("option", option);
+				request.setAttribute("search_value", search_value);
+			}
+			String pageNum=request.getParameter("pageNum");
+			request.setAttribute("pageNum", pageNum);
 		}catch (Exception e) {
 			System.out.println("MemberEditPro -> "+e.getMessage());
 		}

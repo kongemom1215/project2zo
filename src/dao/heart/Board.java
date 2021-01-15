@@ -34,6 +34,8 @@ public class Board {
 	private Date rcmtwriter;
 	//private Date odate;
 	
+	private String sname;
+	
 	public int getQid() {
 		return qid;
 	}
@@ -166,6 +168,12 @@ public class Board {
 	}
 	public void setPname(String pname) {
 		this.pname = pname;
+	}
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
 	}
 
 }
