@@ -107,60 +107,89 @@
 	<div class="myorderview">
 		<h3>주문내역</h3>
 	<div class="myorderviewdetail">
-	<c:forEach var="orderjoin" items="${list_main}">
+	<c:forEach var="orderjoin" items="${list_main}" varStatus="status">
+	<c:set var="str" value="${list_main[status.index + 1].oid }"/>
+		<c:if test="${orderjoin.oid != str }">
 		<a href="mypageOrder.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
-		<span ><fmt:formatDate pattern="yyyyMMdd"
+		<span>${orderjoin.getOdate()}</span>
+		
+		<span style="float:right; color:blue; font-weight:bold;"><fmt:formatDate pattern="yyyyMMdd"
                                     value="${orderjoin.odate }" /> - <fmt:formatNumber
-                                    value="${orderjoin.oid }" pattern="00000" /></span>	
-		<span style="float:right; color:blue; font-weight:bold;"> ${orderjoin.oid }</span>
+                                    value="${orderjoin.oid }" pattern="00000" /></span>
 		<span style="float:right;">주문번호 : </span>
 		</a>
 		<hr>
+		<c:forEach var="orderjoin2" items="${list_main}" varStatus="status">
+		<c:set var="stl" value="${list_main[status.index + 1].pid }"/>
+		<c:if test="${orderjoin2.pid != stl }">
 		<table>
 		<!-- 주문상품 중 대표 사진 -->
-			<tr><td rowspan="4"><img src="${orderjoin.pthumbimg }" width="100"/></td>
-			<td></td><td></td><td></td>
-			<td colspan="6">${orderjoin.pname }</td><td></td><td></td><td></td><td></td></tr>
-			<tr></tr><tr><td></td><td></td><td></td><td colspan="6">주문총액 : ${orderjoin.oamount } 원 </td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-			<td></td></tr><tr></tr>
-		</table>
-				<span style="font-size:large; color:blue; font-weight:bold;">
-				<c:set var="ostate" value="${orderjoin.ostate }"/>
+			<tr><td rowspan="4"><img src="${orderjoin2.pthumbimg }" width="100"/></td>
+			<td colspan="6">${orderjoin2.pname }</td><td></td><td></td></tr>
+			<tr><td><c:set var="poption" value="${orderjoin.poption }"/>
+				 	<c:if test="${poption ne null}">
+				 	옵션 : 
+				 	<c:forEach var="orderjoin3" items="${list_main}">
+				 		${orderjoin3.poption } (수량:${orderjoin3.getDqty() })
+				 	</c:forEach>
+				 	</c:if>
+				 	<c:if test="${poption eq null}">
+				 		수량 : ${orderjoin2.getDqty() }
+				 	</c:if></td></tr>
+				 	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+			<td>
 				<c:choose>
-				 	<c:when test="${ostate eq '0' }">
+				<c:when test="${orderjoin2.ostate eq '5' }">
+					<c:choose>
+					<c:when test="${orderjoin2.reviewox eq '0' }">
+				 		<input type="button"  value=" 리뷰쓰기 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
+						onclick="location.href='reviewWrite.do?oid=${orderjoin2.oid }&pid=${orderjoin2.pid }'" >
+					</c:when>
+					<c:when test="${orderjoin2.reviewox eq '1' }">
+				 		
+					</c:when>
+					<c:otherwise></c:otherwise>
+					</c:choose>
+				</c:when>
+				<c:otherwise></c:otherwise>
+				</c:choose>
+			</td></tr><tr></tr>
+		</table>
+		</c:if>
+		</c:forEach>
+		<div>주문총액 : <fmt:formatNumber type="number" pattern="#,###" value="${orderjoin.oamount }"/>원 </div>
+				<span style="font-size:large; color:blue; font-weight:bold;">
+				<c:choose>
+				 	<c:when test="${orderjoin.ostate eq '0' }">
 				 		구매취소
 				 	</c:when>
-				 	<c:when test="${ostate eq '1' }">
+				 	<c:when test="${orderjoin.ostate eq '1' }">
 				 		결제대기
 				 		<input type="button"  value=" 주문취소 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
 						onclick="location.href='mypageOrderdelete.do?oid=${orderjoin.oid }'" >
 				 	</c:when>
-				 	<c:when test="${ostate eq '2' }">
+				 	<c:when test="${orderjoin.ostate eq '2' }">
 				 		결제완료
 				 		<input type="button"  value=" 주문취소 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
 						onclick="location.href='mypageOrderdelete.do?sid=${shoppinguser.sid}&oid=${orderjoin.oid }'" >
 				 	</c:when>
-				 	<c:when test="${ostate eq '3' }">
+				 	<c:when test="${orderjoin.ostate eq '3' }">
 				 		배송중
 				 	</c:when>
-				 	<c:when test="${ostate eq '4' }">
+				 	<c:when test="${orderjoin.ostate eq '4' }">
 				 		배송완료
 				 		<input type="button"  value=" 구매확정 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
 						onclick="location.href='mypageOrderhwakjeong.do?oid=${orderjoin.oid }'" >
 				 	</c:when>
-				 	<c:when test="${ostate eq '5' }">
-				 		구매확정
-				 		<input type="button"  value=" 리뷰쓰기 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
-						onclick="location.href='reviewWrite.do?oid=${orderjoin.oid }'" >
-				 	</c:when>
-				 	<c:when test="${ostate eq '6' }">
+				 	<c:when test="${orderjoin.ostate eq '5' }">
 				 		구매확정
 				 	</c:when>
 				 	<c:otherwise></c:otherwise>
 				</c:choose>
 				</span>
 				<p>
-			</c:forEach>
+				</c:if>
+	</c:forEach>
 	</div>
 	
 <!-- <c:forEach var="order_tb" items=""> -->	
