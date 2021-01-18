@@ -61,9 +61,6 @@
     margin-left:20px;
     text-align:center;
 }
-a{
-	text-decoration: underline;
-}
 </style>
 </head>
 <body>
