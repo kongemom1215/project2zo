@@ -126,6 +126,9 @@
 				</tr>
 			</table>
 			</c:if>
+			<c:if test="${sid == session_sid}">
+			삭제 수정
+			</c:if>
 			<div style="height: 100px;"></div>
 		</c:when>
 		<c:when test="${type eq 'qna' && not empty qcontent && session_sid == sid}">
@@ -138,6 +141,11 @@
 					<td style="width: 70px;">카테고리</td>
 				</tr>
 				<tr>
+					<td style="width: 70px;"></td>
+					<td style="width: 750px; text-align: left;"><img style="width: 400px;" src="${qfile }"></td>
+					<td style="width: 70px;"></td>
+				</tr>
+				<tr>
 					<td style="width: 70px;">${qid }</td>
 					<td style="width: 600px; text-align: left;">${qcontent }</td>
 					<td style="width: 70px;">${sname }</td>
@@ -146,6 +154,7 @@
 				</tr>
 			</table> 
 			<p>
+			<c:if test="${not empty qcmt}">
 			<table class="board_table1">
 			<tr>
 					<td style="width: 70px;"></td>
@@ -162,6 +171,9 @@
 					<td style="width: 70px;"></td>
 				</tr>
 			</table>
+			</c:if>
+			<p>
+			삭제 수정
 			<div style="height: 100px;"></div>
 		</c:when>
 		<c:when test="${type eq 'qna' && not empty qcontent && session_sid == 1}">
@@ -182,6 +194,7 @@
 				</tr>
 			</table> 
 			<p>
+			<c:if test="${not empty qcmt}">
 			<table class="board_table1">
 			<tr>
 					<td style="width: 70px;"></td>
@@ -199,6 +212,7 @@
 				</tr>
 			</table>
 			<div style="height: 100px;"></div>
+			</c:if>
 		</c:when>
 	</c:choose>
 
@@ -247,17 +261,19 @@
 					<c:forEach var="list" items="${list }" begin="${(20*select_page) }" end="${20 + (20*select_page) }">
 						<tr>
 							<td style="width: 70px;">${list.nid }</td>
-							<td style="width: 600px; text-align: left;"><a href="board.do?
-							type=notice&
-							nid=${list.nid }&
-							ntitle=${list.ntitle }&
-							ncontent=${list.ncontent }&
-							npublic=${list.npublic }&
-							ndate=${list.ndate }&
-							nfile=${list.nfile }&
-							nhit=${list.nhit }&
-							page=${page }
-							">${list.ntitle }</a></td>
+							<c:url value="board.do" var="url"> 
+									<c:param name="pageNum" value="${pageNum}" /> 
+									<c:param name="type" value="notice" /> 
+									<c:param name="nid" value="${list.nid }" /> 
+									<c:param name="ntitle" value="${list.ntitle }" /> 
+									<c:param name="ncontent" value="${list.ncontent }" /> 
+									<c:param name="npublic" value="${list.npublic }" /> 
+									<c:param name="ndate" value="${list.ndate }" /> 
+									<c:param name="nfile" value="${list.nfile }" /> 
+									<c:param name="nhit" value="${list.nhit }" /> 
+									<c:param name="page" value="${page }" /> 
+								</c:url> 
+							<td style="width: 600px; text-align: left;"><a href="${url }">${list.ntitle }</a></td>
 							<td style="width: 70px;">관리자</td>
 							<td style="width: 90px;">${list.ndate }</td>
 							<td style="width: 70px;">${list.nhit }</td>
@@ -290,24 +306,26 @@
 					<c:forEach var="review" items="${list }">
 					<tr>
 							<td style="width: 70px;">${review.rid }</td>
-							<td style="width: 600px; text-align: left;"><a href='board.do?sid=${review.sid }&
-																							pageNum=${pageNum}&
-																							type=review&
-																							rid=${review.rid }&
-																							sid=${review.sid }&
-																							oid=${review.oid }&
-																							rwriter=${review.rwriter }&
-																							rtitle=${review.rtitle }&
-																							rcontent=${review.rcontent }&
-																							rimg=${review.rimg }&
-																							rdate=${review.rdate }&
-																							rhit=${review.rhit }&
-																							rcmt=${review.rcmt }&
-																							rcmtdate=${review.rcmtdate }&
-																							odate=${review.odate }&
-																							pid=${review.pid }
-																							'>
-                   ${review.rtitle }</a></td>
+							<td style="width: 600px; text-align: left;">
+							
+							<c:url value="board.do" var="url"> 
+									<c:param name="pageNum" value="${pageNum}" /> 
+									<c:param name="type" value="review" /> 
+									<c:param name="rid" value="${review.rid }" /> 
+									<c:param name="sid" value="${review.sid }" /> 
+									<c:param name="rwriter" value="${review.rwriter }" /> 
+									<c:param name="rtitle" value="${review.rtitle }" /> 
+									<c:param name="rcontent" value="${review.rcontent }" /> 
+									<c:param name="rdate" value="${review.rdate }" /> 
+									<c:param name="rhit" value="${review.rhit }" /> 
+									<c:param name="rcmt" value="${review.rcmt }" /> 
+									<c:param name="rcmtdate" value="${review.rcmtdate }" /> 
+									<c:param name="odate" value="${review.odate }" /> 
+									<c:param name="pid" value="${review.pid }" /> 
+								</c:url> 
+								
+								<a href=${url }> ${review.rtitle }</a>
+               			   </td>
 							<td style="width: 70px;">${review.sname }</td>
 							<td style="width: 90px;">${review.rdate}</td>
 							<td style="width: 70px;">${review.rhit}</td>
@@ -346,18 +364,20 @@
 					<c:forEach var="qna" items="${list }">
 					<tr>
 							<td style="width: 70px;">${qna.qid }</td>
-							<td style="width: 600px; text-align: left;"><a href='board.do?sid=${qna.sid }&
-																							pageNum=${pageNum}&
-																							type=qna&
-																							qid=${qna.qid }&
-																							sname=${qna.sname }&
-																							qdate=${qna.qdate}&
-																							qctg=${qna.qctg }&
-																							qcontent=${qna.qcontent }&
-																							qcmt=${qna.qcmt }&
-																							qcmtdate=${qna.qcmtdate }
-																							'>
-                   문의 드립니다 <c:if test="${not empty qna.qcmt}">[답변완료]</c:if></a></td>
+							<td style="width: 600px; text-align: left;">
+								<c:url value="board.do" var="url"> 
+									<c:param name="sid" value="${qna.sid}" /> 
+									<c:param name="pageNum" value="${pageNum}" /> 
+									<c:param name="type" value="qna" /> 
+									<c:param name="sname" value="${qna.sname }" /> 
+									<c:param name="qdate" value="${qna.qdate}" /> 
+									<c:param name="qctg" value="${qna.qctg}" /> 
+									<c:param name="qcontent" value="${qna.qcontent }" /> 
+									<c:param name="qcmt" value="${qna.qcmt }" /> 
+									<c:param name="qcmtdate" value="${qna.qcmtdate }" /> 
+									<c:param name="qfile" value="${qna.qfile }" /> 
+								</c:url> 
+								<a href="${url}">문의드립니다<c:if test="${not empty qna.qcmt}">[답변완료]</c:if></a></td>
 							<td style="width: 70px;">${qna.sname }</td>
 							<td style="width: 90px;">${qna.qdate}</td>
 							<td style="width: 70px;">${qna.qctg }</td>

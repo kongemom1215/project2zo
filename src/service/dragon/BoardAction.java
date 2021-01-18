@@ -177,6 +177,16 @@ public class BoardAction implements CommandProcess {
 				
 				request.setAttribute("list",  list_qna);
 				
+				request.setAttribute("sid", request.getParameter("sid"));
+				request.setAttribute("qid", request.getParameter("qid"));
+				request.setAttribute("sname", request.getParameter("sname"));
+				request.setAttribute("qdate", request.getParameter("qdate"));
+				request.setAttribute("qctg", request.getParameter("qctg"));
+				request.setAttribute("qcontent", request.getParameter("qcontent"));
+				request.setAttribute("qcmt", request.getParameter("qcmt"));
+				request.setAttribute("qcmtdate", request.getParameter("qcmtdate"));
+				request.setAttribute("qfile", request.getParameter("qfile"));
+			
 				int qid_num = Integer.parseInt(request.getParameter("qid_num"));
 				
 				if (request.getParameter("qid_num") != null) {
@@ -194,18 +204,7 @@ public class BoardAction implements CommandProcess {
 					request.setAttribute("qcmtdate", board.getQcmtdate());
 					request.setAttribute("qfile", board.getQfile());
 					
-				} else {
-					request.setAttribute("sid", request.getParameter("sid"));
-					request.setAttribute("qid", request.getParameter("qid"));
-					request.setAttribute("sname", request.getParameter("sname"));
-					request.setAttribute("qdate", request.getParameter("qdate"));
-					request.setAttribute("qctg", request.getParameter("qctg"));
-					request.setAttribute("qcontent", request.getParameter("qcontent"));
-					request.setAttribute("qcmt", request.getParameter("qcmt"));
-					request.setAttribute("qcmtdate", request.getParameter("qcmtdate"));
-					request.setAttribute("qfile", request.getParameter("qfile"));
 				}
-				
 				
 			} catch (Exception e) {
 				

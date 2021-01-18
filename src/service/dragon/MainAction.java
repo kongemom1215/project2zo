@@ -18,6 +18,8 @@ import javax.servlet.http.HttpSession;
 import dao.dragon.Product;
 import dao.dragon.ProductDao;
 import dao.dragon.ShoppingUserDao;
+import dao.god.NoticeDao;
+import dao.half.Notice;
 import service.CommandProcess;
 
 public class MainAction implements CommandProcess  {
@@ -27,6 +29,21 @@ public class MainAction implements CommandProcess  {
 			throws ServletException, IOException {
 		
 		System.out.println("-- service.dragon.MainAction --");
+		
+		
+		try {
+			HttpSession session = request.getSession(true);
+			
+			dao.half.NoticeDao ntcdao = dao.half.NoticeDao.getInstance();
+			Notice ntc = new Notice();
+			ntc = ntcdao.getlatest();
+
+			session.setAttribute("ntc", ntc);
+		} catch (Exception e) {
+			System.out.println("mainaction popup error : " + e.getMessage());
+		}
+		
+		
 		
 		try {
 			
@@ -97,6 +114,7 @@ public class MainAction implements CommandProcess  {
 			String calendar_2_7 = format.format(time);
 			String calendar_2_7_format2 = format2.format(time);
 			String covid_calendar_2_7 = shoppinguserdao.covid_19_live(calendar_2_7, calendar_2_7);
+			System.out.println(covid_calendar_2_7);
 
 			time = new Date(start_calendar.getTimeInMillis() + ((now_calendar.getTimeInMillis() - start_calendar.getTimeInMillis()))/7*3);
 			String calendar_3_7 = format.format(time);
