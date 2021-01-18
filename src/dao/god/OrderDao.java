@@ -47,7 +47,7 @@ public class OrderDao {
 			while(rs.next()) {
 				Order order=new Order();
 				order.setOid(rs.getInt(1));
-				order.setOdate(rs.getDate(2));
+				order.setOdate(rs.getTimestamp(2));
 				order.setSid(sid);
 				order.setCid(rs.getInt(4));
 				order.setOname(rs.getString(5));
@@ -91,7 +91,7 @@ public class OrderDao {
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				order.setOid(rs.getInt(1));
-				order.setOdate(rs.getDate(2));
+				order.setOdate(rs.getTimestamp(2));
 				order.setSid(rs.getInt(3));
 				order.setCid(rs.getInt(4));
 				order.setOname(rs.getString(5));
@@ -130,7 +130,7 @@ public class OrderDao {
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				order.setOid(rs.getInt(1));
-				order.setOdate(rs.getDate(2));
+				order.setOdate(rs.getTimestamp(2));
 				order.setSid(rs.getInt(3));
 				order.setCid(rs.getInt(4));
 				order.setOname(rs.getString(5));
@@ -190,7 +190,7 @@ public class OrderDao {
 			while(rs.next()) {
 				Order order=new Order();
 				order.setOid(rs.getInt(1));
-				order.setOdate(rs.getDate(2));
+				order.setOdate(rs.getTimestamp(2));
 				order.setSid(rs.getInt(3));
 				order.setCid(rs.getInt(4));
 				order.setOname(rs.getString(5));
@@ -232,7 +232,7 @@ public class OrderDao {
 			while(rs.next()) {
 				Order order=new Order();
 				order.setOid(rs.getInt(1));
-				order.setOdate(rs.getDate(2));
+				order.setOdate(rs.getTimestamp(2));
 				order.setSid(rs.getInt(3));
 				order.setCid(rs.getInt(4));
 				order.setOname(rs.getString(5));
@@ -275,7 +275,7 @@ public class OrderDao {
 			while(rs.next()) {
 				Order order=new Order();
 				order.setOid(rs.getInt(1));
-				order.setOdate(rs.getDate(2));
+				order.setOdate(rs.getTimestamp(2));
 				order.setSid(rs.getInt(3));
 				order.setCid(rs.getInt(4));
 				order.setOname(rs.getString(5));
@@ -318,7 +318,7 @@ public class OrderDao {
 			while(rs.next()) {
 				Order order=new Order();
 				order.setOid(rs.getInt(1));
-				order.setOdate(rs.getDate(2));
+				order.setOdate(rs.getTimestamp(2));
 				order.setSid(rs.getInt(3));
 				order.setCid(rs.getInt(4));
 				order.setOname(rs.getString(5));
@@ -362,7 +362,6 @@ public class OrderDao {
 						salesAmount[i]=0;
 					else
 						salesAmount[i]=rs.getInt(1)/10000.0;
-					System.out.println("salesAmount[i] -> "+salesAmount[i]);
 				}
 				rs.close();
 				pstmt.close();

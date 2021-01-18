@@ -20,6 +20,14 @@
 		}
 	}
 </script>
+<style type="text/css">
+#search_table{
+	margin-left:20px;
+}
+table{
+	width: 610px;
+}
+</style>
 </head>
 <body>
 <div class="main">
@@ -98,7 +106,7 @@
 						<c:forEach var="user" items="${userlist }">
 							<tr>
 								<td>${user.sid }</td>
-								<td><a href="memberInfo.do?sid=${user.sid }&pageNum=${pageNum}">${user.sname }</a></td>
+								<td><a href="memberInfo.do?sid=${user.sid }&pageNum=${pageNum}" style="text-decoration:underline;">${user.sname }</a></td>
 								<td>${user.semail }</td>
 								<td>${user.scontact }</td>
 								<td>${user.sregdate }</td>
