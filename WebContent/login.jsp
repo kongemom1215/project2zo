@@ -7,7 +7,36 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
-<link rel="stylesheet" type="text/css" href="css/login.css?ver=2">
+<style type="text/css">
+
+		table{width: 35%;
+		  height: 100px;
+		  margin: auto;
+		  font-weight: bolder;
+		  }
+		  
+	#login{text-align: center; width: 300px; overflow: hidden; position: absolute; right: 50%; top: 20%;}
+	#login2{text-align: center; width: 300px; overflow: hidden; position: absolute; right: 15%; top: 35%;}
+	
+	.semail{width: auto; height: auto;	background-color: #B9FFFF; border: 0px; font-size: 30px; outline: none;}
+	.spwd{width: auto; height: auto;	background-color: #B9FFFF; border: 0px; font-size: 30px; outline: none;}
+	.join{background-color: #00EBFF; display: inline-block; outline: none; cursor: pointer; text-align: center;
+	text-decoration: none; padding: .5em 2em .55em; text-shadow: 0 1px 1px rgba(0,0,0,.3); color:white;
+	border-radius: .5em; box-shadow: 0 1px 2px rgba(0,0,0,.2); border: 0;}
+	.join:hover{background-color: #3CCEFF;}
+	
+	.Login{background-color: #00EBFF; display: inline-block; outline: none; cursor: pointer; text-align: center;
+	text-decoration: none; padding: .5em 2em .55em; text-shadow: 0 1px 1px rgba(0,0,0,.3); color:white; width:295px;
+	border-radius: .5em; box-shadow: 0 1px 2px rgba(0,0,0,.2); border: 0;}
+	.Login:hover{background-color: #3CCEFF}
+	
+	
+	::placeholder{
+	text-align:left;
+	font-size: 0.5em;	
+	font-weight: 100;
+	}
+</style>
 </head>
 <body>
 <div class="main">

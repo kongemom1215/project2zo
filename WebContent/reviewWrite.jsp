@@ -86,7 +86,7 @@
 		<tr><td>주문번호	</td><td ><fmt:formatDate pattern="yyyyMMdd"
                                     value="${orderjoin.odate }" /> - <fmt:formatNumber
                                     value="${orderjoin.oid }" pattern="00000" /></td></tr>
-		<tr><td rowspan="2"><img src="${orderjoin.getPthumbimg() }" width="100"/></<td><td>상품명	</td><td >${orderjoin.getPname() }</td></tr>
+		<tr><td>상품명	</td><td >${orderjoin.getPname() }</td></tr>
 		<tr><td>주문일자	</td><td >${orderjoin.getOdate() }</td></tr>
 		<tr><td>제목 </td><td><input type="text" name="rtitle" required="required"></td></tr>
 		<tr><td>내용</td><td><pre><textarea rows="10" cols="40" name="rcontent" required="required"></textarea></pre></td></tr>

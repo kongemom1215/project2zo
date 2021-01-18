@@ -89,47 +89,20 @@
 					작성가능한 리뷰 : ${cntYetReview }
 				</div>
 			<div class="myorderviewdetail">
-			<c:forEach var="orderjoin" items="${list}" varStatus="status">
-			<c:set var="str" value="${list[status.index + 1].oid }"/>
-				<c:if test="${orderjoin.oid != str }">
+			<c:forEach var="orderjoin" items="${list}">
 				<span>${orderjoin.getOdate()}</span>
 				<span style="float:right; color:blue; font-weight:bold;"><fmt:formatDate pattern="yyyyMMdd"
 		                                    value="${orderjoin.odate }" /> - <fmt:formatNumber
 		                                    value="${orderjoin.oid }" pattern="00000" /></span>
 				<span style="float:right;">주문번호 : </span>
 				<br><hr>
-				<c:forEach var="orderjoin" items="${list}" varStatus="status">
-				<c:set var="stl" value="${list[status.index + 1].pid }"/>
-				<c:if test="${orderjoin.pid != stl }">	
 				<table>
 				<!-- 주문상품 중 대표 사진 -->
 					<tr><td rowspan="4"><img src="${orderjoin.getPthumbimg() }" width="100"/></td>
 					<td colspan="6">${orderjoin.getPname() }</td><td></td></tr>
 					<tr><td>수량 : ${orderjoin.getDqty() }</td><td>송장번호 : ${orderjoin.getOinvoice() }</td></tr>
-					<tr><td>주문총액 : ${orderjoin.getOamount() } 원 </td>
-					<td>
-					<c:set var="ostate" value="${orderjoin.ostate }"/>
-						<c:choose>
-						<c:when test="${ostate eq '5' }">
-							<c:set var="reviewox" value="${orderjoin.reviewox }"/>
-							<c:choose>
-							<c:when test="${reviewox eq '0' }">
-						 		<input type="button"  value=" 리뷰쓰기 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
-								onclick="location.href='reviewWrite.do?oid=${orderjoin.oid }&pid=${orderjoin.pid }'" >
-							</c:when>
-							<c:when test="${reviewox eq '1' }">
-						 		
-							</c:when>
-							<c:otherwise></c:otherwise>
-							</c:choose>
-						</c:when>
-						<c:otherwise></c:otherwise>
-						</c:choose>
-					</td>
-					</tr>
+					<tr><td>주문총액 : ${orderjoin.getOamount() } 원 </td></tr>
 					<tr></tr></table>
-					</c:if>
-					</c:forEach>
 					<span style="font-size:large; color:blue; font-weight:bold;">
 						<c:set var="ostate" value="${orderjoin.getOstate() }"/>
 						<c:choose>
@@ -157,12 +130,17 @@
 								onclick="location.href='qnaWrite.do?oid=${orderjoin.oid }'" >
 						 	</c:when>
 						 	<c:when test="${ostate eq '5' }">
-				 				구매확정
-				 			</c:when>
+						 		구매확정
+						 		<input type="button"  value=" 리뷰쓰기 " style="background-color:white; font-size:large; color:violet; font-weight:bold; border: 0; outline: 0;" 
+								onclick="location.href='reviewWrite.do?oid=${orderjoin.oid }'" >
+						 	</c:when>
+						 	<c:when test="${ostate eq '6' }">
+						 		구매확정
+						 	</c:when>
 						 	<c:otherwise></c:otherwise>
 						</c:choose>
 			</span>
-			<p></c:if>
+			<p>
 			</c:forEach>
 			</div>
 			</div>

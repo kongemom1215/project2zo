@@ -225,15 +225,14 @@
    </c:if>
 <h1>SIGN UP</h1>
  <form action="joinPro.do">
-<input type="hidden" name="stype" value="1">
+
 		<table>
 			<tr><td>이메일</td> <td><input type="email" name="semail" id="semail" class="semail" required="required" placeholder="아이디로 사용할 이메일 주소를 입력해주세요."></td></tr>
 			<tr><td></td><td style="background-color: white;"></td></tr>
 	<!-- 		<td><input type="button" value="중복확인" ></td> -->
 			
-			<tr><td>비밀번호 </td><td>  <div class="main2"><input  type="password" id="spwd" name="spwd" class="spwd" required="required" placeholder="비밀번호는 영문+숫자만 가능합니다" pattern="^(?=.*[a-z])(?=.*[0-9]).{1,10}$"><i>확인</i></div></td></tr>
-         <tr><td>비밀번호 </td><td>  <div class="main2"><input  type="password" id="spwd2" name="spwd2" class="spwd" required="required" placeholder="비밀번호는 영문+숫자만 가능합니다" pattern="^(?=.*[a-z])(?=.*[0-9]).{1,10}$"><i>확인</i></div></td></tr>
-		
+			<tr><td>비밀번호 </td><td>  <div class="main2"><input  type="password" id="spwd" name="spwd" class="spwd" required="required" placeholder="비밀번호를 입력해주세요."><i>확인</i></div></td></tr>
+			<tr><td>비밀번호 </td><td>  <div class="main2"><input  type="password" id="spwd2" name="spwd2" class="spwd" required="required" placeholder="비밀번호를 입력해주세요."><i>확인</i></div></td></tr>
 			
 			<tr><td>이름 </td><td>   <input  type="text" name="sname" class="sname" required="required" placeholder="한글 15자까지 가능합니다." maxlength="15"></td></tr>
 			<tr><td>연락처 </td><td>   <input  type="text" name="scontact" class="scontact" required="required"
@@ -247,13 +246,10 @@
 								 <input type="text" id="sample6_extraAddress" placeholder="참고항목" style="border:none;">
 								 <input type="text" name="saddress2" id="sample6_detailAddress" placeholder="상세주소" style="border:none;"></td></tr>
 			<tr><td>질문</td><td><select name="squestion">
-				<option>1. 기억에 남는 추억의 장소는?</option>
-            <option>2. 자신의 인생 좌우명은?</option>
-            <option>3. 자신의 보물 제1호는?</option>
-            <option>4. 가장 기억에 남는 선생님 성함은?</option>
-            <option>5. 타인이 모르는 자신만의 신체비밀이 있다면?</option>
-            <option>6. 추억하고 싶은 날짜가 있다면?</option>
-            <option>7. 받았던 선물 중 기억에 남는 독특한 선물은?</option>
+				<option>출신 고등학교는?</option>
+				<option>현재 사는 지역은?</option>
+				<option>어떻게 오셨나요?</option>
+				<option>성별은?</option>
 			</select></td></tr>
 			<tr><td>답변</td><td><input type="text" name="sanswer" required="required" placeholder="위 질문의 답변"></td></tr>
 			 <tr><td>마케팅동의</td><td>   Y<input  type="radio" name="sagree" value="y">
