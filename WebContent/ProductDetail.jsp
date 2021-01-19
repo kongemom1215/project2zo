@@ -253,12 +253,19 @@
 					<!-- infotablediv close -->
 					<!-- 홍주님과 협업 -->
 					<div class="purchase">
+					<c:if test="${empty session_sid}">
+					<input type="button" class="pbuttons" value="바로구매" onclick="location.href='login.do?url=productDetail.do&pid=${pid }'">
+					<input type="button" class="pbuttons" value="장바구니" onclick="location.href='login.do?url=productDetail.do&pid=${pid }'">
+					<input type="button" class="pbuttons" value="찜" onclick="location.href='login.do?url=productDetail.do&pid=${pid }'">
+					</c:if>
+					<c:if test="${not empty session_sid}">
 						<input type="submit" value="바로구매" class="pbuttons"
 							formaction="goOrder.do?pid=${pid}&option=${option}&howmany=${howmany}"></input>
 						<input type="submit" value="장바구니" class="pbuttons"
 							formaction="cartAdd.do?pid=${pid}&option=${option}&howmany=${howmany}&sum=${sum}"></input>
 						<input type="submit" value="찜" class="pbuttons"
 							formaction="jjim.do"></input>
+							</c:if>
 					</div>
 					
 				</form>
