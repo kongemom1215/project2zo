@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<textarea rows="10" cols="80" readonly="readonly">
+	<textarea rows="10" cols="80">
 할인 쿠폰 및 혜택, 이벤트, 신상품 소식 등 쇼핑몰에서 제공하는 유익한 쇼핑 정보를 이메일로 받아 보실 수 있습니다.
 
 단, 주문/거래 정보 및 주요 정책과 관련된 내용은 수신동의 여부와 관계없이 발송됩니다.

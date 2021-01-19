@@ -6,71 +6,34 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/memberadmin.css?ver=37">
-<link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
-</head>
-<style type="text/css">
-table{
-	display: inline-block;
-	border: 1px solid #FAFAFA;
-	border-collapse:collapse;
-	width: 500px;
-	height:350px;
-	margin-left:0px;
-	margin-top:50px;
-	table-layout: fixed;
-	text-align:left;
-}
-td{
-	border: 1px solid #F2F2F2;
-	padding:10px;
-}
-td:first-child{
-	width:150px;
-	background-color:#EFF5FB;
-}
-td:nth-child(2){
-	width:350px;
-	background-color:white;
-}
+<link rel="stylesheet" type="text/css" href="css/memberinfo.css?ver=3">
 </style>
+</head>
 <body>
-<div class="main">
-	<div style="margin-top: 15px;">
-<a href="main.do"><img src="./img/Logo.png"></a>
-
-<c:choose>
-<c:when test="${session_stype eq '1'}">
-<a class="top_button">위시리스트</a>
-<a class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
-<a class="top_button">마이페이지</a>
-<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
-</c:when>
-<c:when test="${session_stype eq '0'}">
-<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
-<a href="adminPage.do" class="top_button">관리페이지</a>
-</c:when>
-<c:otherwise>
-<a class="top_button">위시리스트</a>
-<a class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
-<a class="top_button">마이페이지</a>
-<a href="login.do" class="top_button">로그인/회원가입</a>
-</c:otherwise>
-</c:choose>
-</div>
-</div>
-<hr>
-   <div class="main" style="width: 900px; height: 10px; display: table; vertical-align: middle; position: relative;">
-      <div style="width: 900px; display: table-cell; text-align: center;">
-       <input type="button" style="width: 300px; background-color: white; border: 0px;" value="ADMINISTRATOR SERVICE" onclick="location.href='adminPage.do'">
-      </div>
-   </div>
- <hr>
-	<div class="main" style="width:1000px">
+	<!--로고 및 로그인 메뉴  -->
+	<div style="width: 900px; margin-left: 350px; position: relative;">
+		<img src="img/Logo.png"> <input type="button" value="로그아웃"
+			class="top"
+			style="float: right; background-color: white; border: 0px;"></input>
+		<input type="button" value="관리자페이지" class="top"
+			style="float: right; background-color: white; border: 0px;"
+			onclick="location.href='adminPage.do'"></input>
+	</div>
+	<hr>
+	<!--관리자메뉴  -->
+	<div
+		style="width: 900px; height: 10px; display: table-cell; vertical-align: middle; position: relative;">
+		<div style="width: 900px; margin-left: 350px;">
+			<div id="admin" style="position: relative; float: left;">
+				<input type="button"
+					style="width: 300px; background-color: white; border: 0px;"
+					value="ADMINISTRATOR SERVICE"
+					onclick="location.href='adminPage.do'">
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div id="adminMember" style="width:1000px;">
 		<div id="sidebar">
 			<img src="./img/admin_member.JPG" id="img1">
 			<h2 class="memberMenu">회원 관리</h2>
@@ -100,8 +63,8 @@ td:nth-child(2){
 			<br>
 			<div id="search_content">
 				<div id="search_content2">
-					<div id="search_table2">
-						<form action="memberEditPro.do?sid=${sid }&pageNum=${pageNum}&option=${option }&search_value=${search_value }" method="post">
+					<div id="search_table">
+						<form action="memberEditPro.do?sid=${sid }" method="post">
 						<table>
 							<tr>
 								<td>회원 고유 번호</td>
@@ -151,7 +114,7 @@ td:nth-child(2){
 						</table>
 						<br><br><br><br>
 						<input type="submit" class="button2" value="수정">
-						<input type="button" value="뒤로가기" class="button2" onclick="location.href='memberInfo.do?sid=${sid}&pageNum=${pageNum }&option=${option}&search_value=${search_value }'">
+						<input type="button" value="뒤로가기" class="button2" onclick="location.href='memberInfo.do?sid=${sid}&pageNum=${pageNum }'">
 						</form>
 					</div>
 				</div>

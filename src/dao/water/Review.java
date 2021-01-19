@@ -20,7 +20,7 @@ public class Review {
 	private Date rdate;
 	private int rhit;
 	private String rcmt;
-	private Date rcmtdate;
+	private Date rcmtwriter;
 	private Date odate;
 	// 조회용
 		private String sname;
@@ -92,16 +92,16 @@ public class Review {
 	public void setRcmt(String rcmt) {
 		this.rcmt = rcmt;
 	}
+	public Date getRcmtwriter() {
+		return rcmtwriter;
+	}
+	public void setRcmtwriter(Date rcmtwriter) {
+		this.rcmtwriter = rcmtwriter;
+	}
 	public Date getOdate() {
 		return odate;
 	}
 	public void setOdate(Date odate) {
 		this.odate = odate;
-	}
-	public Date getRcmtdate() {
-		return rcmtdate;
-	}
-	public void setRcmtdate(Date rcmtdate) {
-		this.rcmtdate = rcmtdate;
 	}
 }

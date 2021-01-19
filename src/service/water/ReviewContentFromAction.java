@@ -37,7 +37,7 @@ public class ReviewContentFromAction implements CommandProcess {
 			request.setAttribute("rdate", review.getRdate());
 			request.setAttribute("rhit", review.getRhit());
 			request.setAttribute("rcmt", review.getRcmt());
-			request.setAttribute("rcmtdate", review.getRcmtdate());
+			request.setAttribute("rcmtwriter", review.getRcmtwriter());
 			request.setAttribute("odate", review.getOdate());
 			request.setAttribute("pid", review.getPid());
 			

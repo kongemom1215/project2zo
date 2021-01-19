@@ -9,15 +9,10 @@
 }
 #sidebar{
 	margin-top:30px;
-	width:250px;
+	width:300px;
 	height:400px;
 	float:left;
 	position:relative;
-}
-#img1{
-	width:150px; 
-	height:150px; 
-	margin-left:50px; 
 }
 #content{
 	margin-top:30px;
@@ -34,6 +29,11 @@
 	width:640px;
 	height:700px;
 }
+#img1{
+	width:150px; 
+	height:150px; 
+	margin-left:75px; 
+}
 .boardMenu{
 	text-align:center;
 	color:#00B9FF;
@@ -43,7 +43,7 @@
 	text-align:center;
 }
 .boardMenuButton{
-	margin-left:70px;
+	margin-left:100px;
 	float:left;
 }
 .button{

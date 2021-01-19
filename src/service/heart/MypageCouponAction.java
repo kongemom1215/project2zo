@@ -32,13 +32,13 @@ public class MypageCouponAction implements CommandProcess {
 			
 			int sid = (int) session.getAttribute("session_sid");
 			
-			System.out.println("coupon sid ->"+sid);
+			System.out.println("sid ->"+sid);
 			CouponDao cp = CouponDao.getInstance();
-			Coupon coupon = new Coupon(); 
-			
+			Coupon coupon = new Coupon();
+			coupon = cp.select(sid); 
+			System.out.println("MypageCouponAction coupon.getcid->"+coupon.getCid());
 			List<Coupon> listC = cp.list(sid, startRow, endRow);
-			System.out.println("MypageCouponAction coupon.getcid->"+listC.get(0).getCid());
-			System.out.println("MypageCouponAction coupon.getCenddate->"+listC.get(0).getCenddate());
+			System.out.println("MypageCouponAction coupon.getCenddate->"+coupon.getCenddate());
 			int count = cp.getCount(sid);
 			
 			int pageCnt=(int)Math.ceil((double)count/pageSize);

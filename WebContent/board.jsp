@@ -61,35 +61,6 @@
 <div class="main" style="margin-top: 20px; text-align: center;">
 																							
 	<c:choose>
-	<c:when test="${type eq 'notice' && not empty ncontent}">
-			<table class="board_table1">
-				<tr>
-					<td style="width: 70px;">번호</td>
-					<td style="width: 600px; text-align: left;">제목</td>
-					<td style="width: 70px;">작성자</td>
-					<td style="width: 90px;">작성일</td>
-					<td style="width: 70px;">조회수</td>
-				</tr>
-				<tr>
-					<td style="width: 70px;">${nid }</td>
-					<td style="width: 600px; text-align: left;">${ntitle }</td>
-					<td style="width: 70px;">관리자</td>
-					<td style="width: 90px;">${ndat }</td>
-					<td style="width: 70px;">${nhit }</td>
-				</tr>
-				<tr>
-					<td style="width: 70px;"></td>
-					<td style="width: 750px; text-align: left;">${ncontent }</td>
-					<td style="width: 70px;"></td>
-				</tr>
-				<tr>
-					<td style="width: 70px;"></td>
-					<td style="width: 750px; text-align: left;"><a href="${nfile }" download>${nfile }</a></td>
-					<td style="width: 70px;"></td>
-				</tr>
-			</table> 
-			<div style="height: 100px;"></div>
-		</c:when>
 	<c:when test="${type eq 'review' && not empty rcontent}">
 			<table class="board_table1">
 				<tr>
@@ -107,25 +78,6 @@
 					<td style="width: 70px;">${rhit }</td>
 				</tr>
 			</table> 
-			<p>
-			<c:if test="${not empty rcmtdate}">
-			<table class="board_table1">
-			<tr>
-					<td style="width: 70px;"></td>
-					<td style="width: 600px; text-align: left;">답변 내용</td>
-					<td style="width: 70px;">작성자</td>
-					<td style="width: 90px;">작성일</td>
-					<td style="width: 70px;"></td>
-				</tr>
-			<tr>
-					<td style="width: 70px;"></td>
-					<td style="width: 600px; text-align: left;">${rcmt }</td>
-					<td style="width: 70px;">관리자</td>
-					<td style="width: 90px;">${rcmtdate }</td>
-					<td style="width: 70px;"></td>
-				</tr>
-			</table>
-			</c:if>
 			<div style="height: 100px;"></div>
 		</c:when>
 		<c:when test="${type eq 'qna' && not empty qcontent && session_sid == sid}">
@@ -214,7 +166,7 @@
 	<table style="float: right;">
 	<c:if test="${type eq 'review'}">
 	<tr>
-		<td class="board_button"><a href="mypageYetReview.do">리뷰 작성</a></td>
+		<td class="board_button"><a href="reviewWriteForm.do?pageNum=${pageNum }&type=review">글쓰기</a></td>
 	</tr>
 	</c:if>
 	<c:if test="${type eq 'qna'}">
@@ -229,20 +181,6 @@
 	</div>
 		<c:choose>
 			<c:when test="${type eq 'notice'}">
-			<table class="board_table1">
-				<tr>
-					<td style="width: 70px;">번호</td>
-					<td style="width: 600px; text-align: left;">제목</td>
-					<td style="width: 70px;">작성자</td>
-					<td style="width: 90px;">작성일</td>
-					<td style="width: 70px;">조회수</td>
-				</tr>
-			</table>
-			<table class="board_table2">
-				<tr>
-					<td style="width: 900px;"> </td>
-				</tr>
-			</table>
 				<table class="board_table1" style="margin-bottom: 5px;">
 					<c:forEach var="list" items="${list }" begin="${(20*select_page) }" end="${20 + (20*select_page) }">
 						<tr>
@@ -303,7 +241,7 @@
 																							rdate=${review.rdate }&
 																							rhit=${review.rhit }&
 																							rcmt=${review.rcmt }&
-																							rcmtdate=${review.rcmtdate }&
+																							rcmtwriter=${review.rcmtwriter }&
 																							odate=${review.odate }&
 																							pid=${review.pid }
 																							'>
@@ -357,7 +295,7 @@
 																							qcmt=${qna.qcmt }&
 																							qcmtdate=${qna.qcmtdate }
 																							'>
-                   문의 드립니다 <c:if test="${not empty qna.qcmt}">[답변완료]</c:if></a></td>
+                   문의 드립니다 <c:if test="${not empty qna.qcontent }">[답변완료]</c:if></a></td>
 							<td style="width: 70px;">${qna.sname }</td>
 							<td style="width: 90px;">${qna.qdate}</td>
 							<td style="width: 70px;">${qna.qctg }</td>

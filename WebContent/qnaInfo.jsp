@@ -7,15 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/qna.css?ver=108"/>
-<link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
+<link rel="stylesheet" type="text/css" href="css/qna.css"/>
 <style type="text/css">
 	table{
 		width:600px;
 		background-color: white;
 		border: 1px solid black;
 		border-collapse: collapse;
-		table-layout:fixed;
 	}
 	th, td{
 		border: 1px solid black;
@@ -25,10 +23,7 @@
 		width:100px;
 	}
 	td:nth-child(2){
-		width:150px; 
-		text-overflow:ellipsis;
-		overflow:hidden;
-		white-space:nowrap;
+		width:150px;
 	}
 	a{
 		color:black;
@@ -75,42 +70,30 @@
 </script>
 </head>
 <body>
-<div class="main">
-	<div style="margin-top: 15px;">
-<a href="main.do"><img src="./img/Logo.png"></a>
-
-<c:choose>
-<c:when test="${session_stype eq '1'}">
-<a class="top_button">위시리스트</a>
-<a class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
-<a class="top_button">마이페이지</a>
-<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
-</c:when>
-<c:when test="${session_stype eq '0'}">
-<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
-<a href="adminPage.do" class="top_button">관리페이지</a>
-</c:when>
-<c:otherwise>
-<a class="top_button">위시리스트</a>
-<a class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
-<a class="top_button">마이페이지</a>
-<a href="login.do" class="top_button">로그인/회원가입</a>
-</c:otherwise>
-</c:choose>
-</div>
-</div>
-<hr>
-   <div class="main" style="width: 900px; height: 10px; display: table; vertical-align: middle; position: relative;">
-      <div style="width: 900px; display: table-cell; text-align: center;">
-       <input type="button" style="width: 300px; background-color: white; border: 0px;" value="ADMINISTRATOR SERVICE" onclick="location.href='adminPage.do'">
-      </div>
-   </div>
- <hr>
-	<div class="main" style="width:1000px">
+	<!--로고 및 로그인 메뉴  -->
+	<div style="width: 900px; margin-left: 350px; position: relative;">
+		<img src="img/Logo.png"> <input type="button" value="로그아웃"
+			class="top"
+			style="float: right; background-color: white; border: 0px;"></input>
+		<input type="button" value="관리자페이지" class="top"
+			style="float: right; background-color: white; border: 0px;"
+			onclick="location.href='adminPage.do'"></input>
+	</div>
+	<hr>
+	<!--관리자메뉴  -->
+	<div
+		style="width: 900px; height: 10px; display: table-cell; vertical-align: middle; position: relative;">
+		<div style="width: 900px; margin-left: 350px;">
+			<div id="admin" style="position: relative; float: left;">
+				<input type="button"
+					style="width: 300px; background-color: white; border: 0px;"
+					value="ADMINISTRATOR SERVICE"
+					onclick="location.href='adminPage.do'">
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div id="adminBoard" style="width:1100px;">
 		<div id="sidebar">
 			<img src="./img/admin_board.JPG" id="img1">
 			<h2 class="boardMenu">게시판 관리</h2>
@@ -140,18 +123,14 @@
 							<td colspan="3">${qna.sname }</td>
 						</tr>
 						<tr>
-						<c:choose>
-							<c:when test="${qna.odate ne null}">
-								<td>상품</td>
-								<td>${qna.pid }-<a href="productDetail.do?pid=${qna.pid }">${qna.pname }</a></td>
-								<td>주문번호</td>
-								<td><fmt:formatDate pattern="yyyyMMdd" value="${qna.odate }" />-<fmt:formatNumber value="${qna.oid }" pattern="00000"></fmt:formatNumber></td>
-							</c:when>
-							<c:otherwise>
-								<td>상품</td>
-								<td colspan="3">${qna.pid }-<a href="productDetail.do?pid=${qna.pid }">${qna.pname }</a></td>
-							</c:otherwise>
-						</c:choose>
+						<c:if test="${qna.pid ne 0}">
+							<td>상품</td>
+							<td>${qna.pid }-<a href="productDetail.do?pid=${qna.pid }">${qna.pname }...</a></td>
+						</c:if>
+						<c:if test="${qna.odate ne null}">
+							<td>주문번호</td>
+							<td><fmt:formatDate pattern="yyyyMMdd" value="${qna.odate }" />-<fmt:formatNumber value="${qna.oid }" pattern="00000"></fmt:formatNumber></td>
+						</c:if>
 						</tr>
 						<tr>
 							<td>내용</td>

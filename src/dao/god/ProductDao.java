@@ -1,6 +1,6 @@
 package dao.god;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -315,6 +315,7 @@ public class ProductDao {
 				product.setPthumbimg(rs.getString(14));
 				product.setPoption(rs.getString(15));
 				
+				System.out.println("pthumbimg -> "+rs.getString(16));
 				productlist.add(product);
 			}
 		} catch (Exception e) {

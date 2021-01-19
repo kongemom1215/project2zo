@@ -2,13 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Welcome to Byerus</title>
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
-<link rel="stylesheet" href="./css/ShoppingMainCss.css?ver=4">
+<link rel="stylesheet" href="./css/ShoppingMainCss.css?ver=5">
 <style>
 .displaytable {
 	padding-down: 5px;
@@ -27,27 +28,27 @@
 			<a href="main.do"><img src="./img/Logo.png"></a>
 
 			<c:choose>
-<c:when test="${session_stype eq '1'}">
-<a href="jjimForm.do" class="top_button">위시리스트</a>
-<a href="cart.do" class="top_button">장바구니</a>
-<a href="mypageOrder.do" class="top_button">주문/배송</a>
-<a href="mypage.do" class="top_button">마이페이지</a>
-<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
-</c:when>
-<c:when test="${session_stype eq '0'}">
-<a href="main.do?logout=logout" class="top_button">로그아웃</a>
-<a class="top_button">${session_sname } 님</a>
-<a href="adminPage.do" class="top_button">관리페이지</a>
-</c:when>
-<c:otherwise>
-<a href="login.do?url=jjimForm.do" class="top_button">위시리스트</a>
-<a href="login.do?url=cart.do" class="top_button">장바구니</a>
-<a href="login.do?url=mypageOrder.do" class="top_button">주문/배송</a>
-<a href="login.do?url=mypage.do" class="top_button">마이페이지</a>
-<a href="login.do?url=main.do" class="top_button">로그인/회원가입</a>
-</c:otherwise>
-</c:choose>
+				<c:when test="${session_stype eq '1'}">
+					<a href="jjimForm.do" class="top_button">위시리스트</a>
+					<a href="cart.do" class="top_button">장바구니</a>
+					<a href="mypageOrder.do" class="top_button">주문/배송</a>
+					<a href="mypage.do" class="top_button">마이페이지</a>
+					<a href="main.do?logout=logout" class="top_button">로그아웃</a>
+					<a class="top_button">${session_sname } 님</a>
+				</c:when>
+				<c:when test="${session_stype eq '0'}">
+					<a href="main.do?logout=logout" class="top_button">로그아웃</a>
+					<a class="top_button">${session_sname } 님</a>
+					<a href="adminPage.do" class="top_button">관리페이지</a>
+				</c:when>
+				<c:otherwise>
+					<a href="login.do?url=jjimForm.do" class="top_button">위시리스트</a>
+					<a href="login.do?url=cart.do" class="top_button">장바구니</a>
+					<a href="login.do?url=mypageOrder.do" class="top_button">주문/배송</a>
+					<a href="login.do?url=mypage.do" class="top_button">마이페이지</a>
+					<a href="login.do?url=main.do" class="top_button">로그인/회원가입</a>
+				</c:otherwise>
+			</c:choose>
 
 		</div>
 	</div>
@@ -161,7 +162,7 @@
 			<!-- 무엇을 보고있는지 출력 -->
 			<div class="productdisplaygroup">
 				<div class="watching">
-					<font color="white"> <c:if test="${cate eq 'total'}">전체상품 : </c:if>
+					<font color="white" size="x-small"> <c:if test="${cate eq 'total'}">전체상품 : </c:if>
 						<c:if test="${cate eq 'cheon'}">체온측정 : </c:if> <c:if
 							test="${cate eq 'sodok'}">소독 / 손 : </c:if> <c:if
 							test="${cate eq 'alco'}">소독 / 알콜 : </c:if> <c:if
@@ -202,23 +203,29 @@
 
 						<c:forEach var="hotproduct" items="${hotlist }">
 							<table class="displaytable" style="table-layout: fixed">
-								<tr height="120px">
+								<tr height="150px">
 									<td width="160px"><a
 										href='productDetail.do?pid=${hotproduct.pid }'> <img
 											src="${hotproduct.pthumbimg }" width="120" height="120"></img>
 									</a></td>
 								</tr>
-								<tr height="40px">
+								<tr height="35px">
 									<td width="160px"><a
-										href='productDetail.do?pid=${hotproduct.pid }'>${hotproduct.pname }
+										href='productDetail.do?pid=${hotproduct.pid }'> <c:if
+												test="${fn:length(hotproduct.pname)>25}">
+											${fn:substring(hotproduct.pname,0,25) } ...
+										</c:if> <c:if test="${fn:length(hotproduct.pname)<26}">
+											${hotproduct.pname }
+										</c:if>
+
 									</a> <c:if test="${hotproduct.pdiscount > 0 }">
 											<img src="./img/sale.png" width="25" height="17">
 										</c:if></td>
 								</tr>
-								<tr>
+								<tr height="40px">
 									<td width="160px"><c:if
 											test="${hotproduct.pdiscount > 0 }">
-											<font color="gray"><span
+											<font color="#00F5FF"><span
 												style="text-decoration: line-through;"> <fmt:formatNumber
 														type="number" pattern="#,###" value="${hotproduct.pprice}" />원
 											</span><br />
@@ -240,7 +247,8 @@
 				<!-- 쪽번호 구역 -->
 				<div class="pages">
 					<c:if test="${startPage > blockSize }">
-						<a href='shoppingMain.do?pageNum=${startPage-blockSize }&display_select=${display_select }&cate=${cate}'>[이전]</a>
+						<a
+							href='shoppingMain.do?pageNum=${startPage-blockSize }&display_select=${display_select }&cate=${cate}'>[이전]</a>
 
 					</c:if>
 					<c:forEach var="i" begin="${startPage }" end="${endPage }">
@@ -249,7 +257,8 @@
 						</a>
 					</c:forEach>
 					<c:if test="${endPage < pageCnt }">
-						<a href='shoppingMain.do?pageNum=${startPage+blockSize }&display_select=${display_select }&cate=${cate}'>[다음]</a>
+						<a
+							href='shoppingMain.do?pageNum=${startPage+blockSize }&display_select=${display_select }&cate=${cate}'>[다음]</a>
 					</c:if>
 				</div>
 				<a

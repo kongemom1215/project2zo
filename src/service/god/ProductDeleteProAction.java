@@ -15,7 +15,6 @@ public class ProductDeleteProAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			System.out.println("아");
 			int pid=Integer.parseInt(request.getParameter("pid"));
 			ProductDao pd=ProductDao.getInstance();
 			int result=pd.deleteProduct(pid);

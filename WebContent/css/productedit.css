@@ -9,21 +9,21 @@
 }
 #sidebar{
 	margin-top:30px;
-	width:250px;
+	width:300px;
 	height:400px;
 	float:left;
 	position:relative;
-}
-#img1{
-	width:150px; 
-	height:150px; 
-	margin-left:50px; 
 }
 #content{
 	width:800px;
 	height:800px;
 	float:left;
 	position:relative;
+}
+#img1{	
+	width:150px; 
+	height:150px; 
+	margin-left:75px; 
 }
 #img2{
 	width:200px; 
@@ -38,7 +38,7 @@
 	text-align:center;
 }
 .productMenuButton{
-	margin-left:70px;
+	margin-left:100px;
 	float:left;
 }
 .button{

@@ -42,11 +42,7 @@ public class NoticeInsertProAction implements CommandProcess {
 			Notice notice=new Notice();
 			notice.setNtitle(multi.getParameter("ntitle"));
 			notice.setNcontent(multi.getParameter("ncontent"));
-			if(filenames.get(0)==null)
-				notice.setNfile(null);
-			else
-				notice.setNfile("./noticefile/"+filenames.get(0));
-				
+			notice.setNfile("./noticefile/"+filenames.get(0));
 			notice.setNpublic(Integer.parseInt(multi.getParameter("npublic")));
 			
 			NoticeDao nd=NoticeDao.getInstance();

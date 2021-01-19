@@ -35,7 +35,6 @@ public class JoinProAction implements CommandProcess {
 				user.setSagree(request.getParameter("sagree"));
 				user.setSquestion(request.getParameter("squestion"));
 				user.setSanswer(request.getParameter("sanswer"));
-				user.setStype(Integer.parseInt(request.getParameter("stype")));
 				
 		        System.out.println("JoinProAction requestPro semail->"+request.getParameter("semail"));
 		        System.out.println("JoinProAction requestPro spwd->"+request.getParameter("spwd"));

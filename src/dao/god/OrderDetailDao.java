@@ -50,9 +50,9 @@ public class OrderDetailDao {
 				detail.setPid(rs.getInt(2));
 				detail.setDqty(rs.getInt(3));
 				detail.setPoption(rs.getString(4));
-				detail.setPname(rs.getString(6));
-				detail.setPprice(rs.getInt(7));
-				detail.setPthumbimg(rs.getString(8));
+				detail.setPname(rs.getString(5));
+				detail.setPprice(rs.getInt(6));
+				detail.setPthumbimg(rs.getString(7));
 				
 				orderdetaillist.add(detail);
 			}

@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/productadmin.css?ver=104">
-<link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
+<link rel="stylesheet" type="text/css" href="css/productadmin.css?ver=1">
+<link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=2">
 <style type="text/css">
 a{
 	color:black;
@@ -37,16 +37,17 @@ a:link{
 </script>
 </head>
 <body>
+<!--로고 및 로그인 메뉴  -->
 <div class="main">
-	<div style="margin-top: 15px;">
+<div style="margin-top: 15px;">
 <a href="main.do"><img src="./img/Logo.png"></a>
 
 <c:choose>
 <c:when test="${session_stype eq '1'}">
-<a class="top_button">위시리스트</a>
-<a class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
-<a class="top_button">마이페이지</a>
+<a href="jjimForm.do" class="top_button">위시리스트</a>
+<a href="cart.do" class="top_button">장바구니</a>
+<a href="mypageOrder.do" class="top_button">주문/배송</a>
+<a href="mypage.do" class="top_button">마이페이지</a>
 <a href="main.do?logout=logout" class="top_button">로그아웃</a>
 <a class="top_button">${session_sname } 님</a>
 </c:when>
@@ -56,23 +57,28 @@ a:link{
 <a href="adminPage.do" class="top_button">관리페이지</a>
 </c:when>
 <c:otherwise>
-<a class="top_button">위시리스트</a>
-<a class="top_button">장바구니</a>
-<a class="top_button">주문/배송</a>
-<a class="top_button">마이페이지</a>
-<a href="login.do" class="top_button">로그인/회원가입</a>
+<a href="login.do?url=jjimForm.do" class="top_button">위시리스트</a>
+<a href="login.do?url=cart.do" class="top_button">장바구니</a>
+<a href="login.do?url=mypageOrder.do" class="top_button">주문/배송</a>
+<a href="login.do?url=mypage.do" class="top_button">마이페이지</a>
+<a href="login.do?url=main.do" class="top_button">로그인/회원가입</a>
 </c:otherwise>
 </c:choose>
+
 </div>
 </div>
-<hr>
-   <div class="main" style="width: 900px; height: 10px; display: table; vertical-align: middle; position: relative;">
-      <div style="width: 900px; display: table-cell; text-align: center;">
-       <input type="button" style="width: 300px; background-color: white; border: 0px;" value="ADMINISTRATOR SERVICE" onclick="location.href='adminPage.do'">
-      </div>
-   </div>
- <hr>
-	<div class="main" style="width:1000px">
+<hr style="width: 900px; border-bottom: 0xp;">
+	<!--관리자메뉴  -->
+<div class="main">
+<div style="height: 17.33px;">
+<div class="nav_button" style="width: 300psx; height: 10px;"></div>
+<div class="nav_button"><a href="adminPage.do">ADMINISTRATOR SERVICE</a></div>
+<div class="nav_button" style="width: 300psx; height: 10px;"></div>
+</div>
+</div>
+
+<hr style="width: 900px; margin-bottom: 0px; border-bottom: 0px;">
+	<div class="main" style="width: 1100px;">
 		<div id="sidebar">
 			<img src="./img/admin_product.JPG" id="img1">
 			<h2 class="productMenu">상품 관리</h2>
@@ -104,7 +110,7 @@ a:link{
 						<c:forEach var="product" items="${productlist }">
 							<tr>
 								<td rowspan="2">${product.pid}</td>
-								<td rowspan="2"><a href="productInfo.do?pid=${product.pid }&pageNum=${pageNum}&option=${option}&search_value=${search_value}"><img src="${product.pthumbimg }" id="img2"></a></td>
+								<td rowspan="2"><a href="productInfo.do?pid=${product.pid }&pageNum=${pageNum}"><img src="${product.pthumbimg }" id="img2"></a></td>
 								<td colspan="3">상품명 : ${product.pname }</td>
 								
 							</tr>

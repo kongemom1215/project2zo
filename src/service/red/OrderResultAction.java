@@ -15,7 +15,6 @@ import dao.red.CouponDao;
 import dao.red.Order;
 import dao.red.OrderDetailDao;
 import dao.red.Order_tbDao;
-import dao.red.ProductDao;
 import service.CommandProcess;
 
 public class OrderResultAction implements CommandProcess {
@@ -23,7 +22,7 @@ public class OrderResultAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("장바구니->결제창에서 입력한 내용 주문DB에 insert");
+		System.out.println("결제창에서 입력한 내용 주문DB에 insert");
 		System.out.println("OrderResultAction Start!!");
 		
 		try {
@@ -80,12 +79,12 @@ public class OrderResultAction implements CommandProcess {
 			order.setOdeliverey(sumPost);//택배비
 			if(backNum == null || bank.equals("해당사항없음")) {
 				//신용카드 결제
-				order.setOpay(2); //신용카드결제
-				order.setOstate(2); //결제완료
+				order.setOpay(2);
+				order.setOstate(0);
 			}else if(credit.equals("해당사항없음") || creditNum == null || creditPass == null  ) {
 				//무통장 결제
-				order.setOpay(1); //무통장결제
-				order.setOstate(1); //결제대기
+				order.setOpay(1);
+				order.setOstate(1);
 			}
 			
 			//Order DB에 넣기
@@ -104,27 +103,20 @@ public class OrderResultAction implements CommandProcess {
 			ArrayList<CartnWish>list = cartw.select(session_sid);
 			//오더디테일 테이블에 넣기
 			int result2=0;
-			int reduce=0;
+			
 			for(int i=0;i<list.size();i++) {
 					System.out.println("list.size()==>"+list.size());
 				list.get(i);
 					System.out.println("list.get(i);==>"+list.get(i));
 				int pid = list.get(i).getPid();
 				int cwqty = list.get(i).getCwqty();
-				
 				String option = list.get(i).getCwoption();
-				System.out.println("list.get(i).getPid()==>"+list.get(i).getPid());
-				System.out.println("pid==>"+pid);
-				System.out.println("cwqty==>"+cwqty);
-				System.out.println("option==>"+option);
-				
-				//주문상세에 insert
+					System.out.println("list.get(i).getPid()==>"+list.get(i).getPid());
+					System.out.println("pid==>"+pid);
+					System.out.println("cwqty==>"+cwqty);
+					System.out.println("option==>"+option);
 				OrderDetailDao odd = OrderDetailDao.getInstance();
 				result2=odd.insert(oid,pid,cwqty,option);
-				//상품재고관리
-				ProductDao pd = ProductDao.getInstance();
-				reduce = pd.reduce(pid);
-
 				
 			}
 
@@ -144,7 +136,6 @@ public class OrderResultAction implements CommandProcess {
 			request.setAttribute("del", del);
 			request.setAttribute("order", order);
 			request.setAttribute("total_input", total_input);
-			request.setAttribute("reduce", reduce);
 			
 			System.out.println("-----------------");
 			System.out.println("list=>"+list);
@@ -154,7 +145,6 @@ public class OrderResultAction implements CommandProcess {
 			System.out.println("sum_value=>"+sum_value);
 			System.out.println("del=>"+del);
 			System.out.println("total_input=>"+total_input);
-			System.out.println("reduce=>"+reduce);
 			System.out.println("-----------------");
 
 			

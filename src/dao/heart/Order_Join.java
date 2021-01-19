@@ -7,7 +7,6 @@ public class Order_Join {
 	private int oid;
 	private Date odate;
 	private int sid;
-
 	private int cid;
 	private String oname;
 	private String ocontact;
@@ -22,28 +21,7 @@ public class Order_Join {
 	private int dqty;
 	private String pname;
 	private String pthumbimg;
-	private String poption;
-	private int cdiscount;
-	private int reviewox;
 	
-	public int getReviewox() {
-		return reviewox;
-	}
-	public void setReviewox(int reviewox) {
-		this.reviewox = reviewox;
-	}
-	public int getCdiscount() {
-		return cdiscount;
-	}
-	public void setCdiscount(int cdiscount) {
-		this.cdiscount = cdiscount;
-	}
-	public String getPoption() {
-		return poption;
-	}
-	public void setPoption(String poption) {
-		this.poption = poption;
-	}
 	public String getPname() {
 		return pname;
 	}

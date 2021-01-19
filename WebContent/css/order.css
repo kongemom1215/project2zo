@@ -1,21 +1,29 @@
 @charset "UTF-8";
+
+#admin {
+	top: 50%;
+	left: 50%;
+}
+#adminMember{
+	margin-left:350px;
+}
 #sidebar{
 	margin-top:30px;
-	width:250px;
+	width:300px;
 	height:400px;
 	float:left;
 	position:relative;
-}
-#img1{
-	width:150px; 
-	height:150px; 
-	margin-left:50px; 
 }
 #content{
 	width:700px;
 	height:800px;
 	float:left;
 	position:relative;
+}
+#img1{
+	width:150px; 
+	height:150px; 
+	margin-left:75px; 
 }
 .memberMenu{
 	text-align:center;
@@ -26,7 +34,7 @@
 	text-align:center;
 }
 .memberMenuButton{
-	margin-left:70px;
+	margin-left:80px;
 	float:left;
 }
 #content{
@@ -86,7 +94,18 @@ th, td{
 	border-bottom : 3px solid #d2d2d2;
 	padding:10px;
 }
-a {
-	text-decoration: none;
-	color: black;
+td:nth-child(1), th:nth-child(1) {
+	width:180px;
+}
+a{
+	color:black;
+}
+a:visited {
+	color:black;
+}
+a:link{
+	color:black;
+}
+#adminMember{
+	width:1200px;
 }

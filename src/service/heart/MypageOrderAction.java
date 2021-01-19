@@ -23,7 +23,6 @@ public class MypageOrderAction implements CommandProcess {
 			HttpSession session = request.getSession(true);
 			
 			int sid = (int) session.getAttribute("session_sid");
-			
 		
 			System.out.println("sid ->"+sid);
 			Order_tbDao oddao = Order_tbDao.getInstance();

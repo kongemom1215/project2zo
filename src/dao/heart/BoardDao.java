@@ -64,6 +64,7 @@ public class BoardDao {
 					board.setQcmt(rs.getString("qcmt"));
 					board.setQcmtdate(rs.getDate("qcmtdate")); 
 					board.setOdate(rs.getDate("odate"));
+					board.setQpwd(rs.getInt("qpwd"));
 					board.setPname(rs.getString("pname"));
 					list.add(board);
 				} while (rs.next());
@@ -76,7 +77,7 @@ public class BoardDao {
 			if (pstmt != null) pstmt.close();
 			if (conn !=null) conn.close();
 		}
-		System.out.println("qna list->"+list);
+		System.out.println("list->"+list);
 		return list;
 	}
 	
@@ -230,19 +231,19 @@ public class BoardDao {
 		
 		return board;
 	}
-	public int review(Board board,int sid, int oid,int pid) throws SQLException {
+	public int review(Board board,int sid, int oid) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs=null;
 		int result = 0;
 		String sql1 = "select nvl(max(rid),0) from review";
 		String sql2 = "insert into review values (?,?,?,?,?,?,?,sysdate,0,null,null,(select o.odate from order_tb o where oid=?),?)";
-		//String sql3 = "select pid from orderdetail where oid=?";
+		String sql3 = "select pid from orderdetail where oid=?";
 		String sql4="select sname from shoppinguser where sid=?";
 		String sql5="update order_tb set ostate=ostate+1 where oid=?";
-		String sql6 ="Update orderdetail set reviewox=reviewox+1 where oid=? and pid=?";
 		int rid=0;
 		String sname=null;
+		int pid=0;
 		try {
 			conn=getConnection();
 			pstmt=conn.prepareStatement(sql1);
@@ -252,13 +253,13 @@ public class BoardDao {
 			rs.close();
 			pstmt.close();
 			
-		/*	pstmt=conn.prepareStatement(sql3);
+			pstmt=conn.prepareStatement(sql3);
 			pstmt.setInt(1, oid);
 			rs=pstmt.executeQuery();
 			if(rs.next()) 
 				pid = rs.getInt(1);
 			rs.close();
-			pstmt.close(); */
+			pstmt.close();
 			
 			pstmt=conn.prepareStatement(sql4);
 			pstmt.setInt(1, sid);
@@ -287,13 +288,6 @@ public class BoardDao {
 			
 			pstmt=conn.prepareStatement(sql5);
 			pstmt.setInt(1, oid);
-			pstmt.executeUpdate();
-			rs.close();
-			pstmt.close();
-			
-			pstmt=conn.prepareStatement(sql6);
-			pstmt.setInt(1, oid);
-			pstmt.setInt(2, pid);
 			pstmt.executeUpdate();
 			
 			

@@ -30,7 +30,6 @@ public class ReviewWriteAction implements CommandProcess {
 			
 			int sid = (int) session.getAttribute("session_sid");
 			int oid = Integer.parseInt(request.getParameter("oid"));
-			int pid = Integer.parseInt(request.getParameter("pid"));
 
 			int maxSize=10*1024*1024; // 10MB
 			String rootPath=request.getServletContext().getRealPath("/");
@@ -55,14 +54,13 @@ public class ReviewWriteAction implements CommandProcess {
 			board.setRimg("./reviewfile/"+filenames.get(0));
 			
 			BoardDao bd = BoardDao.getInstance();
-			int result =bd.review(board,sid,oid,pid); 
+			int result =bd.review(board,sid,oid); 
 			
 			
 			
 			
 			request.setAttribute("sid", sid);
-			request.setAttribute("oid", oid);	
-			request.setAttribute("pid", pid);
+			request.setAttribute("oid", oid);		
 			System.out.println("ReviewWriteAction sid->"+sid);
 			System.out.println("ReviewWriteAction oid->"+oid);
 			request.setAttribute("board", board);			

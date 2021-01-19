@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,6 +95,25 @@
 			addComma(Math.round(parseInt(hm.value) * sell_price));
 			remoconSwitch();
 		}
+		
+		function reviewchk() {
+			let buycheck = ${buycheck};
+
+			if (buycheck < 0) {
+				alert('구매이력이 없습니다');
+				return false;
+			} else if (buycheck == 1) {
+				alert('구매이력 확인을 위해 로그인하세요.');
+				return false;
+			} else if (buycheck == 7) {
+				alert('이미 리뷰를 작성하셨습니다');
+				return false;
+			} else if (buycheck == 0) {
+				return true;
+			}
+		}
+		
+		
 	</script>
 	<div class="main">
 		<div style="margin-top: 15px;">
@@ -276,25 +297,6 @@
 				</div>
 
 
-				<script>
-					function reviewchk() {
-						let buycheck = ${buycheck};
-
-						if (buycheck < 0) {
-							alert('구매이력이 없습니다');
-							return false;
-						} else if (buycheck == 1) {
-							alert('구매이력 확인을 위해 로그인하세요.');
-							return false;
-						} else if (buycheck == 7) {
-							alert('이미 리뷰를 작성하셨습니다');
-							return false;
-						} else if (buycheck == 0) {
-							return true;
-						}
-					}
-				</script>
-
 
 				<div class="boardzone">
 
@@ -320,18 +322,21 @@
 								<th width="200px">작성자</th>
 								<th width="100px">작성일</th>
 							</tr>
-							<c:if test="${qtotCnt > 0 }">
+							<c:if test="${rtotCnt > 0 }">
+
 								<c:forEach var="reviews" items="${rlist }">
 									<tr height="25px">
 										<td>${rstartNum }</td>
-										<td><a href=''>${reviews.rtitle }</a></td>
+										<td>${reviews.rtitle }</td>
 										<td>${reviews.sname }</td>
 										<td>${reviews.rdate }</td>
 									</tr>
+									<tr height="20px"></tr>
 									<tr height="40px">
 										<td></td>
-										<td style="text-align: left;" colspan=3 align=left><span
-											style="font-size: x-small; color: gray;">
+
+										<td style="text-align: left; background-color: #B9E2FA;" colspan=2;><span
+											style="font-size: x-small; color: #1E3269; padding: 7px;">
 												${reviews.rcontent }</span></td>
 									</tr>
 									<c:set var="rstartNum" value="${rstartNum - 1 }" />
@@ -402,8 +407,8 @@
 									<c:if test="${qnas.qcmt ne null}">
 										<tr>
 											<td></td>
-											<td style="text-align: left;"><span
-												style="font-size: x-small; color: #14D3FF;">${qnas.qcmt }</span>
+											<td style="text-align: left; background-color: #B9E2FA;"><span
+												style="font-size: x-small; color: #1E3269; padding: 7px;">${qnas.qcmt }</span>
 											</td>
 											<td>BYE-RUS</td>
 											<td></td>
@@ -447,21 +452,21 @@
 						<img src="./img/bulb.gif" width="50">이 카테고리의 인기 상품
 					</div>
 					<br /> <br />
-					<table class="recomproduct" id="rptable">
+					<table class="recomproduct" id="rptable" >
 						<tr height="180px">
 
 							<c:forEach var="best4" items="${BEST4PRODUCTS }">
 
 								<td width="180px"><a
 									href='productDetail.do?pid=${best4.pid }'><img
-										src="${best4.pthumbimg }" width="150" height="150"></img></td>
+										src="${best4.pthumbimg }" width="100" height="100"></img></td>
 								<td width="50px"></td>
 							</c:forEach>
 
 						</tr>
 						<tr height="40px">
 							<c:forEach var="best4" items="${BEST4PRODUCTS }">
-								<td><font color="gray">${best4.pname }</font></td>
+								<td><span style="font-size: x-small; color: gray;">${best4.pname }</span></td>
 								<td></td>
 							</c:forEach>
 

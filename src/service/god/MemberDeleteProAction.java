@@ -21,15 +21,6 @@ public class MemberDeleteProAction implements CommandProcess {
 			int result=sd.deleteUser(sid);
 			
 			request.setAttribute("result", result);
-			
-			String option=request.getParameter("option");
-			String search_value=request.getParameter("search_value");
-			if(!(option==null || option.equals(""))) {
-				request.setAttribute("option", option);
-				request.setAttribute("search_value", search_value);
-			}
-			String pageNum=request.getParameter("pageNum");
-			request.setAttribute("pageNum", pageNum);
 		} catch (Exception e) {
 			System.out.println("MemberDeleteProAction -> "+e.getMessage());
 		}

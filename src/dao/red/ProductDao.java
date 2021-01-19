@@ -710,37 +710,8 @@ public List<Product> select() throws SQLException {
 		return product;
 	}
 
-//주문완료 후 재고관리
- public int reduce(int pid) throws SQLException {
-	 int reduce=0;
-	 
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = "update product set psell=psell+1 , PINVENTORY=PINVENTORY-1 where pid=?";
-		
-		
-		try {
-			
-			
-			conn=getConnection();
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, pid);
-			reduce=pstmt.executeUpdate();
-			
-			System.out.println("주문완료 후 재고관리 reduce==>"+reduce);	
-			
-		}catch(Exception e) {
-			System.out.println("ProductDao reduce error !!!"+e.getMessage());
-		}finally{
-			if(conn != null) conn.close();
-			if(pstmt != null) pstmt.close();
-			if(rs != null) rs.close();
-		}
-	 
-	 
-	 return reduce;
- }
+
+
 
 
 
