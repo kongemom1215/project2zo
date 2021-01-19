@@ -117,7 +117,7 @@
 					<a href="login.do?url=cart.do" class="top_button">장바구니</a>
 					<a href="login.do?url=mypageOrder.do" class="top_button">주문/배송</a>
 					<a href="login.do?url=mypage.do" class="top_button">마이페이지</a>
-					<a href="login.do?url=main.do" class="top_button">로그인/회원가입</a>
+					<a href="login.do?url=productDetail.do&pid=${pid }" class="top_button">로그인/회원가입</a>
 				</c:otherwise>
 			</c:choose>
 
@@ -260,6 +260,7 @@
 						<input type="submit" value="찜" class="pbuttons"
 							formaction="jjim.do"></input>
 					</div>
+					
 				</form>
 				<!-- purchase close -->
 			</div>
@@ -290,7 +291,19 @@
 							alert('이미 리뷰를 작성하셨습니다');
 							return false;
 						} else if (buycheck == 0) {
-							return true;
+							location.href="mypageYetReview.do";
+							return false;
+						}
+					}
+					function qnachk() {
+						let buycheck = ${buycheck};
+						
+						if (buycheck == 1) {
+							alert('문의글 작성을 위해 로그인하세요.');
+							return false;
+						} else {
+							location.href="writeForm.do?pid=" + ${pid};
+							return false;
 						}
 					}
 				</script>
@@ -320,11 +333,12 @@
 								<th width="200px">작성자</th>
 								<th width="100px">작성일</th>
 							</tr>
-							<c:if test="${qtotCnt > 0 }">
+							<c:if test="${rtotCnt > 0 }">
+
 								<c:forEach var="reviews" items="${rlist }">
 									<tr height="25px">
 										<td>${rstartNum }</td>
-										<td><a href=''>${reviews.rtitle }</a></td>
+										<td>${reviews.rtitle }</td>
 										<td>${reviews.sname }</td>
 										<td>${reviews.rdate }</td>
 									</tr>
@@ -372,7 +386,7 @@
 								<td></td>
 								<td></td>
 								<td>
-									<form>
+									<form onsubmit="return qnachk();">
 										<input type="submit" value="문의글 쓰기" class="pbuttons"></input>
 									</form> <br />
 								</td>
