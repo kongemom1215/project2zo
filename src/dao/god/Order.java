@@ -1,10 +1,11 @@
 package dao.god;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Order {
 	private int oid;
-	private Date odate;
+	private Timestamp odate;
 	private int sid;
 	private int cid;
 	private String oname;
@@ -31,10 +32,11 @@ public class Order {
 	public void setOid(int oid) {
 		this.oid = oid;
 	}
-	public Date getOdate() {
+	
+	public Timestamp getOdate() {
 		return odate;
 	}
-	public void setOdate(Date odate) {
+	public void setOdate(Timestamp odate) {
 		this.odate = odate;
 	}
 	public int getSid() {

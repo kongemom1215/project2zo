@@ -1,6 +1,6 @@
 package dao.god;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Qna {
 	private int qid;
@@ -9,11 +9,11 @@ public class Qna {
 	private int pid;
 	private int oid;
 	private String qcontent;
-	private Date qdate;
+	private Timestamp qdate;
 	private String qfile;
 	private String qcmt;
-	private Date qcmtdate;
-	private Date odate;
+	private Timestamp qcmtdate;
+	private Timestamp odate;
 	// 조회용 테이블에 없음!
 	private String sname;
 	private String pname;
@@ -66,12 +66,6 @@ public class Qna {
 	public void setQcontent(String qcontent) {
 		this.qcontent = qcontent;
 	}
-	public Date getQdate() {
-		return qdate;
-	}
-	public void setQdate(Date qdate) {
-		this.qdate = qdate;
-	}
 	public String getQfile() {
 		return qfile;
 	}
@@ -84,16 +78,22 @@ public class Qna {
 	public void setQcmt(String qcmt) {
 		this.qcmt = qcmt;
 	}
-	public Date getQcmtdate() {
+	public Timestamp getQdate() {
+		return qdate;
+	}
+	public void setQdate(Timestamp qdate) {
+		this.qdate = qdate;
+	}
+	public Timestamp getQcmtdate() {
 		return qcmtdate;
 	}
-	public void setQcmtdate(Date qcmtdate) {
+	public void setQcmtdate(Timestamp qcmtdate) {
 		this.qcmtdate = qcmtdate;
 	}
-	public Date getOdate() {
+	public Timestamp getOdate() {
 		return odate;
 	}
-	public void setOdate(Date odate) {
+	public void setOdate(Timestamp odate) {
 		this.odate = odate;
 	}
 	

@@ -149,7 +149,7 @@
 							</c:when>
 							<c:otherwise>
 								<td>상품</td>
-								<td colspan="3">${qna.pid }-<a href="productDetail.do?pid=${qna.pid }">${qna.pname }</a></td>
+								<td colspan="3">${qna.pid }-<a href="productDetail.do?pid=${qna.pid }" style="text-decoration:underline;">${qna.pname }</a></td>
 							</c:otherwise>
 						</c:choose>
 						</tr>

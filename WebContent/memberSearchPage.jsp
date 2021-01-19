@@ -20,6 +20,12 @@ a:visited {
 a:link{
 	color:black;
 }
+#search_table{
+	margin-left:20px;
+}
+table{
+	width: 610px;
+}
 </style>
 <script type="text/javascript">
 	function chk(){
@@ -111,7 +117,7 @@ a:link{
 						<c:forEach var="user" items="${userlist }">
 							<tr>
 								<td>${user.sid }</td>
-								<td><a href="memberInfo.do?sid=${user.sid }&pageNum=${pageNum}&option=${option}&search_value=${search_value}">${user.sname }</a></td>
+								<td><a href="memberInfo.do?sid=${user.sid }&pageNum=${pageNum}&option=${option}&search_value=${search_value}" style="text-decoration: underline;">${user.sname }</a></td>
 								<td>${user.semail }</td>
 								<td>${user.scontact }</td>
 								<td>${user.sregdate }</td>
