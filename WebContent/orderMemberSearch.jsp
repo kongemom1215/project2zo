@@ -19,7 +19,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 <link rel="stylesheet" type="text/css" href="css/order.css?ver=21">
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
 <script type="text/javascript">
