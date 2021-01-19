@@ -23,7 +23,7 @@ public class Board {
 	private Date qdate;
 	private String qfile;
 	private String qcmt;
-	private Date qcmtwriter;
+	private Date qcmtdate;
 	private Date odate;
 	private String qtitle;
 	
@@ -38,8 +38,10 @@ public class Board {
 	private Date rdate;
 	private int rhit;
 	private String rcmt;
-	private Date rcmtwriter;
+	private Date rcmtdate;
 	//private Date odate;
+	
+	private String sname;
 	
 	public int getNid() {
 		return nid;
@@ -125,12 +127,6 @@ public class Board {
 	public void setQcmt(String qcmt) {
 		this.qcmt = qcmt;
 	}
-	public Date getQcmtwriter() {
-		return qcmtwriter;
-	}
-	public void setQcmtwriter(Date qcmtwriter) {
-		this.qcmtwriter = qcmtwriter;
-	}
 	public Date getOdate() {
 		return odate;
 	}
@@ -197,17 +193,29 @@ public class Board {
 	public void setRcmt(String rcmt) {
 		this.rcmt = rcmt;
 	}
-	public Date getRcmtwriter() {
-		return rcmtwriter;
-	}
-	public void setRcmtwriter(Date rcmtwriter) {
-		this.rcmtwriter = rcmtwriter;
-	}
 	public String getQtitle() {
 		return qtitle;
 	}
 	public void setQtitle(String qtitle) {
 		this.qtitle = qtitle;
+	}
+	public Date getQcmtdate() {
+		return qcmtdate;
+	}
+	public void setQcmtdate(Date qcmtdate) {
+		this.qcmtdate = qcmtdate;
+	}
+	public Date getRcmtdate() {
+		return rcmtdate;
+	}
+	public void setRcmtdate(Date rcmtdate) {
+		this.rcmtdate = rcmtdate;
+	}
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
 	}
 	
 	

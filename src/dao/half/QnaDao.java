@@ -88,7 +88,12 @@ public class QnaDao {
 			pstmt.setInt(3, endRow);
 			rs = pstmt.executeQuery();
 
+			/*
+			 * if (rs.next()) { System.out.println("o"); } else { System.out.println("x"); }
+			 */
+			
 			while (rs.next()) {
+				System.out.println("rs가 있는가?");
 				Qna qna = new Qna();
 				qna.setQid(rs.getInt("qid"));
 				qna.setSid(rs.getInt("sid"));

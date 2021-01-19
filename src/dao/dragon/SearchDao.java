@@ -1,3 +1,5 @@
+// compare - if (isInitialSound(search_text.charAt(0))) 통해서 search_text (검색할 단어) 가 자음인지 판단
+
 package dao.dragon;
 
 import java.sql.Connection; 
@@ -41,10 +43,17 @@ public class SearchDao {
 	private static final char HANGUL_BEGIN_UNICODE = 44032; // 가
 	private static final char HANGUL_LAST_UNICODE = 55203; // 힣
 	private static final char HANGUL_BASE_UNIT = 588;//각자음 마다 가지는 글자수
+	
+	// 유니코드 10진수로 표현했을 때, ㄱ ㄲ ㄴ … ㅍ ㅎ 각 자음이 가지는 수가 588 가지
 	//자음
-	private static final char[] INITIAL_SOUND = { 'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' };
+	
+	private static final char[] INITIAL_SOUND = { 'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 
+			'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ',
+			'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ',
+			'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' };
 
 	// 해당 문자가 INITIAL_SOUND 인지 검사
+	
 	private static boolean isInitialSound(char searchar) {
 		for(char c:INITIAL_SOUND) {
 			if(c == searchar) {
@@ -55,6 +64,7 @@ public class SearchDao {
 	}
 	 
 	// 자음 얻기
+	
 	private static char getInitialSound(char c) {
 		int hanBegin = (c - HANGUL_BEGIN_UNICODE);
 		int index = hanBegin / HANGUL_BASE_UNIT;

@@ -105,8 +105,8 @@ public class CouponDao {
 				System.out.println("Coupon list 2");
 				pstmt.setInt(1, sid);
 				System.out.println("Coupon list 3");
-				pstmt.setInt(2, startRow+1);
-				pstmt.setInt(3, endRow+1);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
 				System.out.println("startRow->"+startRow);
 				System.out.println("endRow"+endRow);
 				rs = pstmt.executeQuery();

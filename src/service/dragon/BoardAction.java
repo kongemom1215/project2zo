@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import dao.dragon.Board;
 import dao.dragon.BoardDao;
+import dao.water.Notice;
+import dao.water.NoticeDao;
 import dao.water.Qna;
 import dao.water.QnaDao;
 import dao.water.Review;
@@ -24,16 +26,14 @@ public class BoardAction implements CommandProcess {
 			throws ServletException, IOException {
 		
 		System.out.println("-- service.dragon.BoardAction --");
+		 request.setCharacterEncoding("utf-8");
+		 response.setContentType("text/html;charset=UTF-8");
 		
-		try {
 		HttpSession session = request.getSession(true);
 		session.setAttribute("session_sid", session.getAttribute("session_sid"));
 		session.setAttribute("session_sname", session.getAttribute("session_sname"));
 		session.setAttribute("session_stype", session.getAttribute("session_stype"));
 		session.setAttribute("session_semail", session.getAttribute("session_semail"));
-		} catch (Exception e) {
-			System.out.println("오류 : "+ e.getMessage());
-		}
 		
 		String pageNum = "";	
 		int currentPage = 0;
@@ -52,6 +52,7 @@ public class BoardAction implements CommandProcess {
 		
 		QnaDao qna = QnaDao.getInstance();
 		ReviewDao rd = ReviewDao.getInstance();
+		NoticeDao nd = NoticeDao.getInstance();
 		
 		List<Board> list = new ArrayList<Board>();
 		
@@ -65,10 +66,59 @@ public class BoardAction implements CommandProcess {
 		}
 		
 		try {
-		if (type.equals("notice")) {
+		if (type == null || type == "") {
+			type="notice";
+		}
 			
+		if (type.equals("notice")) {
+			try {
+				try {
+					NoticeDao noticedao = NoticeDao.getInstance();
+					noticedao.readCount(Integer.parseInt(request.getParameter("nid")));
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				pageNum = request.getParameter("pageNum");	
+				if (pageNum==null || pageNum.equals("")) {	pageNum = "1";	}
+				currentPage = Integer.parseInt(pageNum);	
+				pageSize  = 10;
+				blockSize = 10;
+				startRow = (currentPage - 1) * pageSize + 1;
+				endRow =  startRow + pageSize - 1;
+				totCnt = rd.getTotalCnt();
+				startNum = totCnt - startRow + 1;   // 38
+				List<Notice> list_notice = nd.list(startRow , endRow); 
+				System.out.println("ListAction list.size()-->" + list_notice.size());        // /och16/list.do
+				 System.out.println("ListAction list.get(0).getContent()-->" + list_notice.get(0).getNcontent()); // /och16/list.do
+				pageCnt = (int)Math.ceil((double)totCnt/pageSize);
+				startPage = (int)(currentPage-1)/blockSize*blockSize + 1;
+				endPage = startPage + blockSize -1;	
+				if (endPage > pageCnt) endPage = pageCnt;	
+				
+				
+				request.setAttribute("list",  list_notice);
+				
+				request.setAttribute("sid", request.getParameter("sid"));
+				
+				request.setAttribute("nid", request.getParameter("nid"));
+				request.setAttribute("ntitle", request.getParameter("ntitle"));
+				request.setAttribute("ncontent", request.getParameter("ncontent"));
+				request.setAttribute("ndate", request.getParameter("ndate"));
+				request.setAttribute("nfile", request.getParameter("nfile"));
+				request.setAttribute("nhit", request.getParameter("nhit"));
+				request.setAttribute("nid", request.getParameter("nid"));
+				
+			} catch (Exception e) {
+				
+			}
 		} else if (type.equals("review")) {
 			try {
+				try {
+					ReviewDao reviewdao = ReviewDao.getInstance();
+					reviewdao.readCount(Integer.parseInt(request.getParameter("rid")));
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 				pageNum = request.getParameter("pageNum");	
 				if (pageNum==null || pageNum.equals("")) {	pageNum = "1";	}
 				currentPage = Integer.parseInt(pageNum);	
@@ -86,9 +136,11 @@ public class BoardAction implements CommandProcess {
 				endPage = startPage + blockSize -1;	
 				if (endPage > pageCnt) endPage = pageCnt;	
 				
+				
 				request.setAttribute("list",  list_review);
 				
 				request.setAttribute("sid", request.getParameter("sid"));
+				
 				request.setAttribute("rid", request.getParameter("rid"));
 				request.setAttribute("rwriter", request.getParameter("rwriter"));
 				request.setAttribute("rtitle", request.getParameter("rtitle"));
@@ -97,7 +149,7 @@ public class BoardAction implements CommandProcess {
 				request.setAttribute("rdate", request.getParameter("rdate"));
 				request.setAttribute("rhit", request.getParameter("rhit"));
 				request.setAttribute("rcmt", request.getParameter("rcmt"));
-				request.setAttribute("rcmtwriter", request.getParameter("rcmtwriter"));
+				request.setAttribute("rcmtdate", request.getParameter("rcmtdate"));
 				request.setAttribute("odate", request.getParameter("odate"));
 				request.setAttribute("pid", request.getParameter("pid"));
 				
@@ -133,6 +185,27 @@ public class BoardAction implements CommandProcess {
 				request.setAttribute("qcontent", request.getParameter("qcontent"));
 				request.setAttribute("qcmt", request.getParameter("qcmt"));
 				request.setAttribute("qcmtdate", request.getParameter("qcmtdate"));
+				request.setAttribute("qfile", request.getParameter("qfile"));
+			
+				int qid_num = Integer.parseInt(request.getParameter("qid_num"));
+				
+				if (request.getParameter("qid_num") != null) {
+					Board board = new Board();
+					board = boarddao.select_qna(qid_num);
+					request.setAttribute("sid", session.getAttribute("session_sid"));
+					System.out.println(session.getAttribute("session_sid"));
+					request.setAttribute("qid", qid_num);
+					System.out.println(board.getQid());
+					request.setAttribute("sname", board.getSname());
+					request.setAttribute("qdate", board.getQdate());
+					request.setAttribute("qctg", board.getQctg());
+					request.setAttribute("qcontent", board.getQcontent());
+					request.setAttribute("qcmt", board.getQcmt());
+					request.setAttribute("qcmtdate", board.getQcmtdate());
+					request.setAttribute("qfile", board.getQfile());
+					
+				}
+				
 			} catch (Exception e) {
 				
 			}

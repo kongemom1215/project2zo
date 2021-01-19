@@ -114,6 +114,7 @@ public class MainAction implements CommandProcess  {
 			String calendar_2_7 = format.format(time);
 			String calendar_2_7_format2 = format2.format(time);
 			String covid_calendar_2_7 = shoppinguserdao.covid_19_live(calendar_2_7, calendar_2_7);
+			System.out.println(covid_calendar_2_7);
 
 			time = new Date(start_calendar.getTimeInMillis() + ((now_calendar.getTimeInMillis() - start_calendar.getTimeInMillis()))/7*3);
 			String calendar_3_7 = format.format(time);

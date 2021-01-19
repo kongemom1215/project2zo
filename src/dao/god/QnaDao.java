@@ -79,11 +79,11 @@ public class QnaDao {
 				qna.setPid(rs.getInt(5));
 				qna.setOid(rs.getInt(6));
 				qna.setQcontent(rs.getString(7));
-				qna.setQdate(rs.getDate(8));
+				qna.setQdate(rs.getTimestamp(8));
 				qna.setQfile(rs.getString(9));
 				qna.setQcmt(rs.getString(10));
-				qna.setQcmtdate(rs.getDate(11));
-				qna.setOdate(rs.getDate(12));
+				qna.setQcmtdate(rs.getTimestamp(11));
+				qna.setOdate(rs.getTimestamp(12));
 				qna.setSname(rs.getString(13));
 				
 				qnalist.add(qna);
@@ -121,11 +121,11 @@ public class QnaDao {
 				qna.setPid(rs.getInt(5));
 				qna.setOid(rs.getInt(6));
 				qna.setQcontent(rs.getString(7));
-				qna.setQdate(rs.getDate(8));
+				qna.setQdate(rs.getTimestamp(8));
 				qna.setQfile(rs.getString(9));
 				qna.setQcmt(rs.getString(10));
-				qna.setQcmtdate(rs.getDate(11));
-				qna.setOdate(rs.getDate(12));
+				qna.setQcmtdate(rs.getTimestamp(11));
+				qna.setOdate(rs.getTimestamp(12));
 				qna.setSname(rs.getString(13));
 				
 				waitlist.add(qna);
@@ -215,11 +215,11 @@ public class QnaDao {
 				qna.setPid(rs.getInt(5));
 				qna.setOid(rs.getInt(6));
 				qna.setQcontent(rs.getString(7));
-				qna.setQdate(rs.getDate(8));
+				qna.setQdate(rs.getTimestamp(8));
 				qna.setQfile(rs.getString(9));
 				qna.setQcmt(rs.getString(10));
-				qna.setQcmtdate(rs.getDate(11));
-				qna.setOdate(rs.getDate(12));
+				qna.setQcmtdate(rs.getTimestamp(11));
+				qna.setOdate(rs.getTimestamp(12));
 				qna.setSname(rs.getString(13));
 				
 				ctglist.add(qna);
@@ -255,13 +255,13 @@ public class QnaDao {
 				qna.setPid(rs.getInt(4));
 				qna.setOid(rs.getInt(5));
 				qna.setQcontent(rs.getString(6));
-				qna.setQdate(rs.getDate(7));
+				qna.setQdate(rs.getTimestamp(7));
 				qna.setQfile(rs.getString(8));
 				qna.setQcmt(rs.getString(9));
-				qna.setQcmtdate(rs.getDate(10));
-				qna.setOdate(rs.getDate(11));
+				qna.setQcmtdate(rs.getTimestamp(10));
+				qna.setOdate(rs.getTimestamp(11));
 				qna.setSname(rs.getString(12));
-				qna.setPname(rs.getString(13).substring(0, 15));
+				qna.setPname(rs.getString(13));
 			}
 		} catch (Exception e) {
 			System.out.println("qna select() -> "+e.getMessage());

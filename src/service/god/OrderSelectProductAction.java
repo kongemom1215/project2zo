@@ -22,7 +22,7 @@ public class OrderSelectProductAction implements CommandProcess {
 			
 			OrderDao od=OrderDao.getInstance();
 			List<Order> orderlist=od.selectPid(pid);
-			
+
 			request.setAttribute("pid", pid);
 			request.setAttribute("orderlist", orderlist);
 		} catch (Exception e) {

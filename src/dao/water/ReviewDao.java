@@ -91,7 +91,7 @@ private static ReviewDao instance;
 				review.setRdate(rs.getDate("rdate"));
 				review.setRhit(rs.getInt("rhit"));
 				review.setRcmt(rs.getString("rcmt"));
-				review.setRcmtwriter(rs.getDate("rcmtwriter"));
+				review.setRcmtdate(rs.getDate("rcmtdate"));
 				review.setOdate(rs.getDate("odate"));
 				review.setSname(rs.getString("sname"));
 				
@@ -131,7 +131,7 @@ private static ReviewDao instance;
 				review.setRdate(rs.getDate("rdate"));
 				review.setRhit(rs.getInt("rhit"));
 				review.setRcmt(rs.getString("rcmt"));
-				review.setRcmtwriter(rs.getDate("rcmtwriter"));
+				review.setRcmtdate(rs.getDate("rcmtdate"));
 				review.setOdate(rs.getDate("odate"));
 			} 
 		} catch (Exception e) {
@@ -156,7 +156,7 @@ private static ReviewDao instance;
 		int result = 0;
 		ResultSet rs = null;
 		String sql1 = "select nvl(max(rid),0) from review";
-		String sql="insert into review values(?,?,?,?,?,?,?,sysdate,?,?,sysdate,sysdate,?)";
+		String sql="insert into review values(?,?,?,?,?,?,?,sysdate,?,?,null,sysdate,?)";
 
 		try { 
 			conn  = getConnection();
@@ -214,7 +214,7 @@ private static ReviewDao instance;
 			review.setRdate(rs.getDate("rdate"));
 			review.setRhit(rs.getInt("rhit"));
 			review.setRcmt(rs.getString("rcmt"));
-			review.setRcmtwriter(rs.getDate("rcmtwriter"));
+			review.setRcmtdate(rs.getDate("rcmtdate"));
 			review.setOdate(rs.getDate("odate"));
 			} 
 	  }catch(Exception e) { 

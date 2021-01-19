@@ -1,6 +1,6 @@
 package dao.god;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Review {
 	private int rid;
@@ -10,11 +10,11 @@ public class Review {
 	private String rtitle;
 	private String rcontent;
 	private String rimg;
-	private Date rdate;
+	private Timestamp rdate;
 	private int rhit;
 	private String rcmt;
-	private Date rcmtdate;
-	private Date odate;
+	private Timestamp rcmtdate;
+	private Timestamp odate;
 	private int pid;
 	//조회용
 	private String pname;
@@ -73,12 +73,7 @@ public class Review {
 	public void setRimg(String rimg) {
 		this.rimg = rimg;
 	}
-	public Date getRdate() {
-		return rdate;
-	}
-	public void setRdate(Date rdate) {
-		this.rdate = rdate;
-	}
+	
 	public int getRhit() {
 		return rhit;
 	}
@@ -91,16 +86,23 @@ public class Review {
 	public void setRcmt(String rcmt) {
 		this.rcmt = rcmt;
 	}
-	public Date getRcmtdate() {
+	public Timestamp getRdate() {
+		return rdate;
+	}
+	public void setRdate(Timestamp rdate) {
+		this.rdate = rdate;
+	}
+	public Timestamp getRcmtdate() {
 		return rcmtdate;
 	}
-	public void setRcmtdate(Date rcmtdate) {
+	public void setRcmtdate(Timestamp rcmtdate) {
 		this.rcmtdate = rcmtdate;
 	}
-	public Date getOdate() {
+	public Timestamp getOdate() {
 		return odate;
 	}
-	public void setOdate(Date odate) {
+	public void setOdate(Timestamp odate) {
 		this.odate = odate;
 	}
+
 }

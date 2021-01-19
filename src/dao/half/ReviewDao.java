@@ -37,6 +37,37 @@ public class ReviewDao {
 		return conn;
 	}
 
+		public String getWritername(int sid) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sname = null;
+		String sql = "select sname from (select r.sid, s.sname from review r, shoppinguser s where r.sid = s.sid )"
+				+ "where sid = ?";
+
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, sid);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+			sname = rs.getString(1);
+		} catch (Exception e) {
+			System.out.println("review sname 가져오기 에러 : " + e.getMessage());
+		} finally {
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
+		}
+		return sname;
+
+	}
+	
+	
+	
 	public List<Review> rlist(int startRow, int endRow, int pid) throws SQLException {
 		List<Review> rlist = new ArrayList<Review>();
 
@@ -44,10 +75,6 @@ public class ReviewDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sname = null;
-
-		System.out.println("startrow : " + startRow);
-		System.out.println("endrow : " + endRow);
-		System.out.println("pid : " + pid);
 
 		String sql = "select * from (select rownum rn ,a.* from "
 				+ " (select * from review where pid = ? order by rdate desc) a ) " + " where rn between ? and ?";
@@ -64,14 +91,12 @@ public class ReviewDao {
 				Review review = new Review();
 				review.setRid(rs.getInt("rid"));
 				review.setSid(rs.getInt("sid"));
-				review.setSname(rs.getString("rwriter"));
+				review.setSname(getWritername(rs.getInt("sid")));
 				review.setPid(pid);
 				review.setRtitle(rs.getString("rtitle"));
 				review.setRcontent(rs.getString("rcontent"));
 				review.setRdate(rs.getDate("rdate"));
 				rlist.add(review);
-				System.out.println("리뷰남긴회원번호 : " + rs.getInt("sid"));
-				System.out.println("리뷰남긴회원이름 : " + rs.getString("rwriter"));
 			}
 
 		} catch (Exception e) {
@@ -117,5 +142,6 @@ public class ReviewDao {
 		return tot;
 
 	}
+	
 
 }

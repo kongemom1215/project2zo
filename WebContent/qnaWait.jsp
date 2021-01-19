@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/notice.css?ver=1"/>
+<link rel="stylesheet" type="text/css" href="css/notice.css?ver=109"/>
+<link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
 <style type="text/css">
 	table{
 		width:600px;
@@ -49,30 +51,42 @@
 </script>
 </head>
 <body>
-	<!--로고 및 로그인 메뉴  -->
-	<div style="width: 900px; margin-left: 350px; position: relative;">
-		<img src="img/Logo.png"> <input type="button" value="로그아웃"
-			class="top"
-			style="float: right; background-color: white; border: 0px;"></input>
-		<input type="button" value="관리자페이지" class="top"
-			style="float: right; background-color: white; border: 0px;"
-			onclick="location.href='adminPage.do'"></input>
-	</div>
-	<hr>
-	<!--관리자메뉴  -->
-	<div
-		style="width: 900px; height: 10px; display: table-cell; vertical-align: middle; position: relative;">
-		<div style="width: 900px; margin-left: 350px;">
-			<div id="admin" style="position: relative; float: left;">
-				<input type="button"
-					style="width: 300px; background-color: white; border: 0px;"
-					value="ADMINISTRATOR SERVICE"
-					onclick="location.href='adminPage.do'">
-			</div>
-		</div>
-	</div>
-	<hr>
-	<div id="adminBoard" style="width:1100px;">
+<div class="main">
+	<div style="margin-top: 15px;">
+<a href="main.do"><img src="./img/Logo.png"></a>
+
+<c:choose>
+<c:when test="${session_stype eq '1'}">
+<a class="top_button">위시리스트</a>
+<a class="top_button">장바구니</a>
+<a class="top_button">주문/배송</a>
+<a class="top_button">마이페이지</a>
+<a href="main.do?logout=logout" class="top_button">로그아웃</a>
+<a class="top_button">${session_sname } 님</a>
+</c:when>
+<c:when test="${session_stype eq '0'}">
+<a href="main.do?logout=logout" class="top_button">로그아웃</a>
+<a class="top_button">${session_sname } 님</a>
+<a href="adminPage.do" class="top_button">관리페이지</a>
+</c:when>
+<c:otherwise>
+<a class="top_button">위시리스트</a>
+<a class="top_button">장바구니</a>
+<a class="top_button">주문/배송</a>
+<a class="top_button">마이페이지</a>
+<a href="login.do" class="top_button">로그인/회원가입</a>
+</c:otherwise>
+</c:choose>
+</div>
+</div>
+<hr>
+   <div class="main" style="width: 900px; height: 10px; display: table; vertical-align: middle; position: relative;">
+      <div style="width: 900px; display: table-cell; text-align: center;">
+       <input type="button" style="width: 300px; background-color: white; border: 0px;" value="ADMINISTRATOR SERVICE" onclick="location.href='adminPage.do'">
+      </div>
+   </div>
+ <hr>
+	<div class="main" style="width:1000px">
 		<div id="sidebar">
 			<img src="./img/admin_board.JPG" id="img1">
 			<h2 class="boardMenu">게시판 관리</h2>
@@ -120,7 +134,7 @@
 								</c:if>
 								<a href="qnaInfo.do?qid=${wait.qid }&pageNum=${pageNum}&qctg=wait">문의 드립니다</a></td>
 								<td>${wait.sname }</td>
-								<td>${wait.qdate }</td>
+								<td><fmt:formatDate value="${wait.qdate }" pattern="yyyy-MM-dd"/></td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -129,7 +143,14 @@
 							<a href="qnaWaitPage.do?pageNum=${startPage-blockSize }">[이전]</a>
 						</c:if>
 						<c:forEach var="i" begin="${startPage }" end="${endPage}">
-							<a href="qnaWaitPage.do?pageNum=${i }">[${i }]</a>
+							<c:choose>
+								<c:when test="${i eq pageNum }">
+									<a href="qnaWaitPage.do?pageNum=${i }" style="font-weight:bold;">${i }</a>
+								</c:when>
+								<c:otherwise>
+								<a href="qnaWaitPage.do?pageNum=${i }">${i }</a>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
 						<c:if test="${endPage< pageCnt}">
 							<a href="qnaWaitPage.do?pageNum=${startPage+blockPage }">[다음]</a>
