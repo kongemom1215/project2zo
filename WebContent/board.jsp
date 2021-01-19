@@ -171,9 +171,9 @@
 					<td style="width: 70px;"></td>
 				</tr>
 			</table>
+			</c:if>
 			<p>
 			삭제 수정
-			</c:if>
 			<div style="height: 100px;"></div>
 		</c:when>
 		<c:when test="${type eq 'qna' && not empty qcontent && session_sid == 1}">
@@ -194,6 +194,7 @@
 				</tr>
 			</table> 
 			<p>
+			<c:if test="${not empty qcmt}">
 			<table class="board_table1">
 			<tr>
 					<td style="width: 70px;"></td>
@@ -211,6 +212,7 @@
 				</tr>
 			</table>
 			<div style="height: 100px;"></div>
+			</c:if>
 		</c:when>
 	</c:choose>
 
@@ -259,17 +261,19 @@
 					<c:forEach var="list" items="${list }" begin="${(20*select_page) }" end="${20 + (20*select_page) }">
 						<tr>
 							<td style="width: 70px;">${list.nid }</td>
-							<td style="width: 600px; text-align: left;"><a href="board.do?
-							type=notice&
-							nid=${list.nid }&
-							ntitle=${list.ntitle }&
-							ncontent=${list.ncontent }&
-							npublic=${list.npublic }&
-							ndate=${list.ndate }&
-							nfile=${list.nfile }&
-							nhit=${list.nhit }&
-							page=${page }
-							">${list.ntitle }</a></td>
+							<c:url value="board.do" var="url"> 
+									<c:param name="pageNum" value="${pageNum}" /> 
+									<c:param name="type" value="notice" /> 
+									<c:param name="nid" value="${list.nid }" /> 
+									<c:param name="ntitle" value="${list.ntitle }" /> 
+									<c:param name="ncontent" value="${list.ncontent }" /> 
+									<c:param name="npublic" value="${list.npublic }" /> 
+									<c:param name="ndate" value="${list.ndate }" /> 
+									<c:param name="nfile" value="${list.nfile }" /> 
+									<c:param name="nhit" value="${list.nhit }" /> 
+									<c:param name="page" value="${page }" /> 
+								</c:url> 
+							<td style="width: 600px; text-align: left;"><a href="${url }">${list.ntitle }</a></td>
 							<td style="width: 70px;">관리자</td>
 							<td style="width: 90px;">${list.ndate }</td>
 							<td style="width: 70px;">${list.nhit }</td>
