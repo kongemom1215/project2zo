@@ -37,9 +37,6 @@ public class MypageAction implements CommandProcess {
 			ShoppingUser shoppinguser = su.select(sid);
 			Order_tbDao oddao = Order_tbDao.getInstance();
 			List<Order_Join> list_main = oddao.list_main(sid);
-			System.out.println("list main ostate -> "+list_main.get(0).getOstate());
-			
-			
 			
 			int count_Order = oddao.getCount(sid);
 			System.out.println("MypageAction count_Order->"+count_Order);

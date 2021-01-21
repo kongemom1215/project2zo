@@ -5,20 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 </head>
 <body>
 
 <c:if test="${result > 0 }">
 	<script type="text/javascript">
 		alert("회원가입 되었습니다");  
-		location.href="main.do?pageNum=${pageNum}";
+		location.href="login.do";
 	</script>
 </c:if>
 <c:if test="${result == 0 }">  
 	<script type="text/javascript">
 		alert("회원가입 실패했습니다");  
-		location.href="main.do?pageNum=${pageNum}";
+		location.href="join.do";
 	</script>
 </c:if>
 <%-- <c:if test="${sagree2 == n }">  

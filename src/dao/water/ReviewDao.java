@@ -193,10 +193,10 @@ private static ReviewDao instance;
 	}
 	
 	
-	  public Review select(int sid) throws SQLException {
+	  public Review select(int rid) throws SQLException {
 		  Review review = new Review();
 	  Connection conn = null;
-	  String sql = "select * from review where sid="+sid;
+	  String sql = "select * from review where rid="+rid;
 	  PreparedStatement pstmt = null; 
 	  ResultSet rs = null; 
 	  try { conn = getConnection(); 
@@ -234,7 +234,7 @@ private static ReviewDao instance;
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			int result = 0;
-			String sql="update review set rcontent=? ,rtitle=? where sid=?";
+			String sql="update review set rcontent=? ,rtitle=?,rimg=? where rid=?";
 
 			try { 
 				conn  = getConnection();
@@ -242,7 +242,8 @@ private static ReviewDao instance;
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, review.getRcontent());
 				pstmt.setString(2, review.getRtitle());
-				pstmt.setInt(3, review.getSid());
+				pstmt.setString(3, review.getRimg());
+				pstmt.setInt(4, review.getRid());
 				
 				result = pstmt.executeUpdate();
 				System.out.println(result);
@@ -271,5 +272,30 @@ private static ReviewDao instance;
 				 if(pstmt != null) pstmt.close();
 				 if(conn!=null) conn.close();
 			 }
+		 }
+		
+		
+		public int delete(int rid) throws SQLException {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			int result = 0;
+			ResultSet rs = null;
+			String sql="delete from review where rid = ?";
+
+			try { 
+				conn  = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, rid);
+				rs = pstmt.executeQuery();
+				result = pstmt.executeUpdate();
+			} catch(Exception e) {
+				System.out.println("삭제 dao오류="+e.getMessage());
+			} finally {
+				if (pstmt != null)  pstmt.close();
+				if (conn != null)   conn.close();
+				if (rs != null) 	rs.close();
+			}
+			return result;
 		}
+		
 }

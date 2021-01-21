@@ -5,19 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 </head>
 <body>
 <c:if test="${result > 0 }">
 	<script type="text/javascript">
 		alert("수정 완료 !");
-		location.href="review.do?pageNum=${pageNum}";
+		location.href="board.do?pageNum=${pageNum}&type=review";
 	</script>
 </c:if>
 <c:if test="${result == 0 }">
 	<script type="text/javascript">
 		alert("실패...");
-		location.href="review.do?num=${num}&pageNum=${pageNum}"
+		location.href="board.do?&pageNum=${pageNum}&type=review"
 	</script>
 </c:if>
 </body>

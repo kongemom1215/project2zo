@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 </head>
 <body>
 
 	<c:if test="${result>0 }">
 		<script type="text/javascript">
 		alert("로그인 하였습니다.");
-			location.href="${url}?pid=${pid}";
+			location.href="${url}?pid=${pid}&type=${type}";
 		</script>
 	</c:if>
 	<c:if test="${result == 0 }">

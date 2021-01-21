@@ -16,7 +16,7 @@
 <!--  -->
 <meta charset="UTF-8">
 <!--  -->
-<title>Insert title here</title>
+<title>Bye-rus</title>
 </head>
 
 <body onload="init();">
@@ -84,7 +84,7 @@
 				<a href="shoppingMain.do">SHOPPING</a>
 			</div>
 			<div class="nav_button">
-				<a href="board.do">BOARD</a>
+				<div class="nav_button"><a href="board.do?type=notice">BOARD</a></div>
 			</div>
 		</div>
 	</div>

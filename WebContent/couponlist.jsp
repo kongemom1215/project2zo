@@ -20,7 +20,7 @@ td{
 }
 </style>
 <meta charset="UTF-8">
-<title>쿠폰 조회</title>
+<title>Bye-rus!</title>
 </head>
 <body>
 <%

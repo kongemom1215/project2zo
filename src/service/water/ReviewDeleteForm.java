@@ -19,12 +19,16 @@ public class ReviewDeleteForm implements CommandProcess {
 		try {
 			int sid = Integer.parseInt(request.getParameter("sid"));
 			String pageNum = request.getParameter("pageNum");
+			int rid = Integer.parseInt(request.getParameter("rid"));
 			
 			ReviewDao rd = ReviewDao.getInstance();
-			Review review = rd.select(sid);
+			int result = rd.delete(rid);
+			
+			
+			request.setAttribute("rid", request.getParameter("rid"));
 			request.setAttribute("sid", sid);
 			request.setAttribute("pageNum", pageNum);
-			request.setAttribute("review", review);
+			request.setAttribute("result", result);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

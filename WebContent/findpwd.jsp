@@ -5,14 +5,39 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
 <style type="text/css">
+table {
+width: 50%;
+	height: 200px;
+	margin: auto;
+	font-weight: bolder;
+	border-collapse:collapse;
+}
+.submit {
+	background-color: #0064FF;
+	display: inline-block;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	padding: .5em 2em .55em;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+	color: white;
+	border-radius: .5em;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+	border: 0;
+}
+.submit:hover {
+	background-color: #B9FFFF;
+	color: #0000CD;
+}
 h1{font-weight: 900;}
 	#find{text-align: center; width: 300px; overflow: hidden; position: absolute; right: 50%; top: 30%;}
 	
-	.find{background-color: #00EBFF; display: inline-block; outline: none; cursor: pointer; text-align: center;
-	text-decoration: none; padding: .5em 2em .55em; text-shadow: 0 1px 1px rgba(0,0,0,.3); color:white; width:295px;
+	.find{background-color: #0064FF; display: inline-block; outline: none; cursor: pointer; text-align: center;
+	text-decoration: none; padding: .5em 2em .55em; text-shadow: 0 1px 1px rgba(0,0,0,.3); color:white; width:200px; height:35px;
 	border-radius: .5em; box-shadow: 0 1px 2px rgba(0,0,0,.2); border: 0;}
 	.find:hover{background-color: #3CCEFF}
 </style>
@@ -62,9 +87,9 @@ h1{font-weight: 900;}
 		<h1>비밀번호 찾기</h1>
 			<form action="findPwdPro.do">
 				<table style="margin-left: auto; margin-right: auto;">
-					<tr><td><input type="email" name="semail" required="required" placeholder="이메일"></td></tr>
-					<tr><td><input type="text" name="sename" required="required" placeholder="이름"></td></tr>
-					<tr><td><select name="squestion">
+					<tr><td>이메일</td><td><input type="email" name="semail" required="required" placeholder="이메일" style="width: 300px; height: 20px; text-align: center;"></td></tr>
+					<tr><td>이름</td><td><input type="text" name="sename" required="required" placeholder="이름" style="width: 300px; height: 20px; text-align: center;"></td></tr>
+					<tr><td>질문</td><td><select name="squestion" style="width: 300px; height: 30px; text-align: center;">
 						<option>1. 기억에 남는 추억의 장소는?</option>
             <option>2. 자신의 인생 좌우명은?</option>
             <option>3. 자신의 보물 제1호는?</option>
@@ -73,8 +98,8 @@ h1{font-weight: 900;}
             <option>6. 추억하고 싶은 날짜가 있다면?</option>
             <option>7. 받았던 선물 중 기억에 남는 독특한 선물은?</option>
 					</select></td></tr>
-					<tr><td><input type="text" name="sanswer" required="required" placeholder="위 질문의 답변"></td></tr>
-					<tr><td><input type="submit" value="비밀번호" class="find"></td></tr>
+					<tr><td>답변</td><td><input type="text" name="sanswer" required="required" placeholder="위 질문의 답변" style="width: 300px; height: 20px; text-align: center;"></td></tr>
+					<tr><td colspan="2"><input type="submit" value="비밀번호" class="find"></td></tr>
 				</table>
 			</form>
 	</div>

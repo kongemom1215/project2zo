@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아이디 중복 확인</title>
+<title>Bye-rus!</title>
 </head>
 <body>
 <%

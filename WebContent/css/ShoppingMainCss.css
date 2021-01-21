@@ -14,6 +14,10 @@ body {
 	font-family: 'Jeju Gothic', sans-serif;
 }
 
+table {
+	font-size: small;
+}
+
 .down {
 	width: 900px;
 	height: 1150px;
@@ -33,13 +37,11 @@ body {
 
 .catesmallmenu {
 	font-size: 30px;
-	
 }
 
 .catespecialmenu {
 	margin-top: 10px;
 }
-
 
 .product {
 	float: left;
@@ -48,7 +50,6 @@ body {
 	height: 365px;
 	/* 	background-color: green; */
 }
-
 
 .bestimages {
 	width: 690px;
@@ -135,7 +136,7 @@ body {
 	height: 15px;
 	text-align: center;
 	background-color: #50C2FF;
-	border-radius: 10px;
+	border-radius: 5px;
 	margin-left: 25px;
 	padding: 2px;
 }

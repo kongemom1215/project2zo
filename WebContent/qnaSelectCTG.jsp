@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 <link rel="stylesheet" type="text/css" href="css/notice.css?ver=110"/>
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
 <style type="text/css">
@@ -130,7 +131,7 @@
 								</c:if>
 								<a href="qnaInfo.do?qid=${ctg.qid }&pageNum=${pageNum}&qctg=${qctg}">문의 드립니다</a></td>
 								<td>${ctg.sname }</td>
-								<td>${ctg.qdate }</td>
+								<td><fmt:formatDate value="${ctg.qdate }" pattern="yyyy-MM-dd"/></td>
 							</tr>
 						</c:forEach>
 					</table>

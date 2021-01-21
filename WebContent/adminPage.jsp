@@ -5,14 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
 <style type="text/css">
-#admin {
-	top: 50%;
-	left: 50%;
-}
-
 .member_button {
 	position: relative;
 	border: 0;
@@ -105,10 +100,10 @@
 					<td><input type="button" class="order_button" onclick="location.href='orderAdminPage.jsp'"></td>
 				</tr>
 				<tr>
-					<td><input type="button" value="회원 관리" class="admin_button" onclick="location.href='memberAdminPage.do'"> </td>
-					<td><input type="button" value="상품 관리" class="admin_button" onclick="location.href='productAdminPage.do'"></td>
-					<td><input type="button" value="게시판 관리" class="admin_button" onclick="location.href='noticeAdminPage.do'"> </td>
-					<td><input type="button" value="결제&배송 관리" class="admin_button" onclick="location.href='orderAdminPage.jsp'"></td>
+					<td><input type="button" style="font-family: 'Jeju Gothic', sans-serif; font-size:16px;" value="회원 관리" class="admin_button" onclick="location.href='memberAdminPage.do'"> </td>
+					<td><input type="button" style="font-family: 'Jeju Gothic', sans-serif; font-size:16px;" value="상품 관리" class="admin_button" onclick="location.href='productAdminPage.do'"></td>
+					<td><input type="button" style="font-family: 'Jeju Gothic', sans-serif; font-size:16px;" value="게시판 관리" class="admin_button" onclick="location.href='noticeAdminPage.do'"> </td>
+					<td><input type="button" style="font-family: 'Jeju Gothic', sans-serif; font-size:16px;" value="결제&배송 관리" class="admin_button" onclick="location.href='orderAdminPage.jsp'"></td>
 				</tr>
 			</table>
 		</div>

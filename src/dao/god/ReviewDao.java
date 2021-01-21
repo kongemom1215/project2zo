@@ -80,11 +80,11 @@ public class ReviewDao {
 				review.setRtitle(rs.getString(6));
 				review.setRcontent(rs.getString(7));
 				review.setRimg(rs.getString(8));
-				review.setRdate(rs.getDate(9));
+				review.setRdate(rs.getTimestamp(9));
 				review.setRhit(rs.getInt(10));
 				review.setRcmt(rs.getString(11));
-				review.setRcmtdate(rs.getDate(12));
-				review.setOdate(rs.getDate(13));
+				review.setRcmtdate(rs.getTimestamp(12));
+				review.setOdate(rs.getTimestamp(13));
 				review.setPid(rs.getInt(14));
 				review.setPname(rs.getString(15));
 				
@@ -150,11 +150,11 @@ public class ReviewDao {
 				review.setRtitle(rs.getString(6));
 				review.setRcontent(rs.getString(7));
 				review.setRimg(rs.getString(8));
-				review.setRdate(rs.getDate(9));
+				review.setRdate(rs.getTimestamp(9));
 				review.setRhit(rs.getInt(10));
 				review.setRcmt(rs.getString(11));
-				review.setRcmtdate(rs.getDate(12));
-				review.setOdate(rs.getDate(13));
+				review.setRcmtdate(rs.getTimestamp(12));
+				review.setOdate(rs.getTimestamp(13));
 				review.setPid(rs.getInt(14));
 				review.setPname(rs.getString(15));
 				
@@ -221,11 +221,11 @@ public class ReviewDao {
 				review.setRtitle(rs.getString(6));
 				review.setRcontent(rs.getString(7));
 				review.setRimg(rs.getString(8));
-				review.setRdate(rs.getDate(9));
+				review.setRdate(rs.getTimestamp(9));
 				review.setRhit(rs.getInt(10));
 				review.setRcmt(rs.getString(11));
-				review.setRcmtdate(rs.getDate(12));
-				review.setOdate(rs.getDate(13));
+				review.setRcmtdate(rs.getTimestamp(12));
+				review.setOdate(rs.getTimestamp(13));
 				review.setPid(rs.getInt(14));
 				review.setPname(rs.getString(15));
 				
@@ -263,11 +263,11 @@ public class ReviewDao {
 				review.setRtitle(rs.getString(5));
 				review.setRcontent(rs.getString(6));
 				review.setRimg(rs.getString(7));
-				review.setRdate(rs.getDate(8));
+				review.setRdate(rs.getTimestamp(8));
 				review.setRhit(rs.getInt(9));
 				review.setRcmt(rs.getString(10));
-				review.setRcmtdate(rs.getDate(11));
-				review.setOdate(rs.getDate(12));
+				review.setRcmtdate(rs.getTimestamp(11));
+				review.setOdate(rs.getTimestamp(12));
 				review.setPid(rs.getInt(13));
 				review.setPname(rs.getString(14).substring(0, 15));
 			}

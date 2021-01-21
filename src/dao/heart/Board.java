@@ -32,6 +32,7 @@ public class Board {
 	private int rhit;
 	private String rcmt;
 	private Date rcmtwriter;
+	private Date rcmtdate;
 	//private Date odate;
 	
 	private String sname;
@@ -174,6 +175,12 @@ public class Board {
 	}
 	public void setSname(String sname) {
 		this.sname = sname;
+	}
+	public Date getRcmtdate() {
+		return rcmtdate;
+	}
+	public void setRcmtdate(Date rcmtdate) {
+		this.rcmtdate = rcmtdate;
 	}
 
 }

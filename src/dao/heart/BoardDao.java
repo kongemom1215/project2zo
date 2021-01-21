@@ -97,20 +97,20 @@ public class BoardDao {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
                 Board board = new Board();
-                board.setRid(rs.getInt(2));
-                board.setSid(rs.getInt(3));
-                board.setOid(rs.getInt(4));
-                board.setRwriter(rs.getString(5));
-                board.setRtitle(rs.getString(6));
-                board.setRcontent(rs.getString(7));
-                board.setRimg(rs.getString(8));
-                board.setRdate(rs.getDate(9));
-                board.setRhit(rs.getInt(10));
-                board.setRcmt(rs.getString(11));
-                board.setRcmtwriter(rs.getDate(12));
-                board.setOdate(rs.getDate(13));
-                board.setPid(rs.getInt(14));
-                board.setPname(rs.getString(15));
+                board.setRid(rs.getInt("rid"));
+                board.setSid(rs.getInt("sid"));
+                board.setOid(rs.getInt("oid"));
+                board.setRwriter(rs.getString("rwriter"));
+                board.setRtitle(rs.getString("rtitle"));
+                board.setRcontent(rs.getString("rcontent"));
+                board.setRimg(rs.getString("rimg"));
+                board.setRdate(rs.getDate("rdate"));
+                board.setRhit(rs.getInt("rhit"));
+                board.setRcmt(rs.getString("rcmt"));
+                board.setRcmtdate(rs.getDate("rcmtdate"));
+                board.setOdate(rs.getDate("odate"));
+                board.setPid(rs.getInt("pid"));
+                board.setPname(rs.getString("pname"));
 
                 list.add(board);
 			}
@@ -197,7 +197,7 @@ public class BoardDao {
 					board.setRcmt(rs.getString("rcmt"));
 					board.setRdate(rs.getDate("rdate"));
 					board.setOdate(rs.getDate("odate"));
-					board.setRcmtwriter(rs.getDate("rcmtwriter"));
+					board.setRcmtdate(rs.getDate("rcmtdate"));
 					board.setRhit(rs.getInt("rhit"));
 					
 					rs.close();
@@ -230,82 +230,76 @@ public class BoardDao {
 		
 		return board;
 	}
-	public int review(Board board,int sid, int oid,int pid) throws SQLException {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs=null;
-		int result = 0;
-		String sql1 = "select nvl(max(rid),0) from review";
-		String sql2 = "insert into review values (?,?,?,?,?,?,?,sysdate,0,null,null,(select o.odate from order_tb o where oid=?),?)";
-		//String sql3 = "select pid from orderdetail where oid=?";
-		String sql4="select sname from shoppinguser where sid=?";
-		String sql5="update order_tb set ostate=ostate+1 where oid=?";
-		String sql6 ="Update orderdetail set reviewox=reviewox+1 where oid=? and pid=?";
-		int rid=0;
-		String sname=null;
-		try {
-			conn=getConnection();
-			pstmt=conn.prepareStatement(sql1);
-			rs=pstmt.executeQuery();
-			if(rs.next())
-				rid=rs.getInt(1)+1;
-			rs.close();
-			pstmt.close();
-			
-		/*	pstmt=conn.prepareStatement(sql3);
-			pstmt.setInt(1, oid);
-			rs=pstmt.executeQuery();
-			if(rs.next()) 
-				pid = rs.getInt(1);
-			rs.close();
-			pstmt.close(); */
-			
-			pstmt=conn.prepareStatement(sql4);
-			pstmt.setInt(1, sid);
-			rs=pstmt.executeQuery();
-			if(rs.next()) 
-				sname = rs.getString(1);
-			rs.close();
-			pstmt.close();
-			
-			pstmt=conn.prepareStatement(sql2);
-			pstmt.setInt(1, rid);
-			pstmt.setInt(2, sid);
-			pstmt.setInt(3, oid);
-			pstmt.setString(4, sname);
-			pstmt.setString(5, board.getRtitle());
-			pstmt.setString(6,board.getRcontent());
-			pstmt.setString(7,board.getRimg());
-			pstmt.setInt(8, oid);
-			pstmt.setInt(9, pid);
-			
-			
-			result=pstmt.executeUpdate();
-			rs.close();
-			pstmt.close();
-			System.out.println("result : "+result);
-			
-			pstmt=conn.prepareStatement(sql5);
-			pstmt.setInt(1, oid);
-			pstmt.executeUpdate();
-			rs.close();
-			pstmt.close();
-			
-			pstmt=conn.prepareStatement(sql6);
-			pstmt.setInt(1, oid);
-			pstmt.setInt(2, pid);
-			pstmt.executeUpdate();
-			
-			
-		} catch (Exception e) {
-			System.out.println("review insert() ->"+e.getMessage());
-		} finally {
-			if(pstmt!=null)
-				pstmt.close();
-			if(conn!=null)
-				conn.close();
-		}
-		return result;
-	}
+	   public int review(Board board,int sid, int oid,int pid) throws SQLException {
+		      Connection conn = null;
+		      PreparedStatement pstmt = null;
+		      ResultSet rs=null;
+		      int result = 0;
+		      String sql1 = "select nvl(max(rid),0) from review";
+		      String sql2 = "insert into review values (?,?,(select o.odate from order_tb o where oid=?),?,?,?,?,?,?,sysdate,0,null,null)";
+		      //String sql3 = "select pid from orderdetail where oid=?";
+		      String sql4="select sname from shoppinguser where sid=?";
+		      String sql6 ="Update orderdetail set reviewox=reviewox+1 where oid=? and pid=?";
+		      int rid=0;
+		      String sname=null;
+		      try {
+		         conn=getConnection();
+		         pstmt=conn.prepareStatement(sql1);
+		         rs=pstmt.executeQuery();
+		         if(rs.next())
+		            rid=rs.getInt(1)+1;
+		         rs.close();
+		         pstmt.close();
+		         
+		      /*   pstmt=conn.prepareStatement(sql3);
+		         pstmt.setInt(1, oid);
+		         rs=pstmt.executeQuery();
+		         if(rs.next()) 
+		            pid = rs.getInt(1);
+		         rs.close();
+		         pstmt.close(); */
+		         
+		         pstmt=conn.prepareStatement(sql4);
+		         pstmt.setInt(1, sid);
+		         rs=pstmt.executeQuery();
+		         if(rs.next()) 
+		            sname = rs.getString(1);
+		         rs.close();
+		         pstmt.close();
+		         
+		         pstmt=conn.prepareStatement(sql2);
+		         pstmt.setInt(1, rid);
+		         pstmt.setInt(2, sid);
+		         pstmt.setInt(3, oid);
+		         pstmt.setInt(4, oid);
+		         pstmt.setInt(5, pid);
+		         pstmt.setString(6, sname);
+		         pstmt.setString(7, board.getRtitle());
+		         pstmt.setString(8,board.getRcontent());
+		         pstmt.setString(9,board.getRimg());
+		      
+		         
+		         
+		         result=pstmt.executeUpdate();
+		         rs.close();
+		         pstmt.close();
+		         System.out.println("result : "+result);
+		         
+		         pstmt=conn.prepareStatement(sql6);
+		         pstmt.setInt(1, oid);
+		         pstmt.setInt(2, pid);
+		         pstmt.executeUpdate();
+		         
+		         
+		      } catch (Exception e) {
+		         System.out.println("review insert() ->"+e.getMessage());
+		      } finally {
+		         if(pstmt!=null)
+		            pstmt.close();
+		         if(conn!=null)
+		            conn.close();
+		      }
+		      return result;
+		   }
 
 }

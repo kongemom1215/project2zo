@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 <link rel="stylesheet" type="text/css" href="css/notice.css?ver=112"/>
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
 <style type="text/css">
@@ -129,7 +130,7 @@ function chk(){
 									[답변완료]</c:if>
 									<a href="reviewInfo.do?rid=${wait.rid }&rctg=wait&pageNum=${pageNum}">${wait.rtitle }</a></td>
 								<td>${wait.rwriter }</td>
-								<td>${wait.rdate }</td>
+								<td><fmt:formatDate value="${wait.rdate }" pattern="yyyy-MM-dd"/></td>
 								<td>${wait.rhit }</td>
 							</tr>
 						</c:forEach>

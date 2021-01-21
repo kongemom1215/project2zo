@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 <link rel="stylesheet" type="text/css" href="css/qna.css?ver=108"/>
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
 <style type="text/css">
@@ -149,7 +149,7 @@
 							</c:when>
 							<c:otherwise>
 								<td>상품</td>
-								<td colspan="3">${qna.pid }-<a href="productDetail.do?pid=${qna.pid }">${qna.pname }</a></td>
+								<td colspan="3">${qna.pid }-<a href="productDetail.do?pid=${qna.pid }" style="text-decoration:underline;">${qna.pname }</a></td>
 							</c:otherwise>
 						</c:choose>
 						</tr>

@@ -11,6 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import oracle.net.aso.f;
+
 public class ProductDao {
 	private static ProductDao instance;
 
@@ -34,37 +36,6 @@ public class ProductDao {
 			System.out.println(e.getMessage());
 		}
 		return conn;
-	}
-
-	public int productAdd(String pname, String ptype, int pprice, int pinventory, String poption) {
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql_max = "SELECT max(pid) pid FROM product";
-		int pid_max = 0;
-		int result = 0;
-		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql_max);
-			rs = pstmt.executeQuery();
-			rs.next();
-			pid_max = rs.getInt("pid");
-			System.out.println(pid_max + 1);
-			String sql = "insert into PRODUCT (pid, pname, ptype, pprice, pinventory, poption) values (?, ?, ?, ?, ?, ?)";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, pid_max + 1);
-			pstmt.setString(2, pname);
-			pstmt.setString(3, ptype);
-			pstmt.setInt(4, pprice);
-			pstmt.setInt(5, pinventory);
-			pstmt.setString(6, poption);
-			pstmt.executeUpdate();
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
-		return result;
 	}
 
 	public List<Product> main_img() throws SQLException {

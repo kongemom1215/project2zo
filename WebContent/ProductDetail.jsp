@@ -2,11 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Welcome to Byerus</title>
+<title>Bye-rus!</title>
 <link rel="stylesheet" href="./css/ProductDetailCss.css?ver=3">
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=2s">
 <style>
@@ -93,6 +95,37 @@
 			addComma(Math.round(parseInt(hm.value) * sell_price));
 			remoconSwitch();
 		}
+		
+		function reviewchk() {
+			let buycheck = ${buycheck};
+
+			if (buycheck < 0) {
+				alert('구매이력이 없습니다');
+				return false;
+			} else if (buycheck == 1) {
+				alert('구매이력 확인을 위해 로그인하세요.');
+				return false;
+			} else if (buycheck == 7) {
+				alert('이미 리뷰를 작성하셨습니다');
+				return false;
+			} else if (buycheck == 0) {
+				location.href="mypageYetReview.do";
+				return false;
+			}
+		}
+		
+		function qnachk() {
+			let buycheck = ${buycheck};
+			
+			if (buycheck == 1) {
+				alert('문의글 작성을 위해 로그인하세요.');
+				return false;
+			} else {
+				location.href="writeForm.do?pid=" + ${pid};
+				return false;
+			}
+		}
+		
 	</script>
 	<div class="main">
 		<div style="margin-top: 15px;">
@@ -117,13 +150,14 @@
 					<a href="login.do?url=cart.do" class="top_button">장바구니</a>
 					<a href="login.do?url=mypageOrder.do" class="top_button">주문/배송</a>
 					<a href="login.do?url=mypage.do" class="top_button">마이페이지</a>
-					<a href="login.do?url=main.do" class="top_button">로그인/회원가입</a>
+					<a href="login.do?url=productDetail.do&pid=${pid }" class="top_button">로그인/회원가입</a>
 				</c:otherwise>
 			</c:choose>
 
 		</div>
+		<hr>
 	</div>
-	<hr>
+	
 	<div class="main">
 		<div style="height: 17.33px;">
 			<div class="nav_button">
@@ -253,14 +287,23 @@
 					<!-- infotablediv close -->
 					<!-- 홍주님과 협업 -->
 					<div class="purchase">
-						<input type="submit" value="바로구매" class="pbuttons"
-							formaction="goOrder.do?pid=${pid}&option=${option}&howmany=${howmany}"></input>
-						<input type="submit" value="장바구니" class="pbuttons"
-							formaction="cartAdd.do?pid=${pid}&option=${option}&howmany=${howmany}&sum=${sum}"></input>
-						<input type="submit" value="찜" class="pbuttons"
-							formaction="jjim.do"></input>
+						<c:if test="${empty session_sid}">
+							<input type="button" class="pbuttons" value="바로구매"
+								onclick="location.href='login.do?url=productDetail.do&pid=${pid }'">
+							<input type="button" class="pbuttons" value="장바구니"
+								onclick="location.href='login.do?url=productDetail.do&pid=${pid }'">
+							<input type="button" class="pbuttons" value="찜"
+								onclick="location.href='login.do?url=productDetail.do&pid=${pid }'">
+						</c:if>
+						<c:if test="${not empty session_sid}">
+							<input type="submit" value="바로구매" class="pbuttons"
+								formaction="goOrder.do?pid=${pid}&option=${option}&howmany=${howmany}"></input>
+							<input type="submit" value="장바구니" class="pbuttons"
+								formaction="cartAdd.do?pid=${pid}&option=${option}&howmany=${howmany}&sum=${sum}"></input>
+							<input type="submit" value="찜" class="pbuttons"
+								formaction="jjim.do"></input>
+						</c:if>
 					</div>
-					
 				</form>
 				<!-- purchase close -->
 			</div>
@@ -276,25 +319,6 @@
 
 				</div>
 
-
-				<script>
-					function reviewchk() {
-						let buycheck = ${buycheck};
-
-						if (buycheck < 0) {
-							alert('구매이력이 없습니다');
-							return false;
-						} else if (buycheck == 1) {
-							alert('구매이력 확인을 위해 로그인하세요.');
-							return false;
-						} else if (buycheck == 7) {
-							alert('이미 리뷰를 작성하셨습니다');
-							return false;
-						} else if (buycheck == 0) {
-							return true;
-						}
-					}
-				</script>
 
 
 				<div class="boardzone">
@@ -330,10 +354,13 @@
 										<td>${reviews.sname }</td>
 										<td>${reviews.rdate }</td>
 									</tr>
+									<tr height="20px"></tr>
 									<tr height="40px">
 										<td></td>
-										<td style="text-align: left;" colspan=3 align=left><span
-											style="font-size: x-small; color: gray;">
+
+										<td style="text-align: left; background-color: #B9E2FA;"
+											colspan=2;><span
+											style="font-size: x-small; color: #1E3269; padding: 7px;">
 												${reviews.rcontent }</span></td>
 									</tr>
 									<c:set var="rstartNum" value="${rstartNum - 1 }" />
@@ -374,7 +401,7 @@
 								<td></td>
 								<td></td>
 								<td>
-									<form>
+									<form onsubmit="return qnachk();">
 										<input type="submit" value="문의글 쓰기" class="pbuttons"></input>
 									</form> <br />
 								</td>
@@ -404,8 +431,8 @@
 									<c:if test="${qnas.qcmt ne null}">
 										<tr>
 											<td></td>
-											<td style="text-align: left;"><span
-												style="font-size: x-small; color: #14D3FF;">${qnas.qcmt }</span>
+											<td style="text-align: left; background-color: #B9E2FA;"><span
+												style="font-size: x-small; color: #1E3269; padding: 7px;">${qnas.qcmt }</span>
 											</td>
 											<td>BYE-RUS</td>
 											<td></td>
@@ -456,14 +483,14 @@
 
 								<td width="180px"><a
 									href='productDetail.do?pid=${best4.pid }'><img
-										src="${best4.pthumbimg }" width="150" height="150"></img></td>
+										src="${best4.pthumbimg }" width="100" height="100"></img></td>
 								<td width="50px"></td>
 							</c:forEach>
 
 						</tr>
 						<tr height="40px">
 							<c:forEach var="best4" items="${BEST4PRODUCTS }">
-								<td><font color="gray">${best4.pname }</font></td>
+								<td><span style="font-size: x-small; color: gray;">${best4.pname }</span></td>
 								<td></td>
 							</c:forEach>
 

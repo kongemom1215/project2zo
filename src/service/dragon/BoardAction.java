@@ -85,7 +85,7 @@ public class BoardAction implements CommandProcess {
 				blockSize = 10;
 				startRow = (currentPage - 1) * pageSize + 1;
 				endRow =  startRow + pageSize - 1;
-				totCnt = rd.getTotalCnt();
+				totCnt = nd.getTotalCnt();
 				startNum = totCnt - startRow + 1;   // 38
 				List<Notice> list_notice = nd.list(startRow , endRow); 
 				System.out.println("ListAction list.size()-->" + list_notice.size());        // /och16/list.do
@@ -93,6 +93,7 @@ public class BoardAction implements CommandProcess {
 				pageCnt = (int)Math.ceil((double)totCnt/pageSize);
 				startPage = (int)(currentPage-1)/blockSize*blockSize + 1;
 				endPage = startPage + blockSize -1;	
+				System.out.println("endpage : " + endPage);
 				if (endPage > pageCnt) endPage = pageCnt;	
 				
 				
@@ -153,6 +154,25 @@ public class BoardAction implements CommandProcess {
 				request.setAttribute("odate", request.getParameter("odate"));
 				request.setAttribute("pid", request.getParameter("pid"));
 				
+				int reivew_num = Integer.parseInt(request.getParameter("reivew_num"));
+				
+				if (request.getParameter("reivew_num") != null) {
+					Board board = new Board();
+					board = boarddao.select_reivew(reivew_num);
+					request.setAttribute("sid", session.getAttribute("session_sid"));
+					request.setAttribute("rid", board.getRid());
+					request.setAttribute("rwriter", board.getRwriter());
+					request.setAttribute("rtitle", board.getRtitle());
+					request.setAttribute("rcontent", board.getRcontent());
+					request.setAttribute("rimg", board.getRimg());
+					request.setAttribute("rdate", board.getRdate());
+					request.setAttribute("rhit", board.getRhit());
+					request.setAttribute("rcmt", board.getRcmt());
+					request.setAttribute("rcmtdate", board.getRcmtdate());
+					request.setAttribute("odate", board.getOdate());
+					request.setAttribute("pid", board.getPid());
+					
+				}
 			} catch (Exception e) {
 				
 			}
@@ -177,15 +197,23 @@ public class BoardAction implements CommandProcess {
 				
 				request.setAttribute("list",  list_qna);
 				
+				request.setAttribute("sid", request.getParameter("sid"));
+				request.setAttribute("qid", request.getParameter("qid"));
+				request.setAttribute("sname", request.getParameter("sname"));
+				request.setAttribute("qdate", request.getParameter("qdate"));
+				request.setAttribute("qctg", request.getParameter("qctg"));
+				request.setAttribute("qcontent", request.getParameter("qcontent"));
+				request.setAttribute("qcmt", request.getParameter("qcmt"));
+				request.setAttribute("qcmtdate", request.getParameter("qcmtdate"));
+				request.setAttribute("qfile", request.getParameter("qfile"));
+			
 				int qid_num = Integer.parseInt(request.getParameter("qid_num"));
 				
 				if (request.getParameter("qid_num") != null) {
 					Board board = new Board();
 					board = boarddao.select_qna(qid_num);
 					request.setAttribute("sid", session.getAttribute("session_sid"));
-					System.out.println(session.getAttribute("session_sid"));
 					request.setAttribute("qid", qid_num);
-					System.out.println(board.getQid());
 					request.setAttribute("sname", board.getSname());
 					request.setAttribute("qdate", board.getQdate());
 					request.setAttribute("qctg", board.getQctg());
@@ -194,18 +222,7 @@ public class BoardAction implements CommandProcess {
 					request.setAttribute("qcmtdate", board.getQcmtdate());
 					request.setAttribute("qfile", board.getQfile());
 					
-				} else {
-					request.setAttribute("sid", request.getParameter("sid"));
-					request.setAttribute("qid", request.getParameter("qid"));
-					request.setAttribute("sname", request.getParameter("sname"));
-					request.setAttribute("qdate", request.getParameter("qdate"));
-					request.setAttribute("qctg", request.getParameter("qctg"));
-					request.setAttribute("qcontent", request.getParameter("qcontent"));
-					request.setAttribute("qcmt", request.getParameter("qcmt"));
-					request.setAttribute("qcmtdate", request.getParameter("qcmtdate"));
-					request.setAttribute("qfile", request.getParameter("qfile"));
 				}
-				
 				
 			} catch (Exception e) {
 				

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 <link rel="stylesheet" type="text/css" href="css/order.css?ver=20">
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -61,8 +61,9 @@
     margin-left:20px;
     text-align:center;
 }
-a{
-	text-decoration: underline;
+a {
+	text-decoration: none;
+	color: black;
 }
 </style>
 </head>
@@ -177,7 +178,7 @@ a{
 						<c:forEach var="order" items="${orderlist }">
 							<tr>
 								<td><fmt:formatDate pattern="yyyy.MM.dd HH:mm" value="${order.odate }" /></td>
-								<td><a href="orderSelectInfo.do?oid=${order.oid }&datepicker=${datepicker}&datepicker2=${datepicker2}"> <fmt:formatDate pattern="yyyyMMdd" value="${order.odate }"/>
+								<td><a href="orderSelectInfo.do?oid=${order.oid }&datepicker=${datepicker}&datepicker2=${datepicker2}" style="text-decoration: underline;"> <fmt:formatDate pattern="yyyyMMdd" value="${order.odate }"/>
 										-<fmt:formatNumber value="${order.oid }" pattern="00000"/></a></td>
 								<td>${order.sname }</td>
 								<td><fmt:formatNumber value="${order.oamount }" pattern="#,###"/></td>

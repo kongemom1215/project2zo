@@ -49,84 +49,84 @@
 </div>
 <hr style="margin-bottom: 0px; border-bottom: 0px;">
 <div class="main">
-	<div class="mypagehead">
-		<input type="button" value="마이페이지" style="margin-top: 30px; font-weight:bold; font-size: 30px; color: #00EBFF; background-color: white; width: 170px; border: 0; outline: 0;" onclick="location.href='mypage.do?sid=${2 }'">
-	<hr>
-	</div>
-	<div class="down">
-	<div class="mypagemainside">
-	<div class="mypageside">
-		<br>
-		<a href="mypageOrder.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
-		<span>주문조회</span>
-		<span style="float:right;">></span>
-		</a><p>
-		<a href="mypageCoupon.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
-		<span>쿠폰</span>
-		<span style="float:right;">></span>
-		</a><p>
-		<a href="mypageReview.do" style="text-decoration: none; color: black;">
-		<span>리뷰/문의</span>
-		<span style="float:right;">></span>
-		</a><p>
-		<a href="mypageEditForm.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
-		<span>회원정보수정</span>
-		<span style="float:right;">></span>
-		</a><p>
-		<a href="mypageDeleteForm.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
-		<span>회원탈퇴</span>
-		<span style="float:right;">></span>
-		</a><p>
-	</div>
-	</div>
+   <div class="mypagehead">
+      <input type="button" value="마이페이지" style="margin-top: 30px; font-weight:bold; font-size: 30px; color: #00EBFF; background-color: white; width: 170px; border: 0; outline: 0;" onclick="location.href='mypage.do?sid=${2 }'">
+   <hr>
+   </div>
+   <div class="down">
+   <div class="mypagemainside">
+   <div class="mypageside">
+      <br>
+      <a href="mypageOrder.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+      <span>주문조회</span>
+      <span style="float:right;">></span>
+      </a><p>
+      <a href="mypageCoupon.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+      <span>쿠폰</span>
+      <span style="float:right;">></span>
+      </a><p>
+      <a href="mypageReview.do" style="text-decoration: none; color: black;">
+      <span>리뷰/문의</span>
+      <span style="float:right;">></span>
+      </a><p>
+      <a href="mypageEditForm.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+      <span>회원정보수정</span>
+      <span style="float:right;">></span>
+      </a><p>
+      <a href="mypageDeleteForm.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+      <span>회원탈퇴</span>
+      <span style="float:right;">></span>
+      </a><p>
+   </div>
+   </div>
 
 <div class="useredit">
-	<table>
-		<caption><h2>주문자 정보</h2></caption>
-		<tr><td>수령자 : </td><td>${orderjoin.oname }</td></tr>
-		<tr><td>연락처 : </td><td>${orderjoin.ocontact }</td></tr>
-		<tr><td>우편번호 : </td><td>${orderjoin.opost }</td></tr>
-		<tr><td>주소 : </td><td>${orderjoin.oaddress }</td></tr>
-		<tr><td>결제수단 : </td><td>
-		<c:set var="opay" value="${orderjoin.opay }"/>
-				<c:choose>
-				 	<c:when test="${opay eq '1' }">
-				 		카드
-				 	</c:when>
-				 	<c:when test="${opay eq '2' }">
-				 		무통장
-				 	</c:when>			
-				 	<c:otherwise></c:otherwise>	 	
-				</c:choose>				
-		</td></tr>
-		<tr><td>배송비 : </td><td>
-		<c:set var="odelivery" value="${orderjoin.odelivery }"/>
-				<c:choose>
-				 	<c:when test="${odelivery eq '0' }">
-				 		무료배송
-				 	</c:when>
-				 	<c:when test="${odelivery eq '3000' }">
-				 		3,000원
-				 	</c:when>			
-				 	<c:otherwise></c:otherwise>	 	
-				</c:choose>				
-		</td></tr>
-		<tr>
-		<c:set var="cid" value="${orderjoin.cid }"/>
-				<c:choose>
-				 	<c:when test="${cid eq null }">
-				 	</c:when>
-				 	<c:when test="${cid ne null }">
-				 	<td>할인가액 : </td><td>
-				 	<c:set var="cprice" value="${((orderjoin.oamount-orderjoin.odelivery)*100/(100 - orderjoin.cdiscount))*(orderjoin.cdiscount/100) }" />
-				 	<fmt:formatNumber type="number" pattern="#,###" value="${cprice }"/>원
-				 	</td>
-				 	</c:when>			
-				 	<c:otherwise></c:otherwise>	 	
-				</c:choose>				
-		</tr>
-	</table>
-</div>	
+   <table>
+      <caption><h2>주문자 정보</h2></caption>
+      <tr><td>수령자 : </td><td>${orderjoin.oname }</td></tr>
+      <tr><td>연락처 : </td><td>${orderjoin.ocontact }</td></tr>
+      <tr><td>우편번호 : </td><td>${orderjoin.opost }</td></tr>
+      <tr><td>주소 : </td><td>${orderjoin.oaddress }</td></tr>
+      <tr><td>결제수단 : </td><td>
+      <c:set var="opay" value="${orderjoin.opay }"/>
+            <c:choose>
+                <c:when test="${opay eq '1' }">
+                   카드
+                </c:when>
+                <c:when test="${opay eq '2' }">
+                   무통장
+                </c:when>         
+                <c:otherwise></c:otherwise>       
+            </c:choose>            
+      </td></tr>
+      <tr><td>배송비 : </td><td>
+      <c:set var="odelivery" value="${orderjoin.odelivery }"/>
+            <c:choose>
+                <c:when test="${odelivery eq '0' }">
+                   무료배송
+                </c:when>
+                <c:when test="${odelivery eq '3000' }">
+                   3,000원
+                </c:when>         
+                <c:otherwise></c:otherwise>       
+            </c:choose>            
+      </td></tr>
+      <tr>
+      <c:set var="cid" value="${orderjoin.cid }"/>
+            <c:choose>
+                <c:when test="${cid eq '0' }">
+                </c:when>
+                <c:when test="${cid ne '0' }">
+                <td>할인가액 : </td><td>
+                <c:set var="cprice" value="${((orderjoin.oamount-orderjoin.odelivery)*100/(100 - orderjoin.cdiscount))*(orderjoin.cdiscount/100) }" />
+                <fmt:formatNumber type="number" pattern="#,###" value="${cprice }"/>원
+                </td>
+                </c:when>         
+                <c:otherwise></c:otherwise>       
+            </c:choose>            
+      </tr>
+   </table>
+</div>   
 </div>
 </div>
 <div style="height: 90%;">

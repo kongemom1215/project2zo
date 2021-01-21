@@ -132,7 +132,7 @@ public class BoardDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs =null;
-		String sql = "select * from reivew where rid= ?";
+		String sql = "select * from review where rid= ?";
 		Board board = new Board();
 		try {
 			conn = getConnection();
@@ -157,7 +157,7 @@ public class BoardDao {
 		} catch (Exception e) {
 			System.out.println("ShoppingUser select error=>"+e.getMessage());
 		} finally {
-			if (rs !=null)    rs.close();
+			if (rs !=null)    rs.close(); 	
 			if (pstmt != null) pstmt.close();
 			if (conn !=null)  conn.close();
 		}

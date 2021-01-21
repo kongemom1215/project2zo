@@ -57,6 +57,7 @@ public class WriteProAction implements CommandProcess {
 				  Qna qna = new Qna();
 				String pageNum = request.getParameter("pageNum");
 				
+				qna.setQid(Integer.parseInt(multi.getParameter("qid")));
 				qna.setSid(Integer.parseInt(multi.getParameter("session_sid")));
 		        qna.setQcontent(multi.getParameter("qcontent"));
 		        qna.setQctg(multi.getParameter("qctg"));

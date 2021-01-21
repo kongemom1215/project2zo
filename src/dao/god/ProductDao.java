@@ -180,7 +180,7 @@ public class ProductDao {
 		int result=0;
 		Connection conn=null;
 		PreparedStatement pstmt=null;
-		String sql="update Product set pname=?, ptype=?, pprice=?, pinventory=?, pdiscount=?, ppublic=?, pthumbimg=?, col1=?, col2=?, col3=? where pid=?";
+		String sql="update Product set pname=?, ptype=?, pprice=?, pinventory=?, pdiscount=?, ppublic=?, pthumbimg=?, col1=?, col2=?, col3=?, poption=? where pid=?";
 		
 		try {
 			conn=getConnection();
@@ -195,7 +195,8 @@ public class ProductDao {
 			pstmt.setString(8, product.getCol1());
 			pstmt.setString(9, product.getCol2());
 			pstmt.setString(10, product.getCol3());
-			pstmt.setInt(11, product.getPid());
+			pstmt.setString(11, product.getPoption());
+			pstmt.setInt(12, product.getPid());
 			
 			
 			result=pstmt.executeUpdate();

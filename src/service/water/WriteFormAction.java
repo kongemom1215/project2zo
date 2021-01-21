@@ -17,8 +17,8 @@ public class WriteFormAction implements CommandProcess {
 		System.out.println("WriteFormAction2 시작...");
 		try {
 			
-			
-			 request.setAttribute("pageNum", pageNum);
+			request.setAttribute("pid", request.getParameter("pid"));
+			request.setAttribute("pageNum", pageNum);
 				} catch (Exception e) {
 					
 				}

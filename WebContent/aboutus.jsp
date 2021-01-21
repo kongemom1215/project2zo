@@ -16,7 +16,7 @@
 <!--  -->
 <meta charset="UTF-8">
 <!--  -->
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 </head>
 <body>
 <div class="main">
@@ -42,7 +42,7 @@
 <a href="login.do?url=cart.do" class="top_button">장바구니</a>
 <a href="login.do?url=mypageOrder.do" class="top_button">주문/배송</a>
 <a href="login.do?url=mypage.do" class="top_button">마이페이지</a>
-<a href="login.do?url=main.do" class="top_button">로그인/회원가입</a>
+<a href="login.do?url=aboutUs.do" class="top_button">로그인/회원가입</a>
 </c:otherwise>
 </c:choose>
 

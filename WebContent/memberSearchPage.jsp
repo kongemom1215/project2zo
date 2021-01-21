@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 <link rel="stylesheet" type="text/css" href="css/memberadmin.css?ver=1">
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
 <style type="text/css">
@@ -19,6 +19,12 @@ a:visited {
 
 a:link{
 	color:black;
+}
+#search_table{
+	margin-left:20px;
+}
+table{
+	width: 610px;
 }
 </style>
 <script type="text/javascript">
@@ -111,7 +117,7 @@ a:link{
 						<c:forEach var="user" items="${userlist }">
 							<tr>
 								<td>${user.sid }</td>
-								<td><a href="memberInfo.do?sid=${user.sid }&pageNum=${pageNum}&option=${option}&search_value=${search_value}">${user.sname }</a></td>
+								<td><a href="memberInfo.do?sid=${user.sid }&pageNum=${pageNum}&option=${option}&search_value=${search_value}" style="text-decoration: underline;">${user.sname }</a></td>
 								<td>${user.semail }</td>
 								<td>${user.scontact }</td>
 								<td>${user.sregdate }</td>

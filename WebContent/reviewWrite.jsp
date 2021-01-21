@@ -49,53 +49,54 @@
 </div>
 <hr style="margin-bottom: 0px; border-bottom: 0px;">
 <div class="main">
-	<div class="mypagehead">
-		<input type="button" value="마이페이지" style="margin-top: 30px; font-weight:bold; font-size: 30px; color: #00EBFF; background-color: white; width: 170px; border: 0; outline: 0;" onclick="location.href='mypage.do'">
-	<hr>
-	</div>
-	<div class="down">
-	<div class="mypagemainside">
-	<div class="mypageside">
-		<br>
-		<a href="mypageOrder.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
-		<span>주문조회</span>
-		<span style="float:right;">></span>
-		</a><p>
-		<a href="mypageCoupon.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
-		<span>쿠폰</span>
-		<span style="float:right;">></span>
-		</a><p>
-		<a href="mypageReview.do" style="text-decoration: none; color: black;">
-		<span>리뷰/문의</span>
-		<span style="float:right;">></span>
-		</a><p>
-		<a href="mypageEditForm.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
-		<span>회원정보수정</span>
-		<span style="float:right;">></span>
-		</a><p>
-		<a href="mypageDeleteForm.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
-		<span>회원탈퇴</span>
-		<span style="float:right;">></span>
-		</a><p>
-	</div>
-	</div>
-
-<form action="reviewWriteAction.do?oid=${orderjoin.oid }" method="post" enctype="Multipart/form-data">
-	<table>
-		<caption><h2>리뷰 작성</h2></caption>
-		<tr><td>주문번호	</td><td ><fmt:formatDate pattern="yyyyMMdd"
+   <div class="mypagehead">
+      <input type="button" value="마이페이지" style="margin-top: 30px; font-weight:bold; font-size: 30px; color: #00EBFF; background-color: white; width: 170px; border: 0; outline: 0;" onclick="location.href='mypage.do'">
+   <hr>
+   </div>
+   <div class="down">
+   <div class="mypagemainside">
+   <div class="mypageside">
+      <br>
+      <a href="mypageOrder.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+      <span>주문조회</span>
+      <span style="float:right;">></span>
+      </a><p>
+      <a href="mypageCoupon.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+      <span>쿠폰</span>
+      <span style="float:right;">></span>
+      </a><p>
+      <a href="mypageReview.do" style="text-decoration: none; color: black;">
+      <span>리뷰/문의</span>
+      <span style="float:right;">></span>
+      </a><p>
+      <a href="mypageEditForm.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+      <span>회원정보수정</span>
+      <span style="float:right;">></span>
+      </a><p>
+      <a href="mypageDeleteForm.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+      <span>회원탈퇴</span>
+      <span style="float:right;">></span>
+      </a><p>
+   </div>
+   </div>
+<div class="useredit">
+<form action="reviewWriteAction.do?oid=${orderjoin.oid }&pid=${orderjoin.pid}" method="post" enctype="Multipart/form-data">
+   <table>
+      <caption><h2>리뷰 작성</h2></caption>
+      <tr><td style="background-color:gray; width:80px; text-align: center;">주문번호   </td><td ><fmt:formatDate pattern="yyyyMMdd"
                                     value="${orderjoin.odate }" /> - <fmt:formatNumber
-                                    value="${orderjoin.oid }" pattern="00000" /></td></tr>
-		<tr><td rowspan="2"><img src="${orderjoin.getPthumbimg() }" width="100"/></<td><td>상품명	</td><td >${orderjoin.getPname() }</td></tr>
-		<tr><td>주문일자	</td><td >${orderjoin.getOdate() }</td></tr>
-		<tr><td>제목 </td><td><input type="text" name="rtitle" required="required"></td></tr>
-		<tr><td>내용</td><td><pre><textarea rows="10" cols="40" name="rcontent" required="required"></textarea></pre></td></tr>
-		<tr><td>첨부이미지</td><td><input type="file" name="rimg" accept="image/*"></td></tr>
+                                    value="${orderjoin.oid }" pattern="00000" /></td><td rowspan="3"><img src="${orderjoin.getPthumbimg() }" width="120"/></td></tr>
+      <tr><td style="background-color:gray; text-align: center;">상품명   </td><td style="width:200px;">${orderjoin.getPname() }</td></tr>
+      <tr><td style="background-color:gray; text-align: center;">주문일자   </td><td >${orderjoin.getOdate() }</td></tr>
+      <tr><td style="background-color:gray; text-align: center;">제목 </td><td><input type="text" name="rtitle" required="required"></td></tr>
+      <tr><td style="background-color:gray; text-align: center;">내용</td><td  colspan="2"><pre><textarea rows="10" cols="60" name="rcontent" required="required"></textarea></pre></td></tr>
+      <tr><td style="background-color:gray; text-align: center;">첨부이미지</td><td><input type="file" name="rimg" accept="image/*"></td></tr>
 
-		<tr><td colspan="3" style="text-align: center;"><input type="submit" value="완료" class="button"></td></tr>
-	</table>
+      <tr><td colspan="3" style="text-align: center;"><input type="submit" value="완료" class="button"></td></tr>
+   </table>
 </form>
-</div>	
+</div>
+</div>   
 </div>
 <div style="height: 90%;">
 </div>

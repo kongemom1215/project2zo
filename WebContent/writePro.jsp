@@ -5,19 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 </head>
 <body>
 <c:if test="${result > 0 }">
 	<script type="text/javascript">
 		alert("입력 완료");  
-		location.href="board.do?pageNum=${pageNum}";
+		location.href="board.do?pageNum=${pageNum}&type=qna";
 	</script>
 </c:if>
 <c:if test="${result == 0 }">  
 	<script type="text/javascript">
 		alert("입력 실패");  
-		location.href="board.do";
+		location.href="board.do?pageNum=${pageNum}&type=qna";
 	</script>
 </c:if>
 </body>

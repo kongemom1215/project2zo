@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 <link rel="stylesheet" type="text/css" href="css/order.css?ver=20">
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -60,9 +60,6 @@
     margin-top: 10px;
     margin-left:20px;
     text-align:center;
-}
-a{
-	text-decoration: underline;
 }
 </style>
 </head>

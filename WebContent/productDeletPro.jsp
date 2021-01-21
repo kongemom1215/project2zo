@@ -5,14 +5,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 </head>
 <body>
 	<c:if test="${result>0 }">
 		<script type="text/javascript">
 			alert("삭제 완료");
-			location.href="productAdminPage.do";
 		</script>
+		<c:choose>
+			<c:when test="${search_value ne null }">
+				<script type="text/javascript">
+					location.href="productSearch.do?pageNum=${pageNum}&option=${option}&search_value=${search_value}"
+				</script>
+			</c:when>
+			<c:otherwise>
+				<script type="text/javascript">
+					location.href="productAdminPage.do?pageNum=${pageNum }";
+				</script>
+			</c:otherwise>
+		</c:choose>
 	</c:if>
 </body>
 </html>

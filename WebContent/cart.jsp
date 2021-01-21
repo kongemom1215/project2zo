@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
 <link rel="stylesheet" type="text/css" href="css/cartnbuy.css?ver=2"> 
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -22,75 +22,18 @@
 		});
 		});
 		
+  		
   		$(document).ready(function(){
-		$('#checkdel').click(function(){
-			
-			if(confirm_val){
-				var tr_arr = new Array();
-				$("input[name=check1]:checked").each(function(){
-					var tr_value=$(this).val();
-					alert(tr_value);
-					tr_arr.push(tr_value);
-					
-					});
-				
-				alert(tr_arr);
-				
-				}
-			});
-	});	 
-  		
-  	$('#checkDel').click(function(){
-  		var confirm_val = confirm("정말 삭제하시겠습니까?"); 
-  		if(confirm_val){
-  			
-  		}
-  		
-  		
-  		
-  	})
-
-/*/*  function cart_del(){
-		var input_cart = document.getElementsByName("check1");
-		var checked = false;
-		var indexid = false;
-		for(var i=0;i<input_cart.length;i++){
-			if(input_cart[i].checked){
-				cartp=input_cart[i].value;
-				alert(cartp);
-				
-			}
-		}
-
- }
- */ 
- //선택된 체크박스의 값 설정
-/* function fn_chkClick(index){
-	var i=index ;
-	var test;
-	var check;
-	alert("index=>"+index);
-	if(document.cartForm.check1[i].checked){
-		document.cartForm.check1[i].value = "1"; //선택된값=>1로
-	}else{
-		document.cartForm.check1[i].value = "0"; //선택되지않은 값=>0으로
-	}
-}
-	function doDelte(){
-		var this_form = document.cartForm.check1;
-		var i=0;
-		var answer;
-		answer=confirm("선택한 상품을 삭제하시겠습니까??");
-		if(anwer==true){
-			  if(form.chklst[i].checked == true) {
-				  this_from action ='checkDel.do';
-				  thisForm.method = 'post';
-				  thisForm.submit();
-			  }
-		}
-		
-	}	
- */		
+  		   $('#checkdel').click(function(){
+  		      if($("input[type='checkbox']").is(':checked')){
+  		         return true;
+  		      }else{
+  		         alert("삭제할 상품을 체크하세요");
+  		         return false;
+  		      }
+  		      
+  		   });
+  		   }); 
 </script>
 <style type="text/css">
 .main_go{

@@ -9,7 +9,26 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
+<style type="text/css">
+.button {
+    width:90px;
+    background-color: #14D3FF;
+    border: none;
+    color:#fff;
+    padding: 8px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+   border-radius:10px;
+}
+   .button:hover {
+    background-color: blue;
+}   
 
+</style>
 </head>
 <body>
 <div class="main">
@@ -50,84 +69,69 @@
 </div>
 <hr style="margin-bottom: 0px; border-bottom: 0px;">
 <div class="main">
-	<div class="mypagehead">
-		<input type="button" value="마이페이지" style="margin-top: 30px; font-weight:bold; font-size: 30px; color: #00EBFF; background-color: white; width: 170px; border: 0; outline: 0;" onclick="location.href='mypage.do?sid=${2 }'">
-	<hr>
-	</div>
+   <div class="mypagehead">
+      <input type="button" value="마이페이지" style="margin-top: 30px; font-weight:bold; font-size: 30px; color: #00EBFF; background-color: white; width: 170px; border: 0; outline: 0;" onclick="location.href='mypage.do?sid=${2 }'">
+   <hr>
+   </div>
 <div class="down">
 <div class="mypagemainside">
-	<div class="mypageside">
-		<br>
-		<a href="mypageOrder.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
-		<span>주문조회</span>
-		<span style="float:right;">></span>
-		</a><p>
-		<a href="mypageCoupon.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
-		<span>쿠폰</span>
-		<span style="float:right;">></span>
-		</a><p>
-		<a href="mypageReview.do" style="text-decoration: none; color: black;">
-		<span>리뷰/문의</span>
-		<span style="float:right;">></span>
-		</a><p>
-		<a href="mypageEditForm.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
-		<span>회원정보수정</span>
-		<span style="float:right;">></span>
-		</a><p>
-		<a href="mypageDeleteForm.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
-		<span>회원탈퇴</span>
-		<span style="float:right;">></span>
-		</a><p>
-	</div>
-	</div>
-		
-		<input type="button" value="상품 리뷰" onclick="location.href='mypageReview.do'">
-		<input type="button" value="상품 Q&A" onclick="location.href='mypageQna.do'">
-				<div>
-					내가 작성한 문의 : ${cntQna }
-				</div>
-			<table>
-					<tr>
-						<th>문의카테고리</th>
-						<th>상품명</th>
-						<th>문의내용</th>
-						<th>작성일</th>
-					</tr>
-					<c:forEach var="qna" items="${list }">						
-						<tr>					
-							<td>${qna.getQctg() }</td>	
-							<td>${qna.getPname() }</td>
-							<td><a href="board.do?type=qna&qid_num=${qna.qid }">${qna.getQcontent() }</a></td>
-							<td>${qna.getQdate() }</td>
-						</tr>
-						</c:forEach>	
-					</table>
-					<div style="text-align : center">
-						<c:if test="${startPage>blockSize }">
-							<a href="mypageQna.do?pageNum=${startPage-blockSize }">[이전]</a>
-						</c:if>
-						<c:forEach var="i" begin="${startPage }" end="${endPage}">
-							<a href="mypageQna.do?pageNum=${i }">[${i }]</a>
-						</c:forEach>
-						<c:if test="${endPage< pageCnt}">
-							<a href="mypageQna.do?pageNum=${startPage+blockPage }">[다음]</a>
-						</c:if>
-					</div>
-</div>
-</div>	
-<div class="main" style="height: 50px; background-color: #767171; display: table;">
-<div style="width: 10px;">
-</div>
-<div style="display: table-cell; vertical-align: middle; margin-left: 5px;">
-대표 : 임주혜 / 사업자등록번호 : 123-45-67899
-</div>
-<div style="display: table-cell; vertical-align: middle; text-align: right;">
-<a>이용약관</a> /
-<a>개인정보처리방침</a> /
-<a>입점문의</a>
-</div>
-<div style="width: 10px;">
-</div>
-</div>		
+   <div class="mypageside">
+      <br>
+      <a href="mypageOrder.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+      <span>주문조회</span>
+      <span style="float:right;">></span>
+      </a><p>
+      <a href="mypageCoupon.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+      <span>쿠폰</span>
+      <span style="float:right;">></span>
+      </a><p>
+      <a href="mypageReview.do" style="text-decoration: none; color: black;">
+      <span>리뷰/문의</span>
+      <span style="float:right;">></span>
+      </a><p>
+      <a href="mypageEditForm.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+      <span>회원정보수정</span>
+      <span style="float:right;">></span>
+      </a><p>
+      <a href="mypageDeleteForm.do?sid=${shoppinguser.sid }" style="text-decoration: none; color: black;">
+      <span>회원탈퇴</span>
+      <span style="float:right;">></span>
+      </a><p>
+   </div>
+   </div>
+   <div class="myorderviewdetail">   
+      <input type="button" class="button" value="상품 리뷰" onclick="location.href='mypageReview.do'">
+         <table>
+         <caption><h2>상품 Q&A</h2></caption>
+         <tr><td colspan="5" style="background-color:white;">내가 작성한 문의 : ${cntQna }</td></tr>   
+         
+               <tr>
+                  <th>문의카테고리</th>
+                  <th>상품명</th>
+                  <th>문의내용</th>
+                  <th>작성일</th>
+               </tr>
+               <c:forEach var="qna" items="${list }">                  
+                  <tr>               
+                     <td>${qna.getQctg() }</td>         
+                     <td>${qna.getPname() }</td>
+                     <td><a href="board.do?type=qna&qid_num=${qna.qid }">${qna.getQcontent() }</a></td>
+                     <td>${qna.getQdate() }</td>
+                  </tr>
+                  </c:forEach>   
+               </table>
+               <div style="text-align : center">
+                  <c:if test="${startPage>blockSize }">
+                     <a href="mypageQna.do?pageNum=${startPage-blockSize }">[이전]</a>
+                  </c:if>
+                  <c:forEach var="i" begin="${startPage }" end="${endPage}">
+                     <a href="mypageQna.do?pageNum=${i }">[${i }]</a>
+                  </c:forEach>
+                  <c:if test="${endPage< pageCnt}">
+                     <a href="mypageQna.do?pageNum=${startPage+blockPage }">[다음]</a>
+                  </c:if>
+               </div>
+               
+</div>        
 </body>
 </html>

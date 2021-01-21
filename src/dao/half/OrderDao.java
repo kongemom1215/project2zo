@@ -59,12 +59,19 @@ public class OrderDao {
 
 		} catch (Exception e) {
 			System.out.println("half orderdao buycheck error : " + e.getMessage());
+		} finally {
+			if(rs!=null)
+				rs.close();
+			if(pstmt!=null)
+				pstmt.close();
+			if(conn!=null)
+				conn.close();
 		}
 
 		return result;
 	}
 
-	public int writecheck(int sid, int pid) {
+	public int writecheck(int sid, int pid) throws SQLException {
 		int result = 0;
 
 		Connection conn = null;
@@ -89,6 +96,13 @@ public class OrderDao {
 		} catch (Exception e) {
 			System.out.println("half orderdao writecheck error : " + e.getMessage());
 			result = -7;
+		} finally {
+			if(rs!=null)
+				rs.close();
+			if(pstmt!=null)
+				pstmt.close();
+			if(conn!=null)
+				conn.close();
 		}
 
 		return result;

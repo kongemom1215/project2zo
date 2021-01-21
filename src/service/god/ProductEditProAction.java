@@ -53,7 +53,7 @@ public class ProductEditProAction implements CommandProcess {
 			product.setPinventory(Integer.parseInt(multi.getParameter("pinventory")));
 			product.setPdiscount(Integer.parseInt(multi.getParameter("pdiscount")));
 			product.setPpublic(Integer.parseInt(multi.getParameter("ppublic")));
-			
+			product.setPoption(multi.getParameter("poption"));
 			if(filenames.get(0)==null)
 				product.setCol1(multi.getParameter("col1"));
 			else

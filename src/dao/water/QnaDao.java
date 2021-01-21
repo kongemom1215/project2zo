@@ -12,6 +12,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+
 public class QnaDao {
 	private static QnaDao instance;
 	
@@ -297,9 +298,9 @@ public class QnaDao {
 	}
 	
 	
-	  public Qna select(int sid) throws SQLException { Qna qna = new Qna();
+	  public Qna select(int qid) throws SQLException { Qna qna = new Qna();
 	  Connection conn = null;
-	  String sql = "select * from qna where sid="+sid;
+	  String sql = "select * from qna where qid="+qid;
 	  PreparedStatement pstmt = null; 
 	  ResultSet rs = null; 
 	  try { conn = getConnection(); 
@@ -315,8 +316,9 @@ public class QnaDao {
 	  qna.setQdate(rs.getDate("qdate"));
 	  qna.setQfile(rs.getString("qfile"));
 	  qna.setQcmt(rs.getString("qcmt"));
+	  qna.setQcmtdate(rs.getDate("qcmtdate"));
 	  qna.setOdate(rs.getDate("odate"));
-	  qna.setQpwd(rs.getInt("qpwd")); } 
+	   } 
 	  }catch(Exception e) { 
 		  System.out.println(e.getMessage()); }
 	  finally { if(pstmt != null) 
@@ -335,15 +337,15 @@ public class QnaDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql="update qna set qcontent=? where sid=?";
+		String sql="update qna set qcontent=?,qfile=? where qid=?";
 
-		System.out.println("Boarddao update sql->"+sql);
 		try { 
 			conn  = getConnection();
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, qna.getQcontent());
-			pstmt.setInt(2, qna.getSid());
+			pstmt.setString(2, qna.getQfile());
+			pstmt.setInt(3, qna.getQid());
 			
 			result = pstmt.executeUpdate();
 			System.out.println(result);
@@ -357,32 +359,21 @@ public class QnaDao {
 	
 	
 	
-	public int delete(int sid, String qpwd) throws SQLException {
+	public int delete(int qid) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
 		ResultSet rs = null;
-		String sql1 = "select qpwd from qna where sid=?";
-		String sql="delete from qna where sid = ?";
+		String sql="delete from qna where qid = ?";
 
 		try { 
-			String dbPasswd = "";
 			conn  = getConnection();
-			pstmt = conn.prepareStatement(sql1);
-			pstmt.setInt(1, sid);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, qid);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				dbPasswd = rs.getString(1);
-				if(dbPasswd.equals(qpwd)) {
-					rs.close();
-					pstmt.close();
-					pstmt = conn.prepareStatement(sql);
-					pstmt.setInt(1, sid);
-					result = pstmt.executeUpdate();
-				}else result = 0;
-			}else result = -1;
-
-		} catch(Exception e) { System.out.println(e.getMessage());
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			System.out.println("삭제 dao오류="+e.getMessage());
 		} finally {
 			if (pstmt != null)  pstmt.close();
 			if (conn != null)   conn.close();

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bye-rus!</title>
 <link rel="stylesheet" type="text/css" href="css/YoungCSS.css?ver=1">
 <!-- autoload=false 파라미터를 이용하여 자동으로 로딩되는것을 막는다 -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -75,7 +75,7 @@
 							url:"<%=context%>/ajaxSemail.do",  
 							data:{semail : semail},
 							dataType:'text',
-							success:function(msg){
+							success:function(msg){ 
 								$('#msg').html(msg);
 							}
 						})
@@ -124,21 +124,22 @@
 	h1{font-weight: 900;}
 	#join{ text-align: center; }
 	
-	table{width: 35%;
+	table{width: 50%;
 		  height: 400px;
 		  margin: auto;
 		  font-weight: bolder;
+		  font-size: 12px;
 		  }
 	th:nth-child(2n), td:nth-child(2n){
-	background-color: #B9FFFF;}
+	background-color: #D6F4FF;}
 	
-	.semail{width: auto; height: 100%;	background-color: #B9FFFF; border: 0px; font-size: 30px; outline: none;}
-	.spwd{width: auto; height: 100%;	background-color: #B9FFFF; border: 0px; font-size: 30px; outline: none;}
-	.sname{width: auto; height: 100%;	background-color: #B9FFFF; border: 0px; font-size: 30px; outline: none;}
-	.scontact{width: auto; height: 100%;	background-color: #B9FFFF; border: 0px; font-size: 30px; outline: none;}
-	.saddress{width: auto; height: 100%;	background-color: #B9FFFF; border: 0px; font-size: 30px; outline: none;}
-	.spost{width: auto; height: 100%;	background-color: #B9FFFF; border: 0px; font-size: 30px; outline: none;}
-	.button{background-color: #00EBFF; display: inline-block; outline: none; cursor: pointer; text-align: center; width:150px;
+	.semail{width: auto; height: 100%;	background-color: #D6F4FF; border: 0px; font-size: 30px; outline: none;}
+	.spwd{width: auto; height: 100%;	background-color: #D6F4FF; border: 0px; font-size: 30px; outline: none;}
+	.sname{width: auto; height: 100%;	background-color: #D6F4FF; border: 0px; font-size: 30px; outline: none;}
+	.scontact{width: auto; height: 100%;	background-color: #D6F4FF; border: 0px; font-size: 30px; outline: none;}
+	.saddress{width: auto; height: 100%;	background-color: #D6F4FF; border: 0px; font-size: 30px; outline: none;}
+	.spost{width: auto; height: 100%;	background-color: #D6F4FF; border: 0px; font-size: 30px; outline: none;}
+	.button{background-color: #0A6EFF; display: inline-block; outline: none; cursor: pointer; text-align: center; width:150px;
 	text-decoration: none; padding: 10px 10px 10px 10px; text-shadow: 0 1px 1px rgba(0,0,0,.3);
 	border-radius: .5em; box-shadow: 0 1px 2px rgba(0,0,0,.2); border: 0; color:white;}
 	.button:hover{background-color: #3CCEFF;}
@@ -146,9 +147,13 @@
 	.sagree{background-color: white;}
 	::placeholder{
 	text-align:center;
-	font-size: 0.5em;	
+	font-size: 12px;	
 	font-weight: 100;
 	}
+	.button2{background-color: #288CFF; display: inline-block; outline: none; cursor: pointer; text-align: center;
+	text-decoration: none; border:none; text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	border-radius: .5em; box-shadow: 0 1px 2px rgba(0,0,0,.2); border: 0; color:white;}
+	.button2:hover{background-color: #3CCEFF;}
 </style>
 </head>
 <body>
@@ -231,8 +236,8 @@
 			<tr><td></td><td style="background-color: white;"></td></tr>
 	<!-- 		<td><input type="button" value="중복확인" ></td> -->
 			
-			<tr><td>비밀번호 </td><td>  <div class="main2"><input  type="password" id="spwd" name="spwd" class="spwd" required="required" placeholder="비밀번호는 영문+숫자만 가능합니다" pattern="^(?=.*[a-z])(?=.*[0-9]).{1,10}$"><i>확인</i></div></td></tr>
-         <tr><td>비밀번호 </td><td>  <div class="main2"><input  type="password" id="spwd2" name="spwd2" class="spwd" required="required" placeholder="비밀번호는 영문+숫자만 가능합니다" pattern="^(?=.*[a-z])(?=.*[0-9]).{1,10}$"><i>확인</i></div></td></tr>
+			<tr><td>비밀번호 </td><td>  <div class="main2"><input  type="password" id="spwd" name="spwd" class="spwd" required="required" placeholder="비밀번호는 영문+숫자만 가능합니다" pattern="^(?=.*[a-z])(?=.*[0-9]).{1,10}$"><br><i>확인</i></div></td></tr>
+         <tr><td>비밀번호 </td><td>  <div class="main2"><input  type="password" id="spwd2" name="spwd2" class="spwd" required="required" placeholder="비밀번호는 영문+숫자만 가능합니다" pattern="^(?=.*[a-z])(?=.*[0-9]).{1,10}$"><br><i>확인</i></div></td></tr>
 		
 			
 			<tr><td>이름 </td><td>   <input  type="text" name="sname" class="sname" required="required" placeholder="한글 15자까지 가능합니다." maxlength="15"></td></tr>
@@ -241,11 +246,11 @@
 			placeholder="XXX   -   XXXX   -   XXXX"
 			 title="2,3자리-3,4자리-4자리"></td></tr>
 			 
-			 <tr><td>주소</td><td><input type="text" name="spost" id="sample6_postcode" placeholder="우편번호" style="border:none;">
-								 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="cursor: pointer;"><br>
-								 <input type="text" name="saddress" id="sample6_address" placeholder="주소" style="border:none;"><br>
-								 <input type="text" id="sample6_extraAddress" placeholder="참고항목" style="border:none;">
-								 <input type="text" name="saddress2" id="sample6_detailAddress" placeholder="상세주소" style="border:none;"></td></tr>
+			 <tr><td>주소</td><td><input type="text" name="spost" id="sample6_postcode" placeholder="우편번호" style="border:none; margin-left: none;">
+								 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="cursor: pointer;" class="button2"><br>
+								 <input type="text" name="saddress" id="sample6_address" placeholder="주소" style="border:none;  margin-left: none;"><br>
+								 <input type="text" id="sample6_extraAddress" placeholder="참고항목" style="border:none;  margin-left: none;">
+								 <input type="text" name="saddress2" id="sample6_detailAddress" placeholder="상세주소" style="border:none;  margin-left: none;"></td></tr>
 			<tr><td>질문</td><td><select name="squestion">
 				<option>1. 기억에 남는 추억의 장소는?</option>
             <option>2. 자신의 인생 좌우명은?</option>
@@ -256,9 +261,10 @@
             <option>7. 받았던 선물 중 기억에 남는 독특한 선물은?</option>
 			</select></td></tr>
 			<tr><td>답변</td><td><input type="text" name="sanswer" required="required" placeholder="위 질문의 답변"></td></tr>
-			 <tr><td>마케팅동의</td><td>   Y<input  type="radio" name="sagree" value="y">
+			 <tr><td>마케팅<br>동의</td><td>   Y<input  type="radio" name="sagree" value="y">
 			N<input  type="radio" name="sagree" value="n" > </td></tr>
 		</table>
+		<p>
 		<input type="submit" value="회원가입" class="button">
   </form><p>
  <div style="width: 300px;  position: relative; bottom: 565px; left:655px;  text-align: left;"> <span id="msg" style="color: red; font-size: 18px;"></span></div>

@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,7 +101,7 @@ function sub() {
 			<c:forEach var="main_img" items="${main_img }" begin="${(16*select_page) }" end="${3 + (16*select_page) }">
 			<td><a href="productDetail.do?pid=${main_img.pid }">
 			<img src="${main_img.pthumbimg}" class="search_img">
-			<br> ${main_img.pname } <c:if test="${main_img.pdiscount != 0 }">${main_img.pdiscount}% 할인</c:if>
+			<br> <c:if test="${fn:length(main_img.pname)>15}">${fn:substring(main_img.pname,0,15) } ...</c:if><c:if test="${fn:length(main_img.pname)<=15}">${main_img.pname }</c:if> <c:if test="${main_img.pdiscount != 0 }"><br>${main_img.pdiscount}% 할인</c:if>
 			<br> <fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </a> </td>
 			</c:forEach>
 		</tr>
@@ -107,16 +109,15 @@ function sub() {
 			<c:forEach var="main_img" items="${main_img }" begin="${4 + (16*select_page) }" end="${7 + (16*select_page) }">
 			<td><a href="productDetail.do?pid=${main_img.pid }">
 			<img src="${main_img.pthumbimg}" class="search_img">
-			<br> ${main_img.pname } <c:if test="${main_img.pdiscount != 0 }">${main_img.pdiscount}% 할인</c:if>
-			<br>
-			<fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </a> </td>
+			<br> <c:if test="${fn:length(main_img.pname)>15}">${fn:substring(main_img.pname,0,15) } ...</c:if><c:if test="${fn:length(main_img.pname)<=15}">${main_img.pname }</c:if> <c:if test="${main_img.pdiscount != 0 }"><br>${main_img.pdiscount}% 할인</c:if>
+			<br> <fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </a> </td>
 			</c:forEach>
 		</tr>
 		<tr>
 			<c:forEach var="main_img" items="${main_img }" begin="${8 + (16*select_page) }" end="${11 + (16*select_page) }">
 			<td><a href="productDetail.do?pid=${main_img.pid }">
 			<img src="${main_img.pthumbimg}" class="search_img">
-			<br> ${main_img.pname } <c:if test="${main_img.pdiscount != 0 }">${main_img.pdiscount}% 할인</c:if>
+			<br> <c:if test="${fn:length(main_img.pname)>15}">${fn:substring(main_img.pname,0,15) } ...</c:if><c:if test="${fn:length(main_img.pname)<=15}">${main_img.pname }</c:if> <c:if test="${main_img.pdiscount != 0 }"><br>${main_img.pdiscount}% 할인</c:if>
 			<br> <fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </a> </td>
 			</c:forEach>
 		</tr>
@@ -124,7 +125,7 @@ function sub() {
 			<c:forEach var="main_img" items="${main_img }" begin="${12 + (16*select_page) }" end="${15 + (16*select_page)  }">
 			<td><a href="productDetail.do?pid=${main_img.pid }">
 			<img src="${main_img.pthumbimg}" class="search_img">
-			<br> ${main_img.pname } <c:if test="${main_img.pdiscount != 0 }">${main_img.pdiscount}% 할인</c:if>
+			<br> <c:if test="${fn:length(main_img.pname)>15}">${fn:substring(main_img.pname,0,15) } ...</c:if><c:if test="${fn:length(main_img.pname)<=15}">${main_img.pname }</c:if> <c:if test="${main_img.pdiscount != 0 }"><br>${main_img.pdiscount}% 할인</c:if>
 			<br> <fmt:formatNumber value="${main_img.pprice }" pattern="#,###" /> 원 <p> </a> </td>
 			</c:forEach>
 		</tr>
